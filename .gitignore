@@ -1,4 +1,8 @@
 /bin/
 /obj/
+/packages/
+/.vs/
 InternetMall.csproj
+InternetMall.csproj.user
+InternetMall.sln
 
