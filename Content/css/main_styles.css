@@ -12,6 +12,7 @@
   text-align: center;
   zoom:0.8;
   display: block;
+  
 }
 
 #shortcut {
@@ -20,7 +21,8 @@
   text-align: center;
   height: 178px;
   margin-bottom: 30px;
-  z-index: 9999;
+  z-index: 1111;
+  position: relative;
 }
 
 #base {
@@ -32,7 +34,7 @@
   position:relative;
   display: block;
   top: -207px;
-  z-index: -1;
+  z-index: 1;
 }
 #u0_div {
   margin:0 auto;
@@ -2071,22 +2073,24 @@
 
 
 .carousel{
-  width: 500px;
-  height: 200px;
+  width: 1519px;
+  height: 300px;
   overflow: hidden;
   margin: 0 auto;
   background-color: #fff;
+  
 }
 .carousel ul{
   width: 100%;
   height: 100%;
 }
 .carousel ul li{
-  position: absolute;
+  
 }
 .carousel ul li a img{
-  width: 340px;
-  height: 608px;
+  width: 1519px;
+  height: 300px;
+  overflow: hidden;
 }
 .bullet{
   position: absolute;
@@ -2116,7 +2120,7 @@
   height: 50px;
   line-height: 50px;
   text-align: center;
-  background-color: rgba(0,0,0,.1);
+ 
   font-size: 20px;
   color: #ffffff;
   top: 50%;
@@ -2126,19 +2130,20 @@
 } 
 .switch span:hover{
 
-  background-color: rgba(0,0,0,.5);
-
 }
 .prev{
-  left: 0;
+  left: 5px;
 }
 .next{
-  right: 0;
+  right: 20px;
 }
 .active{
   background-color: #27B465 !important;
   width: 20px!important;
 }
+
+
+
 #u70_div {
   border-width:0px;
   position:absolute;

@@ -1,14 +1,15 @@
-var vm2 = new Vue({
+
+var vm = new Vue({
     el:'.carousel',
     data:{
         
         mark:0,
         img:[
-                'images/a1.png',
-                'images/a2.png',
-                'images/a3.png',
-                'images/a4.png',
-                'images/a5.png'
+                '../../images/a1.png',
+                '../../images/a2.png',
+                '../../images/a3.png',
+                '../../images/a4.png',
+                '../../images/a5.png'
         ],
         time:null
     },
@@ -48,8 +49,11 @@ var vm2 = new Vue({
             console.log('leave')
             this.play();
         }
+        
     },
     created(){
         this.play()
     }
-})
+});
+
+

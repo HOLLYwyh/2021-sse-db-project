@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../Content/css/index.css" type="text/css" rel="stylesheet"/>
+    <link href="../../Content/css/common.css" type="text/css" rel="stylesheet"/>
+    <link href="../../Content/css/shortcut_index.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../Content/css/carousel.css" type="text/css">
+    <link href="../../Content/css/animate.css" type="text/css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>index</title>
+</head>
+<body>
+    <div class="shortcut">
+        <ul>
+            <li>
+                <div class="col_EF4F00">
+                    <div>
+                        <a href="index.html">特价</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="col_FFCC00">
+                    <div>
+                        <a href="http://">电子设备</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="col_9FCC48">
+                    <div>
+                        <a href="http://">饮食</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="col_00A3E7">
+                    <div>
+                        <a href="http://">家居</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="col_EF4F00">
+                    <div>
+                        <a href="http://">服装</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="col_FFCC00">
+                    <div>
+                        <a href="http://">美妆</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="col_9FCC48">
+                    <div>
+                        <a href="http://">运动</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="col_00A3E7">
+                    <div>
+                        <a href="http://">珠宝</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="col_EF4F00">
+                    <div>
+                        <a href="http://">汽车</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="col_FFCC00">
+                    <div>
+                        <a href="http://">医疗保健</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="col_9FCC48">
+                    <div>
+                        <a href="http://">图书</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="col_00A3E7">
+                    <div>
+                        <a href="http://">全部分类</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="col_EF4F00">
+                    <div>
+                        <a href="http://">帮助</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="search">
+        <div class="fl huicui">
+            <img src="../../images/main/u68.png">
+        </div>
+        <div>
+            <input type="text" value="关键词搜索" class="fl">
+            <button class="fl" ></button>
+        </div>
+        <div class="nav fr">
+            <div class="nav_son">
+                <img src="../../images/main/u45.svg" alt="">
+                <a href="#">购物车</a>
+            </div>
+            <div class="nav_son">
+                <img src="../../images/main/u49.svg" alt="">
+                <a href="#">通知</a>
+            </div>
+            <div class="nav_son">
+                <img src="../../images/main/u52.svg" alt="">
+                <a href="#">浏览记录</a>
+            </div>
+            <div class="nav_son">
+                <img src="../../images/main/u55.svg" alt="">
+                <a href="#">收藏夹</a>
+            </div>
+            <div class="nav_son">
+                <img src="../../images/main/u58.svg" alt="">
+                <a href="#">历史订单</a>
+            </div>
+            <div class="nav_son">
+                <img src="../../images/main/u61.svg" alt="">
+                <a href="#">优惠券</a>
+            </div>
+            <div class="nav_son login">
+                <img src="../../images/main/u64.svg" alt="">
+                <a href="login.html" class="fl">登录</a>
+                <p class="fl">|</p>
+                <a href="signup.html" class="fl">注册</a>
+            </div>
+        </div>
+    </div>
+    <div class="carousel"  @mouseenter="enter" @mouseleave="leave">
+        <transition-group tag="ul" name="image"
+        enter-active-class="animate__animated animate__fadeIn"
+        leave-active-class="animate__animated animate__fadeOut"
+        >
+        <li v-for='(image,index) in img' :key='index' v-show="index === mark">
+        <a href="javascript:;">
+                <img :src="image">
+        </a>
+        </li>
+        </transition-group>
+        <div class="bullet">
+        <span v-for="(item,index) in img.length" :class="{'active':index === mark}"
+        @click="change(index)" :key="index"></span>
+        </div>
+        <div class="switch">
+        <span class="prev" @click="prev">
+            <img id="u71_img" class="img " src="../../images/main/u71.png"/>
+        </span>
+        <span class="next" @click="next">
+            <img id="u72_img" class="img " src="../../images/main/u72.png"/>
+        </span>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../Scripts/js/index.js"></script>
+    <script type="text/javascript" src="../../Scripts/js/vue.js"></script>
+</body>
+</html>
