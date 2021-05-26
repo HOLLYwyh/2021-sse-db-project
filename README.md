@@ -1,5 +1,5 @@
 # 2021-sse-db-project
 2021-sse-db-project
 
-##  好家伙
+##  数据库课程项目
 
