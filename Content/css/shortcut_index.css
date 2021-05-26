@@ -1,0 +1,60 @@
+.shortcut{
+    zoom:0.8;
+}
+
+.shortcut{
+    width: 100%;
+    height: 52px;
+    background-color:rgba(80, 80, 90, 1);
+  }
+  
+  .shortcut ul{
+    width: 1560px;
+    height: 52px;
+    background-color: #fff;
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+  .shortcut ul li{
+    width: 120px;
+    height: 52px;
+    float: left;
+    display: block;
+  }
+  
+  .col_EF4F00{
+    background-color: #EF4F00;
+  }
+  
+  .col_FFCC00{
+    background-color: #FFCC00;
+  }
+  
+  .col_9FCC48{
+    background-color: #9FCC48;
+  }
+  
+  .col_00A3E7{
+    background-color: #00A3E7;
+  }
+  
+  .shortcut ul li div{
+    width: 120px;
+    height: 52px;  
+  }
+  
+  .shortcut ul li div div{
+    width: 120px;
+    height: 44px;
+    background-color:rgba(80, 80, 90, 1);
+    text-align: center;
+    line-height: 48px;
+    
+  }
+  
+  .shortcut ul li div div a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+  }

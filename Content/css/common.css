@@ -1,0 +1,21 @@
+﻿* {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fl{
+  position: relative;
+  float: left;
+}
+
+.fr{
+  position: relative;
+  float: right;
+}
+
+input {
+  outline: none;
+}
+
+
