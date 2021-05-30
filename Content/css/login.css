@@ -1,5 +1,5 @@
 body{
-    zoom: 0.8;
+    zoom: 1;
 }
 
 input{
@@ -22,11 +22,11 @@ input{
 
 .aria{
     width: 1200px;
-    height: 665px;
+    height: 693px;
     margin: 0 auto;
     text-align: center;
     background-image: url(../../images/login/background3.png);
-    background-size: 100%;
+    background-size: 100% 100%;
     display: block;
     position: relative;
 }
