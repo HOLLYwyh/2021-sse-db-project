@@ -5,11 +5,11 @@ var vm = new Vue({
         
         mark:0,
         img:[
-                '../../images/a1.png',
-                '../../images/a2.png',
-                '../../images/a3.png',
-                '../../images/a4.png',
-                '../../images/a5.png'
+                '../../../Images/Home/Index/a1.png',
+                '../../../Images/Home/Index/a2.png',
+                '../../../Images/Home/Index/a3.png',
+                '../../../Images/Home/Index/a4.png',
+                '../../../Images/Home/Index/a5.png'
         ],
         time:null
     },
