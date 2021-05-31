@@ -30,7 +30,7 @@
      <connectionStrings>
        <add name="OracleDbContext" providerName="Oracle.ManagedDataAccess.Client" connectionString="User Id=****;Password=*****;Data Source=oracle" />
      </connectionStrings>
-   <!--以上的User Id写Oracle的用户名，Password写用户密码 -->
+   <!--以上的User Id写Oracle的用户名，Password写用户密码 Source后的字符串换成(DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=数据库IP地址)(PORT=端口号))(CONNECT_DATA=(SERVICE_NAME=服务名))) -->
    
    <oracle.manageddataaccess.client>
        <version number="*">
