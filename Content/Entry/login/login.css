@@ -1,8 +1,12 @@
 body{
-    zoom: 0.8;
+    zoom: 1;
 }
 
-.signUp{
+input{
+    outline: none;
+}
+
+.logIn {
     width: 100%;
     height: 665px;
     position: relative;
@@ -18,25 +22,21 @@ body{
 
 .aria{
     width: 1200px;
-    height: 665px;
+    height: 693px;
     margin: 0 auto;
     text-align: center;
-    background-image: url(../../images/login/background3.png);
-    background-size: 100%;
+    background-image: url(../../../Images/Entry/login/background3.png);
+    background-size: 100% 100%;
     display: block;
     position: relative;
-    /* padding: 0; */
-    overflow: hidden;
 }
 
 .login_box{
-    display: block;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40px;
+    position: absolute;
+    left: 800px;
+    top: 200px;
     width: 350px;
-    height: 420px;
+    height: 350px;
     background-color: rgba(255, 255, 255, 1);
     box-sizing: border-box;
     border-width: 3px;
@@ -71,16 +71,6 @@ body{
     margin-right: auto;
 }
 
-.yanzheng{
-    width: 270px;
-    margin-top: 20px;
-    height: 36px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    /* padding-bottom: 20px; */
-}
-
 .password{
     width: 270px;
     margin-top: 20px;
@@ -88,7 +78,6 @@ body{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 20px;
 }
 
 .preserve{
@@ -134,22 +123,6 @@ body{
     box-shadow: none;
     font-size: 22px;
     color: #FFFFFF;
-}
-
-.yanzheng input{
-    width: 200px;
-    height: 36px;
-    display: block;
-}
-
-.yanzheng button{
-    line-height: 36px;
-    font-size: 12px;
-    background-color: rgba(237, 108, 103, 1);
-    height: 38px;
-    width: 72px;
-    text-align: center;
-    text-indent: 2px;
 }
 
 .have_not{
