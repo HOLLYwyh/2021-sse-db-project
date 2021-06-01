@@ -326,12 +326,13 @@
     color: #74BEDF;
 }
 
-#nick-name_input {
+#nick-name {
     position: absolute;
-    left: 0px;
-    top: 0px;
+    left: 595px;
+    top: 431px;
     width: 151px;
     height: 32px;
+    display: flex;
     padding: 2px 2px 2px 2px;
     font-family: 'Arial Normal', 'Arial', sans-serif;
     font-weight: 400;
@@ -344,17 +345,6 @@
     text-transform: none;
     background-color: transparent;
     border-color: transparent;
-}
-
-#nick-name {
-    position: absolute;
-    left: 595px;
-    top: 431px;
-    width: 151px;
-    height: 32px;
-    display: flex;
-    font-size: 24px;
-    color: #555555;
 }
 
 #copy2 {
