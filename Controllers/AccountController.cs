@@ -9,7 +9,7 @@ namespace InternetMall.Controllers
     public class AccountController : Controller
     {
         // GET: Account
-        public ActionResult AccountCenter()
+        public ActionResult buyerAccount()
         {
             return View();
         }
