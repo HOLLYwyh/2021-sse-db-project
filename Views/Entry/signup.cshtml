@@ -50,25 +50,25 @@
         <div class="aria">
             <div class="login_box">
                 <div class="client_login">用户注册</div>
-                <form action="">
-                <div class="client_name">
-                    <img src="~/Images/Entry/login/client_name.png" class="fl">
-                    <input type="text" class="fl" placeholder="请输入您的常用手机号">
-                </div>
-                <div class="yanzheng">  
-                    <img src="~/Images/Entry/login/client_name.png" class="fl">
-                    <input type="text" class="fl" placeholder="请输入您的昵称">
-                </div>
-                <div class="password">  
-                    <img src="~/Images/Entry/login/password.png" class="fl">
-                    <input type="text" class="fl" placeholder="请输入您的密码">
-                </div>
-                <div class="password">
-                    <img src="~/Images/Entry/login/password.png" class="fl">
-                    <input type="text" class="fl" placeholder="请再次输入您的密码">
-                </div>
+                <form action="" method="post">
+                    <div class="client_name">
+                        <img src="~/Images/Entry/login/client_name.png" class="fl">
+                        <input type="text" class="fl" name="phoneNumber" placeholder="请输入您的常用手机号">
+                    </div>
+                    <div class="yanzheng">
+                        <img src="~/Images/Entry/login/client_name.png" class="fl">
+                        <input type="text" class="fl" name="nickName" placeholder="请输入您的昵称">
+                    </div>
+                    <div class="password">
+                        <img src="~/Images/Entry/login/password.png" class="fl">
+                        <input type="password" class="fl" name="password" placeholder="请输入您的密码">
+                    </div>
+                    <div class="password">
+                        <img src="~/Images/Entry/login/password.png" class="fl">
+                        <input type="password" class="fl" name="confirmPassword" placeholder="请再次输入您的密码">
+                    </div>
+                    <button>开启荟萃</button>
                 </form>
-                <button>开启荟萃</button>
                 <div class="have_not">
                     <span>已经拥有账号？</span>
                     <a href="LogIn">立即登录</a>
