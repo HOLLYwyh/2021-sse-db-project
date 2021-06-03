@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/Content/Entry/login/login.css" type="text/css" rel="stylesheet"/>
-    <link href="~/Content/Common/common.css" type="text/css" rel="stylesheet"/>
-    <link href="~/Content/Entry/shortcut_five.css" type="text/css" rel="stylesheet"/>
+    <link href="~/Content/Entry/login/login.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/Common/common.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/Entry/shortcut_five.css" type="text/css" rel="stylesheet" />
     <title>login</title>
-    <link rel="icon" href="~/icon.ico" type="image/x-icon" />
+    @RenderPage("~/Views/Shared/base.cshtml")
 </head>
 <body>
     <div class="shortcut">
@@ -23,7 +23,7 @@
                 <li>
                     <div class="col_FFCC00">
                         <div>
-                            <a href="http://">账户中心</a>
+                            <a href="/Account/BuyerAccount">账户中心</a>
                         </div>
                     </div>
                 </li>
@@ -45,18 +45,18 @@
     </div>
     <div class="logIn">
         <div class="huicui">
-            <img src="~/Images/Entry/login/登录界面上部_u246.png" alt="">
+            <img src="~/Images/Entry/login/logo.png" alt="">
         </div>
         <div class="aria">
             <div class="login_box">
                 <div class="client_login">用户登录</div>
-                <form action="">
+                <form action="" method="post">
                 <div class="client_name">
-                    <img src="~/Images/Entry/login/用户名输入框边上的图标_u226.png" class="fl">
+                    <img src="~/Images/Entry/login/client_name.png" class="fl">
                     <input type="text" class="fl" placeholder="用户名/手机号">
                 </div>
                 <div class="password">  
-                    <img src="~/Images/Entry/login/密码输入框边上的图标_u227.png" class="fl">
+                    <img src="~/Images/Entry/login/password.png" class="fl">
                     <input type="password" class="fl" placeholder="密码">
                 </div>
                 <div class="preserve">
