@@ -1,19 +1,21 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Threading.Tasks;
 
 namespace InternetMall.Controllers
 {
     public class EntryController : Controller
     {
         // GET: Entry
-        public ActionResult LogIn()
+        public IActionResult LogIn()
         {
             return View();
         }
-        public ActionResult SignUp()
+        public IActionResult SignUp()
         {
             return View();
         }

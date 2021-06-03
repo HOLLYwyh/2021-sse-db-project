@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/Content/Entry/login/login.css" type="text/css" rel="stylesheet" />
-    <link href="~/Content/Common/common.css" type="text/css" rel="stylesheet" />
-    <link href="~/Content/Entry/shortcut_five.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Entry/login/login.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Entry/shortcut_five.css" type="text/css" rel="stylesheet" />
     <title>login</title>
-    @RenderPage("~/Views/Shared/base.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
 </head>
 <body>
     <div class="shortcut">
@@ -50,14 +50,14 @@
         <div class="aria">
             <div class="login_box">
                 <div class="client_login">用户登录</div>
-                <form action="" method="post">
+                <form action="LogIn" method="post">
                 <div class="client_name">
                     <img src="~/Images/Entry/login/client_name.png" class="fl">
-                    <input type="text" class="fl" placeholder="用户名/手机号">
+                    <input type="text" class="fl" name="ID" placeholder="用户名/手机号">
                 </div>
                 <div class="password">  
                     <img src="~/Images/Entry/login/password.png" class="fl">
-                    <input type="password" class="fl" placeholder="密码">
+                    <input type="password" class="fl" name="password" placeholder="密码">
                 </div>
                 <div class="preserve">
                     <input type="checkbox" class="fr">
