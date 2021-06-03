@@ -1,15 +1,14 @@
 ﻿<!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/Content/Account/buyerAccount/buyerAccount.css" type="text/css" rel="stylesheet" />
-    <link href="~/Content/Common/common.css" type="text/css" rel="stylesheet" />
-    <link href="~/Content/Entry/shortcut_five.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Account/buyerAccount/buyerAccount.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Entry/shortcut_five.css" type="text/css" rel="stylesheet" />
     <title>buyerAccount</title>
-    @RenderPage("~/Views/Shared/base.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
 </head>
 
 <body>
@@ -309,7 +308,7 @@
             <div id="main3"></div>
         </div>
     </div>
-    <script type="text/javascript" src="~/Scripts/Account/buyerAccount/buyerAccount.js" defer></script>
+    <script type="text/javascript" src="~/js/Account/buyerAccount/buyerAccount.js" defer></script>
 </body>
 
 </html>
