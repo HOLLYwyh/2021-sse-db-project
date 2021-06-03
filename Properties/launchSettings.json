@@ -16,7 +16,7 @@
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
       }
     },
-    "InernetMall": {
+    "InternetMall": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

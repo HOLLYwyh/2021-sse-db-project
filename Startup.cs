@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace InernetMall
+namespace InternetMall
 {
     public class Startup
     {
