@@ -9,10 +9,13 @@ using Microsoft.AspNetCore.Http;
 
 namespace InternetMall.Controllers
 {
-    public class ErrorController : Controller
+    public class FavoritesController : Controller
     {
-        // GET: 404
-        public IActionResult Error404()
+        public IActionResult Follow()
+        {
+            return View();
+        }
+        public IActionResult Favorite()
         {
             return View();
         }

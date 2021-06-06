@@ -9,10 +9,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace InternetMall.Controllers
 {
-    public class ErrorController : Controller
+    public class DialogController : Controller
     {
-        // GET: 404
-        public IActionResult Error404()
+        public IActionResult Service()
         {
             return View();
         }
