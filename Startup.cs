@@ -24,7 +24,7 @@ namespace InternetMall
         {
             services.AddHttpContextAccessor(); //注册Cookie相关
             services.AddRazorPages();   //注册Razor
-            services.AddControllersWithViews();
+            services.AddControllersWithViews();  //注册Controller与Views
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
