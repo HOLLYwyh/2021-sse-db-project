@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/Content/Entry/signup/signup.css" type="text/css" rel="stylesheet" />
-    <link href="~/Content/Common/common.css" type="text/css" rel="stylesheet" />
-    <link href="~/Content/Entry/shortcut_five.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Entry/signup/signup.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Entry/shortcut_five.css" type="text/css" rel="stylesheet" />
     <title>signup</title>
-    @RenderPage("~/Views/Shared/base.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
 </head>
 <body>
     <div class="shortcut">
@@ -50,7 +50,7 @@
         <div class="aria">
             <div class="login_box">
                 <div class="client_login">用户注册</div>
-                <form action="" method="post">
+                <form action="SignUp" method="post">
                     <div class="client_name">
                         <img src="~/Images/Entry/login/client_name.png" class="fl">
                         <input type="text" class="fl" name="phoneNumber" placeholder="请输入您的常用手机号">
