@@ -22,7 +22,8 @@ namespace InternetMall
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddHttpContextAccessor(); //注册Cookie相关
+            services.AddRazorPages();   //注册Razor
             services.AddControllersWithViews();
         }
 
@@ -37,6 +38,7 @@ namespace InternetMall
                 app.UseHsts();
             }
 
+            //设置URL状态
             app.Use(async (context, next) =>
             {
                 await next.Invoke();
