@@ -23,7 +23,7 @@ namespace InternetMall.Controllers
         {
             return View();
         }
-        public IActionResult submitOrder()
+        public IActionResult SubmitOrder()
         {
             return View();
         }
