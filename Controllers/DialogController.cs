@@ -9,14 +9,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace InternetMall.Controllers
 {
-    public class EntryController : Controller
+    public class DialogController : Controller
     {
-        // GET: Entry
-        public IActionResult LogIn()
-        {
-            return View();
-        }
-        public IActionResult SignUp()
+        public IActionResult Service()
         {
             return View();
         }
