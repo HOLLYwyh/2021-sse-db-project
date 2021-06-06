@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/Content/Home/index/index.css" type="text/css" rel="stylesheet"/>
-    <link href="~/Content/Common/common.css" type="text/css" rel="stylesheet"/>
-    <link href="~/Content/Home/index/shortcut_index.css" type="text/css" rel="stylesheet"/>
-    <link rel="stylesheet" href="~/Content/Home/index/carousel.css" type="text/css">
-    <link href="~/Content/Home/index/animate.css" type="text/css" rel="stylesheet"/>
+    <link href="~/css/Home/index/index.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Home/index/shortcut_index.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/Home/index/carousel.css" type="text/css">
+    <link href="~/css/Home/index/animate.css" type="text/css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script type="text/javascript" src="~/Scripts/Home/index/index.js"></script>
-    <script type="text/javascript" src="~/Scripts/Common/vue.js"></script>
+    <script type="text/javascript" src="~/js/Home/index/index.js"></script>
+    <script type="text/javascript" src="~/js/Common/vue.js"></script>
     <title>index</title>
-    @RenderPage("~/Views/Shared/base.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
 </head>
 <body>
     <div class="shortcut">
@@ -151,31 +151,30 @@
             </div>
         </div>
     </div>
-    <div class="carousel"  @@mouseenter="enter" @@mouseleave="leave">
+    <div class="carousel" @@mouseenter="enter" @@mouseleave="leave">
         <transition-group tag="ul" name="image"
-        enter-active-class="animate__animated animate__fadeIn"
-        leave-active-class="animate__animated animate__fadeOut"
-        >
-        <li v-for='(image,index) in img' :key='index' v-show="index === mark">
-        <a href="javascript:;">
-                <img :src="image">
-        </a>
-        </li>
+                          enter-active-class="animate__animated animate__fadeIn"
+                          leave-active-class="animate__animated animate__fadeOut">
+            <li v-for='(image,index) in img' :key='index' v-show="index === mark">
+                <a href="javascript:;">
+                    <img :src="image">
+                </a>
+            </li>
         </transition-group>
         <div class="bullet">
-        <span v-for="(item,index) in img.length" :class="{'active':index === mark}"
-        @@click="change(index)" :key="index"></span>
+            <span v-for="(item,index) in img.length" :class="{'active':index === mark}"
+                  @@click="change(index)" :key="index"></span>
         </div>
         <div class="switch">
-        <span class="prev" @@click="prev">
-            <img id="u71_img" class="img " src="~/Images/Home/index/leftarrow.png"/>
-        </span>
-        <span class="next" @@click="next">
-            <img id="u72_img" class="img " src="~/Images/Home/index/rightarrow.png"/>
-        </span>
+            <span class="prev" @@click="prev">
+                <img id="u71_img" class="img " src="~/Images/Home/index/leftarrow.png" />
+            </span>
+            <span class="next" @@click="next">
+                <img id="u72_img" class="img " src="~/Images/Home/index/rightarrow.png" />
+            </span>
         </div>
     </div>
-    <script type="text/javascript" src="~/Scripts/Home/index/index.js"></script>
-    <script type="text/javascript" src="~/Scripts/Common/vue.js"></script>
+    <script type="text/javascript" src="~/js/Home/index/index.js"></script>
+    <script type="text/javascript" src="~/js/Common/vue.js"></script>
 </body>
 </html>

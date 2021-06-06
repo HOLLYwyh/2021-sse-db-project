@@ -9,14 +9,13 @@ using Microsoft.AspNetCore.Http;
 
 namespace InternetMall.Controllers
 {
-    public class EntryController : Controller
+    public class FavoritesController : Controller
     {
-        // GET: Entry
-        public IActionResult LogIn()
+        public IActionResult Follow()
         {
             return View();
         }
-        public IActionResult SignUp()
+        public IActionResult Favorite()
         {
             return View();
         }

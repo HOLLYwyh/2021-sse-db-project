@@ -9,14 +9,21 @@ using Microsoft.AspNetCore.Http;
 
 namespace InternetMall.Controllers
 {
-    public class EntryController : Controller
+    public class PurchaseController : Controller
     {
-        // GET: Entry
-        public IActionResult LogIn()
+        public IActionResult ShoppingCart()
         {
             return View();
         }
-        public IActionResult SignUp()
+        public IActionResult Settle()
+        {
+            return View();
+        }
+        public IActionResult Payment()
+        {
+            return View();
+        }
+        public IActionResult SubmitOrder()
         {
             return View();
         }
