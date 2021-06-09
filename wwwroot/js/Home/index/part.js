@@ -31,7 +31,7 @@ Vue.component('part',{
     </ul>
     </div>
     <div class="rank">
-        <div class="part_title">
+        <div class="rank_title">
          排行榜
         </div>
         <div class="ranklist">
