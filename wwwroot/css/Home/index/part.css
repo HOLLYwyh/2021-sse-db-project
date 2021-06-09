@@ -16,6 +16,16 @@
     float: left;
 }
 
+.rank_title {
+    width: 264px;
+    height: 36px;
+    background-color: #fff;
+    font-size: 20px;
+    line-height: 36px;
+    text-align: left;
+    float: left;
+}
+
 .card_list{
     width: 710px;
     height: 412px;
