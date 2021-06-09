@@ -9,7 +9,8 @@
     <link href="~/css/Home/index/shortcut_index.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/Home/index/carousel.css" type="text/css">
     <link href="~/css/Home/index/animate.css" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" src="~/js/Home/index/index.js"></script>
+    <link href="~/css/Home/index/part.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="~/js/Common/vue.js"></script>
     <title>index</title>
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
 </head>
@@ -115,9 +116,29 @@
         </div>
         <div>
             <input type="text" placeholder="关键词搜索" class="fl">
-            <button class="fl"></button>
         </div>
+        <button class="fl"></button>
         <div class="nav fr">
+
+            <transition enter-active-class="animate__animated animate__fadeIn"
+                        leave-active-class="animate__animated animate__fadeOut">
+                <div class="login_box" v-show="appearance==true" @@mouseenter="appear" @@mouseleave="disappear('B')" style="animation-duration: 200ms">
+                    <div class="avator" @@mouseenter="appear" @@mouseleave="disappear('A')">
+                    </div>
+                    <div class="nickname">
+                        我的昵称
+                    </div>
+
+                </div>
+            </transition>
+
+            <div class="nav_son login">
+                <img src="/Images/Home/index/u64.svg" @@mouseenter="appear" @@mouseleave="disappear('A')">
+                <a href="/Entry/LogIn" class="fl">登录</a>
+                <p class="fl">|</p>
+                <a href="/Entry/SignUp" class="fl">注册</a>
+            </div>
+
             <div class="nav_son">
                 <img src="~/Images/Home/index/shoppingcart.svg" alt="">
                 <a href="#">购物车</a>
@@ -142,38 +163,43 @@
                 <img src="~/Images/Home/index/coupon.svg" alt="">
                 <a href="#">优惠券</a>
             </div>
-            <div class="nav_son login">
-                <img src="~/Images/Home/index/u64.svg" alt="">
-                <a href="/Entry/LogIn" class="fl">登录</a>
-                <p class="fl">|</p>
-                <a href="/Entry/SignUp" class="fl">注册</a>
+
+        </div>
+    </div>
+    <div class="different_kind">
+
+    </div>
+    <div class="recommend">
+        <div id="carousel1">
+            <carousel class="carousel1"></carousel>
+        </div>
+        <div class="rcmd_box">
+            <div class="change_btn">
+                <i class="change_ico"></i>
+                换一换
             </div>
         </div>
     </div>
-    <div class="carousel" @@mouseenter="enter" @@mouseleave="leave">
-        <transition-group tag="ul" name="image"
-                          enter-active-class="animate__animated animate__fadeIn"
-                          leave-active-class="animate__animated animate__fadeOut">
-            <li v-for='(image,index) in img' :key='index' v-show="index === mark">
-                <a href="javascript:;">
-                    <img :src="image">
-                </a>
-            </li>
-        </transition-group>
-        <div class="bullet">
-            <span v-for="(item,index) in img.length" :class="{'active':index === mark}"
-                  @@click="change(index)" :key="index"></span>
-        </div>
-        <div class="switch">
-            <span class="prev" @@click="prev">
-                <img id="u71_img" class="img " src="~/Images/Home/index/leftarrow.png" />
-            </span>
-            <span class="next" @@click="next">
-                <img id="u72_img" class="img " src="~/Images/Home/index/rightarrow.png" />
-            </span>
-        </div>
+
+    <div id="part1">
+        <part></part>
     </div>
+    <div id="part2">
+        <part></part>
+    </div>
+    <div id="part3">
+        <part></part>
+    </div>
+    <div id="part4">
+        <part></part>
+    </div>
+    <div id="part5">
+        <part></part>
+    </div>
+
+    <script type="text/javascript" src="~/js/Home/index/part.js"></script>
+    <script type="text/javascript" src="~/js/Common/carousel.js"></script>
     <script type="text/javascript" src="~/js/Home/index/index.js"></script>
-    <script type="text/javascript" src="~/js/Common/vue.js"></script>
+
 </body>
 </html>
