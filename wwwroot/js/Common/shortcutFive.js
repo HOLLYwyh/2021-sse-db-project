@@ -5,14 +5,14 @@ Vue.component('shortcut',{
                 <li>
                     <div class="col_EF4F00">
                         <div>
-                            <a href="index.html">主界面</a>
+                            <a href="/Home/index">主界面</a>
                         </div>
                     </div>
                 </li>
                 <li>
                     <div class="col_FFCC00">
                         <div>
-                            <a href="http://">账户中心</a>
+                            <a href="/Account/buyerAccount">账户中心</a>
                         </div>
                     </div>
                 </li>
