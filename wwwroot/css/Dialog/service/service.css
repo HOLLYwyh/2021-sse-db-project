@@ -1,0 +1,17 @@
+body{
+    background-color :rgb(138,188,209); /*秋波蓝*/
+}
+
+.dialog-bar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 1300px;
+    height: 600px;
+}
+
+.contacts {
+    position: absolute;
+    left: 50%;
+}
