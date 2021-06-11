@@ -1,0 +1,51 @@
+<!--店铺搜索页面-->
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <!--引入tailwind-->
+    <link href="https://unpkg.com/tailwindcss@@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="/css/Search/searchShop/searchShop.css" rel="stylesheet">
+    <!--引入与导航栏有关的配置-->
+    <link href="/css/Common/shortcut_five.css" rel="stylesheet">
+    <title>搜索结果-商品</title>
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+</head>
+
+<body>
+    <!--渲染导航栏-->
+    <div id="shortcutlg">
+        <shortcut></shortcut>
+    </div>
+    <!--搜索框以相关部分-->
+    <div class="search-bar rounded-b-lg bg-gray-200 shadow">
+        <div class="huicui">
+            <img src="~/Images/Home/index/yinghaohuicui.png">
+        </div>
+        <div>
+            <div>
+                <select class="select rounded-l-lg border-opacity-0 text-blue-500 text-center">
+                    <option value="shop">店铺</option>
+                    <option value="commodity">商品</option>
+                </select>
+            </div>
+            <div id="search" class="search">
+                <el-input placeholder="请输入搜索内容"
+                          v-model="input"
+                          clearable>
+                </el-input>
+            </div>
+            <div id="search-btn" class="search-btn">
+                <el-button icon="el-icon-search"></el-button>
+            </div>
+        </div>
+        <div id="shopping-cart"class="shopping-cart">
+            <el-button type="danger">我的购物车</el-button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="/js/Search/searchShop/searchShop.js"></script>
+</body>
+
+</html>
