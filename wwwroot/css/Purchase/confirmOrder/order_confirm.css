@@ -1,0 +1,116 @@
+/*nav*/
+.con{margin-left: auto;margin-right: auto;width: 100%;}
+.row{margin-left: auto;margin-right: auto;}
+.toper_nav{background: white;border-bottom: 1px solid #DEDEDE;}
+.toper_btm_nav, .toper_nav{float: left;}
+.logoTit{margin-left: 20px;}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{padding-right: 0px;padding-left: 0px;}
+/*tooper*/
+.layui-tab-title{border-bottom: 0px;}
+.layui-tab-title li{color: white;margin-top: -5px;margin-right: 50px;vertical-align:inherit;}
+.toper_btm_nav{height:45px;background: #05226C;} 
+.layui-tab-brief>.layui-tab-title .layui-this{border-radius: 15px;color: #05226C;height: 35px;background: white;padding-bottom: 5px;}
+.layui-tab-title .layui-this:after{height:38px ;line-height: 38px;}
+.toper_btm{line-height: 18px;}
+.toper_btm img{margin-top: 15px;}
+.erweimaImg{float: right;}
+.erweimaCont{margin-left: -8px;font-size: 12px;}
+.toper_tit{font-size: 16px;font-weight: bold;}
+/*content*/
+#myVueAddress{padding-bottom: 100px;}
+.contenterTit{padding: 15px 0px;font-size: 15px;}
+.contenter{border: 1px solid #EDEDED;padding: 0px 15px 20px 15px}
+.contenter ul li{border-bottom: 1px solid #EDEDED;padding:20px 0px 20px 0px;}
+
+
+
+/*收货地址及返回购物车*/
+.addAddressCons{font-weight: bold;}
+.addAddress{float: right;color:#05226C ;cursor: pointer;}
+.addAddress a{color: #05226C;cursor: pointer;}
+.edmitSpan{padding: 0px 5px;}
+.rightAddress{height: 31px;line-height: 31px;margin-top: 10px;padding: 0px 20px;}
+/*更多地址*/
+.DefaultAddress{padding: 4px 10px;background: #a3a3a3;color: white;cursor: pointer;font-size: 12px;}
+.muchAddress{margin-top: 20px;color: #999999;cursor: pointer;width: 75px;margin-left: 15px;}
+.muchAddress .fa-angle-double-down{margin-left: 3px;}
+.noAddress{margin-top: -40px;color: red;cursor: pointer;margin-left: 15px;}
+/*送货方式*/
+.deliverymode{margin-top: 15px;}
+.deliverymodeLeft{background: #f1f1f1;max-width: 270px;padding: 10px 10px 39px 10px;}
+.deliverymodeRight{background: #f9f9f9;padding: 11px 0px;}
+.deliverymodeLeft .consigneeList span{width: 60px;display: block;text-align: center;}
+.deliverymodeLeft .deliverymodeLeftTit{padding: 5px 0px 10px 0px}
+.deliverymodeRight table tr td{border: 0px;background: #f9f9f9;}
+.deliverymodeRight table tr td img{width: 100%;margin-top: -11px;}
+.goodName{display: inline-block;}
+.goodsName{margin-left: 10px;}
+.goodGary{color: #999999;text-align: left;}
+.goodname{font-language-override: 16px;}
+.goodPrice{color: red;font-weight: bold;}
+.goodNum{font-weight: bold;}
+.scolleShow{max-height: 250px;overflow: auto;min-height: 60px;}
+
+/*公司信息*/
+.CompanyInformation{margin-right: 20px;margin-top: 10px;display: inline-block;}
+.modify{color:#05226C ;cursor: pointer;}
+
+/*优惠券*/
+.contenter .couponconts{border-bottom: 0px;}
+.coupon{width: 200px;height: 140px;display: block;border: 2px solid #EDEDED;display: inline-block;margin: 20px 60px 0px 0px;position: relative;cursor: pointer;}
+.couponDiv{width: 100%;height: 100px;background:#cccccc ;padding: 20px;color: #bbbbbb;}
+.couponprice{font-size: 20px;}
+.coupontime{margin-top: 10px;}
+.coupontype{display: block;text-align: center;width: 100%;height: 40px;line-height: 40px;color: #bbbbbb;}
+.couponDivClick{background: #209ceb;color: white;}
+.coupontypeClick{color:#209ceb ;}
+.couponcontShow{max-height: 332px;overflow: auto;}
+.addressDefultClass{border: 1px solid #EDEDED;padding: 3px 7px;border-radius: 4px;color: #EDEDED;}
+.edmitAddre{float: right;}
+
+/*金额抵用函数*/
+.totalRow{height: 40px;background: #f1f1f1;line-height: 40px;padding-left:18px ;}
+
+/*底部信息*/
+.contenterFooter{float: right;text-align: right;margin-top: 20px}
+.footerPrice{display:inline-block;width: 80px;text-align: left;font-weight: bold;color: #999999;}
+.footercouponPrice{color: #2da41e;}
+.footerRow{margin-top: 20px;text-align: right;background: #f1f1f1;padding-left:18px ;}
+.footerRowprice{padding: 10px;display: block;}
+.footerRowprice span{color: red;font-weight: bold;font-size: 16px;}
+.footerRowaddress{display: block;padding: 0px 0px 10px 0px;color: #999999;}
+.footerRowaddress span{margin-right: 10px;}
+
+/*tab标签样式*/
+.consignee{padding: 5px 15px;cursor: pointer;}
+.consigneeList{ border: 1px solid #999999;margin-right: 20px;padding: 5px 17px;display: inline-block;margin-top: 10px;cursor: pointer;position: relative;height: 31px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.consigneeListWidth{width: 100%;}
+.consigneeListRight{padding: 0px 20px;}
+.BackColor{background: #05226C;color: white;}
+/*.consignee:hover .consigneeListRight{
+	
+}*/
+/*tab标签点击样式*/
+.consigneeListClick{border: 1px solid #05226C;}
+
+/*三角形*/
+.arrow-right {position: absolute;transform: rotate(45deg);right: -2px;bottom: -10px;width:0; height:0; border-top:15px solid transparent;border-bottom: 15px solid transparent;border-left: 15px solid #05226C;}
+.fa-check{color: black;color: black;position: absolute;right: 0px;bottom: 0px;color: white;font-size: 12px;}
+
+/*提交表单按钮*/
+.submitForm{float: right;margin-top: 30px;margin-bottom: 100px;padding: 8px 30px;background: #209ceb;color: white;border-radius: 0px;}
+.submitForm:hover{color: white;}
+
+
+/*动画效果*/
+.fade-enter-active, .fade-leave-active {
+  transition: all 1s ;
+}
+.fade-enter  /* .fade-leave-active in below version 2.1.8 */ {
+	opacity: 1;
+  	transform: rotate(180deg);
+}
+.fade-leave-to{
+	opacity: 1;
+	transform: rotate(180deg);
+}

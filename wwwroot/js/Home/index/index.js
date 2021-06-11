@@ -1,60 +1,42 @@
+var loginbox = new Vue({
+    el: '.nav',
+    data: {
+        mouseOnAvator: false,
 
-var vm = new Vue({
-    el:'.carousel',
-    data:{
-        
-        mark:0,
-        img:[
-                '../../../Images/Home/Index/a1.png',
-                '../../../Images/Home/Index/a2.png',
-                '../../../Images/Home/Index/a3.png',
-                '../../../Images/Home/Index/a4.png',
-                '../../../Images/Home/Index/a5.png'
-        ],
-        time:null
+        mouseOnBox: false,
+        appearance: false,
     },
-    methods:{   
-        change(i){
-            this.mark = i;
+    methods: {
+        appear() {
+            this.mouseOnAvator = true
+
+            this.mouseOnBox = true
+            this.appearance = true
+            console.log('1')
         },
-        prev(){
-            this.mark--;
-            if(this.mark === -1){
-                this.mark = 4;
-                return
+        disappear(a) {
+            if (a == 'A') {
+                this.mouseOnAvator = false
+                console.log('2')
             }
-        },
-        next(){
-            this.mark++;
-            if(this.mark === 5){
-                this.mark = 0;
-                return
+            else if (a == 'B') {
+                this.mouseOnBox = false
+                console.log('3')
             }
-        },
-        autoPlay(){
-            this.mark++;
-            if(this.mark === 5){
-                this.mark = 0;
-                return
-            }
-        },
-        play(){
-            this.time = setInterval(this.autoPlay,3000);
-        },
-        enter(){
-            console.log('enter')
-            clearInterval(this.time);
-        },
-        leave(){
-            console.log('leave')
-            this.play();
+
+            if (this.mouseOnBox == false && this.mouseOnAvator == false)
+                this.appearance = false
         }
-        
-    },
-    created(){
-        this.play()
     }
-});
+})
+
+let carousel1 = new Vue({ el: '#carousel1' });
+
+let part1 = new Vue({ el: '#part1' });
+let part2 = new Vue({ el: '#part2' });
+let part3 = new Vue({ el: '#part3' });
+let part4 = new Vue({ el: '#part4' });
+let part5 = new Vue({ el: '#part5' });
 
 
 
