@@ -8,8 +8,8 @@ Vue.component('searchbar', {
         <div>
             <div>
                 <select class="select rounded-l-lg border-opacity-0 text-blue-500 text-center">
-                    <option value="shop">{{first}}</option>
-                    <option value="commodity">{{second}}</option>
+                    <option>{{first}}</option>
+                    <option>{{second}}</option>
                 </select>
             </div>
             <div id="search" class="search">
