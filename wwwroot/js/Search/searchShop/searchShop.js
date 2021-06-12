@@ -5,18 +5,5 @@ new Vue({
 
 //搜索框
 new Vue({
-    el:"#search",
-    data : {
-        input:''
-    }
-})
-
-//搜索按钮
-new Vue({
-    el:"#search-btn"
-})
-
-//购物车按钮
-new Vue({
-    el:"#shopping-cart"
+    el: "#search-bar"
 })
