@@ -2,18 +2,32 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/css/Entry/login/login.css" type="text/css" rel="stylesheet" />
-    <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
-    <link href="~/css/Entry/shortcut_five.css" type="text/css" rel="stylesheet" />
+    <!--引入tailwind-->
     <link href="https://unpkg.com/tailwindcss@@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="/css/Dialog/service/service.css" rel="stylesheet">
     <title>联系客服</title>
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
 </head>
 
 <body>
+    <!--返回按钮-->
+    <!--聊天页面-->
+    <div class="dialog-bar shadow-xl opacity-75 rounded-lg bg-red-100">
+        <!--左边栏-->
+        <el-aside id="left-sidebar" class="shadow-xl opacity-75 rounded-lg"  width="200px">
+            <el-table :data="contactsData" height="600" style="width: 100%">
+                <el-table-column class="contacts" prop="contacts"
+                                 label="联系人"
+                                 width="199">
+                </el-table-column>
+            </el-table>
+        </el-aside>
+        <!--消息区-->
+        <!--发消息区-->
+        <!--评价区-->
+    </div>
+
+    <script type="text/javascript" src="~/js/Dialog/service/service.js"></script>
 </body>
 
 </html>

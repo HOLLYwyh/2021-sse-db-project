@@ -1,48 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/css/Entry/signup/signup.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Entry/buyerSignup/buyerSignup.css" type="text/css" rel="stylesheet" />
     <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
-    <link href="~/css/Entry/shortcut_five.css" type="text/css" rel="stylesheet" />
-    <title>signup</title>
+    <!--引入与导航栏有关的配置-->
+    <link href="/css/Common/shortcut_five.css" rel="stylesheet">
+    <title>注册</title>
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
 </head>
 <body>
-    <div class="shortcut">
-        <ul>
-            <li>
-                <div class="col_EF4F00">
-                    <div>
-                        <a href="/Home/Index">主界面</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_FFCC00">
-                    <div>
-                        <a href="/Account/BuyerAccount">账户中心</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_9FCC48">
-                    <div>
-                        <a href="http://">加入英豪</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_00A3E7">
-                    <div>
-                        <a href="http://">网站导航</a>
-                    </div>
-                </div>
-            </li>
-        </ul>
+    <!--渲染导航栏-->
+    <div id="shortcutlg">
+        <shortcut></shortcut>
     </div>
+
     <div class="signUp">
         <div class="huicui">
             <img src="~/Images/Entry/login/logo.png" alt="">
@@ -71,11 +42,14 @@
                 </form>
                 <div class="have_not">
                     <span>已经拥有账号？</span>
-                    <a href="LogIn">立即登录</a>
+                    <a href="BuyerLogIn">立即登录</a>
                     <a href="#">我要开店</a>
                 </div>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript" src="/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="/js/Entry/buyerSignup/buyerSignup.js"></script>
 </body>
 </html>

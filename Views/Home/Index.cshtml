@@ -11,7 +11,7 @@
     <link href="~/css/Home/index/animate.css" type="text/css" rel="stylesheet" />
     <link href="~/css/Home/index/part.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="~/js/Common/vue.js"></script>
-    <title>index</title>
+    <title>欢迎来到英豪荟萃~</title>
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
 </head>
 <body>
@@ -117,7 +117,7 @@
         <div>
             <input type="text" placeholder="关键词搜索" class="fl">
         </div>
-        <button class="fl"></button>
+        <button class="fl" onclick="window.location.href = '/Search/SearchCommodity'"></button>
         <div class="nav fr">
 
             <transition enter-active-class="animate__animated animate__fadeIn"
@@ -134,9 +134,9 @@
 
             <div class="nav_son login">
                 <img src="/Images/Home/index/u64.svg" @@mouseenter="appear" @@mouseleave="disappear('A')">
-                <a href="/Entry/LogIn" class="fl">登录</a>
+                <a href="/Entry/BuyerLogIn" class="fl">登录</a>
                 <p class="fl">|</p>
-                <a href="/Entry/SignUp" class="fl">注册</a>
+                <a href="/Entry/BuyerSignUp" class="fl">注册</a>
             </div>
 
             <div class="nav_son">
