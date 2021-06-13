@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <link href="~/css/Entry/buyerLogin/buyerLogin.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
+    <!--引入与导航栏有关的配置-->
+    <link href="/css/Common/shortcut_five.css" rel="stylesheet">
+    <title>登录</title>
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+</head>
+<body>
+    <!--渲染导航栏-->
+    <div id="shortcutlg">
+        <shortcut></shortcut>
+    </div>
+
+    <div class="logIn">
+        <div class="huicui">
+            <img src="~/Images/Entry/login/logo.png" alt="">
+        </div>
+        <div class="aria">
+            <div class="login_box">
+                <div class="client_login">用户登录</div>
+                <form action="LogIn" method="post">
+                    <div class="client_name">
+                        <img src="~/Images/Entry/login/client_name.png" class="fl">
+                        <input type="text" class="fl" name="ID" placeholder="用户名/手机号">
+                    </div>
+                    <div class="password">
+                        <img src="~/Images/Entry/login/password.png" class="fl">
+                        <input type="password" class="fl" name="password" placeholder="密码">
+                    </div>
+                    <div class="preserve">
+                        <input type="checkbox" class="fr">
+                        <span class="fr">保存密码</span>
+                    </div>
+                    <button>开启荟萃</button>
+                </form>
+                <div class="have_not">
+                    <span>尚未拥有账号？</span>
+                    <a href="BuyerSignUp">立即注册</a>
+                    <a href="#">忘记密码</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="/js/Entry/buyerLogin/buyerLogin.js"></script>
+</body>
+</html>
