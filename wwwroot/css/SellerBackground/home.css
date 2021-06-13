@@ -1,0 +1,10 @@
+@import url("//unpkg.com/element-ui@2.15.2/lib/theme-chalk/index.css");
+
+.nav-area{
+    background-color:white;
+    border:solid rgb(129, 127, 127) 2px;
+    width:15%;
+    height:100%;
+    position: fixed; /* 使它产生粘性，即使在滚动时 */
+    overflow: auto; /* 如果侧栏的内容太多，则启用滚动条 */
+}
