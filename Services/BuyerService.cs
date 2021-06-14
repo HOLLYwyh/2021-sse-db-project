@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using InternetMall.Models;
 using InternetMall.Interfaces;
+using InternetMall.DBContext;
 
-namespace InternetMall.Services
+namespace WebApplication1.Services
 {
     public class BuyerService:IBuyerServices
     {
         private ModelContext _context;
         Random rd = new Random();
-        public bool Logon(string phone, string nickName, string passwd)//注册
+        public bool SignUp(string phone, string nickName, string passwd)//注册
         {
             //如果要注册的用户电话不存在，说明可以注册
             if (BuyerExists(phone) == false)

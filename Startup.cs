@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,7 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using InternetMall.Models;
+using InternetMall.DBContext;
 
 namespace InternetMall
 {
@@ -17,21 +19,22 @@ namespace InternetMall
         public Startup(IConfiguration configuration)
         {
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+               .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+
             services.AddDbContext<ModelContext>(options => options.UseOracle(Configuration.GetConnectionString("OracleDBContext")));
 
+            services.AddHttpContextAccessor(); //注册Cookie相关
+            services.AddRazorPages();   //注册Razor
+            services.AddControllersWithViews();  //注册Controller与Views
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -39,17 +42,27 @@ namespace InternetMall
                 app.UseDeveloperExceptionPage();
             }
             else
-            {
-                app.UseExceptionHandler("/Home/Error");
+            { 
+                app.UseHsts();
             }
+
+            //设置URL状态
+            app.Use(async (context, next) =>
+            {
+                await next.Invoke();
+                if (context.Response.StatusCode == 404)
+                {
+                    context.Response.Redirect("/Error/Error404");
+                }
+            });
+
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
