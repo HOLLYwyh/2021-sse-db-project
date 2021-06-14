@@ -20,5 +20,17 @@ namespace InternetMall.Controllers
         {
             return View();
         }
+        public IActionResult SellorSignUp()
+        {
+            return View();
+        }
+        public IActionResult SellorLogIn()
+        {
+            return View();
+        }
+        public IActionResult AdministratorLogIn()
+        {
+            return View();
+        }
     }
 }
