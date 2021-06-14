@@ -29,11 +29,12 @@ body {
 	width: 7.5rem;
 	opacity: 0;
 	transition: all 0.5s ease-in 0.5s;
+	z-index:1000;
 }
 
 .rocket-wrapper .active-rocket {
 	position: absolute;
-	z-index: 3;
+	z-index: 1003;
 	width: 100%;
 	height: 100%;
 	font-size: 0;
@@ -48,7 +49,7 @@ body {
 
 .rocket-wrapper .hover-rocket {
 position: absolute;
-z-index: 2;
+z-index: 1002;
 width: 100%;
 height: 100%;
 font-size: 0;
@@ -59,7 +60,7 @@ transition: opacity 0.5s ease-in;
 
 .rocket-wrapper .default-rocket {
 position: absolute;
-z-index: 1;
+z-index: 1001;
 width: 100%;
 height: 100%;
 font-size: 0;
