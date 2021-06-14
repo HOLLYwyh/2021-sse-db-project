@@ -1,7 +1,4 @@
 Vue.component('side-bar', {
-    data: {
-
-    },
     template: `
         <el-menu default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
             background-color="transparent" text-color="#8a8c93" active-text-color="#29b7cb">

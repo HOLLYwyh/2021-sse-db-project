@@ -10,6 +10,7 @@
 
     <!-- import CSS -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
     <!-- import Vue before Element -->
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <!-- import JavaScript -->
@@ -22,15 +23,25 @@
 <body>
     <el-container>
         <div class="nav-area">
-        <img>
-        <el-aside id="nav" style="width:100%;">
-            <side-bar></side-bar>
-        </el-aside>
+            <el-aside id="nav" style="width:100%;">
+                <side-bar></side-bar>
+            </el-aside>
+        </div>
+
+        <div class="main-body">
+            <div class="dropdown">
+            <button class="dropbtn"></button>
+            <div class="dropdown-content">
+                <a href="#">个人信息</a>
+                <a href="#">设置</a>
+                <a href="#">退出登录</a>
+            </div>
+            </div>
         </div>
     </el-container>
-
 </body>
 <script src="../../wwwroot/js/SellerBackground/home.js"></script>
 <script src="../../wwwroot/js/SellerBackground/sidebar.js"></script>
+<script src="../../wwwroot/js/SellerBackground/dropdownMenu.js"></script>
 
 </html>
