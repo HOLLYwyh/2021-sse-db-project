@@ -9,9 +9,9 @@ using InternetMall.Models;
 using InternetMall.Interfaces;
 using InternetMall.DBContext;
 
-namespace WebApplication1.Services
+namespace InternetMall.Services
 {
-    public class BuyerService:IBuyerServices
+    public class BuyerService:IBuyerService
     {
         private ModelContext _context;
         Random rd = new Random();

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using InternetMall.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Internetmall.Interfaces
+namespace InternetMall.Interfaces
 {
-    public interface IBuyerServices
+    public interface IBuyerService
     {
         public bool SignUp(string phone, string nickName, string passwd);//注册
 
