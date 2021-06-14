@@ -29,4 +29,4 @@ Vue.component('dropdown-menu', {
     `
 })
 
-let menu = new Vue({ el: '#menu' });
+let avatar = new Vue({ el: '#avatar' });

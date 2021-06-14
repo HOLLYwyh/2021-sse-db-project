@@ -13,13 +13,13 @@
     overflow: auto; /* 如果侧栏的内容太多，则启用滚动条 */
 }
 
-.header {
+/*.header {
     color: black;
     line-height: 60px;
     width: 100%;
     text-align: right;
     font-size: 18px;
-}
+}*/
 
 /* 设置下拉按钮的样式 */
 .dropbtn {
