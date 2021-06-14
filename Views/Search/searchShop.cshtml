@@ -1,0 +1,32 @@
+<!--店铺搜索页面-->
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <!--引入tailwind-->
+    <link href="https://unpkg.com/tailwindcss@@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="/css/Search/searchShop/searchShop.css" rel="stylesheet">
+    <!--引入与导航栏有关的配置-->
+    <link href="/css/Common/shortcut_five.css" rel="stylesheet">
+    <!--搜索框-->
+    <link href="/css/Search/searchBar.css" rel="stylesheet">
+    <title>搜索结果-店铺</title>
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+</head>
+
+<body>
+    <!--渲染导航栏-->
+    <div id="shortcutlg">
+        <shortcut></shortcut>
+    </div>
+    <!--搜索框部分-->
+    <div id="search-bar">
+        <searchbar></searchbar>
+    </div>
+
+    <script type="text/javascript" src="/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="/js/Search/searchBar.js"></script>
+    <script type="text/javascript" src="/js/Search/searchShop/searchShop.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+body{
+    zoom: 1;
+}
+
+.signUp{
+    width: 100%;
+    height: 693px;
+    position: relative;
+}
+
+.huicui{
+    width: 100%;
+    height: 131px;
+    background-color: #6B97A2;
+    text-align: center;
+    zoom: 0.5;
+}
+
+.aria{
+    
+    width: 1200px;
+    height: 693px;
+    margin: 0 auto 0;
+    text-align: center;
+    background-image: url(../../images/login/background3.png);
+    background-size: 100% 100%;
+    display: block;
+    position: relative;
+    /* padding: 0; */
+    overflow: hidden;
+}
+
+.have_not{
+    margin-top: 20px;
+    font-size: 10px;
+}
+
+.have_not a{
+    color: #74BEDF;
+    text-decoration: none;
+}
+
+.psw{
+    margin-bottom: 10px!important;
+}
+
+.rem{
+    margin-bottom: 0!important;
+}
+
+
+
+.login_box{
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    width: 350px;
+    height: 360px;
+    background-color: rgba(255, 255, 255, 1);
+    box-sizing: border-box;
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgba(121, 121, 121, 1);
+    border-radius: 16px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    font-family: 'Arial Normal', 'Arial', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: normal;
+    color: #888888;
+    
+}
+
+.forem{
+   margin-top: 20px;
+}
+
+.login_box img{
+    zoom: 0.8;
+}
+
+.client_login{
+    margin-top: 20px;
+    font-size: 36px;
+}
+
+
+
+
+.login_box input{
+    width: 200px;
+    height: 36px;
+    margin-top: 0;
+    font-family: 'Arial Normal', 'Arial', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: normal;
+    color: #888888;
+    font-size: 18px;
+    text-indent: 0.5em;
+}
+
+.preserve input{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.login_box button{
+    width: 200px;
+    height: 35px;
+    background-color: rgba(237, 108, 103, 1);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(237, 108, 103, 1);
+    border-radius: 12px;
+    font-size: 22px;
+    line-height: 14px;
+    color: #FFFFFF;
+    
+    display: block;
+}
+
+
+
+
+.note{
+    font-size: small;
+    display: block;
+    width: 200px;
+    height: 20px;
+    margin: 0 auto;
+}
+
+/* .footer{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+} */
