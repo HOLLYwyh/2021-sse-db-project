@@ -1,6 +1,7 @@
 Vue.component('side-bar', {
+
     template: `
-        <el-menu default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
+        <el-menu default-active="1" class="el-menu-vertical-demo"
             background-color="transparent" text-color="#8a8c93" active-text-color="#29b7cb">
             <el-menu-item index="1">
                 <i class="el-icon-s-home"></i>

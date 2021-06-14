@@ -1,30 +1,54 @@
 Vue.component('dropdown-menu', {
-    props:{
+    data: function () {
+        return {
+            isShow: false,
+        }
+    },
+
+    mounted: function () {
+        document.addEventListener('click', (e) => {
+            console.log(e.target);
+            if (e.target.className !== "dropbtn" &&
+                e.target.className!=="sub-btn") {
+                this.isShow = false;
+                console.log(this.isShow);
+            }     
+            else{
+                this.isShow = true;
+                console.log(this.isShow);
+            }
+        })
+    },
+
+    methods: {
 
     },
     template: `
     <div class="dropdown">
-        <button class="dropbtn"></button>
-        <div class="dropdown-content">
-            <div class="sub-btn">
-                <button>
+        <div class="dropbtn">
+            <button class="dropbtn"></button>
+        </div>
+        <div class="dropdown-content" v-show="isShow">
+            <div>
+                <button class="sub-btn">
                 <i class="el-icon-user"></i>
-                <span>个人信息</span>
+                <span class="sub-btn">个人信息</span>
                 </button>
             </div>
-            <div class="sub-btn">
-                <button>
+            <div>
+                <button class="sub-btn">
                 <i class="el-icon-setting"></i>
-                <span>设置</span>
+                <span class="sub-btn">设置</span>
                 </button>
             </div>
-            <div class="sub-btn">
-                <button>
+            <div>
+                <button class="sub-btn">
                 <i class="el-icon-switch-button"></i>
-                <span>退出登录</span>
+                <span class="sub-btn">退出登录</span>
                 </button>
             </div>
         </div>
+    </div>
     </div>
     `
 })
