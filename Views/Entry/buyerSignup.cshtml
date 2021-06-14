@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <link href="~/css/Entry/buyerSignup/buyerSignup.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
+    <!--引入与导航栏有关的配置-->
+    <link href="/css/Common/shortcut_five.css" rel="stylesheet">
+    <title>注册</title>
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+</head>
+<body>
+    <!--渲染导航栏-->
+    <div id="shortcutlg">
+        <shortcut></shortcut>
+    </div>
+
+    <div class="signUp">
+        <div class="huicui">
+            <img src="~/Images/Entry/login/logo.png" alt="">
+        </div>
+        <div class="aria">
+            <div class="login_box">
+                <div class="client_login">用户注册</div>
+                <form action="SignUp" method="post">
+                    <div class="client_name">
+                        <img src="~/Images/Entry/login/client_name.png" class="fl">
+                        <input type="text" class="fl" name="phoneNumber" placeholder="请输入您的常用手机号">
+                    </div>
+                    <div class="yanzheng">
+                        <img src="~/Images/Entry/login/client_name.png" class="fl">
+                        <input type="text" class="fl" name="nickName" placeholder="请输入您的昵称">
+                    </div>
+                    <div class="password">
+                        <img src="~/Images/Entry/login/password.png" class="fl">
+                        <input type="password" class="fl" name="password" placeholder="请输入您的密码">
+                    </div>
+                    <div class="password">
+                        <img src="~/Images/Entry/login/password.png" class="fl">
+                        <input type="password" class="fl" name="confirmPassword" placeholder="请再次输入您的密码">
+                    </div>
+                    <button>开启荟萃</button>
+                </form>
+                <div class="have_not">
+                    <span>已经拥有账号？</span>
+                    <a href="BuyerLogIn">立即登录</a>
+                    <a href="#">我要开店</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="/js/Entry/buyerSignup/buyerSignup.js"></script>
+</body>
+</html>

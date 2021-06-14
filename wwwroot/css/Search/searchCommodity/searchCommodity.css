@@ -1,0 +1,11 @@
+/*为了避免缩小浏览器所带来的影响，设置body默认值*/
+body {
+    min-width : 1200px;
+}
+
+.commodities {
+    height: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 300px;
+}
