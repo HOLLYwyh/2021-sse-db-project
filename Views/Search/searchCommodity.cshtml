@@ -24,10 +24,43 @@
     <div id="search-bar">
         <searchbar></searchbar>
     </div>
+    <!--选择查询部分-->
+    <div class="select-query bg-gray-100 rounded-lg border-2 border-red-500">
+        <p>全部结果：</p>
+    </div>
     <!--商品部分-->
-    <div class="commodities bg-gray-100 rounded-l-lg  border-opacity-0">
+    <div class="commodities bg-gray-100 rounded-lg  border-opacity-0">
+        <div id="test" class="test">
+        <el-row :span="0" v-for="(o, index) in 4" :key="o">
+            <el-col :span="6" v-for="(o, index) in 3" :key="o" :offset="index > 0 ? 2 : 0">
+               <el-card class="transition duration-150 ease-in-out transform hover:-translate-y-1 hover:border-2 hover:border-blue-700" 
+                             :body-style="{ padding: '0px' }">
+                  <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+                     <div style="padding: 0px;">
+                        <span>好吃的汉堡</span>
+                          <div class="bottom clearfix">
+                             <time class="time">{{ currentDate }}</time>
+                             <el-button type="text" class="button">详情</el-button>
+                          </div>
+                      </div>
+               </el-card>
+            </el-col>
+        </el-row>
+        </div>
     </div>
 
+    <!--翻页-->
+    <div id="turn-to-page" class="turn-to-page">
+        <div class="block">
+            <el-pagination @@size-change="handleSizeChange"
+                       @@current-change="handleCurrentChange"
+                       :current-page.sync="currentPage1"
+                       :page-size="100"
+                       layout="prev, pager, next, jumper"
+                       :total="1000">
+            </el-pagination>
+        </div>
+    </div>
 
     <script type="text/javascript" src="/js/Common/shortcutFive.js"></script>
     <script type="text/javascript" src="/js/Search/searchBar.js"></script>
