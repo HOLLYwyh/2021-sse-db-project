@@ -50,3 +50,4 @@ Vue.component('dropdown-menu', {
 })
 
 let avatar = new Vue({ el: '#avatar' });
+let messageBox = new Vue({el:'#message-box'});
