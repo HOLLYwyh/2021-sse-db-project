@@ -7,19 +7,15 @@ Vue.component('dropdown-menu', {
 
     mounted: function () {
         document.addEventListener('click', (e) => {
-            console.log(e.target);
             if (e.target.className !== "dropbtn" &&
                 e.target.className!=="sub-btn") {
                 this.isShow = false;
-                console.log(this.isShow);
             }     
             else{
                 this.isShow = true;
-                console.log(this.isShow);
             }
         })
     },
-
     methods: {
 
     },
