@@ -1,11 +1,29 @@
 Vue.component('dropdown-menu', {
+    props:{
+
+    },
     template: `
     <div class="dropdown">
         <button class="dropbtn"></button>
         <div class="dropdown-content">
-            <a href="#">个人信息</a>
-            <a href="#">设置</a>
-            <a href="#">退出登录</a>
+            <div class="sub-btn">
+                <button>
+                <i class="el-icon-user"></i>
+                <span>个人信息</span>
+                </button>
+            </div>
+            <div class="sub-btn">
+                <button>
+                <i class="el-icon-setting"></i>
+                <span>设置</span>
+                </button>
+            </div>
+            <div class="sub-btn">
+                <button>
+                <i class="el-icon-switch-button"></i>
+                <span>退出登录</span>
+                </button>
+            </div>
         </div>
     </div>
     `

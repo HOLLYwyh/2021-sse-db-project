@@ -55,20 +55,26 @@
     z-index: 1;     /*图层位置*/
     right: 0;
     border-radius: 5%;
-    
 }
-  
-  /* 下拉链接 */
-.dropdown-content a {
-    color: black;
+
+.dropdown-content i{
     padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+    float:left;
+}
+
+.dropdown-content span{
+    padding:8px;
+    float:left;
+}
+
+.dropdown-content button{
+    border: none;
+    width:100%;
 }
   
   /* 悬停时更改下拉链接的颜色 */
-.dropdown-content a:hover {
-    background-color: #f1f1f1
+.dropdown-content button:hover {
+    background-color: #f1f1f1;
 }
   
   /* 悬停时显示下拉菜单 */
