@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using InternetMall.Models;
+using InternetMall.Interfaces;
 
 namespace InternetMall.Services
 {
-    public class BuyerService
+    public class BuyerService:IBuyerServices
     {
         private ModelContext _context;
         Random rd = new Random();
