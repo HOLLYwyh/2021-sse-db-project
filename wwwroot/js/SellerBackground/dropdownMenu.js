@@ -1,6 +1,6 @@
 Vue.component('dropdown-menu', {
     props:{
-        num:String,
+        tag:String,
         list:[],
     },
     data: function () {
@@ -10,13 +10,7 @@ Vue.component('dropdown-menu', {
     },
     mounted: function () {
         document.addEventListener('click', (e) => {
-            //console.log("e.target:"+e.target);
-            //console.log("e.tartget.id:"+e.target.id);
-            //console.log("typeof(e.tartget.id):"+typeof(e.target.id));
-            //console.log("this.num:"+this.num);
-            //console.log("typeof(this.num):"+typeof(this.num));
-
-            if(e.target.id == this.num &&
+            if(e.target.id === this.tag &&
               (e.target.className ==="dropbtn"||
                e.target.className === "sub-btn")){
                 this.isShow = true;
@@ -28,7 +22,7 @@ Vue.component('dropdown-menu', {
     template: `
     <div class="dropdown">
         <div class="dropbtn">
-            <button class="dropbtn" v-bind:id="num"></button>
+            <button class="dropbtn" v-bind:id="tag"></button>
         </div>
         <div class="dropdown-content" v-show="isShow">
             <div v-for="item in list">
