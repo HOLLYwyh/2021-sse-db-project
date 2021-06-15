@@ -31,10 +31,13 @@
         <div class="main-body">
             <ul class="header">
                 <li class="avatar" id="avatar">
-                    <dropdown-menu></dropdown-menu>
+                    <dropdown-menu v-bind:list="[{icon:'el-icon-user',text:'个人信息'},
+                                                 {icon:'el-icon-setting',text:'设置'},
+                                                 {icon:'el-icon-switch-button',text:'退出登录'}]"></dropdown-menu>
                 </li>
                 <li class="message-box" id="message-box">
-                    <dropdown-menu></dropdown-menu>
+                    <dropdown-menu v-bind:list="[{icon:'el-icon-user',text:'我的消息'},
+                                                 {icon:'el-icon-setting',text:'系统通知'}]"></dropdown-menu>
                 </li>
             </ul>
         </div>

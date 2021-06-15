@@ -1,11 +1,9 @@
 Vue.component('dropdown-menu', {
+    props:{
+        list:[],
+    },
     data: function () {
         return {
-            list:[
-                {icon:"el-icon-user",text:"个人信息"},
-                {icon:"el-icon-setting",text:"设置"},
-                {icon:"el-icon-switch-button",text:"退出登录"}
-            ],
             isShow: false,  //控制下拉菜单是否显示
         }
     },
