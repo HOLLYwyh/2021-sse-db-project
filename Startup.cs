@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using InternetMall.Models;
+using InternetMall.DBContext;
 
 namespace InternetMall
 {
@@ -15,6 +18,8 @@ namespace InternetMall
     {
         public Startup(IConfiguration configuration)
         {
+            var builder = new ConfigurationBuilder()
+               .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             Configuration = configuration;
         }
 
@@ -22,6 +27,9 @@ namespace InternetMall
 
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<ModelContext>(options => options.UseOracle(Configuration.GetConnectionString("OracleDBContext")));
+
             services.AddHttpContextAccessor(); //注册Cookie相关
             services.AddRazorPages();   //注册Razor
             services.AddControllersWithViews();  //注册Controller与Views

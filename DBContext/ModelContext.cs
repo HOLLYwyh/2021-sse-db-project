@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using InternetMall.Models;
 
 #nullable disable
 
-namespace InternetMall.Models
+namespace InternetMall.DBContext
 {
     public partial class ModelContext : DbContext
     {

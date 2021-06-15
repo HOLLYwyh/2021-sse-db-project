@@ -22,7 +22,7 @@ body{
     height: 693px;
     margin: 0 auto 0;
     text-align: center;
-    background-image: url(../../images/login/background3.png);
+    background-image: url(../../../Images/Entry/background4.png);
     background-size: 100% 100%;
     display: block;
     position: relative;
@@ -46,6 +46,7 @@ body{
 
 .rem{
     margin-bottom: 0!important;
+    margin-left:120px;
 }
 
 
