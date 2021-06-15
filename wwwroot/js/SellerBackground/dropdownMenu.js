@@ -1,10 +1,14 @@
 Vue.component('dropdown-menu', {
     data: function () {
         return {
-            isShow: false,
+            list:[
+                {icon:"el-icon-user",text:"个人信息"},
+                {icon:"el-icon-setting",text:"设置"},
+                {icon:"el-icon-switch-button",text:"退出登录"}
+            ],
+            isShow: false,  //控制下拉菜单是否显示
         }
     },
-
     mounted: function () {
         document.addEventListener('click', (e) => {
             if (e.target.className !== "dropbtn" &&
@@ -17,7 +21,7 @@ Vue.component('dropdown-menu', {
         })
     },
     methods: {
-
+        
     },
     template: `
     <div class="dropdown">
@@ -25,22 +29,10 @@ Vue.component('dropdown-menu', {
             <button class="dropbtn"></button>
         </div>
         <div class="dropdown-content" v-show="isShow">
-            <div>
+            <div v-for="item in list">
                 <button class="sub-btn">
-                <i class="el-icon-user"></i>
-                <span class="sub-btn">个人信息</span>
-                </button>
-            </div>
-            <div>
-                <button class="sub-btn">
-                <i class="el-icon-setting"></i>
-                <span class="sub-btn">设置</span>
-                </button>
-            </div>
-            <div>
-                <button class="sub-btn">
-                <i class="el-icon-switch-button"></i>
-                <span class="sub-btn">退出登录</span>
+                <i v-bind:class="item.icon"></i>
+                <span class="sub-btn">{{item.text}}</span>
                 </button>
             </div>
         </div>
