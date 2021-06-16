@@ -1,7 +1,7 @@
 @import url("//unpkg.com/element-ui@2.15.2/lib/theme-chalk/index.css");
 
 .nav-area{
-    background-image: url("../../Images/SellerBackground/sidebar_background3.png");
+    background-image: url("../../../Images/SellerBackground/sidebar_background3.png");
     background-repeat: no-repeat;
     background-attachment:fixed;
     background-position:center;
@@ -24,7 +24,7 @@
     padding:10px;
 }
 .avatar .dropbtn{
-    background-image: url("../../Images/SellerBackground/avatar_origion.png");
+    background-image: url("../../../Images/SellerBackground/avatar_origion.png");
     background-size:cover;
     background-repeat: no-repeat;
     background-position:center;
@@ -38,7 +38,7 @@
 
 /* 设置下拉按钮的样式 */
 .message-box .dropbtn {
-    background-image: url("../../Images/SellerBackground/message.png");
+    background-image: url("../../../Images/SellerBackground/message.png");
     background-size:contain;
     background-repeat: no-repeat;
     background-position:center;
