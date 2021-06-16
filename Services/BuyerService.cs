@@ -49,7 +49,7 @@ namespace InternetMall.Services
             {
                 Console.WriteLine("用户不存在");
             }
-            else if (buyer.Passwd == passwd)
+            else if (buyer.Passwd != passwd)
             {
                 Console.WriteLine("手机号或密码错误");
                 buyer = null;
