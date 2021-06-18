@@ -12,11 +12,23 @@ namespace InternetMall.Controllers
     public class EntryController : Controller
     {
         // GET: Entry
-        public IActionResult LogIn()
+        public IActionResult BuyerLogIn()
         {
             return View();
         }
-        public IActionResult SignUp()
+        public IActionResult BuyerSignUp()
+        {
+            return View();
+        }
+        public IActionResult SellorSignUp()
+        {
+            return View();
+        }
+        public IActionResult SellorLogIn()
+        {
+            return View();
+        }
+        public IActionResult AdministratorLogIn()
         {
             return View();
         }
