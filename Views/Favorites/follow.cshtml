@@ -1,1 +1,101 @@
 <!--关注店铺页面 -->
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <link href="~/css/Favorites/follow/follow.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/shortcut_five.css" rel="stylesheet">
+    <title>关注店铺</title>
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+</head>
+
+<body>
+    <div id="app">
+        <el-container direction="vertical">
+            <shortcut></shortcut>
+            <el-container direction="horizontal">
+                <el-aside style="
+            background-color: rgb(238, 241, 246);
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+            width: 300px;
+          ">
+                    <img style="padding: 20px"
+                         src="~/Images/Home/index/yinghaohuicui.png" />
+                    <index></index>
+                </el-aside>
+                <el-container>
+                    <el-main style="min-height: 600px" direction="vertical">
+                        <el-row>
+                            <el-col :span="14">
+                                <tabs></tabs>
+                            </el-col>
+                            <el-col :span="4">
+                                <el-input :span="4"
+                                          v-model="input"
+                                          placeholder="请输入关键字"></el-input>
+                            </el-col>
+                            <el-col :span="1">
+                                <el-button icon="el-icon-search" plain></el-button>
+                            </el-col>
+                            <el-button type="danger">我的购物车</el-button>
+                        </el-row>
+                        <el-row v-for="(o, index) in 4"
+                                :key="o"
+                                :offset="index > 0 ? 1 : 0">
+                            <el-col :span="5">
+                                <el-card :body-style="{ padding: '0px' }" shadow="hover">
+                                    <img src="https://idreamleaguesoccerkits.com/wp-content/uploads/2018/03/China-Logo-512x512-URL.png"
+                                         class="image" />
+                                    <div style="padding: 8px">
+                                        <p>英豪店铺{{ index }}</p>
+                                        <el-rate v-model="rate"
+                                                 disabled
+                                                 show-score
+                                                 text-color="#ff9900"
+                                                 score-template="{value}">
+                                        </el-rate>
+                                        <div class="bottom clearfix">
+                                            <el-button type="text" class="button">进入店铺</el-button>
+                                            <el-button type="text" class="button">联系客服</el-button>
+                                        </div>
+                                    </div>
+                                </el-card>
+                            </el-col>
+                            <el-col :span="19">
+                                <div class="showcase">
+                                    <a style="position:relative;left:-70px;top:18px" href="http://">
+                                        <img src="https://img13.360buyimg.com/n3/jfs/t1/196610/20/6170/148870/60b86e7dEe7428125/448a80669a3ffe99.jpg"
+                                             title="橱窗商品" />
+                                    </a>
+                                    <a style="position:relative;left:-30px;top:18px" href="http://">
+                                        <img src="https://img10.360buyimg.com/n3/jfs/t1/155510/31/3909/125370/5f9a5f3bE03f8f8d7/b99e71abe796cc19.jpg"
+                                             title="橱窗商品" />
+                                    </a>
+                                    <a style="position:relative;left:10px;top:18px" href="http://">
+                                        <img src="https://img13.360buyimg.com/n3/jfs/t1/194264/27/8976/130394/60ccd85eE4041e8a4/a6f918d403719d10.jpg"
+                                             title="橱窗商品" />
+                                    </a>
+                                    <a style="position:relative;left:50px;top:18px" href="http://">
+                                        <img src="https://img12.360buyimg.com/n3/jfs/t1/130670/8/17371/211387/60b86e63E4ad5ce94/781fdb989c743377.jpg"
+                                             title="橱窗商品" />
+                                    </a>
+                                    <a style="position:relative;left:90px;top:18px" href="http://">
+                                        <img src="https://img13.360buyimg.com/n3/jfs/t1/193982/27/6256/167106/60b86e62E7d7c52dc/164d666601220de5.jpg"
+                                             title="橱窗商品" />
+                                    </a>
+                                </div>
+                            </el-col>
+                        </el-row>
+                    </el-main>
+                    <el-footer>
+                        <pagination></pagination>
+                    </el-footer>
+                </el-container>
+            </el-container>
+        </el-container>
+    </div>
+    <script type="text/javascript" src="/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="/js/Favorites/follow/follow.js"></script>
+
+</body>
+
+</html>
