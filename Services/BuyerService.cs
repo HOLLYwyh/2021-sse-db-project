@@ -13,8 +13,13 @@ namespace InternetMall.Services
 {
     public class BuyerService:IBuyerService
     {
-        private ModelContext _context;
+        private readonly ModelContext _context;
         Random rd = new Random();
+
+        public BuyerService(ModelContext context)
+        {
+            _context = context;
+        }
         public bool SignUp(string phone, string nickName, string passwd)//注册
         {
             //如果要注册的用户电话不存在，说明可以注册
@@ -81,10 +86,7 @@ namespace InternetMall.Services
         }
 
 
-        public BuyerService(ModelContext context)
-        {
-            _context = context;
-        }
+        
         public List<Buyer> Index()
         {
             return _context.Buyers.ToList();
