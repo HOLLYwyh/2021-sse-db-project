@@ -79,4 +79,9 @@ Thumbs.db
 InternetMall.csproj
 InternetMall.csproj.user
 InternetMall.sln
-
+packages.config
+Web.config
+Web.Debug.config
+Web.Release.config
+appsettings.Development.json
+appsettings.json

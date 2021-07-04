@@ -1,0 +1,41 @@
+/*以下都是公用的部分*/
+.search-bar {
+    width: 100%;
+    height: 100px;
+}
+
+.huicui {
+    margin-top: 28px;
+    margin-left:10%;
+    float: left;
+    display: block;
+}
+
+.search {
+    margin-top: 33px;
+    width: 400px;
+    float: left;
+    display: block;
+}
+
+.select {
+    margin-top: 33px;
+    margin-left: 11%;
+    float: left;
+    height: 39px;
+    display: block;
+}
+
+.search-btn {
+    margin-top: 33px;
+    float: left;
+    display: block;
+}
+
+.shopping-cart {
+    margin-top :33px;
+    margin-left:11%;
+    width:50px;
+    float: left;
+    display: block;
+}

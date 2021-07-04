@@ -1,0 +1,159 @@
+.kind{
+    position: relative;
+    margin: 20px auto 0;
+    width: 999px;
+    height: 412px;
+    background-color: rgb(52, 13, 224);
+}
+
+.part_title{
+    width: 710px;
+    height: 36px;
+    background-color: #fff;
+    font-size: 20px;
+    line-height: 36px;
+    text-align: left;
+    float: left;
+}
+
+.rank_title {
+    width: 264px;
+    height: 36px;
+    background-color: #fff;
+    font-size: 20px;
+    line-height: 36px;
+    text-align: left;
+    float: left;
+}
+
+.card_list{
+    width: 710px;
+    height: 412px;
+    float: left;
+    background-color: rgb(226, 19, 19);
+}
+
+.card_list ul li{
+    width: 169px;
+    height: 169px;
+    display: block;
+    float: left;
+    margin-right: 8px;
+    margin-top: 10px;
+    
+}
+
+.card_list ul li a{
+    text-decoration: none;
+}
+
+.card_list ul li img{
+    width: 169px;
+    height: 96px;
+}
+
+.introduce{
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 10px 0 8px;
+    height: 40px;
+    overflow: hidden;
+    font-weight: 500;
+    text-align: left;
+}
+
+.shop{
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 12px;
+    color: #999;
+    line-height: 16px;
+    height: 16px;
+}
+
+.rank{
+    width: 264px;
+    height: 412px;
+    float: left;
+    background-color: rgb(19, 233, 37);
+}
+
+.ranklist {
+    width: 264px;
+    height: 376px;
+    display: block;
+    position: relative;
+    float: left;
+}
+
+.ranklist ul li {
+    width: 264px;
+    height: 19px;
+    margin-top: 18px;
+    
+}
+
+.rank ul li a div{
+
+    float: left;
+
+}
+
+.rank ul li .rk{
+    float: left;
+    font-size: 14px;
+    
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 18px;
+    background: #fff;
+    border-radius: 2px;
+    display: inline-block;
+    color: #fff;
+    background: #00a1d6;
+    margin-right: 18px;
+}
+
+.ti{
+    float: left;
+}
+
+.change_bt{
+    width: 72px;
+    margin-top: 10px;
+    display: block;
+    float: right;
+    
+    align-items: center;
+    cursor: pointer;
+    height: 22px;
+    text-align: center;
+    border: 1px solid silver;
+    border-radius: 2px;
+    font-size: 12px;
+    color: #505050;
+    transition: all .2s;
+    line-height: 22px;
+    margin-right: 15px;
+}
+
+.more{
+    width: 72px;
+    margin-top: 10px;
+    display: block;
+    float: right;
+    
+    align-items: center;
+    cursor: pointer;
+    height: 22px;
+    text-align: center;
+    border: 1px solid silver;
+    border-radius: 2px;
+    font-size: 12px;
+    color: #505050;
+    transition: all .2s;
+    line-height: 22px;
+    margin-right: 15px;
+}
