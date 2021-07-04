@@ -59,12 +59,22 @@
 
 .dropdown-content {
     position: absolute;
+    right: 0;
     background-color: white;
     min-width: 140px;
     box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.1);
     z-index: 2;     /*图层位置*/
-    right: 0;
     border-radius: 5%;
+}
+
+.avatar .dropdown-content{
+    margin-right: 1%;
+    margin-top: 1%;
+}
+
+.message-box .dropdown-content{
+    margin-right: 2%;
+    margin-top: 1%;
 }
 
 .dropdown-content i{
@@ -85,4 +95,12 @@
   /* 悬停时更改下拉链接的颜色 */
 .dropdown-content button:hover {
     background-color: #f1f1f1;
+}
+
+.main{
+    margin-left:18%;
+    width:80%;
+    border:solid black 1px;
+    border-radius: 5px;
+    
 }
