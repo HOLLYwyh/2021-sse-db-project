@@ -12,9 +12,14 @@ namespace InternetMall.Controllers
     public class AccountController : Controller
     {
         // GET: Account
-        public IActionResult BuyerAccount()
+        public IActionResult PersonalInformation()
         {
             return View();
         }
+        public IActionResult Security()
+        {
+            return View();
+        }
+
     }
 }

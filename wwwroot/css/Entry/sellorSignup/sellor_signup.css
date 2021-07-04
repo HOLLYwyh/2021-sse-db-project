@@ -22,7 +22,7 @@ body{
     height: 693px;
     margin: 0 auto 0;
     text-align: center;
-    background-image: url(../../images/login/background3.png);
+    background-image: url(../../../Images/Entry/background4.png);
     background-size: 100% 100%;
     display: block;
     position: relative;
@@ -37,7 +37,7 @@ body{
     margin-right: auto;
     margin-top: 40px;
     width: 350px;
-    height: 460px;
+    height: 410px;
     background-color: rgba(255, 255, 255, 1);
     box-sizing: border-box;
     border-width: 3px;
@@ -112,8 +112,9 @@ body{
     font-size: small;
     display: block;
     width: 200px;
-    height: 20px;
-    margin: 0 auto;
+    height: 40px;
+    margin-top: -20px;
+    margin-left:110px;
 }
 
 /* .footer{
