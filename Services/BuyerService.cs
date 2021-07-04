@@ -11,7 +11,7 @@ using InternetMall.DBContext;
 
 namespace InternetMall.Services
 {
-    public class BuyerService:IBuyerService
+    public class BuyerService : IBuyerService
     {
         private readonly ModelContext _context;
         Random rd = new Random();
@@ -41,15 +41,15 @@ namespace InternetMall.Services
             //否则，不能注册已经存在的用户
             return false;
         }
-        public Buyer Login(string s, string passwd)
+        public async Task<Buyer> Login(string s, string passwd)
         {
             Buyer buyer;
             //暂时通过长度区分，有改进空间
             if (s.Length == 11)
-                buyer = SearchByPhone(s);
-            else          
-                buyer = SearchByID(s);
- 
+                buyer = await SearchByPhone (s);
+            else
+                buyer = await SearchByID (s);
+
             if (buyer == null)
             {
                 Console.WriteLine("用户不存在");
@@ -60,46 +60,46 @@ namespace InternetMall.Services
                 buyer = null;
             }
             return buyer;
-        }   
-        public Buyer DisplayBuyer(string s)
+        }
+        public async Task<Buyer> DisplayBuyer(string s)
         {
             Buyer buyer;
             //暂时通过长度区分，有改进空间
             if (s.Length == 11)
-                buyer = SearchByPhone(s);
+                buyer = await SearchByPhone(s);
             else
-                buyer = SearchByID(s);
+                buyer = await SearchByID(s);
 
             if (buyer == null)
             {
                 Console.WriteLine("查看用户不存在");
-            }          
+            }
             return buyer;
         }
-        public Buyer EditBuyer(Buyer before, Buyer now)//修改个人信息，主码不允许修改！
+        public async Task<Buyer> EditBuyer(Buyer before, Buyer now)//修改个人信息，主码不允许修改！
         {
             string id = before.BuyerId;
 
-            var buyer = Edit(id, now);
+            var buyer = await Edit(id, now);
 
             return buyer;
         }
 
 
-        
+
         public List<Buyer> Index()
         {
             return _context.Buyers.ToList();
         }
-        public Buyer SearchByPhone(string phone)
+        public async Task<Buyer> SearchByPhone(string phone)
         {
             if (phone == null)
             {
                 return null;
             }
 
-            var buyer = _context.Buyers
-                .FirstOrDefault(m => m.Phone == phone);
+            var buyer = await _context.Buyers
+                .FirstOrDefaultAsync(m => m.Phone == phone);
             if (buyer == null)
             {
                 return null;
@@ -107,15 +107,15 @@ namespace InternetMall.Services
 
             return buyer;
         }
-        public Buyer SearchByID(string ID)
+        public async Task<Buyer> SearchByID(string ID)
         {
             if (ID == null)
             {
                 return null;
             }
 
-            var buyer = _context.Buyers
-                .FirstOrDefault(m => m.BuyerId == ID);
+            var buyer = await _context.Buyers
+                .FirstOrDefaultAsync(m => m.BuyerId == ID);
             if (buyer == null)
             {
                 return null;
@@ -123,30 +123,30 @@ namespace InternetMall.Services
 
             return buyer;
         }
-        public void Create([Bind("BuyerId,Phone,Passwd,Nickname,Gender,DateBirth,IdNumber")] Buyer buyer)
+        public async void Create([Bind("BuyerId,Phone,Passwd,Nickname,Gender,DateBirth,IdNumber")] Buyer buyer)
         {
             //if (ModelState.IsValid)
             //{
             _context.Add(buyer);
-            _context.SaveChanges();
-                //return RedirectToAction(nameof(Index));
+            await _context.SaveChangesAsync();
+            //return RedirectToAction(nameof(Index));
             //}
         }
-        public Buyer Edit(string id)
+        public async Task<Buyer> Edit(string id)
         {
             if (id == null)
             {
                 return null;
             }
 
-            var buyer = _context.Buyers.Find(id);
+            var buyer = await _context.Buyers.FindAsync(id);
             if (buyer == null)
             {
                 return null;
             }
             return buyer;
         }
-        public Buyer Edit(string id, [Bind("BuyerId,Phone,Passwd,Nickname,Gender,DateBirth,IdNumber")] Buyer buyer)
+        public async Task<Buyer> Edit(string id, [Bind("BuyerId,Phone,Passwd,Nickname,Gender,DateBirth,IdNumber")] Buyer buyer)
         {
             if (id != buyer.BuyerId)
             {
@@ -155,41 +155,41 @@ namespace InternetMall.Services
 
             //if (ModelState.IsValid)
             //{
-                try
+            try
+            {
+                _context.Update(buyer);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!BuyerExists(buyer.BuyerId))
                 {
-                    _context.Update(buyer);
-                    _context.SaveChanges();
+                    return null;
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!BuyerExists(buyer.BuyerId))
-                    {
-                        return null;
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
-                //return RedirectToAction(nameof(Index));
+            }
+            //return RedirectToAction(nameof(Index));
             //}
             return buyer;
         }
-        public Buyer Delete(string id)
+        public async Task<Buyer> Delete(string id)
         {
             if (id == null)
             {
                 return null;
             }
 
-            var buyer = _context.Buyers
-                .FirstOrDefault(m => m.BuyerId == id);
+            var buyer = await _context.Buyers
+                .FirstOrDefaultAsync(m => m.BuyerId == id);
             if (buyer == null)
             {
                 return null;
             }
             _context.Buyers.Remove(buyer);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return buyer;
         }
         public bool BuyerExists(string phone)
