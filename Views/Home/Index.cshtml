@@ -11,11 +11,21 @@
     <link href="~/css/Home/index/animate.css" type="text/css" rel="stylesheet" />
     <link href="~/css/Home/index/part.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="~/js/Common/vue.js"></script>
+
+    <link href="~/css/Common/naviRight.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
     <title>欢迎来到英豪荟萃~</title>
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
     @await Html.PartialAsync("~/Views/Shared/backToTop.cshtml")
 </head>
 <body>
+    <div id="naviRight">
+        <naviright>
+
+        </naviright>
+    </div>
     <div class="shortcut">
         <ul>
             <li>
@@ -200,6 +210,7 @@
 
     <script type="text/javascript" src="~/js/Home/index/part.js"></script>
     <script type="text/javascript" src="~/js/Common/carousel.js"></script>
+    <script type="text/javascript" src="~/js/Common/naviRight.js"></script>
     <script type="text/javascript" src="~/js/Home/index/index.js"></script>
 
 </body>

@@ -1,0 +1,163 @@
+﻿.qyzSidebar .sidebar .sidebaRmenu .sidebaPersonage .ttbox {
+    padding-top: 10px;
+    width: 200px;
+    height: 230px;
+    line-height: 35px;
+    text-align: center;
+    font-family: 微软雅黑;
+    position: absolute;
+    z-index: 1;
+    left: 35px;
+    top: 0;
+    background-color: #ffffff;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 3px 6px 0 rgb(0 0 0 / 20%);
+    -webkit-transition: left 0.3s ease-in-out 0.1s;
+    transition: left 0.3s ease-in-out 0.1s;
+    display: block;
+    /* _display: none; */
+}
+
+.qyzSidebar .sidebar .sidebaRmenu .sidebaPersonage:hover .ttbox {
+    left: -200px;
+}
+
+.listli:hover {
+    width: 100%;
+    background-color: rgb(250, 12, 12);
+}
+
+.qyzSidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9990;
+    width: 0;
+    height: 100%;
+}
+
+    .qyzSidebar .sidebar {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 0;
+        height: 100%;
+        border-right: 6px solid #7a6e6e;
+        -webkit-transition: right 0.3s ease-in-out 0s;
+        transition: right 0.3s ease-in-out 0s;
+    }
+
+        .qyzSidebar .sidebar .index1 {
+            z-index: 11;
+        }
+
+        .qyzSidebar .sidebar .index2 {
+            z-index: 22;
+        }
+
+        .qyzSidebar .sidebar .toolbar-animate-in {
+            -webkit-animation: toolbar-scaleIn 0.35s ease-in-out;
+            animation: toolbar-scaleIn 0.35s ease-in-out;
+        }
+
+        .qyzSidebar .sidebar .toolbar-animate-out {
+            -webkit-animation: toolbar-scaleOut 0.35s ease-in;
+            animation: toolbar-scaleOut 0.35s ease-in;
+        }
+
+        .qyzSidebar .sidebar .sidebaRmenu {
+            position: absolute;
+            top: 45%;
+            left: -29px;
+            width: 35px;
+            margin-top: -61px;
+        }
+
+            .qyzSidebar .sidebar .sidebaRmenu .sidebaPersonage {
+                position: relative;
+                width: 35px;
+                height: 35px;
+                margin-bottom: 1px;
+                cursor: pointer;
+                background-color: #7a6e6e;
+                border-radius: 3px 0 0 3px;
+            }
+
+
+
+                .qyzSidebar .sidebar .sidebaRmenu .sidebaPersonage .user {
+                    position: relative;
+                    z-index: 2;
+                    padding: 0 0 0 0px;
+                    color: #E4E4E4;
+                    line-height: 35px;
+                    text-align: center;
+                }
+
+                .qyzSidebar .sidebar .sidebaRmenu .sidebaPersonage .tab-text {
+                    width: 62px;
+                    height: 35px;
+                    line-height: 35px;
+                    color: #fff;
+                    text-align: center;
+                    font-family: 微软雅黑;
+                    position: absolute;
+                    z-index: 1;
+                    left: 35px;
+                    top: 0;
+                    background-color: #7a6e6e;
+                    border-radius: 3px 0 0 3px;
+                    -webkit-transition: left 0.3s ease-in-out 0.1s;
+                    transition: left 0.3s ease-in-out 0.1s;
+                    _display: none;
+                }
+
+                .qyzSidebar .sidebar .sidebaRmenu .sidebaPersonage .amount {
+                    position: absolute;
+                    z-index: 3;
+                    right: 2px;
+                    top: -5px;
+                    height: 15px;
+                    padding: 1px 2px;
+                    border: 1px solid #cd2c3c;
+                    overflow: hidden;
+                    color: #fff;
+                    font: 11px/11px verdana;
+                    text-align: center;
+                    min-width: 11px;
+                    _width: 20px;
+                    border-radius: 10px;
+                    border-radius: 0px\9;
+                    background-color: #cc6060;
+                }
+
+                .qyzSidebar .sidebar .sidebaRmenu .sidebaPersonage .shopping {
+                    position: relative;
+                    z-index: 2;
+                    color: #E4E4E4;
+                    padding: 2px 0 0 3px;
+                    background-color: #7a6e6e;
+                }
+
+                .qyzSidebar .sidebar .sidebaRmenu .sidebaPersonage:hover {
+                    background-color: #cd2c3c;
+                }
+
+                    .qyzSidebar .sidebar .sidebaRmenu .sidebaPersonage:hover .tab-text {
+                        left: -61px;
+                        background-color: #cd2c3c;
+                    }
+
+                    .qyzSidebar .sidebar .sidebaRmenu .sidebaPersonage:hover .user,
+                    .qyzSidebar .sidebar .sidebaRmenu .sidebaPersonage:hover .shopping {
+                        background-color: #cd2c3c;
+                    }
+
+    .qyzSidebar .retract {
+        right: 270px;
+    }
+
+.myscroll {
+    height: 260px;
+    overflow: hidden;
+}
