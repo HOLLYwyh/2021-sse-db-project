@@ -1,11 +1,64 @@
 /*为了避免缩小浏览器所带来的影响，设置body默认值*/
 body {
     min-width : 1200px;
+    max-height : 1500px; /*在此处仅作为测试使用*/
 }
 
+/*商品栏*/
 .commodities {
-    height: 100%;
+    /*height: 100%;*/
+    height:1000px;
     margin-left: 10%;
     margin-right: 10%;
-    margin-top: 300px;
+    margin-top : 1%;
+}
+
+/*选择筛选栏*/
+.select-query {
+    height: 100px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top:50px;
+}
+
+/*换页部分*/
+.turn-to-page {
+    margin: 0 35%;
+}
+
+
+/*以下均为测试*/
+.test {
+    margin-left: 7%;
+}
+
+
+.time {
+    font-size: 13px;
+    color: #999;
+}
+
+.bottom {
+    margin-top: 13px;
+    line-height: 12px;
+}
+
+.button {
+    padding: 0;
+    float: right;
+}
+
+.image {
+    width: 50%;
+    display: block;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both
 }

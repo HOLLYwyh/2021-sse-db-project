@@ -1,0 +1,95 @@
+<!--账户安全页面 -->
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <link href="~/css/Account/security/security.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/shortcut_five.css" rel="stylesheet">
+    <title>账户安全</title>
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+</head>
+
+<body>
+    <div id="app">
+        <el-container direction="vertical">
+            <shortcut></shortcut>
+            <el-container direction="horizontal">
+                <el-aside style="
+            background-color: rgb(238, 241, 246);
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+            width: 300px;
+          ">
+                    <img style="padding: 20px"
+                         src="~/Images/Home/index/yinghaohuicui.png" />
+                    <index></index>
+                </el-aside>
+                <el-container style="min-height: 600px" direction="vertical" class="aria">
+                        <el-row style="position:relative;top:50px">
+                            <el-col :span="4"
+                                    :offset="2">
+                                <el-card :body-style="{ padding: '10px' }" shadow="hover">
+                                    <i style="padding:5px" class="el-icon-mobile-phone"></i>
+
+                                    <div style="padding: 8px">
+                                        <span>手机号码<br></span>
+                                        <span style="padding:8px;color:#aaaaaa">{{phone}}</span>
+                                        <div class="bottom clearfix">
+                                            <el-button type="primary" round>修改</el-button>
+                                        </div>
+                                    </div>
+                                </el-card>
+                            </el-col>
+                            <el-col :span="4"
+                                    :offset="1">
+                                <el-card :body-style="{ padding: '10px' }" shadow="hover">
+                                    <i style="padding:5px" class="el-icon-s-goods"></i>
+
+                                    <div style="padding: 8px">
+                                        <span>登录密码<br></span>
+                                        <span style="padding:8px;color:#aaaaaa">*********</span>
+                                        <div class="bottom clearfix">
+                                            <el-button type="primary" round>修改</el-button>
+                                        </div>
+                                    </div>
+                                </el-card>
+                            </el-col>
+                            <el-col :span="4"
+                                    :offset="1">
+                                <el-card :body-style="{ padding: '10px' }" shadow="hover">
+                                    <i style="padding:5px" class="el-icon-coin"></i>
+
+                                    <div style="padding: 8px">
+                                        <span>支付密码<br></span>
+                                        <span style="padding:8px;color:#aaaaaa">******</span>
+                                        <div class="bottom clearfix">
+                                            <el-button type="primary" round>修改</el-button>
+                                        </div>
+                                    </div>
+                                </el-card>
+                            </el-col>
+                            <el-col :span="4"
+                                    :offset="1">
+                                <el-card :body-style="{ padding: '10px' }" shadow="hover">
+                                    <i style="padding:5px" class="el-icon-s-custom"></i>
+
+                                    <div style="padding: 8px">
+                                        <span>实名认证<br></span>
+                                        <span style="padding:8px;color:#aaaaaa">{{name}}</span>
+                                        <div class="bottom clearfix">
+                                            <el-button type="primary" round>立即认证</el-button>
+                                        </div>
+                                    </div>
+                                </el-card>
+                            </el-col>
+
+                        </el-row>
+                </el-container>
+            </el-container>
+        </el-container>
+    </div>
+
+
+    <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="~/js/Account/security/security.js"></script>
+</body>
+
+</html>
