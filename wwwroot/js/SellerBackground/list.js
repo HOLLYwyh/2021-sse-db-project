@@ -84,7 +84,7 @@ Vue.component('list', {
     }
   },
   template: `
-<div>
+<el-card>
 <el-tabs v-model="activeName" @tab-click="handleClick(activeName)">
     <el-tab-pane label="全部" name="ALL"></el-tab-pane>
     <el-tab-pane label="待发货" name="TO_BE_SHIP"></el-tab-pane>
@@ -109,7 +109,7 @@ Vue.component('list', {
     <el-table-column prop="date" label="日期" sortable width="180">
     </el-table-column>
 </el-table>
-</div>
+</el-card>
     `
 })
 
