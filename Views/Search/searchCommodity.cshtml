@@ -25,12 +25,22 @@
         <searchbar></searchbar>
     </div>
     <!--选择查询部分-->
-    <div class="select-query bg-gray-100 rounded-lg border-2 border-red-500">
-        <p>全部结果：</p>
+    <div id="search-category" class="search-category">
+       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @@select="handleSelect">
+          <el-menu-item index="1">综合结果</el-menu-item>
+            <el-submenu index="2">
+               <template slot="title">
+                    价格
+               </template>
+               <el-menu-item index="2-1">价格从高到低</el-menu-item>
+               <el-menu-item index="2-2">价格从低到高</el-menu-item>
+            </el-submenu>
+            <el-menu-item index="3">销量</el-menu-item>
+       </el-menu>
     </div>
     <!--商品部分-->
     <div class="commodities bg-gray-100 rounded-lg  border-opacity-0">
-        <div id="test" class="test">
+        <div id="commodity-list" class="commodity-list">
         <el-row :span="0" v-for="(o, index) in 4" :key="o">
             <el-col :span="6" v-for="(o, index) in 3" :key="o" :offset="index > 0 ? 2 : 0">
                <el-card class="transition duration-150 ease-in-out transform hover:-translate-y-1 hover:border-2 hover:border-blue-700" 
