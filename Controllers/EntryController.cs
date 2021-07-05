@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using InternetMall.Services;
 using InternetMall.DBContext;
+using InternetMall.Models;
+using ThirdParty.Json.LitJson;
 
 namespace InternetMall.Controllers
 {
@@ -31,7 +33,6 @@ namespace InternetMall.Controllers
             {
                 return View();
             }
-           
         }
         public IActionResult BuyerSignUp()
         {
@@ -59,9 +60,9 @@ namespace InternetMall.Controllers
 
         // 前后端交互
         [HttpPost]
-        public IActionResult BuyerLogInForm()   //买家登录
+        public IActionResult BuyerLogInForm([FromBody] EntryLogInBuyer logInBuyer)   //买家登录
         {
-            var buyer = service.Login(Request.Form["ID"], Request.Form["password"]);
+            var buyer = service.Login(logInBuyer.ID, logInBuyer.password);
             {
                 {
                     if (buyer != null)
@@ -72,21 +73,27 @@ namespace InternetMall.Controllers
                     }
                     else
                     {
-                        return Redirect("/Entry/BuyerLogIn");
+                        JsonData jsondata = new JsonData();
+                        jsondata["NickName"] = "找不到名称";
+                        jsondata["password"] = "找不到密码";
+                        return Json(jsondata.ToJson());
                     }
                 }
             }
         }
-        public IActionResult BuyerSignUpForm()  //买家注册
+
+        [HttpPost]
+        public IActionResult BuyerSignUpForm([FromBody] EntrySignUpBuyer signUpBuyer)  //买家注册
         {
-            //买家注册的页面，还没有开始写
-            if (service.SignUp(Request.Form["phoneNumber"], Request.Form["nickName"], Request.Form["password"]))
+            if (service.SignUp(signUpBuyer.phoneNumber,signUpBuyer.nickName,signUpBuyer.password))
             {
                 return Redirect("/Entry/BuyerLogIn");
             }
             else
             {
-                return Redirect("/Entry/BuyerSignUp");
+                JsonData jsondata = new JsonData();
+                jsondata["signUp"] = "注册失败";
+                return Json(jsondata.ToJson());
             }
         }
     }

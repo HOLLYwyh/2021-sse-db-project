@@ -32,7 +32,7 @@ function validateForm() {
     }
     var pat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{6,18}$/;
     if (!pat.test(x)) {
-        alert("密码至少包含小写字母、大写字母和数字且长度为6~18位");
+        alert("密码至少包含小写字母、大写字母和数字且长度为6-18位");
         return false;
     }
 
@@ -45,6 +45,25 @@ function validateForm() {
         alert("两次输入密码不一致");
         return false;
     }
+    return true;
 }
 
+
+function signup() {
+    if (!validateForm()) {
+        return false;
+    }
+
+    $.ajax({
+        type: "post",
+        url: "/Entry/BuyerSignUpForm",
+        async: false,
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ phoneNumber: $("#phoneNumber").val(), nickName: $("#nickName").val(), password: $("#password").val() }),
+        success: function (result) {
+            alert("该号码已被注册");
+        }
+    });
+}
 

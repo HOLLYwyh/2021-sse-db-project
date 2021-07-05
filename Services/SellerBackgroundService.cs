@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InternetMall.DBContext;
 using InternetMall.Interfaces;
 using InternetMall.Models;
 using Microsoft.EntityFrameworkCore;
@@ -67,7 +68,7 @@ namespace InternetMall.Services
                 {
                     foreach (OrdersCommodity newOrdersCommodity in newOrder.OrdersCommodities)
                     {
-                        if (newOrdersCommodity.CommodityName.Contains(commodityName) == false)
+                        if (newOrdersCommodity.Commodity.Name.Contains(commodityName) == false)
                             newOrder.OrdersCommodities.Remove(newOrdersCommodity);
                     }
                 }
