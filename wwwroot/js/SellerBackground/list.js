@@ -86,12 +86,12 @@ Vue.component('list', {
   template: `
 <div>
 <el-tabs v-model="activeName" @tab-click="handleClick(activeName)">
-    <el-tab-pane label="全部" name="ALL">全部</el-tab-pane>
-    <el-tab-pane label="待发货" name="TO_BE_SHIP">待发货</el-tab-pane>
-    <el-tab-pane label="待收货" name="TO_BE_RECEIVE">待收货</el-tab-pane>
-    <el-tab-pane label="待付款" name="TO_BE_PAY">待付款</el-tab-pane>
-    <el-tab-pane label="已完成" name="DONE">已完成</el-tab-pane>
-    <el-tab-pane label="待处理" name="OTHER">待处理</el-tab-pane>
+    <el-tab-pane label="全部" name="ALL"></el-tab-pane>
+    <el-tab-pane label="待发货" name="TO_BE_SHIP"></el-tab-pane>
+    <el-tab-pane label="待收货" name="TO_BE_RECEIVE"></el-tab-pane>
+    <el-tab-pane label="待付款" name="TO_BE_PAY"></el-tab-pane>
+    <el-tab-pane label="已完成" name="DONE"></el-tab-pane>
+    <el-tab-pane label="待处理" name="OTHER"></el-tab-pane>
 </el-tabs>
 <el-table :data="showData"  style="width: 100%">
     <el-table-column prop="name" label="姓名" width="180">
