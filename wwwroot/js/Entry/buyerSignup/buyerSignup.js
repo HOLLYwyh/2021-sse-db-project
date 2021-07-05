@@ -45,6 +45,25 @@ function validateForm() {
         alert("两次输入密码不一致");
         return false;
     }
+    return true;
 }
 
+
+function signup() {
+    if (!validateForm()) {
+        return false;
+    }
+
+    $.ajax({
+        type: "post",
+        url: "/Entry/BuyerSignUpForm",
+        async: false,
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ phoneNumber: $("#phoneNumber").val(), nickName: $("#nickName").val(), password: $("#password").val() }),
+        success: function (result) {
+            alert("该号码已被注册");
+        }
+    });
+}
 
