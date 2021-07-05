@@ -27,19 +27,38 @@ namespace InternetMall.Services
             return await modelContext.ToListAsync();
         }
 
-        public void publicActivity(DateTime sTime, DateTime eTime, string activityName, int activityType, string desc)//发布活动
+        public void PublishActivity(DateTime sTime, DateTime eTime, string activityName, int activityType, string desc)//发布活动
         {
             Activity newActivity = new Activity { ActivityId = Guid.NewGuid().ToString(), StartTime = sTime, EndTime = eTime, Name = activityName, Category = activityType, description = desc };
             _context.Activities.Add(newActivity);
             _context.SaveChanges();
         }
-        public void publicCoupon(string couponId, DateTime sTime, DateTime eTime, int thres, int dis1, int dis2, int type, string shopId, string commdityId)//发布优惠券
+
+        public async Task<Activity> DisplayActivity(string activityId)//显示活动
+        {
+            if (activityId == null)
+            {
+                return null;
+            }
+            Activity newActivity = await _context.Activities.Where(a => a.ActivityId == activityId).FirstOrDefaultAsync();
+            return newActivity;
+        }
+        public void PublishCoupon(string couponId, DateTime sTime, DateTime eTime, int thres, int dis1, int dis2, int type, string shopId, string commdityId)//发布优惠券
         {
             Coupon coupon = new Coupon { CouponId = couponId, StartTime = sTime, EndTime = eTime, Threshold = thres, Discount1 = dis1, Discount2 = dis2, Category = type, ShopId = shopId, CommodityId = commdityId };
             _context.Coupons.Add(coupon);
             _context.SaveChanges();
         }
 
+        public async Task<Coupon> DisplayCoupon(string couponId)//显示优惠券
+        {
+            if (couponId == null)
+            {
+                return null;
+            }
+            Coupon newCoupon = await _context.Coupons.Where(c => c.CouponId == couponId).FirstOrDefaultAsync();
+            return newCoupon;
+        }
         public async Task<List<Order>> DisplayOrder(string shopId)//展示订单
         {
             if (shopId == null)
@@ -98,6 +117,24 @@ namespace InternetMall.Services
                 }
             }
             return  newList;
+        }
+        public async Task<List<Order>> FilterOrder(int orderType)//筛选订单
+        {
+            if (orderType < 0 || orderType > 9)
+            {
+                return null;
+            }
+            List<Order> newList;
+            var modelContext = await _context.Orders.Include(o => o.Buyer)
+                                                    .Include(o => o.Received)
+                                                    .Include(o => o.Shop).ToListAsync();
+            newList = modelContext;
+            foreach (Order newOrder in newList)
+            {
+                if(newOrder.Status != orderType)
+                    newList.Remove(newOrder);
+            }
+            return newList;
         }
     }
 }
