@@ -105,3 +105,9 @@
     padding-right:30px;
     padding-top: 10px; 
 }
+
+.paginationClass{
+    float:right;
+    padding-top:10px;
+    padding-bottom: 5px;
+}
