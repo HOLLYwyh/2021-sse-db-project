@@ -85,14 +85,17 @@ var Main = new Vue({
       }],
       showData:[{
         date: '',
-        name: '1',
-        address: '1',
-        phone: '1',
-        condition: '1',
-        tag: '1',
-        show: true
+        name: '',
+        address: '',
+        phone: '',
+        condition: '',
+        tag: '',
+        show: false
       }]
     }
+  },
+  mounted(){
+    this.handleClick('ALL');
   },
   methods: {
     formatter(row, column) {
