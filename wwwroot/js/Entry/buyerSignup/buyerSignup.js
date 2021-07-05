@@ -32,7 +32,7 @@ function validateForm() {
     }
     var pat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{6,18}$/;
     if (!pat.test(x)) {
-        alert("密码至少包含小写字母、大写字母和数字且长度为6~18位");
+        alert("密码至少包含小写字母、大写字母和数字且长度为6-18位");
         return false;
     }
 
