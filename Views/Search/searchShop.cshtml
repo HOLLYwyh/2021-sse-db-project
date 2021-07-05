@@ -12,6 +12,7 @@
     <link href="/css/Search/searchBar.css" rel="stylesheet">
     <title>搜索结果-店铺</title>
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/backToTop.cshtml")
 </head>
 
 <body>
@@ -22,6 +23,10 @@
     <!--搜索框部分-->
     <div id="search-bar">
         <searchbar></searchbar>
+    </div>
+    <!--筛选栏部分-->
+    <!--店铺搜索结果-->
+    <div class="shops bg-gray-100 rounded-lg  border-opacity-0">
     </div>
 
     <script type="text/javascript" src="/js/Common/shortcutFive.js"></script>
