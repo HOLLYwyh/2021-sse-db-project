@@ -9,7 +9,7 @@ namespace InternetMall.Models
     {
         public string ShopId { get; set; }
         public string BuyerId { get; set; }
-
+        public DateTime DateCreated { get; set; }
         public virtual Buyer Buyer { get; set; }
         public virtual Shop Shop { get; set; }
     }
