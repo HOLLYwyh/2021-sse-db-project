@@ -32,6 +32,35 @@ var loginbox = new Vue({
 
 let carousel1 = new Vue({ el: '#carousel1' });
 
+let shortcut1 = new Vue({ el: '#shortcut' });
+
+var rcmd = new Vue({
+    el: '.rcmd_box',
+    data: {
+        mark: 0,
+        goods: [
+            {
+                img: '../../Images/Home/index/a1.png', intro: "泰国进口金枕鲜榴莲1,泰国进口金枕鲜榴莲,泰国进口金枕1", shop: '金轮', link:'https://www.baidu.com/'
+            },
+            {
+                img: '../../Images/Home/index/a2.png', intro: '泰国进口金枕鲜榴莲2,泰国进口金枕鲜榴莲,泰国进口金枕2', shop: '金轮', link:''
+            },
+            {
+                img: '../../Images/Home/index/a3.png', intro: '泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲,泰国进口金枕3', shop: '金轮', link: ''
+            },
+            {
+                img: '../../Images/Home/index/a4.png', intro: '泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲,泰国进口金枕4', shop: '金轮', link: ''
+            },
+            {
+                img: '../../Images/Home/index/a5.png', intro: '泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲,泰国进口金枕5', shop: '金轮', link: ''
+            },
+            {
+                img: '../../Images/Home/index/a1.png', intro: '泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲,泰国进口金枕1', shop: '金轮', link: ''
+            },
+        ],
+    }
+})
+
 let part1 = new Vue({ el: '#part1' });
 let part2 = new Vue({ el: '#part2' });
 let part3 = new Vue({ el: '#part3' });
