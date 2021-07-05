@@ -57,7 +57,7 @@ function signup() {
 
     $.ajax({
         type: "post",
-        url: "/Entry/Test",
+        url: "/Entry/BuyerSignUpForm",
         async: false,
         contentType: "application/json",
         dataType: "json",

@@ -8,7 +8,7 @@ function login() {
 
     $.ajax({
         type: "post",
-        url: "/Entry/Test",
+        url: "/Entry/BuyerLogInForm",
         async: false,
         contentType: "application/json",
         dataType: "json",
