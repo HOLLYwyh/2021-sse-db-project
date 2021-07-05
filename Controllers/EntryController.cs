@@ -31,7 +31,6 @@ namespace InternetMall.Controllers
             {
                 return View();
             }
-           
         }
         public IActionResult BuyerSignUp()
         {
