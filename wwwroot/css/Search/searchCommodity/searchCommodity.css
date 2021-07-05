@@ -6,11 +6,10 @@ body {
 
 /*商品栏*/
 .commodities {
-    /*height: 100%;*/
     height:1000px;
     margin-left: 10%;
     margin-right: 10%;
-    margin-top : 1%;
+    margin-top : 2%;
 }
 
 /*选择筛选栏*/
@@ -27,8 +26,8 @@ body {
 }
 
 
-/*以下均为测试*/
-.test {
+/*搜索结果部分*/
+.commodity-list {
     margin-left: 7%;
 }
 
