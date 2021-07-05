@@ -21,7 +21,7 @@
         <div class="aria">
             <div class="login_box">
                 <div class="client_login">用户注册</div>
-                <form action="SignUp" method="post">
+                <form name="myForm" action="BuyerSignUpForm" onsubmit="return validateForm()" method="post">
                     <div class="client_name">
                         <img src="~/Images/Entry/login/client_name.png" class="fl">
                         <input type="text" class="fl" name="phoneNumber" placeholder="请输入您的常用手机号">
@@ -34,11 +34,14 @@
                         <img src="~/Images/Entry/login/password.png" class="fl">
                         <input type="password" class="fl" name="password" placeholder="请输入您的密码">
                     </div>
+                    <div class="note">
+                        密码的位数在6~18位，需要包含大小写字母和数字
+                    </div>
                     <div class="password">
                         <img src="~/Images/Entry/login/password.png" class="fl">
                         <input type="password" class="fl" name="confirmPassword" placeholder="请再次输入您的密码">
                     </div>
-                    <button>开启荟萃</button>
+                    <button type="submit">开启荟萃</button>
                 </form>
                 <div class="have_not">
                     <span>已经拥有账号？</span>

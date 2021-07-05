@@ -38,5 +38,6 @@ let part3 = new Vue({ el: '#part3' });
 let part4 = new Vue({ el: '#part4' });
 let part5 = new Vue({ el: '#part5' });
 
+let naviright = new Vue({ el: '#naviRight' })
 
 
