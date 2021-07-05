@@ -128,16 +128,10 @@ var Main = new Vue({
       let index = 0;
       this.tableData.map((row) => {
         this.handleFilter(this.activeName, row);
-        /*if(row.show === true){
-          this.$set(this.showData[index],'date',row.date);
-          this.$set(this.showData[index],'name',row.name);
-          this.$set(this.showData[index],'address',row.address);
-          this.$set(this.showData[index],'phone',row.phone);
-          this.$set(this.showData[index],'condition',row.condition);
-          this.$set(this.showData[index],'tag',row.tag);
-          this.$set(this.showData[index],'show',row.show);
+        if(row.show === true){
+          this.showData[index] = Object.assign({},row);   
           index++;
-        }*/
+        }
       });
     }
   }
