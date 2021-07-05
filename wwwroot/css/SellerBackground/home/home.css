@@ -98,6 +98,17 @@
     background-color: #f1f1f1;
 }
 
+#card-list{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    padding-bottom: 20px;
+}
+
+.card{
+    padding-bottom: 70px;
+}
+
 #list{
     margin-left:15%;
     width:85%;
@@ -109,5 +120,5 @@
 .paginationClass{
     float:right;
     padding-top:10px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
 }
