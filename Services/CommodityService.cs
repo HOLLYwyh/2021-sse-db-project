@@ -6,6 +6,7 @@ using InternetMall.DBContext;
 using InternetMall.Interfaces;
 using InternetMall.Models;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace InternetMall.Services
 {
@@ -145,7 +146,7 @@ namespace InternetMall.Services
 
             return false; //没有需要删除的元组
         }
-        public async Task<List<Commodity>> ShowCommodities(string shopId, string searchCondition)
+        public async Task<string> ShowCommodities(string shopId, string searchCondition)
         {
             List<Commodity> commoditiesList;    //用来存放查找结果
 
@@ -164,7 +165,8 @@ namespace InternetMall.Services
                 commoditiesList = await _context.Commodities
                     .Where(c => c.ShopId == shopId).ToListAsync();
             }
-            return commoditiesList;
+            string commoditiesJson = JsonConvert.SerializeObject(commoditiesList);
+            return commoditiesJson;
         }
     }
 }
