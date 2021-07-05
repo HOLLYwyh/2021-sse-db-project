@@ -1,5 +1,6 @@
 @import url("//unpkg.com/element-ui@2.15.2/lib/theme-chalk/index.css");
 
+/*侧边栏*/
 .nav-area {
     background-image: url("../../../Images/SellerBackground/sidebar_background3.png");
     background-repeat: no-repeat;
@@ -24,26 +25,32 @@
     float: right;
     padding:10px;
 }
-.avatar .dropbtn{
+
+/*头像按钮的样式*/
+.avatar .dropbtn {
     background-image: url("../../../Images/SellerBackground/avatar_origion.png");
-    background-size:cover;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position:center;
+    background-position: center;
+    background-color:white;
     border-radius: 50%;
+    border: 0px;
     cursor: pointer;
     width: 100%;
-    height:100%;
-    z-index: 1;  
+    height: 100%;
+    z-index: 1;
     display: block;
 }
 
-/* 设置下拉按钮的样式 */
+/* 消息按钮的样式 */
 .message-box .dropbtn {
     background-image: url("../../../Images/SellerBackground/message.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    background-color: white;
     border-radius: 50%;
+    border: 0px;
     cursor: pointer;
     width: 100%;
     height: 100%;
@@ -53,9 +60,10 @@
 
   /* 容器 <div> - 需要放置下拉内容 */
 .dropdown {
-    width:40px;
-    height:40px;
+    width: 40px;
+    height: 40px;
     display: inline-block;
+    background-color: white;
 }
 
 .dropdown-content {
@@ -90,6 +98,7 @@
 
 .dropdown-content button{
     border: none;
+    background-color:white;
     width:100%;
 }
   
