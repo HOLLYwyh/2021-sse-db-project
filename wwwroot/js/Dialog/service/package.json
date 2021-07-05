@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "nodejs-websocket": "^1.7.2"
+  }
+}

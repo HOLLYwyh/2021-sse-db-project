@@ -1,33 +1,95 @@
 <!--与客服对话的页面-->
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+<head>-->
     <!--引入tailwind-->
-    <link href="https://unpkg.com/tailwindcss@@^2/dist/tailwind.min.css" rel="stylesheet">
+    <!--<link href="https://unpkg.com/tailwindcss@@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="/css/Dialog/service/service.css" rel="stylesheet">
     <title>联系客服</title>
-    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+    @*@await Html.PartialAsync("~/Views/Shared/base.cshtml")*@
 </head>
 
-<body>
+<body>-->
     <!--返回按钮-->
     <!--聊天页面-->
-    <div class="dialog-bar shadow-xl opacity-75 rounded-lg bg-red-100">
+    <!--<div class="dialog-bar shadow-xl opacity-75 rounded-lg bg-red-100">-->
         <!--左边栏-->
-        <el-aside id="left-sidebar" class="shadow-xl opacity-75 rounded-lg"  width="200px">
+        <!--<el-aside id="left-sidebar" class="shadow-xl opacity-75 rounded-lg" width="200px">
             <el-table :data="contactsData" height="600" style="width: 100%">
                 <el-table-column class="contacts" prop="contacts"
                                  label="联系人"
                                  width="199">
                 </el-table-column>
             </el-table>
-        </el-aside>
+        </el-aside>-->
         <!--消息区-->
         <!--发消息区-->
         <!--评价区-->
-    </div>
+    <!--</div>
 
     <script type="text/javascript" src="~/js/Dialog/service/service.js"></script>
+</body>
+
+</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+
+</head>
+
+<body>
+    <input type="text" placeholder="输入你的内容" />
+    <button type="submit">发送请求</button>
+    <div></div>
+    <script>
+        var socket = new WebSocket('ws://localhost:3000');
+        var button = document.querySelector('button');
+        var input = document.querySelector('input');
+        var div = document.querySelector('div');
+        const TYPE_ENTER = 0
+        const TYPE_LEAVE = 1
+        const TYPE_MSG = 2
+
+        socket.addEventListener('open', function () {
+            console.log("服务连接成功");
+            div.innerHTML = '服务器连接成功';
+        });
+        button.addEventListener('click', function () {
+            var value = input.value;
+            socket.send(value);
+            input.value = '';
+        });
+        socket.addEventListener('message', function (e) {
+            var data = JSON.parse(e.data);
+            var dv = document.createElement('div');
+            dv.innerText = data.msg + '-----' + data.time;
+            if (data.type === TYPE_ENTER) {
+                dv.style.color = 'green';
+            }
+            else if (data.type === TYPE_LEAVE) {
+                dv.style.color = 'red';
+            }
+            else {
+                dv.style.color = 'blue';
+            }
+            div.appendChild(dv);
+        })
+        socket.addEventListener('close', function () {
+            console.log('服务断开连接');
+        })
+
+
+    </script>
+
 </body>
 
 </html>
