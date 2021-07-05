@@ -108,6 +108,7 @@ Vue.component('list', {
           index++;
         }
       });
+      this.currentChangePage(this.currentPage);
     },
     handleSizeChange(pageSize) { // 每页条数切换
       this.pageSize = pageSize;
@@ -115,16 +116,18 @@ Vue.component('list', {
     },
     handleCurrentChange(currentPage) {//页码切换
       this.currentPage = currentPage;
-      this.currentChangePage(currentPage)
+      this.currentChangePage(currentPage);
     },
     //分页方法
     currentChangePage(currentPage) {
       let startIndex = (currentPage - 1) * this.pageSize;
       let endIndex = startIndex + this.pageSize - 1;
       this.curpageData.splice(0, this.curpageData.length);
+      let index = 0;
       for (let i = startIndex; i <= endIndex; i++) {
         if (i < this.filteredData.length) {
-          this.curpageData.push(this.filteredData[i]);
+          this.curpageData[index] = Object.assign({},this.filteredData[i]);
+          index++;
         }
       }
     },
@@ -139,7 +142,7 @@ Vue.component('list', {
     <el-tab-pane label="已完成" name="DONE"></el-tab-pane>
     <el-tab-pane label="待处理" name="OTHER"></el-tab-pane>
 </el-tabs>
-<el-table :data="filteredData"  style="width: 100%">
+<el-table :data="curpageData"  style="width: 100%">
     <el-table-column prop="name" label="姓名" width="180">
     </el-table-column>
     <el-table-column prop="phone" label="电话" width="180">
