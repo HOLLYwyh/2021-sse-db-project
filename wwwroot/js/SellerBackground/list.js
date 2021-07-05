@@ -1,61 +1,6 @@
-/*Vue.component('list', {
-    props:{
-        tag:String,
-        list:[],
-    },
-    data: function () {
-        return {
-            tableData: [{
-              date: '2016-05-02',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1518 弄',
-              tag: '家'
-            }, {
-              date: '2016-05-04',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1517 弄',
-              tag: '公司'
-            }]
-        }
-    },
-    methods: {
-        resetDateFilter() {
-          this.$refs.filterTable.clearFilter('date');
-        },
-        clearFilter() {
-          this.$refs.filterTable.clearFilter();
-        },
-        formatter(row, column) {
-          return row.address;
-        },
-        filterTag(value, row) {
-          return row.tag === value;
-        },
-        filterHandler(value, row, column) {
-          const property = column['property'];
-          return row[property] === value;
-        },
-        drawTag(tag){
-          if(tag==='DONE'){ //已完成
-            return 'success';
-          }else if(tag==='TO_BE_RECEIVE'){ //待收货
-            return '';
-          }else if(tag==='TO_BE_SHIP'){ //待发货
-            return 'danger';
-          }else if(tag==='TO_BE_PAY'){  //待付款
-            return 'warning';
-          }else{
-            return 'info';
-          }
-        }
-    },
-    template: `
-
-    `
-})*/
-var Main = new Vue({
-  el:"#app",
-  data() {
+/*只需要将tableData的内容进行修改，就能对页面进行重新渲染 */
+Vue.component('list', {
+  data: function () {
     return {
       activeName: 'ALL',
       tableData: [{
@@ -83,7 +28,7 @@ var Main = new Vue({
         tag: 'TO_BE_RECEIVE',
         show: true
       }],
-      showData:[{
+      showData: [{
         date: '',
         name: '',
         address: '',
@@ -94,7 +39,7 @@ var Main = new Vue({
       }]
     }
   },
-  mounted(){
+  mounted() {
     this.handleClick('ALL');
   },
   methods: {
@@ -127,17 +72,45 @@ var Main = new Vue({
     },
     handleClick(activeName) {
       this.activeName = activeName;
-      this.showData.splice(0,this.showData.length);
+      this.showData.splice(0, this.showData.length);
       let index = 0;
       this.tableData.map((row) => {
         this.handleFilter(this.activeName, row);
-        if(row.show === true){
-          this.showData[index] = Object.assign({},row);   
+        if (row.show === true) {
+          this.showData[index] = Object.assign({}, row);
           index++;
         }
       });
     }
-  }
+  },
+  template: `
+<div>
+<el-tabs v-model="activeName" @tab-click="handleClick(activeName)">
+    <el-tab-pane label="全部" name="ALL">全部</el-tab-pane>
+    <el-tab-pane label="待发货" name="TO_BE_SHIP">待发货</el-tab-pane>
+    <el-tab-pane label="待收货" name="TO_BE_RECEIVE">待收货</el-tab-pane>
+    <el-tab-pane label="待付款" name="TO_BE_PAY">待付款</el-tab-pane>
+    <el-tab-pane label="已完成" name="DONE">已完成</el-tab-pane>
+    <el-tab-pane label="待处理" name="OTHER">待处理</el-tab-pane>
+</el-tabs>
+<el-table :data="showData"  style="width: 100%">
+    <el-table-column prop="name" label="姓名" width="180">
+    </el-table-column>
+    <el-table-column prop="phone" label="电话" width="180">
+    </el-table-column>
+    <el-table-column prop="address" label="地址" :formatter="formatter">
+    </el-table-column>
+    <el-table-column prop="tag" label="标签" width="120">
+        <template slot-scope="scope">
+            <el-tag :type="drawTag(scope.row.tag)" disable-transitions>
+                {{scope.row.condition}}</el-tag>
+        </template>
+    </el-table-column>
+    <el-table-column prop="date" label="日期" sortable width="180">
+    </el-table-column>
+</el-table>
+</div>
+    `
 })
-//var Ctor = Vue.extend(Main)
-//new Ctor().$mount('#app')
+
+let list = new Vue({ el: '#list' });
