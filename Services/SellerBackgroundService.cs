@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using InternetMall.DBContext;
@@ -24,6 +25,19 @@ namespace InternetMall.Services
             }
             var modelContext = _context.Shops.Where(s => s.SellerId == sellerId).Include(s => s.Seller);
             return await modelContext.ToListAsync();
+        }
+
+        public void publicActivity(DateTime sTime, DateTime eTime, string activityName, int activityType, string desc)//发布活动
+        {
+            Activity newActivity = new Activity { ActivityId = Guid.NewGuid().ToString(), StartTime = sTime, EndTime = eTime, Name = activityName, Category = activityType, description = desc };
+            _context.Activities.Add(newActivity);
+            _context.SaveChanges();
+        }
+        public void publicCoupon(string couponId, DateTime sTime, DateTime eTime, int thres, int dis1, int dis2, int type, string shopId, string commdityId)//发布优惠券
+        {
+            Coupon coupon = new Coupon { CouponId = couponId, StartTime = sTime, EndTime = eTime, Threshold = thres, Discount1 = dis1, Discount2 = dis2, Category = type, ShopId = shopId, CommodityId = commdityId };
+            _context.Coupons.Add(coupon);
+            _context.SaveChanges();
         }
 
         public async Task<List<Order>> DisplayOrder(string shopId)//展示订单
