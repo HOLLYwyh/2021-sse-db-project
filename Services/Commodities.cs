@@ -128,11 +128,11 @@ namespace InternetMall.Services
 
 
 
-        public async Task<bool> Delete(string shop_id, string commodity_id)
+        public async Task<bool> Delete(string shopId, string commodityId)
         {
             //查找是否存在需要删除的元组
             var result = await _context.Commodities
-                .Where(c => c.CommodityId == commodity_id && c.ShopId == shop_id).ToListAsync();//如果运行失败，可以考虑将条件筛选分步执行,也可以考虑用find（）
+                .Where(c => c.CommodityId == commodityId && c.ShopId == shopId).ToListAsync();//如果运行失败，可以考虑将条件筛选分步执行,也可以考虑用find（）
             if (result != null)
             {
                 foreach (Commodity commodity in result) //挨个检查
