@@ -68,8 +68,8 @@ namespace InternetMall.Services
                 {
                     foreach (OrdersCommodity newOrdersCommodity in newOrder.OrdersCommodities)
                     {
-                       // if (newOrdersCommodity.CommodityName.Contains(commodityName) == false)
-                         //   newOrder.OrdersCommodities.Remove(newOrdersCommodity);
+                        if (newOrdersCommodity.Commodity.Name.Contains(commodityName) == false)
+                            newOrder.OrdersCommodities.Remove(newOrdersCommodity);
                     }
                 }
                 else if(recieverName !=null)
