@@ -21,20 +21,20 @@
         <div class="aria">
             <div class="login_box">
                 <div class="client_login">用户登录</div>
-                <form action="BuyerLogInForm" method="post">
+                <form  method="post">
                     <div class="client_name">
                         <img src="~/Images/Entry/login/client_name.png" class="fl">
-                        <input type="text" class="fl" name="ID" placeholder="用户名/手机号">
+                        <input type="text" id="ID" class="fl" name="ID" placeholder="用户名/手机号">
                     </div>
                     <div class="password">
                         <img src="~/Images/Entry/login/password.png" class="fl">
-                        <input type="password" class="fl" name="password" placeholder="密码">
+                        <input type="password" id="password" class="fl" name="password" placeholder="密码">
                     </div>
                     <div class="preserve">
                         <input type="checkbox" class="fr">
                         <span class="fr">保存密码</span>
                     </div>
-                    <button>开启荟萃</button>
+                    <button onclick="login()">开启荟萃</button>
                 </form>
                 <div class="have_not">
                     <span>尚未拥有账号？</span>
