@@ -1,7 +1,11 @@
-//订单相关常量
-namespace InternetMall.Constants.Orders
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Internetmall.Constants
 {
-    public class COrders
+    public class COrderCommodity
     {
         public const int Unknown = 0;       //未定义
         public const int ToBePay = 1;       //待付款

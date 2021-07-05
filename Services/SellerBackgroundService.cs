@@ -12,6 +12,28 @@ namespace InternetMall.Services
     public class SellerBackgroundServices: ISellerBackgroundService
     {
         private readonly ModelContext _context;
+        public async Task<bool> Refundment(string orderId, string commodityId)//退款售后
+        {
+            Order newOrder = await _context.Orders.Include(o => o.OrdersCommodities).FirstOrDefaultAsync(o => o.OrdersId == orderId);
+            bool commodityJudge = false;
+            bool orderJudge = true;
+            foreach(OrdersCommodity commodity in newOrder.OrdersCommodities)
+            {
+                if (commodity.status != 10)
+                    orderJudge = false;
+                if (commodity.CommodityId == commodityId)
+                {
+                    commodityJudge = true;
+                    commodity.status = 10;
+                }
+            }
+            if (orderJudge == true)
+                newOrder.Status = 10;
+            await _context.SaveChangesAsync();
+            if (commodityJudge == false)
+                return false;
+            else return true;
+        }
         public SellerBackgroundServices(ModelContext context)
         {
             _context = context;
@@ -74,7 +96,9 @@ namespace InternetMall.Services
             List<Order> newList;
             var modelContext = await _context.Orders.Include(o => o.Buyer)
                                                     .Include(o => o.Received)
-                                                    .Include(o => o.Shop).ToListAsync();
+                                                    .Include(o => o.Shop)
+                                                    .Include(o => o.OrdersCommodities)
+                                                    .ToListAsync();
             newList = modelContext;
             foreach(Order newOrder in newList)
             {
