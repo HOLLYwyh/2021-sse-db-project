@@ -45,6 +45,32 @@ function validateForm() {
         alert("两次输入密码不一致");
         return false;
     }
+    return true;
 }
 
+
+function signup() {
+    if (!validateForm()) {
+        /*alert("注册失败");*/
+        return false;
+    }
+
+    $.ajax({
+        type: "post",
+        url: "/Entry/Test",
+        async: false,
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ phoneNumber: $("#phoneNumber").val(), password: $("#password").val() }),//也可以传"&username=sa&password=123456"
+        success: function (result) {
+
+            //if (document.cookie !== "") {
+            //    //alert("成功~");
+            //}
+           /* else*/ {
+                alert("该号码已被注册");
+            }
+        }
+    });
+}
 
