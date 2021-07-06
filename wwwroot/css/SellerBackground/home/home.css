@@ -1,0 +1,22 @@
+@import url("//unpkg.com/element-ui@2.15.2/lib/theme-chalk/index.css");
+
+#card-list{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    padding-bottom: 20px;
+}
+
+.card img{
+    width:60px;
+    float:left;
+    padding-bottom: 30px;
+    padding-top:10px;
+}
+
+.card .info{
+    float:left;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    padding-top:15px;
+}
