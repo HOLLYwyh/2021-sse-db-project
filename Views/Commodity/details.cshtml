@@ -2,31 +2,43 @@
 <html>
 <head>
     <title>商品详情</title>
+    
 </head>
 <body>
-
+    @*<style>
+        div{
+            border:1px solid red;
+        }
+    </style>*@
     <div id="container" style="width:1200px">
-        <div id="header" style="background-color:#FFA500;width:1200px">
+        <div id="header" style="width: 1200px; background-color: #f75404;">
             <h1 style="margin-bottom:0;">高级优质国家级精品运动鞋</h1>
         </div>
 
-        <div id="menu" style="background-color:#FFD700;height:480px;width:500px;float:left;">
-            <b>商品简介</b>  <br>
-            名称 name <br>
-            价格 price <br>
-            店铺 shop <br>
+        <div id="menu" style="background-color: #f5bb37; height: 480px; width: 500px; float: left;">
+            <div id="header" style="background-color:#91ef28; text-align: center; ">
+                <h3 style="margin-bottom: 0;">商品简介</h3>
+                获取商品简介
+            </div>
+
+            名称 name <br />
+            价格 price <br />
+            尺码 size <br />
+            颜色 color <br />
+            店铺 shop <br />
             以上数据从数据库获取 <br>
             <button onclick="window.location.href = '/Purchase/payment'">买我!</button>
+            <button onclick="window.location.href = '/Purchase/shoppingCart'">加入购物车</button>
 
         </div>
-        <div id="content" style="background-color:#EEEEEE;height:200px;width:400px;float:left;">
+        <div id="content" style="height:200px;width:700px;float:left;">
             <iframe src="https://smart3d.tongji.edu.cn/MyFirstJSDemo/examples/"
                     width="700" height="480" name="topFrame" scrolling="No" noresize="noresize" frameborder="0" id="rightframe">
             </iframe>
         </div>
     </div>
 
-    <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
+    <div id="footer" style="background-color:#f0f43c;clear:both;text-align:center;">
         版权-我
     </div>
 
