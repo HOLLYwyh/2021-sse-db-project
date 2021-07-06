@@ -6,7 +6,6 @@ using InternetMall.DBContext;
 using InternetMall.Interfaces;
 using InternetMall.Models;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 
 namespace InternetMall.Services
 {

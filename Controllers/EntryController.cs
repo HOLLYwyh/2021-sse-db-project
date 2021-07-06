@@ -25,7 +25,7 @@ namespace InternetMall.Controllers
         // 传输页面
         public IActionResult BuyerLogIn()
         {
-            if(Request.Cookies["nickName"] != null)
+            if(Request.Cookies["buyerNickName"] != null)
             {
                 return Redirect("/Home/Index");
             }
@@ -36,7 +36,7 @@ namespace InternetMall.Controllers
         }
         public IActionResult BuyerSignUp()
         {
-            if (Request.Cookies["nickName"] != null)
+            if (Request.Cookies["buyerNickName"] != null)
             {
                 return Redirect("/Home/Index");
             }
@@ -68,14 +68,14 @@ namespace InternetMall.Controllers
                     if (buyer != null)
                     {
                         //设置cookie
-                        HttpContext.Response.Cookies.Append("nickName", buyer.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(60) });
+                        HttpContext.Response.Cookies.Append("buyerNickName", buyer.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
                         return Redirect("/Home/Index");
                     }
                     else
                     {
                         JsonData jsondata = new JsonData();
-                        jsondata["NickName"] = "找不到名称";
-                        jsondata["password"] = "找不到密码";
+                        jsondata["buyerNickName"] = "找不到名称";
+                        jsondata["buyerPassword"] = "找不到密码";
                         return Json(jsondata.ToJson());
                     }
                 }
