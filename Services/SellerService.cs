@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using InternetMall.Models;
 using InternetMall.DBContext;
-using Internetmall.Interfaces;
+using InternetMall.Interfaces;
 
-namespace Internetmall.Services
+namespace InternetMall.Services
 {
     public class SellerService : ISellerService
     {
