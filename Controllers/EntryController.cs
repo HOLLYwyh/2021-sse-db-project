@@ -131,7 +131,7 @@ namespace InternetMall.Controllers
         }
 
         [HttpPost]
-        public IActionResult SellerSignUpForm([FromBody] EntrySignUpSeller signUpSeller)  //买家注册
+        public IActionResult SellerSignUpForm([FromBody] EntrySignUpSeller signUpSeller)  //卖家注册
         {
             if (service.SignUp(signUpSeller.phoneNumber, signUpSeller.nickName, signUpSeller.password))
             {
@@ -146,5 +146,10 @@ namespace InternetMall.Controllers
                 return Json(jsondata.ToJson());
             }
         }
+
+        //[HttpPost]
+        //public IActionResult AdministratorLogInForm([FromBody]EntryLogInAdmin loginSeller)  //管理员登录
+        //{
+        //}
     }
 }
