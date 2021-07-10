@@ -101,12 +101,14 @@ namespace InternetMall.Controllers
         {
             if (service.SignUp(signUpBuyer.phoneNumber,signUpBuyer.nickName,signUpBuyer.password))
             {
-                return Redirect("/Entry/BuyerLogIn");
+                JsonData jsondata = new JsonData();
+                jsondata["signUp"] = "SUCCESS";
+                return Json(jsondata.ToJson());
             }
             else
             {
                 JsonData jsondata = new JsonData();
-                jsondata["signUp"] = "注册失败";
+                jsondata["signUp"] = "ERROR";
                 return Json(jsondata.ToJson());
             }
         }
@@ -119,6 +121,8 @@ namespace InternetMall.Controllers
             {
                 //设置cookie
                 HttpContext.Response.Cookies.Append("sellerNickName", seller.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+                HttpContext.Response.Cookies.Append("sellerID", seller.IdNumber, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+                //HttpContext.Response.Cookies.Append("sellerURL", seller.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
                 JsonData jsondata = new JsonData();
                 jsondata["sellerNickName"] = seller.Nickname;
                 return Json(jsondata.ToJson());
