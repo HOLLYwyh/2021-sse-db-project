@@ -35,9 +35,9 @@
     <!--店铺搜索结果-->
     <div class="shops bg-gray-100 rounded-lg  border-opacity-0">
         <div id="shop-list" class="shop-list">
-            <el-row :span="0" v-for="(o, index) in 4" :key="o">
-                <el-col :span="6" v-for="(o, index) in 1" :key="o" :offset="index > 0 ? 2 : 0">
-                    <el-card class="transition duration-150 ease-in-out transform hover:-translate-y-1 hover:border-2 hover:border-blue-700"
+            <el-row :span="0" v-for="(o, index) in 4" :key="o" :gutter="20" class="row-con">
+                <el-col :span="6" v-for="(o, index) in 1" :key="o">
+                    <el-card class="card transition duration-150 ease-in-out transform hover:-translate-y-1 hover:border-2 hover:border-blue-700"
                              :body-style="{ padding: '0px' }">
                         <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
                         <div style="padding: 10px;">
@@ -48,6 +48,14 @@
                         </div>
                     </el-card>
                 </el-col>
+                <!--店铺详情-->
+                <el-col :span="16">
+                    <el-card class="card description" shadow="never">
+                        <div class="text-blue-700">店铺详情</div>
+                        <p>阿巴阿巴</p>
+                    </el-card>
+                </el-col>
+
             </el-row>
         </div>
     </div>
