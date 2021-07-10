@@ -28,7 +28,6 @@ namespace InternetMall.DBContext
         public virtual DbSet<CouponShop> CouponShops { get; set; }
         public virtual DbSet<FavoriteProduct> FavoriteProducts { get; set; }
         public virtual DbSet<FollowShop> FollowShops { get; set; }
-        public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrdersCommodity> OrdersCommodities { get; set; }
         public virtual DbSet<ReceiveInformation> ReceiveInformations { get; set; }
@@ -403,29 +402,6 @@ namespace InternetMall.DBContext
                     .HasForeignKey(d => d.ShopId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("SYS_C0010030");
-            });
-
-            modelBuilder.Entity<Message>(entity =>
-            {
-                entity.HasKey(e => new { e.UserId, e.ShopId })
-                    .HasName("MESSAGE_PK");
-
-                entity.ToTable("MESSAGE");
-
-                entity.Property(e => e.UserId)
-                    .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("USER_ID");
-
-                entity.Property(e => e.ShopId)
-                    .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("SHOP_ID");
-
-                entity.Property(e => e.FilePath)
-                    .HasMaxLength(40)
-                    .IsUnicode(false)
-                    .HasColumnName("FILE_PATH");
             });
 
             modelBuilder.Entity<Order>(entity =>

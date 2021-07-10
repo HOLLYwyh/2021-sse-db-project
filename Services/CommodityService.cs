@@ -26,8 +26,14 @@ namespace InternetMall.Services
                 .Where(c => c.ShopId == shopId && c.Name == name).ToListAsync();
             if (result == null)                   //不存在，则插入该商品
             {
-                commodity.CommodityId = "000001"; //暂时随便生成一个商品ID，后续商讨设计生成规则
+                Random rd = new Random();//使用种子值初始化 System.Random 类的新实例。默认使用与时间相关的默认种子值
+                var a = rd.Next();       //大于等于零且小于 System.Int32.MaxValue 的 32 位带符号整数。
+                commodity.CommodityId = a.ToString(); //暂时随便生成一个商品ID，后续商讨设计生成规则
                 commodity.Price = price;
+                commodity.Storage = storage;
+                commodity.Name = name;
+                commodity.ShopId = shopId;
+                commodity.Url = url;
                 switch (category)
                 {
                     case "Unkown": commodity.Category = 0;break;                //未定义 
@@ -114,10 +120,6 @@ namespace InternetMall.Services
                     case "BodycareSkincare": commodity.Category = 96;break;     //护肤品 
                     case "BodycareOther": commodity.Category = 99;break;        //其它洗护用品 
                 }
-                commodity.Storage = storage;
-                commodity.Name = name;
-                commodity.ShopId = shopId;
-                commodity.Url = url;
 
                 _context.Add(commodity);
                 await _context.SaveChangesAsync();//保存更新（异步保存，避免等待）
