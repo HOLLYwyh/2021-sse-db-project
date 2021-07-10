@@ -2,7 +2,6 @@ Vue.component('upload', {
     data: function () {
         let checkPrice = (rule, value, callback) => {
             let val = Number(value);
-            
             if (!value) {
                 return callback(new Error('不能为空'));
             }
