@@ -20,6 +20,17 @@ namespace InternetMall.Controllers
         {
             return View();
         }
+        public IActionResult Address()
+        {
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
+        }
 
     }
 }
