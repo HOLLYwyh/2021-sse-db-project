@@ -1,0 +1,24 @@
+@import url("//unpkg.com/element-ui@2.15.2/lib/theme-chalk/index.css");
+
+.main{
+    margin-left:200px;
+    width:1180px;
+    padding-left:30px;
+    padding-right:30px;
+    padding-top: 10px; 
+}
+
+.paginationClass{
+    float:right;
+    padding-top:10px;
+    padding-bottom: 10px;
+}
+
+el-row {
+    margin-top:5px;
+    margin-bottom: 5px;
+}
+
+el-col{
+    padding: 10px 0;
+}
