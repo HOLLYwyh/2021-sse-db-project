@@ -8,25 +8,17 @@
     padding-top: 10px; 
 }
 
-.input{
-    margin-left:200px;
-    width:1180px;
-    padding-left:30px;
-    padding-right:30px;
-    padding-top: 10px; 
-}
-
 .paginationClass{
     float:right;
     padding-top:10px;
     padding-bottom: 10px;
 }
 
-.el-row {
-    margin-top:10px;
-    margin-bottom: 10px;
+el-row {
+    margin-top:5px;
+    margin-bottom: 5px;
 }
 
-.el-col{
+el-col{
     padding: 10px 0;
 }

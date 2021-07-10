@@ -179,24 +179,22 @@ Vue.component('upload', {
     <el-card>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-row>
-                <el-col :span="8">
+                <el-col :span="6">
                     <el-form-item label="商品名称" prop="name">
                         <el-input v-model="ruleForm.name"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="6">
                     <el-form-item label="商品价格" prop="price">
                         <el-input v-model="ruleForm.price"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="6">
                     <el-form-item label="商品库存" prop="num">
                         <el-input v-model.number="ruleForm.num"></el-input>
                     </el-form-item>
                 </el-col>
-            </el-row>
-            <el-row>
-                <el-col :span="8">
+                <el-col :span="6">
                     <el-form-item label="商品类别" prop="category">
                         <el-select v-model="ruleForm.category" placeholder="请选择商品类别">
                             <el-option label="服装" value="CLOTHING"></el-option>
@@ -209,11 +207,6 @@ Vue.component('upload', {
                             <el-option label="美妆" value="BEAUTY"></el-option>
                             <el-option label="洗护" value="BODYCARE"></el-option>
                         </el-select>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                    <el-form-item label="是否上架" prop="condition">
-                        <el-switch v-model="ruleForm.condition"></el-switch>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -233,11 +226,19 @@ Vue.component('upload', {
                     </el-form-item>
                 </el-col>
             </el-row>
-
-            <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-                <el-button @click="resetForm('ruleForm')">重置</el-button>
-            </el-form-item>
+            <el-row>
+                <el-col :span="12">
+                    <el-form-item label="是否上架" prop="condition">
+                        <el-switch v-model="ruleForm.condition"></el-switch>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item style="float: right">
+                        <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+                        <el-button @click="resetForm('ruleForm')">重置</el-button>
+                    </el-form-item>
+                </el-col>
+            </el-row>
         </el-form>
     </el-card>
     <el-card>
