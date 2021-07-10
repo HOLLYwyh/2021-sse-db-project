@@ -13,11 +13,25 @@ namespace InternetMall.Controllers
     {
         public IActionResult Follow()
         {
-            return View();
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
         }
         public IActionResult Favorite()
         {
-            return View();
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
         }
     }
 }
