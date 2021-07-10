@@ -15,5 +15,10 @@ namespace InternetMall.Controllers
         {
             return View();
         }
+
+        public IActionResult Goods()
+        {
+            return View();
+        }
     }
 }
