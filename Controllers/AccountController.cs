@@ -11,10 +11,32 @@ namespace InternetMall.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account
-        public IActionResult BuyerAccount()
+        // 返回页面
+        public IActionResult PersonalInformation()
         {
-            return View();
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
         }
+        public IActionResult Security()
+        {
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
+        }
+
+        //前后端交互
+
+
     }
 }

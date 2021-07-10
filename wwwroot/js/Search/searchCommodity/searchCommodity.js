@@ -7,3 +7,41 @@ new Vue({
 new Vue({
     el:"#search-bar"
 })
+
+//翻页
+new Vue({
+    el: "#turn-to-page",
+        methods: {
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+            }
+        },
+        data:{
+            currentPage1: 1,
+        }
+})
+
+
+//商品结果列表
+new Vue({
+    el: "#commodity-list",
+    data: {
+           currentDate: new Date()
+    }
+})
+
+//搜索分类菜单
+new Vue({
+    el: "#search-category",
+    data: {
+        activeIndex: '1'
+    },
+    methods: {
+        handleSelect(key, keyPath) {
+            console.log(key, keyPath);
+        }
+    }
+})

@@ -11,6 +11,10 @@ namespace InternetMall.Controllers
 {
     public class PurchaseController : Controller
     {
+        public IActionResult ConfirmOrder()
+        {
+            return View();
+        }
         public IActionResult ShoppingCart()
         {
             return View();
