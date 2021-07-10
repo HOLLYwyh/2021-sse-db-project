@@ -142,6 +142,11 @@ namespace InternetMall.DBContext
                     .IsUnicode(false)
                     .HasColumnName("PHONE")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.Url)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("URL");
             });
 
             modelBuilder.Entity<Buyer>(entity =>
@@ -184,6 +189,11 @@ namespace InternetMall.DBContext
                     .IsUnicode(false)
                     .HasColumnName("PHONE")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.Url)
+                  .HasMaxLength(255)
+                  .IsUnicode(false)
+                  .HasColumnName("URL");
             });
 
             modelBuilder.Entity<BuyerCoupon>(entity =>
@@ -250,6 +260,11 @@ namespace InternetMall.DBContext
                 entity.Property(e => e.Storage)
                     .HasPrecision(6)
                     .HasColumnName("STORAGE");
+
+                entity.Property(e => e.Url)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("URL");
 
                 entity.HasOne(d => d.Shop)
                     .WithMany(p => p.Commodities)
@@ -608,6 +623,11 @@ namespace InternetMall.DBContext
                     .IsUnicode(false)
                     .HasColumnName("PHONE")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.Url)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("URL");
             });
 
             modelBuilder.Entity<Shop>(entity =>
@@ -636,6 +656,11 @@ namespace InternetMall.DBContext
                     .HasMaxLength(6)
                     .IsUnicode(false)
                     .HasColumnName("SELLER_ID");
+
+                entity.Property(e => e.Url)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("URL");
 
                 entity.HasOne(d => d.Seller)
                     .WithMany(p => p.Shops)

@@ -24,6 +24,7 @@ namespace InternetMall.Models
         public int? Gender { get; set; }
         public DateTime? DateBirth { get; set; }
         public string IdNumber { get; set; }
+        public string Url { get; set; }
 
         public virtual ICollection<AddShoppingCart> AddShoppingCarts { get; set; }
         public virtual ICollection<BuyerCoupon> BuyerCoupons { get; set; }
