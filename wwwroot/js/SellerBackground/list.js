@@ -108,7 +108,7 @@ Vue.component('list', {
           index++;
         }
       });
-      this.currentChangePage(this.currentPage);
+      this.handleCurrentChange(1);
     },
     handleSizeChange(pageSize) { // 每页条数切换
       this.pageSize = pageSize;
@@ -134,7 +134,7 @@ Vue.component('list', {
   },
   template: `
 <el-card>
-<el-tabs v-model="activeName" @tab-click="handleClick(activeName)">
+<el-tabs v-model="activeName" v-on:tab-click="handleClick(activeName)">
     <el-tab-pane label="全部" name="ALL"></el-tab-pane>
     <el-tab-pane label="待发货" name="TO_BE_SHIP"></el-tab-pane>
     <el-tab-pane label="待收货" name="TO_BE_RECEIVE"></el-tab-pane>
@@ -160,8 +160,8 @@ Vue.component('list', {
 </el-table>
 <div class="paginationClass">
     <el-pagination
-    @size-change="handleSizeChange"
-    @current-change="handleCurrentChange" 
+    v-on:size-change="handleSizeChange"
+    v-on:current-change="handleCurrentChange" 
     :current-page="currentPage"
     :page-sizes="[5, 10, 20, 50]"
     :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
