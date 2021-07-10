@@ -83,6 +83,8 @@ namespace InternetMall.Controllers
             {
                //设置cookie
                HttpContext.Response.Cookies.Append("buyerNickName", buyer.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+               HttpContext.Response.Cookies.Append("buyerID", buyer.BuyerId, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+               //HttpContext.Response.Cookies.Append("buyerURL", buyer.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
                return Redirect("/Home/Index");
             }
             else
