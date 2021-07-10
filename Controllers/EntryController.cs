@@ -49,11 +49,25 @@ namespace InternetMall.Controllers
         }
         public IActionResult SellerSignUp()
         {
-            return View();
+            if (Request.Cookies["sellerNickName"] != null)
+            {
+                return Redirect("/SellerBackground/Home");
+            }
+            else
+            {
+                return View();
+            }
         }
         public IActionResult SellerLogIn()
         {
-            return View();
+            if (Request.Cookies["sellerNickName"] != null)
+            {
+                return Redirect("/SellerBackground/Home");
+            }
+            else
+            {
+                return View();
+            }
         }
         public IActionResult AdministratorLogIn()
         {
@@ -69,6 +83,8 @@ namespace InternetMall.Controllers
             {
                //设置cookie
                HttpContext.Response.Cookies.Append("buyerNickName", buyer.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+               HttpContext.Response.Cookies.Append("buyerID", buyer.BuyerId, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+               //HttpContext.Response.Cookies.Append("buyerURL", buyer.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
                return Redirect("/Home/Index");
             }
             else
@@ -103,30 +119,39 @@ namespace InternetMall.Controllers
             {
                 //设置cookie
                 HttpContext.Response.Cookies.Append("sellerNickName", seller.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
-                return Redirect("/SellerBackground/Home");
+                JsonData jsondata = new JsonData();
+                jsondata["sellerNickName"] = seller.Nickname;
+                return Json(jsondata.ToJson());
             }
             else
             {
                 JsonData jsondata = new JsonData();
-                jsondata["buyerNickName"] = "找不到名称";
-                jsondata["buyerPassword"] = "找不到密码";
+                jsondata["sellerNickName"] = "找不到名称";
+                jsondata["sellerPassword"] = "找不到密码";
                 return Json(jsondata.ToJson());
             }
         }
 
         [HttpPost]
-        public IActionResult SellerSignUpForm([FromBody] EntrySignUpSeller signUpSeller)  //买家注册
+        public IActionResult SellerSignUpForm([FromBody] EntrySignUpSeller signUpSeller)  //卖家注册
         {
             if (service.SignUp(signUpSeller.phoneNumber, signUpSeller.nickName, signUpSeller.password))
             {
-                return Redirect("/Entry/SellerLogIn");
+                JsonData jsondata = new JsonData();
+                jsondata["signUp"] = "SUCCESS";
+                return Json(jsondata.ToJson());
             }
             else
             {
                 JsonData jsondata = new JsonData();
-                jsondata["signUp"] = "注册失败";
+                jsondata["signUp"] = "ERROR";
                 return Json(jsondata.ToJson());
             }
         }
+
+        //[HttpPost]
+        //public IActionResult AdministratorLogInForm([FromBody]EntryLogInAdmin loginSeller)  //管理员登录
+        //{
+        //}
     }
 }

@@ -52,3 +52,17 @@ body {
 .el-row {
     margin-bottom: 10px;
 }
+
+/*店铺信息展示*/
+.description {
+    height: 240px;
+}
+
+.row-con {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.row-con .card {
+    height: 100%;
+}
