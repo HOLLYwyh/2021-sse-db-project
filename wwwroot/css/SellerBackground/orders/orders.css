@@ -1,0 +1,13 @@
+@import url("//unpkg.com/element-ui@2.15.3/lib/theme-chalk/index.css");
+
+el-select{
+    width:300px;
+}
+
+el-input{
+    width:300px;
+}
+
+.input-with-select{
+    background-color: #fff;
+}
