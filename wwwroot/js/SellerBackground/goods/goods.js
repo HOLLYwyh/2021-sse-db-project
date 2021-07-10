@@ -1,13 +1,15 @@
 Vue.component('upload', {
     data: function () {
         let checkPrice = (rule, value, callback) => {
+            let val = Number(value);
+            
             if (!value) {
                 return callback(new Error('不能为空'));
             }
-            if (!this.isFloat(value)) {
+            if (isNaN(value)) {
                 callback(new Error('请输入数字值'));
             } else {
-                if ((value > 0)&&(value <= 100000000000.00)) {
+                if ((val <= 0) || (val > 100000000000.00)) {
                     callback(new Error('大小在 0.00 到 100000000000.00'));
                 } else {
                     callback();
@@ -21,7 +23,8 @@ Vue.component('upload', {
             if (!Number.isInteger(value)) {
                 callback(new Error('请输入数字值'));
             } else {
-                if ((value > 0)&&(value <= 1000000)) {
+                let val = Number(value);
+                if ((val <= 0)||(val > 1000000)) {
                     callback(new Error('大小在 0 到 1000000'));
                 } else {
                     callback();
@@ -140,6 +143,7 @@ Vue.component('upload', {
             }
         },
         handleClick(activeName) {
+            console.log("!");
             this.activeName = activeName;
             this.filteredData.splice(0, this.filteredData.length);
             let index = 0;
