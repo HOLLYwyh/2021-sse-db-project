@@ -10,12 +10,21 @@
     <link href="/css/Common/shortcut_five.css" rel="stylesheet">
     <!--搜索框-->
     <link href="/css/Search/searchBar.css" rel="stylesheet">
+    <!--右边栏-->
+    <link href="/css/Common/naviRight.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css">
     <title>搜索结果-商品</title>
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
     @await Html.PartialAsync("~/Views/Shared/backToTop.cshtml")
 </head>
 
 <body>
+    <!--右边栏-->
+    <div id="naviRight">
+        <naviright>
+
+        </naviright>
+    </div>
     <!--渲染导航栏-->
     <div id="shortcutlg">
         <shortcut></shortcut>
@@ -73,6 +82,7 @@
     </div>
 
     <script type="text/javascript" src="/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="/js/Common/naviRight.js"></script>
     <script type="text/javascript" src="/js/Search/searchBar.js"></script>
     <script type="text/javascript" src="/js/Search/searchCommodity/searchCommodity.js"></script>
 </body>
