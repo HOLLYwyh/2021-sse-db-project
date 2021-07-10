@@ -49,17 +49,19 @@ function getCookie(cname) {
 }
 
 function getid() {
-    let id = getCookie("buyerNickName")
-    console.log(id)
+    let name = getCookie("buyerNickName")
+    let id = getCookie("buyerID")
+    console.log(name)
     console.log("11")
-    console.log(decodeURI(id))
-    if (id) {
+    console.log(decodeURI(name))
+    if (name) {
         document.getElementById("utility1").innerHTML = `<a href="/Entry/BuyerLogIn" >注销</a>`
-        setid(id)
-        
+        setid(decodeURI(id))
+        setName(decodeURI(name))
     }
-    return id
+    return name
 }
+
 window.onload = getid()
 
 function logOut() {
