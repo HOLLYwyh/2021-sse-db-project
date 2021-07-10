@@ -241,6 +241,7 @@ Vue.component('upload', {
             </el-row>
         </el-form>
     </el-card>
+    </br>
     <el-card>
     <el-tabs v-model="activeName" @tab-click="handleClick(activeName)">
         <el-tab-pane label="全部" name="ALL"></el-tab-pane>
