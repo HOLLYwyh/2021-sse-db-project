@@ -178,45 +178,61 @@ Vue.component('upload', {
     <div>
     <el-card>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-            <el-form-item label="商品名称" prop="name">
-                <el-input v-model="ruleForm.name"></el-input>
-            </el-form-item>
-            <el-form-item label="商品价格" prop="price">
-                <el-input v-model="ruleForm.price"></el-input>
-            </el-form-item>
-            <el-form-item label="商品库存" prop="num">
-                <el-input v-model.number="ruleForm.num"></el-input>
-            </el-form-item>
-            <el-form-item label="商品类别" prop="category">
-                <el-select v-model="ruleForm.category" placeholder="请选择商品类别">
-                    <el-option label="服装" value="CLOTHING"></el-option>
-                    <el-option label="电子产品" value="ELECTRONICS"></el-option>
-                    <el-option label="书籍" value="BOOKS"></el-option>
-                    <el-option label="宠物" value="PETS"></el-option>
-                    <el-option label="运动" value="SPORTS"></el-option>
-                    <el-option label="食品" value="FOOD"></el-option>
-                    <el-option label="家居" value="HOME"></el-option>
-                    <el-option label="美妆" value="BEAUTY"></el-option>
-                    <el-option label="洗护" value="BODYCARE"></el-option>
-                </el-select>
-            </el-form-item>
-            <el-form-item label="是否上架" prop="condition">
-                <el-switch v-model="ruleForm.condition"></el-switch>
-            </el-form-item>
-            <el-form-item label="商品详情" prop="detail">
-                <el-input type="textarea" v-model="ruleForm.detail"></el-input>
-            </el-form-item>
-            <el-form-item label="上传图片" prop="picture">
-                <el-upload
-                    class="upload-demo"
-                    drag
-                    action="https://jsonplaceholder.typicode.com/posts/"
-                    multiple>
-                    <i class="el-icon-upload"></i>
-                    <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-                    <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-                </el-upload>
-            </el-form-item>
+            <el-row>
+                <el-col :span="8">
+                    <el-form-item label="商品名称" prop="name">
+                        <el-input v-model="ruleForm.name"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                    <el-form-item label="商品价格" prop="price">
+                        <el-input v-model="ruleForm.price"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                    <el-form-item label="商品库存" prop="num">
+                        <el-input v-model.number="ruleForm.num"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="8">
+                    <el-form-item label="商品类别" prop="category">
+                        <el-select v-model="ruleForm.category" placeholder="请选择商品类别">
+                            <el-option label="服装" value="CLOTHING"></el-option>
+                            <el-option label="电子产品" value="ELECTRONICS"></el-option>
+                            <el-option label="书籍" value="BOOKS"></el-option>
+                            <el-option label="宠物" value="PETS"></el-option>
+                            <el-option label="运动" value="SPORTS"></el-option>
+                            <el-option label="食品" value="FOOD"></el-option>
+                            <el-option label="家居" value="HOME"></el-option>
+                            <el-option label="美妆" value="BEAUTY"></el-option>
+                            <el-option label="洗护" value="BODYCARE"></el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                    <el-form-item label="是否上架" prop="condition">
+                        <el-switch v-model="ruleForm.condition"></el-switch>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="12">
+                    <el-form-item label="上传图片" prop="picture">
+                        <el-upload class="upload-demo" drag action="https://jsonplaceholder.typicode.com/posts/" multiple>
+                            <i class="el-icon-upload"></i>
+                            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+                        </el-upload>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="商品详情" prop="detail">
+                        <el-input type="textarea" v-model="ruleForm.detail"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
 
             <el-form-item>
                 <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
