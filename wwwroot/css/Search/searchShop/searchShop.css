@@ -1,0 +1,54 @@
+/*为了避免缩小浏览器所带来的影响，设置body默认值*/
+body {
+    min-width: 1200px;
+    max-height: 1500px; /*在此处仅作为测试使用*/
+}
+
+/*店铺栏*/
+.shops {
+    height: 1000px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 2%;
+}
+
+/*换页部分*/
+.turn-to-page {
+    margin: 0 35%;
+}
+
+/*搜索结果部分*/
+.shop-list {
+    margin-left: 7%;
+}
+
+
+
+.bottom {
+    margin-top: 13px;
+    line-height: 12px;
+}
+
+.button {
+    padding: 0;
+    float: right;
+}
+
+.image {
+    width: 50%;
+    display: block;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both
+}
+
+.el-row {
+    margin-bottom: 10px;
+}

@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/css/Home/index/index.css" type="text/css" rel="stylesheet" />
     <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
-    <link href="~/css/Home/index/shortcut_index.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/shortcut_five.css" type="text/css" rel="stylesheet" />
+
     <link rel="stylesheet" href="~/css/Home/index/carousel.css" type="text/css">
     <link href="~/css/Home/index/animate.css" type="text/css" rel="stylesheet" />
     <link href="~/css/Home/index/part.css" type="text/css" rel="stylesheet" />
@@ -25,100 +26,8 @@
 
         </naviright>
     </div>
-    <div class="shortcut">
-        <ul>
-            <li>
-                <div class="col_EF4F00">
-                    <div>
-                        <a href="/Home/Index">特价</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_FFCC00">
-                    <div>
-                        <a href="../Views/Home/Index.cshtml">首页</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_9FCC48">
-                    <div>
-                        <a href="http://">饮食</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_00A3E7">
-                    <div>
-                        <a href="http://">家居</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_EF4F00">
-                    <div>
-                        <a href="http://">服装</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_FFCC00">
-                    <div>
-                        <a href="http://">美妆</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_9FCC48">
-                    <div>
-                        <a href="http://">运动</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_00A3E7">
-                    <div>
-                        <a href="http://">珠宝</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_EF4F00">
-                    <div>
-                        <a href="http://">汽车</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_FFCC00">
-                    <div>
-                        <a href="http://">医疗保健</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_9FCC48">
-                    <div>
-                        <a href="http://">图书</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_00A3E7">
-                    <div>
-                        <a href="http://">全部分类</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_EF4F00">
-                    <div>
-                        <a href="http://">帮助</a>
-                    </div>
-                </div>
-            </li>
-        </ul>
+    <div id="shortcut">
+        <shortcut></shortcut>
     </div>
     <div class="search">
         <div class="fl huicui">
@@ -177,15 +86,30 @@
         </div>
     </div>
     <div class="different_kind">
-
+        <img src="~/Images/Home/index/indextop.png" alt="Alternate Text" />
     </div>
     <div class="recommend">
         <div id="carousel1">
             <carousel class="carousel1"></carousel>
         </div>
         <div class="rcmd_box">
+            <ul>
+                <li v-for='(thing,index) in goods' :key='index'>
+                    <a :href="thing.link">
+                        <img :src="thing.img">
+                        <div class="introduce">
+
+                            {{thing.intro}}
+
+                        </div>
+                        <div class="shop">
+                            店铺：{{thing.shop}}
+                        </div>
+                    </a>
+                </li>
+            </ul>
             <div class="change_btn">
-                <i class="change_ico"></i>
+
                 换一换
             </div>
         </div>
@@ -209,6 +133,7 @@
 
     <script type="text/javascript" src="~/js/Home/index/part.js"></script>
     <script type="text/javascript" src="~/js/Common/carousel.js"></script>
+    <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
     <script type="text/javascript" src="~/js/Common/naviRight.js"></script>
     <script type="text/javascript" src="~/js/Home/index/index.js"></script>
 

@@ -5,7 +5,7 @@ body{
 
 .carousel1{
     height: 200px!important;;
-    width: 459px!important;
+    width: 470px!important;
     float: left;
 }
 
@@ -127,10 +127,15 @@ body{
     margin: 20px auto 0;
 }
 
+.different_kind img{
+    width:100%;
+    height:100%;
+}
+
 .recommend{
     height: 200px;
     width: 999px;
-    background-color: rgb(54, 22, 240);
+   /* background-color: rgb(54, 22, 240);*/
     display: block;
     position: relative;
     margin: 20px auto 0;
@@ -140,7 +145,63 @@ body{
     width: 529px;
     height: 200px;
     float: right;
-    background-color: rgb(233, 21, 21);
+    /*background-color: rgb(233, 21, 21);*/
+}
+
+.rcmd_box ul li {
+    width: 162px;
+    height: 94px;
+    display: block;
+    float: right;
+    margin-left: 8px;
+    margin-bottom: 10px;
+}
+
+.rcmd_box ul li a {
+    text-decoration: none;
+}
+
+.rcmd_box ul li img {
+    width: 162px;
+    height: 96px;
+}
+
+.rcmd_box .introduce {
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 10px 0 8px;
+    height: 40px;
+    overflow: hidden;
+    font-weight: 500;
+    text-align: left;
+    color:white;
+
+    position:relative;
+    top:-75px;
+    display:none;
+}
+
+.rcmd_box ul li:hover .introduce {
+    display: block;
+}
+
+
+
+.rcmd_box ul li .shop {
+    display: flex;
+    font-size: 12px;
+    line-height: 16px;
+    height: 16px;
+    color:white;
+    position:relative;
+    top:-80px;
+    text-align:left;
+    display:none;
+}
+
+.rcmd_box ul li:hover .shop {
+    display: block;
 }
 
 .change_btn{
@@ -148,7 +209,7 @@ body{
     top: 0;
     right: -36px;
     width: 28px;
-    height: 77px;
+    height: 60px;
     border: 1px solid silver;
     border-radius: 2px;
     color: #505050;
