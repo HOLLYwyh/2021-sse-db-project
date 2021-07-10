@@ -39,23 +39,15 @@
         <button class="fl" onclick="window.location.href = '/Search/SearchCommodity'"></button>
         <div class="nav fr">
 
-            <transition enter-active-class="animate__animated animate__fadeIn"
-                        leave-active-class="animate__animated animate__fadeOut">
-                <div class="login_box" v-show="appearance==true" @@mouseenter="appear" @@mouseleave="disappear('B')" style="animation-duration: 200ms">
-                    <div class="avator" @@mouseenter="appear" @@mouseleave="disappear('A')">
-                    </div>
-                    <div class="nickname">
-                        我的昵称
-                    </div>
-
-                </div>
-            </transition>
+         
 
             <div class="nav_son login">
-                <img src="/Images/Home/index/u64.svg" @@mouseenter="appear" @@mouseleave="disappear('A')">
-                <a href="/Entry/BuyerLogIn" class="fl">登录</a>
-                <p class="fl">|</p>
-                <a href="/Entry/BuyerSignUp" class="fl">注册</a>
+                <img src="/Images/Home/index/u64.svg">
+                <div id="utility1">
+                    <a href="/Entry/BuyerLogIn" class="fl">登录</a>
+                    <p class="fl">|</p>
+                    <a href="/Entry/BuyerSignUp" class="fl">注册</a>
+                </div>
             </div>
 
             <div class="nav_son">
