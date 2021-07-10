@@ -24,10 +24,10 @@ Vue.component('naviright', {
                     
                     </div>
                     <div>
-                        {{this.id}}
+                        id:{{this.id}}
                     </div>
                     <div>
-                        {{name}}
+                        {{this.name}}
                     </div>
                     <div class="listli">
                         <a href="">用户中心</a>
@@ -78,7 +78,7 @@ Vue.component('naviright', {
 
  data: function () {
         return {
-            id:'id',
+            id:'',
             name: '昵称',
             img:''
         }
@@ -86,12 +86,16 @@ Vue.component('naviright', {
     mounted() {
         //将Vue方法传到全局对象window中
         window.setid = this.setid;
+        window.setName = this.setName
     },
     methods: {
         
         setid(idx) {
             console.log("22")
             this.id=idx
+        },
+        setName(namex) {
+            this.name = namex
         }
     },
     
