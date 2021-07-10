@@ -222,7 +222,7 @@ Vue.component('upload', {
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="商品详情" prop="detail">
-                        <el-input type="textarea" v-model="ruleForm.detail"></el-input>
+                        <el-input type="textarea" :autosize="{ minRows: 10, maxRows: 11}" v-model="ruleForm.detail"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
