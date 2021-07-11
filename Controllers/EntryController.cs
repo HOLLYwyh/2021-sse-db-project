@@ -137,7 +137,7 @@ namespace InternetMall.Controllers
             {
                 //设置cookie
                 HttpContext.Response.Cookies.Append("sellerNickName", seller.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
-                HttpContext.Response.Cookies.Append("sellerID", seller.IdNumber, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+                HttpContext.Response.Cookies.Append("sellerID", seller.SellerId, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
                 //HttpContext.Response.Cookies.Append("sellerURL", seller.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
                 JsonData jsondata = new JsonData();
                 jsondata["sellerNickName"] = seller.Nickname;
