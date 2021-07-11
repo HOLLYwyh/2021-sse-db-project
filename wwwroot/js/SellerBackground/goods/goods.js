@@ -67,6 +67,7 @@ Vue.component('upload', {
             }],
             filteredData: [],
             curpageData: [],
+            upFile: '', //上传的图片
             ruleForm: {
                 name: '',
                 price: '',
@@ -109,7 +110,31 @@ Vue.component('upload', {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    alert('submit!');
+                    //通过AJAX的方式向后端传送数据
+                    var formData = new FormData();
+                    formData.append("name",$("#picName").val());                //商品名称
+                    formData.append("price", $("#price").val());                //商品价格
+                    formData.append("storage", $("#storage").val());            //商品库存
+                    formData.append("category", $("#category").val());          //商品类别
+                    formData.append("file", this.upFile);
+                    formData.append("description", $("#description").val());    //商品描述
+                    formData.append("onSale", $("#onSale").val());              //商品是否上架
+
+                    $.ajax({
+                        url: '/SellerBackground/UploadCommodity',
+                        type: 'POST',
+                        data: formData,
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (returndata) {
+                            alert("成功");
+                        },
+                        error: function (returndata) {
+                            alert("失败");
+                        }
+                    });
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -176,30 +201,36 @@ Vue.component('upload', {
                 }
             }
         },
+        //上传文件
+        handleChange(file, fileList) {
+            console.log(file, fileList)
+            this.upFile = file.raw
+            console.log(this.upFile)
+        },
     },
     template: `
     <div>
     <el-card>
-        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form method="post" enctype="multipart/form-data" id="uploadForm" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-row>
                 <el-col :span="6">
                     <el-form-item label="商品名称" prop="name">
-                        <el-input v-model="ruleForm.name"></el-input>
+                        <el-input id="picName" v-model="ruleForm.name"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="6">
                     <el-form-item label="商品价格" prop="price">
-                        <el-input v-model="ruleForm.price"></el-input>
+                        <el-input id="price" v-model="ruleForm.price"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="6">
                     <el-form-item label="商品库存" prop="num">
-                        <el-input v-model.number="ruleForm.num"></el-input>
+                        <el-input id="storage" v-model.number="ruleForm.num"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="6">
                     <el-form-item label="商品类别" prop="category">
-                        <el-select v-model="ruleForm.category" placeholder="请选择商品类别">
+                        <el-select id="category" v-model="ruleForm.category" placeholder="请选择商品类别">
                             <el-option label="服装" value="CLOTHING"></el-option>
                             <el-option label="电子产品" value="ELECTRONICS"></el-option>
                             <el-option label="书籍" value="BOOKS"></el-option>
@@ -215,8 +246,9 @@ Vue.component('upload', {
             </el-row>
             <el-row>
                 <el-col :span="12">
-                    <el-form-item label="上传图片" prop="picture">
-                        <el-upload class="upload-demo" drag action="https://jsonplaceholder.typicode.com/posts/" multiple>
+                    <el-form-item  label="上传图片" prop="picture">
+                        <el-upload class="upload-demo" drag action="" limit=1
+                             :auto-upload="false" :on-change="handleChange">
                             <i class="el-icon-upload"></i>
                             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                             <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -225,14 +257,14 @@ Vue.component('upload', {
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="商品详情" prop="detail">
-                        <el-input type="textarea" :autosize="{ minRows: 10, maxRows: 11}" v-model="ruleForm.detail"></el-input>
+                        <el-input id="description" type="textarea" :autosize="{ minRows: 10, maxRows: 11}" v-model="ruleForm.detail"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="是否上架" prop="condition">
-                        <el-switch v-model="ruleForm.condition"></el-switch>
+                        <el-switch id="onSale" v-model="ruleForm.condition"></el-switch>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">

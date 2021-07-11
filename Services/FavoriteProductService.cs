@@ -79,7 +79,7 @@ namespace InternetMall.Services
                 favorite.BuyerId = item.BuyerId;
                 favorite.CommodityId = item.CommodityId;
                 favorite.CommodityName = item.CommodityName;
-                favorite.DateCreated = item.DateCreated;
+                favorite.DateCreated = (DateTime)item.DateCreated;
                 favorite.Price = (decimal)item.Price;
 
                 favorites.Add(favorite);
