@@ -1,6 +1,6 @@
 @import url("//unpkg.com/element-ui@2.15.2/lib/theme-chalk/index.css");
 
-#list{
+.main{
     margin-left:200px;
     width:1150px;
     padding-left:30px;
@@ -12,4 +12,13 @@
     float:right;
     padding-top:10px;
     padding-bottom: 10px;
+}
+
+el-row {
+    margin-top:5px;
+    margin-bottom: 5px;
+}
+
+el-col{
+    padding: 10px 0;
 }

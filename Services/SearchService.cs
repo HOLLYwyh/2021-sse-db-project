@@ -30,30 +30,17 @@ namespace Internetmall.Services
             }
             return ansShop;
         }
-        public async Task<List<Commodity>> SearchCommodity(string commodityName, int key = 0)
+        public List<Commodity> SearchCommodity(string commodityName)
         {
-            List<Commodity> result = new List<Commodity>();
-            if (key == 0)        //随机
+            List<Commodity> ansCom = new List<Commodity>();
+            foreach (var item in _context.Commodities)
             {
-                result = await _context.Commodities
-                  .Where(c => c.Name.Contains(commodityName)).ToListAsync();
+                if (item.Name.Contains(commodityName))
+                {
+                    ansCom.Add(item);//把搜索到包含关键字的商品加入列表
+                }
             }
-            else if (key == 1)//价格升序
-            {
-                result = await _context.Commodities
-                  .Where(c => c.Name.Contains(commodityName)).OrderBy(c => c.Price).ToListAsync();
-            }
-            else if (key == 2)//价格降序
-            {
-                result = await _context.Commodities
-                  .Where(c => c.Name.Contains(commodityName)).OrderByDescending(c => c.Price).ToListAsync();
-            }
-            else              //销量降序
-            {
-                result = await _context.Commodities
-                  .Where(c => c.Name.Contains(commodityName)).OrderByDescending(c => c.Soldnum).ToListAsync();
-            }
-            return result;
+            return ansCom;
         }
     }
 

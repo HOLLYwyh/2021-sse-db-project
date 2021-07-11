@@ -27,7 +27,7 @@ namespace InternetMall.Controllers
         // 传输页面
         public IActionResult BuyerLogIn()
         {
-            if (Request.Cookies["buyerNickName"] != null)
+            if(Request.Cookies["buyerNickName"] != null)
             {
                 return Redirect("/Home/Index");
             }
@@ -79,10 +79,10 @@ namespace InternetMall.Controllers
             if (Request.Cookies["buyerNickName"] != null)
             {
                 //设置cookie
-                HttpContext.Response.Cookies.Delete("buyerNickName");
-                HttpContext.Response.Cookies.Delete("buyerID");
-                //HttpContext.Response.Cookies.Delete("buyerURL");
-                return Redirect("/Home/Index");
+               HttpContext.Response.Cookies.Delete("buyerNickName");
+               HttpContext.Response.Cookies.Delete("buyerID");
+               //HttpContext.Response.Cookies.Delete("buyerURL");
+               return Redirect("/Home/Index");
             }
             else
             {
@@ -97,11 +97,11 @@ namespace InternetMall.Controllers
             var buyer = service.Login(logInBuyer.ID, logInBuyer.password);
             if (buyer != null)
             {
-                //设置cookie
-                HttpContext.Response.Cookies.Append("buyerNickName", buyer.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
-                HttpContext.Response.Cookies.Append("buyerID", buyer.BuyerId, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
-                //HttpContext.Response.Cookies.Append("buyerURL", buyer.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
-                return Redirect("/Home/Index");
+               //设置cookie
+               HttpContext.Response.Cookies.Append("buyerNickName", buyer.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+               HttpContext.Response.Cookies.Append("buyerID", buyer.BuyerId, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+               //HttpContext.Response.Cookies.Append("buyerURL", buyer.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+               return Redirect("/Home/Index");
             }
             else
             {
@@ -115,7 +115,7 @@ namespace InternetMall.Controllers
         [HttpPost]
         public IActionResult BuyerSignUpForm([FromBody] EntrySignUpBuyer signUpBuyer)  //买家注册
         {
-            if (service.SignUp(signUpBuyer.phoneNumber, signUpBuyer.nickName, signUpBuyer.password))
+            if (service.SignUp(signUpBuyer.phoneNumber,signUpBuyer.nickName,signUpBuyer.password))
             {
                 JsonData jsondata = new JsonData();
                 jsondata["signUp"] = "SUCCESS";
@@ -132,12 +132,12 @@ namespace InternetMall.Controllers
         [HttpPost]
         public IActionResult SellerLogInForm([FromBody] EntryLogInSeller logInSeller)    //卖家登录
         {
-            var seller = sellerService.Login(logInSeller.ID, logInSeller.password);
-            if (seller != null)
+            var seller = sellerService.Login(logInSeller.ID,logInSeller.password);
+            if(seller != null)
             {
                 //设置cookie
                 HttpContext.Response.Cookies.Append("sellerNickName", seller.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
-                HttpContext.Response.Cookies.Append("sellerID", seller.IdNumber, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+                HttpContext.Response.Cookies.Append("sellerID", seller.SellerId, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
                 //HttpContext.Response.Cookies.Append("sellerURL", seller.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
                 JsonData jsondata = new JsonData();
                 jsondata["sellerNickName"] = seller.Nickname;

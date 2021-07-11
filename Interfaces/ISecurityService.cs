@@ -18,6 +18,5 @@ namespace InternetMall.Interfaces
 
         // 修改用户密码
         public Task<bool> updatePasswd(string buyerid, string oldPasswd, string newPasswd);
-
     }
 }

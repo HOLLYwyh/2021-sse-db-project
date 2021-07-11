@@ -62,7 +62,13 @@ function signup() {
         dataType: "json",
         data: JSON.stringify({ phoneNumber: $("#phoneNumber").val(), nickName: $("#nickName").val(), password: $("#password").val() }),
         success: function (result) {
-            alert("该号码已被注册");
+            var jsonData = eval("(" + result + ")");   //将json转换成对象
+            if (jsonData.signUp != "ERROR") {
+                window.location = "/Entry/BuyerLogIn";
+            }
+            else {
+                alert("此号码已被注册!");
+            }
         }
     });
 }
