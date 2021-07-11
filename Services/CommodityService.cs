@@ -6,6 +6,7 @@ using InternetMall.DBContext;
 using InternetMall.Interfaces;
 using InternetMall.Models;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace InternetMall.Services
 {
@@ -90,7 +91,7 @@ namespace InternetMall.Services
             return false; //没有需要删除的元组
         }
 
-
+        /*   返回是list类型
         public async Task<List<Commodity>> ShowCommodities(string shopId, string searchCondition)
         {
             List<Commodity> commoditiesList;    //用来存放查找结果
@@ -112,6 +113,30 @@ namespace InternetMall.Services
             }
            
             return commoditiesList;
+        }*/
+
+        //返回是json string类型
+        public async Task<string> ShowCommodities(string shopId, string searchCondition)
+        {
+            List<Commodity> commoditiesList;    //用来存放查找结果
+
+            if (searchCondition == "ON_SALE")    //还有库存的商品
+            {
+                commoditiesList = await _context.Commodities
+                    .Where(c => c.ShopId == shopId && c.Storage > 0).ToListAsync();
+            }
+            else if (searchCondition == "SOLD_OUT") //没有库存的商品
+            {
+                commoditiesList = await _context.Commodities
+                    .Where(c => c.ShopId == shopId && c.Storage == 0).ToListAsync();
+            }
+            else                                 //所有的商品
+            {
+                commoditiesList = await _context.Commodities
+                    .Where(c => c.ShopId == shopId).ToListAsync();
+            }
+
+            return JsonConvert.SerializeObject(commoditiesList);
         }
     }
 }
