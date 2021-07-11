@@ -71,7 +71,7 @@ namespace InternetMall.Services
                         join buyer in _context.Buyers on cart.BuyerId equals buyer.BuyerId
                         join comm in _context.Commodities on cart.CommodityId equals comm.CommodityId
                         join shop in _context.Shops on buyer.BuyerId equals shop.SellerId
-                        where cart.BuyerId == buyerid
+                        where cart.BuyerId == buyerid         //@李林飞
                         select new
                         {
                             BuyerId = buyer.BuyerId,
