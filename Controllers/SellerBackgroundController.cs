@@ -39,6 +39,7 @@ namespace InternetMall.Controllers
 
         public IActionResult Goods()
         {
+
             return View();
         }
         public IActionResult ShopSignUp()
@@ -71,18 +72,26 @@ namespace InternetMall.Controllers
             string contentRootPath = _hostingEnvironment.ContentRootPath;
             foreach (var formFile in files)
             {
-                if (formFile.Length > 0)
+                if (formFile.Length > 0)   //上传图片成功
                 {
                     long fileSize = formFile.Length; //获得文件大小，以字节为单位
 
                     var exetent = Path.GetExtension(formFile.FileName); //文件后缀名
+                    var shopDicName = webRootPath + "/uploads/shops/";//+ Request.Cookies["shopName"].ToString();
+                    if(!Directory.Exists(shopDicName))
+                    {
+                        //新建对应的文件夹
+                        Directory.CreateDirectory(shopDicName);
+                    }
                     string newFileName = System.Guid.NewGuid().ToString(); //随机生成新的文件名
-                    var filePath = webRootPath + "/uploads/" + newFileName + exetent; //newFileName;
+                    var filePath = shopDicName + "/" + newFileName + exetent; //newFileName;
 
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await formFile.CopyToAsync(stream);
                     }
+
+                    //新建商品
                 }
             }
             return Ok(new { count = files.Count, size });
@@ -113,6 +122,7 @@ namespace InternetMall.Controllers
             {
                 JsonData jsondata = new JsonData();
                 jsondata["signUp"] = "SUCCESS";
+                HttpContext.Response.Cookies.Append("shopName",shopSignUp.Name, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
                 return Json(jsondata.ToJson());
             }
             else

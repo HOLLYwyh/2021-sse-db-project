@@ -129,7 +129,7 @@ Vue.component('upload', {
                         contentType: false,
                         processData: false,
                         success: function (returndata) {
-                            alert("成功");
+                            window.location = "/SellerBackground/Goods";
                         },
                         error: function (returndata) {
                             alert("失败");
