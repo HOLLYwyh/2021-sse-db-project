@@ -808,6 +808,11 @@ namespace InternetMall.DBContext
                     .WithMany(p => p.Shops)
                     .HasForeignKey(d => d.SellerId)
                     .HasConstraintName("SYS_C0010017");
+
+                entity.Property(e => e.Description)
+                   .HasMaxLength(1000)
+                   .IsUnicode(false)
+                   .HasColumnName("DESCRIPTION");
             });
 
             OnModelCreatingPartial(modelBuilder);
