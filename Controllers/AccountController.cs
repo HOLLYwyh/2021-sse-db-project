@@ -34,6 +34,17 @@ namespace InternetMall.Controllers
                 return Redirect("/Entry/BuyerLogIn");
             }
         }
+        public IActionResult Address()
+        {
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
+        }
 
         //前后端交互
 

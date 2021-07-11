@@ -13,6 +13,6 @@ namespace InternetMall.Models
         public string Nickname { get; set; }
         public string IdNumber { get; set; }
         public string Name { get; set; }
-        public string? Url { get; set; }
+        public string Url { get; set; }
     }
 }

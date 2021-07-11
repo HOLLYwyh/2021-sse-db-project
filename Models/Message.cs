@@ -7,8 +7,12 @@ namespace InternetMall.Models
 {
     public partial class Message
     {
-        public string UserId { get; set; }
-        public string ShopId { get; set; }
-        public string FilePath { get; set; }
+        public string Messageid { get; set; }
+        public string Chatroomid { get; set; }
+        public string Username { get; set; }
+        public string Text { get; set; }
+        public DateTime Timestamp { get; set; }
+
+        public virtual Chatroom Chatroom { get; set; }
     }
 }
