@@ -4,7 +4,7 @@ Vue.component('upload', {
             data: [{
                 name:'',
                 category:'',
-                detail:''
+                detail: ''
             }],
             ruleForm: {
                 name: '',
@@ -74,8 +74,8 @@ Vue.component('upload', {
             <el-row>
                 <el-col :span="24">
                     <el-form-item>
-                        <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-                        <el-button @click="resetForm('ruleForm')">重置</el-button>
+                        <el-button type="primary" v-on:click="submitForm('ruleForm')">立即创建</el-button>
+                        <el-button v-on:click="resetForm('ruleForm')">重置</el-button>
                     </el-form-item>
                 </el-col>
             </el-row>
