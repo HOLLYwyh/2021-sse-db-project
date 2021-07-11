@@ -1,4 +1,4 @@
-body{
+body {
     position: relative;
     text-align: center;
 }
@@ -8,10 +8,10 @@ body{
     top: 170px;
     left: 35px;
     width: 50px;
-    /*height: ;µº∫Ω∏ﬂ∂»◊‘  ”¶*/
+    /*height: ;ÂØºËà™È´òÂ∫¶Ëá™ÈÄÇÂ∫î*/
     background: #fff;
     border: 1px solid #bfbfbf;
-    border-radius: 5px; /*‘≤Ω« Ù–‘*/
+    border-radius: 5px; /*ÂúÜËßíÂ±ûÊÄß*/
 }
 
 .item {
@@ -21,6 +21,7 @@ body{
     font-size: 12px;
 }
 
+
 .item a{
     text-decoration:none;
     color:black;
@@ -28,7 +29,7 @@ body{
 
 .item:hover {
     background: deepskyblue;
-    color: #fff; /* Û±Íª¨π˝,±≥æ∞±‰¿∂,◊÷ÃÂ—’…´±‰∞◊*/
+    color: #fff; /*Èº†Ê†áÊªëËøá,ËÉåÊôØÂèòËìù,Â≠ó‰ΩìÈ¢úËâ≤ÂèòÁôΩ*/
 }
 
 .carousel1 {
@@ -38,12 +39,11 @@ body{
     float: left;
 }
 
-.login_box{
-    
+.login_box {
     width: 360px;
-    height:200px;
+    height: 200px;
     top: 25px;
-    left:-135px;
+    left: -135px;
     display: block;
     border-radius: 2px;
     background-color: rgba(255, 255, 255);
@@ -53,15 +53,15 @@ body{
     box-shadow: 0 3px 6px 0 rgb(0 0 0 / 20%);
 }
 
-.appear{
-    display: block!important;
+.appear {
+    display: block !important;
 }
 
-.disappear{
-    display: none!important;
+.disappear {
+    display: none !important;
 }
 
-.login_box .avator{
+.login_box .avator {
     width: 70px;
     height: 70px;
     background-color: rgba(236, 8, 8);
@@ -69,11 +69,10 @@ body{
     border-radius: 50%;
     left: 145px;
     top: -35px;
-    
     z-index: 1;
 }
 
-.nickname{
+.nickname {
     color: #212121;
     font-weight: 600;
     text-align: center;
@@ -82,7 +81,7 @@ body{
     z-index: 1;
 }
 
-.search{
+.search {
     position: relative;
     margin: 20px auto 0;
     width: 1200px;
@@ -91,25 +90,25 @@ body{
     z-index: 1;
 }
 
-.search input{
+    .search input {
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 450px;
+        height: 50px;
+        border-radius: 10px;
+        border: none;
+        font-size: 28px;
+        color: #7F7F7F;
+        text-align: left;
+        background-color: rgba(242, 242, 242, 1);
+        outline: none;
+    }
+
+.huicui {
     margin-top: 10px;
-    margin-left: 10px;
-    width: 450px;
-    height: 50px;
-    border-radius: 10px;
-    border: none;
-    font-size: 28px;
-    color: #7F7F7F;
-    text-align: left;
-    background-color: rgba(242, 242, 242, 1);
-    outline: none;
 }
 
-.huicui{
-    margin-top: 10px;
-}
-
-.search button{
+.search button {
     margin-top: 10px;
     margin-left: 5px;
     background: url(../../../Images/Home/index/u42.svg);
@@ -119,35 +118,34 @@ body{
     border: none;
 }
 
-.nav_son{
+.nav_son {
     width: 60px;
     height: 70px;
     float: left;
     margin-left: 10px;
     display: block;
-    
 }
 
-.nav_son a{
-    font-family: 'Arial Normal', 'Arial', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 15px;
-    letter-spacing: normal;
-    color: #555555;
+    .nav_son a {
+        font-family: 'Arial Normal', 'Arial', sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 15px;
+        letter-spacing: normal;
+        color: #555555;
+    }
+
+.login {
+    width: 70px !important;
 }
 
-.login{
-    width: 70px!important;
-}
-
-.nav_son img{
+.nav_son img {
     margin-left: auto;
     margin-right: auto;
     zoom: 0.8;
 }
 
-.different_kind{
+.different_kind {
     height: 90px;
     width: 999px;
     background-color: rgb(54, 22, 240);
@@ -155,6 +153,7 @@ body{
     position: relative;
     margin: 20px auto 0;
 }
+
 
 .different_kind img{
     width:100%;
@@ -165,17 +164,19 @@ body{
     height: 200px;
     width: 999px;
    /* background-color: rgb(54, 22, 240);*/
+
     display: block;
     position: relative;
     margin: 20px auto 0;
 }
 
-.rcmd_box{
+.rcmd_box {
     width: 529px;
     height: 200px;
     float: right;
     /*background-color: rgb(233, 21, 21);*/
 }
+
 
 .rcmd_box ul li {
     width: 162px;
@@ -234,6 +235,7 @@ body{
 }
 
 .change_btn{
+
     position: absolute;
     top: 0;
     right: -36px;
@@ -252,6 +254,3 @@ body{
     line-height: 14px;
     cursor: pointer;
 }
-
-
-
