@@ -42,7 +42,7 @@ namespace InternetMall.Controllers
        [HttpPost]
        [Obsolete]
         public async Task<IActionResult> UploadCommodity()      //上传商品
-       {
+        {
             var date = Request;
             var files = Request.Form.Files;   //上传的图片
             var data = Request.Form.Keys;     //上传的信息
@@ -66,6 +66,12 @@ namespace InternetMall.Controllers
                 }
             }
             return Ok(new { count = files.Count, size });
+        }
+
+        [HttpPost]
+        public IActionResult ApplyShop()     //申请店铺
+        {
+            return View();
         }
     }
 }
