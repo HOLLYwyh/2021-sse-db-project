@@ -15,7 +15,7 @@ namespace InternetMall.Models
         public string OrdersId { get; set; }
         public string BuyerId { get; set; }
         public DateTime? OrdersDate { get; set; }
-        public int? Status { get; set; }
+        public int? Status { get; set; }             // 订单的状态
         public string ReceivedId { get; set; }
         public string ShopId { get; set; }
         public decimal Orderamount { get; set; }

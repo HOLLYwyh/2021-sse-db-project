@@ -1,6 +1,9 @@
-﻿using InternetMall.DBContext;
+﻿using InternetMall.Constants.Orders;
+using InternetMall.DBContext;
 using InternetMall.Interfaces;
 using InternetMall.Models;
+using InternetMall.Models.BusinessEntity;
+using InternetMall.Models.ControllerModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -27,79 +30,130 @@ namespace InternetMall.Services
         private bool OrderExists(string id)
         {
             return _context.Orders.Any(e => e.OrdersId == id);
-        }      
-
-        // 根据买家id查看所有订单
-        public async Task<Order> getOrderByBuyerid(string buyerid)
-        {
-            if(buyerid == null)
-            {
-                return null;
-            }
-
-            var order = await _context.Orders
-                .Include(o => o.Buyer)
-                .Include(o => o.Received)
-                .Include(o => o.Shop)
-                .FirstOrDefaultAsync(m => m.BuyerId == buyerid);
-
-            if(order==null)
-            {
-                return null;
-            }
-
-            return order;
-        }
+        }            
 
         // 创建订单
-        public bool createOrder(string buyerid, string shopName, short category, string description)
+        public bool createOrder(string buyerid, string commodityid, string receivedId)
         {
-            Shop shop = _context.Shops.Where(x => x.SellerId == sellerid && x.Name == shopName).FirstOrDefault();
+            // OrderId生成
+            CreateIdCount orderCount = new CreateIdCount(_context);
+            string orderid = orderCount.GetOrderCount();
 
-            if (shop == null)
-            {
-                shop = new Shop { SellerId = sellerid, ShopId = GetShopCount().ToString(), Name = shopName, Category = category, Description = description };
+            Commodity commodity = _context.Commodities.Where(x => x.CommodityId == commodityid).FirstOrDefault();
 
-                _context.Shops.Add(shop);
-            }
+            // 创建联系集 - 初始时商品状态为待付款
+            OrdersCommodity ordersCommodity = new OrdersCommodity { OrdersId = orderid, CommodityId = commodityid, Status = COrders.ToBePay};
+            _context.OrdersCommodities.Add(ordersCommodity);
 
+            // 创建Order —— 初始状态为待付款
+            Order order = new Order { OrdersId = orderid, BuyerId = buyerid, OrdersDate = DateTime.Now,
+                    Status = COrders.ToBePay, ShopId = commodity.ShopId, ReceivedId = receivedId, Orderamount = 0};
+     
+            _context.Orders.Add(order);
+            
             if (_context.SaveChanges() > 0)
                 return true;
+            else
+                return false;
+        }     
 
-            return false;
-        }
-        public void createOrder(string buyerid, string commodityid)
+        // 更新订单状态
+        public bool updateOrderStatus(string orderid, int newStatus)
         {
-            AddShoppingCart cart = _context.AddShoppingCarts.Where(x => x.BuyerId == buyerid && x.CommodityId == commodityid).FirstOrDefault();
-            if (cart == null)
+            Order order = _context.Orders.Where(x => x.OrdersId == orderid).FirstOrDefault();
+            order.Status = newStatus;
+            _context.Orders.Update(order);
+            if (_context.SaveChanges() > 0)
+                return true;
+            else
+                return false;           
+        }
+
+        // 更新订单中商品的状态
+        public bool updateCommodityStatus(string commodityid, int newStatus)
+        {
+            OrdersCommodity ordersCommodity = _context.OrdersCommodities.Where(x => x.OrdersId == commodityid).FirstOrDefault();
+            ordersCommodity.Status = newStatus;
+            _context.OrdersCommodities.Update(ordersCommodity);
+            if (_context.SaveChanges() > 0)
+                return true;
+            else
+                return false;
+        }
+
+        // 查看买家所有订单
+        public List<OrderView> getOrderByBuyerId(string buyerid)
+        {
+            List<OrderView> ordersView = new List<OrderView>();
+
+            List<Order> orders = _context.Orders.Where(x => x.BuyerId == buyerid).ToList();
+
+            foreach (Order order in orders)
             {
-                cart = new AddShoppingCart { BuyerId = buyerid, CommodityId = commodityid, Quantity = 1, DateCreated = DateTime.Now };
-                _context.AddShoppingCarts.Add(cart);
+
+                OrderView orderView = new OrderView();
+
             }
 
-            else
-                cart.Quantity++;
+            return ordersView;
+        }
 
-            _context.SaveChanges();
+        // 根据状态查看买家订单
+        public List<OrderView> getOrderByStatus(string buyerid, int status)
+        {
+            List<OrderView> orders = new List<OrderView>();
+
+
+            return orders;
+        }
+
+        // 查看订单详情
+        public List<OrderView> getOrderByStatus(string orderid)
+        {
+            List<OrderView> orders = new List<OrderView>();
+
+
+            return orders;
         }
 
         // 删除订单
-        public async Task removeOrder(string buyerid, string commodityid)
+        public bool removeOrder(string buyerid, string commodityid)
         {
-            AddShoppingCart cart = _context.AddShoppingCarts.Where(x => x.BuyerId == buyerid && x.CommodityId == commodityid).FirstOrDefault();
-            if (cart != null)
+            OrdersCommodity ordersCommodity = _context.OrdersCommodities.Where(x => x.CommodityId == commodityid).FirstOrDefault();
+            if (ordersCommodity != null)
             {
-                _context.AddShoppingCarts.Remove(cart);
-                await _context.SaveChangesAsync();
+                Order orders = _context.Orders.Where(x => x.OrdersId == ordersCommodity.OrdersId).FirstOrDefault();
+                if (orders != null)
+                    _context.Orders.Remove(orders);
+
+                _context.OrdersCommodities.Remove(ordersCommodity);
+
+                if (_context.SaveChanges() > 0)
+                    return true;
+                else
+                    return false;
             }
+            else
+                return false;
         }
 
         // 删除所有订单
-        public async Task removeAllOrder(string buyerid)
+        public bool removeAllOrder(string buyerid)
         {
-            var carts = _context.AddShoppingCarts.Where(x => x.BuyerId == buyerid);
-            _context.AddShoppingCarts.RemoveRange(carts);
-            await _context.SaveChangesAsync();
+            List<Order> orders = _context.Orders.Where(x => x.BuyerId == buyerid).ToList();
+
+            foreach (Order order in orders)
+            {
+                OrdersCommodity ordersCommodity = _context.OrdersCommodities.Where(x => x.OrdersId == order.OrdersId).FirstOrDefault();
+                if (ordersCommodity != null)
+                    _context.OrdersCommodities.Remove(ordersCommodity);
+            }
+            _context.Orders.RemoveRange(orders);
+
+            if (_context.SaveChanges() > 0)
+                return true;
+            else
+                return false;
         }
     }
 }
