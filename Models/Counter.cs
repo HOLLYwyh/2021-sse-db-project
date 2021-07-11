@@ -13,5 +13,11 @@ namespace InternetMall.Models
         public int Administratorcount { get; set; }
         public int Commoditycount { get; set; }
         public int Shopcount { get; set; }
+        public int Ordercount { get; set; }
+        public int Couponcount { get; set; }
+        public int Activitycount { get; set; }
+        public int Receivedcount { get; set; }
+        public int Messagecount { get; set; }
+        public int Chatroomcount { get; set; }
     }
 }
