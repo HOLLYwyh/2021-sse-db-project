@@ -28,7 +28,7 @@ Vue.component('side-bar', {
                     window.location.href = '#';
                     break;
                 case 7:
-                    window.location.href = '#';
+                    window.location.href = '/SellerBackground/ShopSignUp';
                     break;
                 case 8:
                     window.location.href = '#';

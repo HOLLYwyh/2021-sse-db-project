@@ -22,11 +22,16 @@ namespace InternetMall.Controllers
             return View();
         }
 
-        //前后端交互
-       //[HttpPost]
-       //public IActionResult UploadCommodity()
-       //{
+        public IActionResult ShopSignUp()
+        {
+            return View();
+        }
 
-       //}
+        //前后端交互
+        //[HttpPost]
+        //public IActionResult UploadCommodity()
+        //{
+
+        //}
     }
 }
