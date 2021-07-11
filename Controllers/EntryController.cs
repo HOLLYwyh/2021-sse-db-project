@@ -155,7 +155,7 @@ namespace InternetMall.Controllers
         [HttpPost]
         public IActionResult SellerSignUpForm([FromBody] EntrySignUpSeller signUpSeller)  //卖家注册
         {
-            if (service.SignUp(signUpSeller.phoneNumber, signUpSeller.nickName, signUpSeller.password))
+            if (sellerService.SignUp(signUpSeller.phoneNumber, signUpSeller.nickName, signUpSeller.password))
             {
                 JsonData jsondata = new JsonData();
                 jsondata["signUp"] = "SUCCESS";
