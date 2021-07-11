@@ -18,6 +18,7 @@ namespace InternetMall.Models
         public int? Status { get; set; }
         public string ReceivedId { get; set; }
         public string ShopId { get; set; }
+        public decimal Orderamount { get; set; }
 
         public virtual Buyer Buyer { get; set; }
         public virtual ReceiveInformation Received { get; set; }
