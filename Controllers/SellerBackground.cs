@@ -33,6 +33,10 @@ namespace InternetMall.Controllers
         {
             return View();
         }
+        public IActionResult ShopSignUp()
+        {
+            return View();
+        }
 
         //前后端交互
        [HttpPost]

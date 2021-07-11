@@ -1,4 +1,4 @@
-Vue.component('dropdown-menu', {
+    Vue.component('dropdown-menu', {
     props:{
         tag:String,
         list:[],
