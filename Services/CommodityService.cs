@@ -62,8 +62,17 @@ namespace InternetMall.Services
                 .Where(c => c.ShopId == shopId && c.Name == name).ToList();
             if (result == null)                   //不存在，则插入该商品
             {
-                commodity.CommodityId = "000001"; //暂时随便生成一个商品ID，后续商讨设计生成规则
+                Counter counts = _context.Counters.FirstOrDefault(c=>c.ID=="0");
+                commodity.CommodityId = (counts.Commoditycount + 1).ToString();//生成商品ID
+                //修改表的计数
+                counts.Commoditycount = counts.Commoditycount + 1;
+                _context.Counters.Update(counts);
+
                 commodity.Price = price;
+                commodity.Storage = storage;
+                commodity.Name = name;
+                commodity.ShopId = shopId;
+                commodity.Url = url;
                 switch (category)
                 {
                     case "Unkown": commodity.Category = 0; break;                //未定义 
@@ -77,11 +86,7 @@ namespace InternetMall.Services
                     case "Beauty": commodity.Category = 8; break;                //美妆 
                     case "Bodycare": commodity.Category = 9; break;              //洗护 
                 }
-                commodity.Storage = storage;
-                commodity.Name = name;
-                commodity.ShopId = shopId;
-                commodity.Url = url;
-
+                
                 _context.Add(commodity);
                  _context.SaveChanges();//保存更新（异步保存，避免等待）
                 return true;
