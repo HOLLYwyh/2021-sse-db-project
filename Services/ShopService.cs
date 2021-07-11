@@ -20,9 +20,9 @@ namespace InternetMall.Services
         }
 
         // 生成店铺
-       　public async Task<bool> createShop(string sellerid, string shopName, short category, string description)
+       　public bool createShop(string sellerid, string shopName, short category, string description)
         {
-            Shop shop = _context.Shops.Where(x => x.SellerId == sellerid).FirstOrDefault();
+            Shop shop = _context.Shops.Where(x => x.SellerId == sellerid && x.Name == shopName).FirstOrDefault();
 
             if (shop == null)
             {
@@ -35,7 +35,7 @@ namespace InternetMall.Services
                 _context.Shops.Add(shop);
             }
 
-            if (await _context.SaveChangesAsync() > 0)
+            if (_context.SaveChanges() > 0)
                 return true;
 
             return false;
