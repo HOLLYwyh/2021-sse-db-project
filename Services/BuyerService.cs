@@ -8,23 +8,19 @@ using Microsoft.EntityFrameworkCore;
 using InternetMall.Models;
 using InternetMall.Interfaces;
 using InternetMall.DBContext;
+using InternetMall.Models.ControllerModels;
 
 namespace InternetMall.Services
 {
     public class BuyerService:IBuyerService
     {
-        private ModelContext _context;      
-        public int GetBuyerCount()
-        {
-            var count = _context.Counters.FirstOrDefault(m => m.ID == "0");
-            int buyerCount = count.Buyercount + 1;
-            count.Buyercount += 1;
-            _context.Counters.Update(count);
-            _context.SaveChanges();
-            return buyerCount;
-        }
+        private readonly ModelContext _context;      
+
         public bool SignUp(string phone, string nickName, string passwd)//注册
         {
+
+            CreateIdCount buyerId = new CreateIdCount(_context);
+
             //如果要注册的用户电话不存在，说明可以注册
             if (BuyerExists(phone) == false)
             {
@@ -34,7 +30,7 @@ namespace InternetMall.Services
                 newBuyer.Nickname = nickName;
                 newBuyer.Passwd = passwd;
                 //为新用户随机生成一个用户ID
-                newBuyer.BuyerId = GetBuyerCount().ToString();
+                newBuyer.BuyerId = buyerId.GetBuyerCount();
                 //其他信息可以为空（初始即为空），用户后续添加即可
 
                 Create(newBuyer);
