@@ -6,194 +6,202 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using InternetMall.Models;
+using InternetMall.Interfaces;
 using InternetMall.DBContext;
-using Internetmall.Interfaces;
 
-namespace Internetmall.Services
+namespace InternetMall.Services
 {
-    public class SellerService : ISellerService
+    public class BuyerService:IBuyerService
     {
-        private readonly ModelContext _context;
+        private ModelContext _context;
         Random rd = new Random();
-
+        public int GetBuyerCount()
+        {
+            var count = _context.Counters.FirstOrDefault(m => m.ID == "0");
+            int buyerCount = count.Buyercount + 1;
+            count.Buyercount += 1; 
+            _context.Update(count);
+            _context.SaveChanges();
+            return buyerCount;
+        }
         public bool SignUp(string phone, string nickName, string passwd)//注册
         {
             //如果要注册的用户电话不存在，说明可以注册
-            if (SellerExists(phone) == false)
+            if (BuyerExists(phone) == false)
             {
-                var newSeller = new Seller();
+                var newBuyer = new Buyer();
 
-                newSeller.Phone = phone;
-                newSeller.Nickname = nickName;
-                newSeller.Passwd = passwd;
-                //为新用户随机生成一个用户ID
-                newSeller.SellerId = rd.Next(0, 1000).ToString();
+                newBuyer.Phone = phone;
+                newBuyer.Nickname = nickName;
+                newBuyer.Passwd = passwd;
+                //采用counter表生成ID
+                newBuyer.BuyerId = GetBuyerCount().ToString();
                 //其他信息可以为空（初始即为空），用户后续添加即可
 
-                Create(newSeller);
+                Create(newBuyer);
 
                 return true;
             }
             //否则，不能注册已经存在的用户
             return false;
         }
-        public Seller Login(string s, string passwd)
+        public Buyer Login(string s, string passwd)
         {
-            Seller seller;
+            Buyer buyer;
             //暂时通过长度区分，有改进空间
             if (s.Length == 11)
-                seller = SearchByPhone(s);
-            else
-                seller = SearchByID(s);
-
-            if (seller == null)
+                buyer = SearchByPhone(s);
+            else          
+                buyer = SearchByID(s);
+ 
+            if (buyer == null)
             {
                 Console.WriteLine("用户不存在");
             }
-            else if (seller.Passwd != passwd)
+            else if (buyer.Passwd != passwd)
             {
                 Console.WriteLine("手机号或密码错误");
-                seller = null;
+                buyer = null;
             }
-            return seller;
-        }
-        public Seller DisplaySeller(string s)
+            return buyer;
+        }   
+        public Buyer DisplayBuyer(string s)
         {
-            Seller seller;
+            Buyer buyer;
             //暂时通过长度区分，有改进空间
             if (s.Length == 11)
-                seller = SearchByPhone(s);
+                buyer = SearchByPhone(s);
             else
-                seller = SearchByID(s);
+                buyer = SearchByID(s);
 
-            if (seller == null)
+            if (buyer == null)
             {
                 Console.WriteLine("查看用户不存在");
-            }
-            return seller;
+            }          
+            return buyer;
         }
-        public Seller EditSeller(Seller before, Seller now)//修改个人信息，主码不允许修改！
+        public Buyer EditBuyer(Buyer before, Buyer now)//修改个人信息，主码不允许修改！
         {
-            string id = before.SellerId;
+            string id = before.BuyerId;
 
-            var seller = Edit(id, now);
+            var buyer = Edit(id, now);
 
-            return seller;
+            return buyer;
         }
 
 
-        public SellerService(ModelContext context)
+        public BuyerService(ModelContext context)
         {
             _context = context;
         }
-        public List<Seller> Index()
+        public List<Buyer> Index()
         {
-            return _context.Sellers.ToList();
+            return _context.Buyers.ToList();
         }
-        public Seller SearchByPhone(string phone)
+        public Buyer SearchByPhone(string phone)
         {
             if (phone == null)
             {
                 return null;
             }
 
-            var seller = _context.Sellers
+            var buyer = _context.Buyers
                 .FirstOrDefault(m => m.Phone == phone);
-            if (seller == null)
+            if (buyer == null)
             {
                 return null;
             }
 
-            return seller;
+            return buyer;
         }
-        public Seller SearchByID(string ID)
+        public Buyer SearchByID(string ID)
         {
             if (ID == null)
             {
                 return null;
             }
 
-            var seller = _context.Sellers
-                .FirstOrDefault(m => m.SellerId == ID);
-            if (seller == null)
+            var buyer = _context.Buyers
+                .FirstOrDefault(m => m.BuyerId == ID);
+            if (buyer == null)
             {
                 return null;
             }
 
-            return seller;
+            return buyer;
         }
-        public void Create([Bind("SellerId,Phone,Passwd,Nickname,Gender,DateBirth,IdNumber")] Seller seller)
+        public void Create([Bind("BuyerId,Phone,Passwd,Nickname,Gender,DateBirth,IdNumber")] Buyer buyer)
         {
             //if (ModelState.IsValid)
             //{
-            _context.Add(seller);
+            _context.Add(buyer);
             _context.SaveChanges();
-            //return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             //}
         }
-        public Seller Edit(string id)
+        public Buyer Edit(string id)
         {
             if (id == null)
             {
                 return null;
             }
 
-            var seller = _context.Sellers.Find(id);
-            if (seller == null)
+            var buyer = _context.Buyers.Find(id);
+            if (buyer == null)
             {
                 return null;
             }
-            return seller;
+            return buyer;
         }
-        public Seller Edit(string id, [Bind("SellerId,Phone,Passwd,Nickname,Gender,DateBirth,IdNumber")] Seller seller)
+        public Buyer Edit(string id, [Bind("BuyerId,Phone,Passwd,Nickname,Gender,DateBirth,IdNumber")] Buyer buyer)
         {
-            if (id != seller.SellerId)
+            if (id != buyer.BuyerId)
             {
                 return null;
             }
 
             //if (ModelState.IsValid)
             //{
-            try
-            {
-                _context.Update(seller);
-                _context.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (SellerExists(seller.SellerId))
+                try
                 {
-                    return null;
+                    _context.Update(buyer);
+                    _context.SaveChanges();
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (!BuyerExists(buyer.BuyerId))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
-            }
-            //return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             //}
-            return seller;
+            return buyer;
         }
-        public Seller Delete(string id)
+        public Buyer Delete(string id)
         {
             if (id == null)
             {
                 return null;
             }
 
-            var seller = _context.Sellers
-                .FirstOrDefault(m => m.SellerId == id);
-            if (seller == null)
+            var buyer = _context.Buyers
+                .FirstOrDefault(m => m.BuyerId == id);
+            if (buyer == null)
             {
                 return null;
             }
-            _context.Sellers.Remove(seller);
+            _context.Buyers.Remove(buyer);
             _context.SaveChanges();
-            return seller;
+            return buyer;
         }
-        public bool SellerExists(string phone)
+        public bool BuyerExists(string phone)
         {
-            return _context.Sellers.Any(e => e.Phone == phone);
+            return _context.Buyers.Any(e => e.Phone == phone);
         }
     }
 }
