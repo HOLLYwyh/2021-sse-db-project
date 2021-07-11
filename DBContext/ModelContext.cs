@@ -357,10 +357,7 @@ namespace InternetMall.DBContext
             });
 
             modelBuilder.Entity<Counter>(entity =>
-            {
-                entity.HasKey(e => new { e.ID, e.Buyercount, e.Sellercount, e.Administratorcount, e.Commoditycount })
-                    .HasName("COUNTER_PK");
-
+            {               
                 entity.ToTable("COUNTER");
 
                 entity.Property(e => e.ID)
