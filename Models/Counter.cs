@@ -13,6 +13,5 @@ namespace InternetMall.Models
         public int Administratorcount { get; set; }
         public int Commoditycount { get; set; }
         public int Shopcount { get; set; }
-        public string ID { get; set; }
     }
 }
