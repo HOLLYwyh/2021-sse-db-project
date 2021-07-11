@@ -1,0 +1,123 @@
+<!--收货管理页面 -->
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <link href="~/css/Account/address/address.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/shortcut_five.css" rel="stylesheet">
+    <title>收货管理</title>
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+</head>
+
+<body>
+    <div id="app">
+        <shortcut></shortcut>
+
+        <el-container direction="horizontal">
+            <el-aside style="
+          background-color: rgb(238, 241, 246);
+          box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+          width: 300px;
+        ">
+                <index></index>
+            </el-aside>
+            <el-main style="min-height: 600px" direction="vertical">
+                <el-row>
+                    <el-col :span="2">
+                        <el-button type="primary" v-on:click="dialogFormVisible = true">新建收货地址</el-button>
+                    </el-col>
+                </el-row>
+                <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+                    <el-form :model="form">
+                        <!--label必须按如下方式命名，浏览器才支持自动填充-->
+                        <el-form-item label="姓名" :label-width="formLabelWidth">
+                            <el-input v-model="form.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="收货地址" :label-width="formLabelWidth">
+                            <el-input v-model="form.address"></el-input>
+                        </el-form-item>
+                        <el-form-item label="电话号码" :label-width="formLabelWidth">
+                            <el-input v-model="form.phone"></el-input>
+                        </el-form-item>
+                        <el-form-item label="信息标签" :label-width="formLabelWidth">
+                            <el-select v-model="form.tag"
+                                       filterable
+                                       allow-create
+                                       default-first-option
+                                       placeholder="请选择地址标签(可输入)">
+                                <el-option v-for="item in options"
+                                           :key="item.value"
+                                           :label="item.label"
+                                           :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-form>
+                    <div slot="footer" class="dialog-footer">
+                        <el-button v-on:click="clear()">取 消</el-button>
+                        <el-button type="primary" v-on:click="addInfo()">确 定</el-button>
+                    </div>
+                </el-dialog>
+
+                <el-row v-for="(item, index) in info" :key="item.NO" :offset="1">
+                    <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <span style="float: left; margin-left: 20px"><strong>{{ item.tag }}</strong></span>
+                            <span style="float: center; color: #aaaaaa">
+                                {{item.first}}
+                            </span>
+                            <el-button style="float: right; padding: 3px 10px"
+                                       type="text"
+                                       v-on:click="setDefault(item.NO)">设为默认</el-button>
+                            <el-button style="float: right; padding: 3px 0"
+                                       type="text"
+                                       v-on:click="edit(item.NO, index)">编辑</el-button>
+                        </div>
+                        <div class="text item">
+                            <span class="descriptor">人员姓名：</span><span class="data">{{ item.name }}</span><br />
+                            <span class="descriptor">收货地址：</span><span class="data">{{ item.address }}</span><br />
+                            <span class="descriptor">手机号码：</span><span class="data">{{ item.phone }}</span>
+                        </div>
+                    </el-card>
+                </el-row>
+                <el-dialog title="收货地址" :visible.sync="editVisible">
+                    <el-form :model="form">
+                        <!--label必须按如下方式命名，浏览器才支持自动填充-->
+                        <el-form-item label="姓名" :label-width="formLabelWidth">
+                            <el-input v-model="form.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="收货地址" :label-width="formLabelWidth">
+                            <el-input v-model="form.address"></el-input>
+                        </el-form-item>
+                        <el-form-item label="电话号码" :label-width="formLabelWidth">
+                            <el-input v-model="form.phone"></el-input>
+                        </el-form-item>
+                        <el-form-item label="信息标签" :label-width="formLabelWidth">
+                            <el-select v-model="form.tag"
+                                       filterable
+                                       allow-create
+                                       default-first-option
+                                       placeholder="请选择地址标签(可输入)">
+                                <el-option v-for="item in options"
+                                           :key="item.value"
+                                           :label="item.label"
+                                           :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-form>
+                    <div slot="footer" class="dialog-footer">
+                        <el-button type="danger" v-on:click="deleteInfo()">删除地址</el-button>
+                        <el-button v-on:click="clear()">取 消</el-button>
+                        <el-button type="primary" v-on:click="renewInfo(form.NO)">确 定</el-button>
+                    </div>
+                </el-dialog>
+            </el-main>
+        </el-container>
+    </div>
+
+
+    <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="~/js/Account/address/address.js"></script>
+</body>
+
+</html>
