@@ -13,8 +13,7 @@ namespace InternetMall.Services
 {
     public class BuyerService:IBuyerService
     {
-        private ModelContext _context;
-        //Random rd = new Random();
+        private ModelContext _context;      
         public int GetBuyerCount()
         {
             var count = _context.Counters.FirstOrDefault(m => m.ID == "0");
