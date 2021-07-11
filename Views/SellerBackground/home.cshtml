@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英豪荟萃 - 首页</title>
+    <link rel="icon" href="~/icon.ico" type="image/x-icon" />
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- import Vue before Element -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="//unpkg.com/element-ui@@2.15.2/lib/index.js"></script>
+
+    <link rel="stylesheet" href="~/css/SellerBackground/home/home.css">
+    <link rel="stylesheet" href="~/css/SellerBackground/sidebar.css">
+    <link rel="stylesheet" href="~/css/SellerBackground/list.css">
+    <link rel="stylesheet" href="~/css/SellerBackground/dropdownmenu.css">
+</head>
+
+<body>
+    <div>
+        <div class="nav-area">
+            <el-aside id="nav" style="width:100%;">
+                <side-bar></side-bar>
+            </el-aside>
+        </div>
+        <div class="main-body">
+            <ul class="header">
+                <li class="avatar" id="avatar">
+                    <dropdown-menu v-bind:list="[{icon:'el-icon-user',text:'个人信息'},
+                                                 {icon:'el-icon-setting',text:'设置'},
+                                                 {icon:'el-icon-switch-button',text:'退出登录'}]" v-bind:tag="'avatar'">
+                    </dropdown-menu>
+                </li>
+                <li class="message-box" id="message-box">
+                    <dropdown-menu v-bind:list="[{icon:'el-icon-chat-dot-square',text:'我的消息'},
+                                                 {icon:'el-icon-message',text:'系统通知'}]" v-bind:tag="'message'">
+                    </dropdown-menu>
+                </li>
+            </ul>
+
+            <div class="main" id="list">
+                <div id="card-list">
+                    <el-card class="card">
+                        <img src="~/Images/SellerBackground/home/followers_num.png">
+                        <div class="info">
+                            <div class="label">关注人数</div>
+                            <div class="num">233</div>
+                        </div>
+                    </el-card>
+                    <el-card class="card">
+                        <img src="~/Images/SellerBackground/home/recent_profit.png">
+                        <div class="info">
+                            <div class="label">本月盈利</div>
+                            <div class="num">233</div>
+                        </div>
+                    </el-card>
+                    <el-card class="card">
+                        <img src="~/Images/SellerBackground/home/orders_num .png">
+                        <div class="info">
+                            <div class="label">待发货订单</div>
+                            <div class="num">233</div>
+                        </div>
+                    </el-card>
+                    <el-card class="card">
+                        <img src="~/Images/SellerBackground/home/service_num.png">
+                        <div class="info">
+                            <div class="label">退款售后订单</div>
+                            <div class="num">233</div>
+                        </div>
+                    </el-card>
+                </div>
+                <list></list>
+            </div>
+
+        </div>
+    </div>
+    <script src="~/js/SellerBackground/sidebar.js"></script>
+    <script src="~/js/SellerBackground/dropdownMenu.js"></script>
+    <script src="~/js/SellerBackground/list.js"></script>
+</body>
+</html>

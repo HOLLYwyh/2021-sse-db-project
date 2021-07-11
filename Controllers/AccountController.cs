@@ -11,14 +11,28 @@ namespace InternetMall.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account
+        // 返回页面
         public IActionResult PersonalInformation()
         {
-            return View();
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
         }
         public IActionResult Security()
         {
-            return View();
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
         }
         public IActionResult Address()
         {
@@ -31,6 +45,9 @@ namespace InternetMall.Controllers
                 return Redirect("/Entry/BuyerLogIn");
             }
         }
+
+        //前后端交互
+
 
     }
 }

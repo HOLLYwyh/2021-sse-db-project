@@ -1,3 +1,8 @@
+//右边栏
+new Vue({
+    el: "#naviRight"
+})
+
 //渲染导航栏
 new Vue({
     el: "#shortcutlg"
@@ -25,10 +30,23 @@ new Vue({
 })
 
 
-//测试卡片
+//商品结果列表
 new Vue({
-    el: "#test",
+    el: "#commodity-list",
     data: {
            currentDate: new Date()
+    }
+})
+
+//搜索分类菜单
+new Vue({
+    el: "#search-category",
+    data: {
+        activeIndex: '1'
+    },
+    methods: {
+        handleSelect(key, keyPath) {
+            console.log(key, keyPath);
+        }
     }
 })

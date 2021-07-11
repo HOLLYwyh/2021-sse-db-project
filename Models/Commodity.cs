@@ -21,6 +21,9 @@ namespace InternetMall.Models
         public int? Storage { get; set; }
         public string Name { get; set; }
         public string ShopId { get; set; }
+        public string Url { get; set; }
+        public int Soldnum { get; set; }
+        public string Description { get; set; } 
 
         public virtual Shop Shop { get; set; }
         public virtual ICollection<AddShoppingCart> AddShoppingCarts { get; set; }
