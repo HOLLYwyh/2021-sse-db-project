@@ -153,7 +153,7 @@ Vue.component('upload', {
                     index++;
                 }
             });
-            this.currentChangePage(this.currentPage);
+            this.currentChangePage(1);
         },
         handleSizeChange(pageSize) { // 每页条数切换
             this.pageSize = pageSize;
