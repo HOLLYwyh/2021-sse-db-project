@@ -157,6 +157,12 @@ Vue.component('list', {
     </el-table-column>
     <el-table-column prop="date" label="日期" sortable width="180">
     </el-table-column>
+    <el-table-column width="60" v-show="showDeliverIcon">
+      <template slot-scope="scope">
+        <el-button type="primary" icon="el-icon-truck" circle v-if="scope.row.tag==='TO_BE_SHIP'">
+        </el-button>
+      </template>
+    </el-table-column>
 </el-table>
 <div class="paginationClass">
     <el-pagination
