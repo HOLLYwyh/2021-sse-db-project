@@ -17,13 +17,14 @@
 }
 
 .rank_title {
-    width: 264px;
+    width: 274px;
     height: 36px;
     background-color: #fff;
     font-size: 20px;
     line-height: 36px;
     text-align: left;
     float: left;
+    margin-bottom:9px;
 }
 
 .card_list{
@@ -52,7 +53,7 @@
     height: 96px;
 }
 
-.introduce{
+.introduce {
     width: 100%;
     font-size: 14px;
     line-height: 20px;
@@ -61,6 +62,7 @@
     overflow: hidden;
     font-weight: 500;
     text-align: left;
+    color: #212121;
 }
 
 .shop{
@@ -73,14 +75,14 @@
 }
 
 .rank{
-    width: 264px;
+    width: 274px;
     height: 412px;
-    float: left;
+    float: right;
     /*background-color: rgb(19, 233, 37);*/
 }
 
 .ranklist {
-    width: 264px;
+    width: 274px;
     height: 376px;
     display: block;
     position: relative;
@@ -88,16 +90,14 @@
 }
 
 .ranklist ul li {
-    width: 264px;
+    width: 274px;
     height: 19px;
-    margin-top: 18px;
+    margin-bottom: 18px;
     
 }
 
-.rank ul li a div{
-
-    float: left;
-
+.rank ul li a {
+    text-decoration:none;
 }
 
 .rank ul li .rk{
@@ -110,22 +110,31 @@
     line-height: 18px;
     background: #fff;
     border-radius: 2px;
-    display: inline-block;
+   
     color: #fff;
     background: #00a1d6;
     margin-right: 18px;
 }
 
-.ti{
-    float: left;
+
+
+.ranklist ul li a .name {
+    color: #212121;
+    height: 19px;
+    width: 237px;
+    overflow: hidden;
+    text-align: left;
+    white-space: nowrap;
+    font-size: 14px;
+    text-overflow: ellipsis;
 }
 
-.change_bt{
+
+.change_bt {
     width: 72px;
     margin-top: 10px;
     display: block;
     float: right;
-    
     align-items: center;
     cursor: pointer;
     height: 22px;

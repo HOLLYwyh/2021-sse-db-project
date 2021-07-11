@@ -79,7 +79,7 @@ Vue.component('index', {
     <h3>账户设置</h3>
     <el-link :underline="false" href="/Account/personalInformation">个人信息</el-link>  
     <el-link :underline="false" href="/Account/security">账户安全</el-link>  
-    <el-link :underline="false" href="https://">收货管理</el-link>  
+    <el-link :underline="false" href="/Account/address">收货管理</el-link>  
 
   </el-container>
 `,

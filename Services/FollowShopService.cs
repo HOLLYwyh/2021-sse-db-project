@@ -70,7 +70,7 @@ namespace InternetMall.Services
 
                 followShopView.BuyerId = item.BuyerId;
                 followShopView.ShopId = item.ShopId;
-                followShopView.DateCreated = item.DateCreated;
+                followShopView.DateCreated = (DateTime)item.DateCreated;
                 followShopView.ShopName = item.ShopName;
                 
 
