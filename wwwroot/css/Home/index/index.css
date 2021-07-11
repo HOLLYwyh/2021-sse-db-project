@@ -3,9 +3,38 @@ body{
     text-align: center;
 }
 
-.carousel1{
-    height: 200px!important;;
-    width: 470px!important;
+#lift {
+    position: fixed;
+    top: 170px;
+    left: 35px;
+    width: 50px;
+    /*height: ;导航高度自适应*/
+    background: #fff;
+    border: 1px solid #bfbfbf;
+    border-radius: 5px; /*圆角属性*/
+}
+
+.item {
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.item a{
+    text-decoration:none;
+    color:black;
+}
+
+.item:hover {
+    background: deepskyblue;
+    color: #fff; /*鼠标滑过,背景变蓝,字体颜色变白*/
+}
+
+.carousel1 {
+    height: 200px !important;
+    
+    width: 470px !important;
     float: left;
 }
 

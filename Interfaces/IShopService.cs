@@ -9,7 +9,7 @@ namespace InternetMall.Interfaces
     public interface IShopService
     {
         // 生成店铺
-       　public Task<bool> createShop(string sellerid, string shopName, short category, string description);
+       　public bool createShop(string sellerid, string shopName, short category, string description);
 
         // 查看卖家所有店铺
         public Task<List<Shop>> viewSellerShop(string sellerid);
