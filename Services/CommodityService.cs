@@ -20,26 +20,22 @@ namespace InternetMall.Services
         }
 
 
-        public async Task<bool> Create(decimal price, string category, string description, int storage, string name, string shopId,string url)
+        public  bool Create(decimal price, string category, string description, int storage, string name, string shopId,string url)
         {
 
             Commodity commodity = new Commodity();
             //result是查找结果:查看店内是否已经有了重名的商品
-            var result = await _context.Commodities
-                .Where(c => c.ShopId == shopId && c.Name == name).ToListAsync();
+            var result = _context.Commodities
+                .Where(c => c.ShopId == shopId && c.Name == name).ToList();
             if (result == null)                   //不存在，则插入该商品
             {
-                var allCount = _context.Counters.ToList();//读取记录商品个数的数据
-                int number = allCount[0].Commoditycount + 1;  //计算新商品的ID
-                //更新数据库的Counter
-                Counter newCounter = new Counter();
-                newCounter.Buyercount = allCount[0].Buyercount;
-                newCounter.Sellercount = allCount[0].Sellercount;
-                newCounter.Administratorcount = allCount[0].Administratorcount;
-                newCounter.Commoditycount = number;
-                newCounter.Shopcount = allCount[0].Shopcount;
+                var allCount = _context.Counters.Where(c => c.ID == 0).ToList();//读取记录商品个数的数据
+                int number = allCount.Commoditycount + 1;  //计算新商品的ID
+
                 //更新Counter表的信息
-                _context.Counters.Update(newCounter);
+                allCount.Commoditycount = number;
+                _context.Counters.Update(allCount);
+                _context.SaveChanges();
             }
             if (result == null)                   //不存在，则插入该商品
             {
@@ -66,24 +62,24 @@ namespace InternetMall.Services
                 }
 
                 _context.Add(commodity);
-                await _context.SaveChangesAsync();//保存更新（异步保存）
+                 _context.SaveChanges();//保存更新（异步保存）
                 return true;
             }
             else return false;                    
         }
 
 
-        public async Task<bool> Delete(string shopId, string commodityId)
+        public  bool Delete(string shopId, string commodityId)
         {
             //查找是否存在需要删除的元组
-            var result = await _context.Commodities
-                .Where(c => c.CommodityId == commodityId && c.ShopId == shopId).ToListAsync();//如果运行失败，可以考虑将条件筛选分步执行,也可以考虑用find（）
+            var result =  _context.Commodities
+                .Where(c => c.CommodityId == commodityId && c.ShopId == shopId).ToList();//如果运行失败，可以考虑将条件筛选分步执行,也可以考虑用find（）
             if (result != null)
             {
                 foreach (Commodity commodity in result) //挨个检查
                 {
                     _context.Remove(commodity);
-                    await _context.SaveChangesAsync();
+                     _context.SaveChanges();
                 }
                 return true;
             }
@@ -92,48 +88,48 @@ namespace InternetMall.Services
         }
 
         /*   返回是list类型
-        public async Task<List<Commodity>> ShowCommodities(string shopId, string searchCondition)
+        public  List<Commodity> ShowCommodities(string shopId, string searchCondition)
         {
             List<Commodity> commoditiesList;    //用来存放查找结果
 
             if (searchCondition== "ON_SALE")    //还有库存的商品
             {
-                commoditiesList = await _context.Commodities
-                    .Where(c => c.ShopId == shopId && c.Storage > 0).ToListAsync();
+                commoditiesList =  _context.Commodities
+                    .Where(c => c.ShopId == shopId && c.Storage > 0).ToList();
             }
             else if(searchCondition== "SOLD_OUT") //没有库存的商品
             {
-                commoditiesList = await _context.Commodities
-                    .Where(c => c.ShopId == shopId && c.Storage == 0).ToListAsync();
+                commoditiesList =  _context.Commodities
+                    .Where(c => c.ShopId == shopId && c.Storage == 0).ToList();
             }
             else                                 //所有的商品
             {
-                commoditiesList = await _context.Commodities
-                    .Where(c => c.ShopId == shopId).ToListAsync();
+                commoditiesList =  _context.Commodities
+                    .Where(c => c.ShopId == shopId).ToList();
             }
            
             return commoditiesList;
         }*/
 
         //返回是json string类型
-        public async Task<string> ShowCommodities(string shopId, string searchCondition)
+        public  string ShowCommodities(string shopId, string searchCondition)
         {
             List<Commodity> commoditiesList;    //用来存放查找结果
 
             if (searchCondition == "ON_SALE")    //还有库存的商品
             {
-                commoditiesList = await _context.Commodities
-                    .Where(c => c.ShopId == shopId && c.Storage > 0).ToListAsync();
+                commoditiesList =  _context.Commodities
+                    .Where(c => c.ShopId == shopId && c.Storage > 0).ToList();
             }
             else if (searchCondition == "SOLD_OUT") //没有库存的商品
             {
-                commoditiesList = await _context.Commodities
-                    .Where(c => c.ShopId == shopId && c.Storage == 0).ToListAsync();
+                commoditiesList =  _context.Commodities
+                    .Where(c => c.ShopId == shopId && c.Storage == 0).ToList();
             }
             else                                 //所有的商品
             {
-                commoditiesList = await _context.Commodities
-                    .Where(c => c.ShopId == shopId).ToListAsync();
+                commoditiesList =  _context.Commodities
+                    .Where(c => c.ShopId == shopId).ToList();
             }
 
             return JsonConvert.SerializeObject(commoditiesList);
