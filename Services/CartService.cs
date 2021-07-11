@@ -90,7 +90,7 @@ namespace InternetMall.Services
                 cartview.BuyerId = item.BuyerId;
                 cartview.CommodityId = item.CommodityId;
                 cartview.CommodityName = item.CommodityName;
-                cartview.DateCreated = item.DateCreated;
+                cartview.DateCreated = (DateTime)item.DateCreated;
                 cartview.ShopName = item.ShopName;
                 cartview.Quantity = item.Quantity;
                 cartview.Price = (decimal)item.Price;
