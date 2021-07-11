@@ -4,14 +4,15 @@
 .nav-area {
     background-image: url("../../Images/SellerBackground/sidebar_background3.png");
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
+    background-attachment:scroll;
+    background-position: left;
     background-size: cover;
     background-color: black;
-    width: 200px;
+    width: 15%;
+    min-width: 200px;
     /*min-width: 180px;*/
     height: 100%;
-    position: fixed; /* 使它产生粘性，即使在滚动时 */
+    position:absolute; /* 使它产生粘性，即使在滚动时 */
     overflow: auto; /* 如果侧栏的内容太多，则启用滚动条 */
     display:block;
 }

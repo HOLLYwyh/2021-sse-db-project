@@ -23,7 +23,8 @@ namespace Internetmall.Services
             _context = context;
         }
 
-        public async Task<CommodityList> RecommendingCommodities(bool inFo, string buyerId , int commodityCategory)
+        //首页展示商品推荐
+        public async Task<ListToJsonView<Commodity>> RecommendingCommodities(bool inFo, string buyerId , int commodityCategory)
         {
             Random random = new Random(GetRandomSeedbyGuid());
             List<Commodity> resultList = new List<Commodity>();
@@ -82,7 +83,8 @@ namespace Internetmall.Services
                     resultList.Add(commoditiesList.FirstOrDefault(c => c.CommodityId == temp2));
                 }
             }
-            CommodityList finalResultList = new CommodityList(resultList);
+            ListToJsonView<Commodity> finalResultList = new ListToJsonView<Commodity>(resultList);
+            //string returnList1 = Newtonsoft.Json.JsonConvert.SerializeObject(resultList);
             return finalResultList;
         }   
     }

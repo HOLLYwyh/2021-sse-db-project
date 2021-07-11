@@ -74,6 +74,22 @@ namespace InternetMall.Controllers
             return View();
         }
 
+        public IActionResult BuyerLogOut()    //买家退出登录
+        {
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                //设置cookie
+               HttpContext.Response.Cookies.Delete("buyerNickName");
+               HttpContext.Response.Cookies.Delete("buyerID");
+               //HttpContext.Response.Cookies.Delete("buyerURL");
+               return Redirect("/Home/Index");
+            }
+            else
+            {
+                return Redirect("/Home/Index");
+            }
+        }
+
         // 前后端交互
         [HttpPost]
         public IActionResult BuyerLogInForm([FromBody] EntryLogInBuyer logInBuyer)   //买家登录
@@ -121,7 +137,7 @@ namespace InternetMall.Controllers
             {
                 //设置cookie
                 HttpContext.Response.Cookies.Append("sellerNickName", seller.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
-                HttpContext.Response.Cookies.Append("sellerID", seller.IdNumber, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+                HttpContext.Response.Cookies.Append("sellerID", seller.SellerId, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
                 //HttpContext.Response.Cookies.Append("sellerURL", seller.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
                 JsonData jsondata = new JsonData();
                 jsondata["sellerNickName"] = seller.Nickname;

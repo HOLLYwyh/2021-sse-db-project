@@ -26,7 +26,7 @@ namespace InternetMall.DBContext
         public virtual DbSet<Chatroom> Chatrooms { get; set; }
         public virtual DbSet<Chatuser> Chatusers { get; set; }
         public virtual DbSet<Commodity> Commodities { get; set; }
-       // public virtual DbSet<Counter> Counters { get; set; }
+        public virtual DbSet<Counter> Counters { get; set; }
         public virtual DbSet<Coupon> Coupons { get; set; }
         public virtual DbSet<CouponShop> CouponShops { get; set; }
         public virtual DbSet<FavoriteProduct> FavoriteProducts { get; set; }
@@ -357,11 +357,13 @@ namespace InternetMall.DBContext
             });
 
             modelBuilder.Entity<Counter>(entity =>
-            {
-                entity.HasKey(e => new { e.Buyercount, e.Sellercount, e.Administratorcount, e.Commoditycount })
-                    .HasName("COUNTER_PK");
-
+            {               
                 entity.ToTable("COUNTER");
+
+                entity.Property(e => e.ID)
+                   .HasMaxLength(10)
+                   .IsUnicode(false)
+                   .HasColumnName("ID");
 
                 entity.Property(e => e.Buyercount)
                     .HasPrecision(10)
@@ -382,6 +384,30 @@ namespace InternetMall.DBContext
                 entity.Property(e => e.Shopcount)
                     .HasPrecision(10)
                     .HasColumnName("SHOPCOUNT");
+       
+                entity.Property(e => e.Ordercount)
+                   .HasPrecision(10)
+                   .HasColumnName("ORDERCOUNT");
+
+                entity.Property(e => e.Couponcount)
+                   .HasPrecision(10)
+                   .HasColumnName("COUPONCOUNT");
+
+                entity.Property(e => e.Activitycount)
+                   .HasPrecision(10)
+                   .HasColumnName("ACTIVITYCOUNT");
+
+                entity.Property(e => e.Receivedcount)
+                   .HasPrecision(10)
+                   .HasColumnName("RECEIVEDCOUNT");
+
+                entity.Property(e => e.Messagecount)
+                   .HasPrecision(10)
+                   .HasColumnName("MESSAGECOUNT");
+
+                entity.Property(e => e.Chatroomcount)
+                   .HasPrecision(10)
+                   .HasColumnName("CHATROOMCOUNT");
             });
 
             modelBuilder.Entity<Coupon>(entity =>
@@ -808,6 +834,11 @@ namespace InternetMall.DBContext
                     .WithMany(p => p.Shops)
                     .HasForeignKey(d => d.SellerId)
                     .HasConstraintName("SYS_C0010017");
+
+                entity.Property(e => e.Description)
+                   .HasMaxLength(1000)
+                   .IsUnicode(false)
+                   .HasColumnName("DESCRIPTION");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -31,10 +31,15 @@ var rcmd = new Vue({
 })
 
 let part1 = new Vue({ el: '#part1' });
+
 let part2 = new Vue({ el: '#part2' });
 let part3 = new Vue({ el: '#part3' });
 let part4 = new Vue({ el: '#part4' });
 let part5 = new Vue({ el: '#part5' });
+let part6 = new Vue({ el: '#part6' });
+let part7 = new Vue({ el: '#part7' });
+let part8 = new Vue({ el: '#part8' });
+let part9 = new Vue({ el: '#part9' });
 
 let naviright = new Vue({ el: '#naviRight' })
 
@@ -51,7 +56,7 @@ function getCookie(cname) {
 function getid() {
     let id = getCookie("buyerID")
     if (id) {
-        document.getElementById("utility1").innerHTML = `<a href="/Entry/BuyerLogIn" >注销</a>`
+        document.getElementById("utility1").innerHTML = `<a href="/Entry/BuyerLogOut">注销</a>`
     }
     return id
 }

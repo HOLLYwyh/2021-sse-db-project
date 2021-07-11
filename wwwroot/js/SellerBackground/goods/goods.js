@@ -2,7 +2,6 @@ Vue.component('upload', {
     data: function () {
         let checkPrice = (rule, value, callback) => {
             let val = Number(value);
-            
             if (!value) {
                 return callback(new Error('不能为空'));
             }
@@ -130,7 +129,7 @@ Vue.component('upload', {
                         contentType: false,
                         processData: false,
                         success: function (returndata) {
-                            alert("成功");
+                            window.location = "/SellerBackground/Goods";
                         },
                         error: function (returndata) {
                             alert("失败");
@@ -179,7 +178,7 @@ Vue.component('upload', {
                     index++;
                 }
             });
-            this.currentChangePage(this.currentPage);
+            this.currentChangePage(1);
         },
         handleSizeChange(pageSize) { // 每页条数切换
             this.pageSize = pageSize;
@@ -270,8 +269,8 @@ Vue.component('upload', {
                 </el-col>
                 <el-col :span="12">
                     <el-form-item style="float: right">
-                        <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-                        <el-button @click="resetForm('ruleForm')">重置</el-button>
+                        <el-button type="primary" v-on:click="submitForm('ruleForm')">立即创建</el-button>
+                        <el-button v-on:click="resetForm('ruleForm')">重置</el-button>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -279,7 +278,7 @@ Vue.component('upload', {
     </el-card>
     </br>
     <el-card>
-    <el-tabs v-model="activeName" @tab-click="handleClick(activeName)">
+    <el-tabs v-model="activeName" v-on:tab-click="handleClick(activeName)">
         <el-tab-pane label="全部" name="ALL"></el-tab-pane>
         <el-tab-pane label="出售中" name="ON_SALE"></el-tab-pane>
         <el-tab-pane label="已售完" name="SOLD_OUT"></el-tab-pane>
@@ -311,8 +310,8 @@ Vue.component('upload', {
     </el-table>
     <div class="paginationClass">
         <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange" 
+        v-on:size-change="handleSizeChange"
+        v-on:current-change="handleCurrentChange" 
         :current-page="currentPage"
         :page-sizes="[10, 20, 50, 100]"
         :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Internetmall.Models
 {
-    public class CommodityList
+    public class ListToJsonView<template>
     {
-        public List<Commodity> commoditiesList;
+        public List<template> returnList { get; set; }
         
-        public CommodityList(List<Commodity> commodityList)
+        public ListToJsonView(List<template> pList)
         {
-            commoditiesList = commodityList;
+            returnList = pList;
         }
     }
 }

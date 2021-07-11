@@ -21,6 +21,21 @@
     @await Html.PartialAsync("~/Views/Shared/backToTop.cshtml")
 </head>
 <body>
+    <div id="lift">
+        <ul>
+            <li class="item"><a href="#part1">服装</a></li>
+            <li class="item">电子</li>
+            <li class="item">书籍</li>
+            <li class="item">宠物</li>
+            <li class="item">运动</li>
+            <li class="item">食品</li>
+            <li class="item">家居</li>
+            <li class="item">美妆</li>
+            <li class="item">洗护</li>
+           
+        </ul>
+    </div>
+    
     <div id="naviRight">
         <naviright>
 
@@ -39,7 +54,7 @@
         <button class="fl" onclick="window.location.href = '/Search/SearchCommodity'"></button>
         <div class="nav fr">
 
-         
+
 
             <div class="nav_son login">
                 <img src="/Images/Home/index/u64.svg">
@@ -108,20 +123,33 @@
     </div>
 
     <div id="part1">
-        <part></part>
+        <part type="服装"></part>
     </div>
     <div id="part2">
-        <part></part>
+        <part type="电子产品"></part>
     </div>
     <div id="part3">
-        <part></part>
+        <part type="书籍"></part>
     </div>
     <div id="part4">
-        <part></part>
+        <part type="宠物"></part>
     </div>
     <div id="part5">
-        <part></part>
+        <part type="运动"></part>
     </div>
+    <div id="part6">
+        <part type="食品"></part>
+    </div>
+    <div id="part7">
+        <part type="家居"></part>
+    </div>
+    <div id="part8">
+        <part type="美妆"></part>
+    </div>
+    <div id="part9">
+        <part type="洗护"></part>
+    </div>
+
 
     <script type="text/javascript" src="~/js/Home/index/part.js"></script>
     <script type="text/javascript" src="~/js/Common/carousel.js"></script>

@@ -9,6 +9,7 @@ namespace Internetmall.Interfaces
 {
     interface IHomeService
     {
-        public Task<CommodityList> RecommendingCommodities(bool inFo, string buyerId = null, int commodityCategory = -1);
+        //首页展示商品推荐
+        public Task<ListToJsonView<Commodity>> RecommendingCommodities(bool inFo, string buyerId = null, int commodityCategory = -1);
     }
 }
