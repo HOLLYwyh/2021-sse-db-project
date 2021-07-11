@@ -11,6 +11,5 @@ namespace InternetMall.Constants.Orders
         public const int ToBeComment = 5;   //待评价
         public const int Done = 6;          //已完成
         public const int Canceled = 9;      //已取消
-        public const int pending = 10;      //待处理
     }
 }

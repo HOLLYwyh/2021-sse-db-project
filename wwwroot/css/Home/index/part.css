@@ -3,7 +3,7 @@
     margin: 20px auto 0;
     width: 999px;
     height: 412px;
-    background-color: rgb(52, 13, 224);
+   /* background-color: rgb(52, 13, 224);*/
 }
 
 .part_title{
@@ -30,7 +30,7 @@
     width: 710px;
     height: 412px;
     float: left;
-    background-color: rgb(226, 19, 19);
+    /*background-color: rgb(226, 19, 19);*/
 }
 
 .card_list ul li{
@@ -76,7 +76,7 @@
     width: 264px;
     height: 412px;
     float: left;
-    background-color: rgb(19, 233, 37);
+    /*background-color: rgb(19, 233, 37);*/
 }
 
 .ranklist {
@@ -101,7 +101,7 @@
 }
 
 .rank ul li .rk{
-    float: left;
+    float:left;
     font-size: 14px;
     
     width: 18px;
