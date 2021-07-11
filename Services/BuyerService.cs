@@ -14,16 +14,7 @@ namespace InternetMall.Services
     public class BuyerService:IBuyerService
     {
         private ModelContext _context;
-        
-        public int GetBuyerCount()
-        {
-            var count = _context.Counters.FirstOrDefault(m => m.ID == "0");
-            int buyerCount = count.Buyercount + 1;
-            count.Buyercount += 1;
-            _context.Update(count);
-            _context.SaveChanges();
-            return buyerCount;
-        }
+        Random rd = new Random();
         public bool SignUp(string phone, string nickName, string passwd)//注册
         {
             //如果要注册的用户电话不存在，说明可以注册
@@ -34,8 +25,8 @@ namespace InternetMall.Services
                 newBuyer.Phone = phone;
                 newBuyer.Nickname = nickName;
                 newBuyer.Passwd = passwd;
-                //采用counter表生成ID
-                newBuyer.BuyerId = GetBuyerCount().ToString();
+                //为新用户随机生成一个用户ID
+                newBuyer.BuyerId = rd.Next(0, 1000).ToString();
                 //其他信息可以为空（初始即为空），用户后续添加即可
 
                 Create(newBuyer);
