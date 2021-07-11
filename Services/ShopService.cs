@@ -31,7 +31,7 @@ namespace InternetMall.Services
         // 生成店铺
        　public bool createShop(string sellerid, string shopName, short category, string description)
         {
-            Shop shop =  _context.Shops.Where(x => x.SellerId == sellerid && x.Name == shopName).FirstOrDefault();
+            Shop shop = _context.Shops.Where(x => x.SellerId == sellerid && x.Name == shopName).FirstOrDefault();
           
             if (shop == null)
             {    
