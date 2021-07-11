@@ -67,12 +67,12 @@ namespace InternetMall.Controllers
             string contentRootPath = _hostingEnvironment.ContentRootPath;
             foreach (var formFile in files)
             {
-                if (formFile.Length > 0)
+                if (formFile.Length > 0)   //上传图片成功
                 {
                     long fileSize = formFile.Length; //获得文件大小，以字节为单位
 
                     var exetent = Path.GetExtension(formFile.FileName); //文件后缀名
-                    var shopDicName = webRootPath + "/uploads/shops/" + Request.Cookies["shopName"].ToString();
+                    var shopDicName = webRootPath + "/uploads/shops/";//+ Request.Cookies["shopName"].ToString();
                     if(!Directory.Exists(shopDicName))
                     {
                         //新建对应的文件夹
@@ -85,6 +85,8 @@ namespace InternetMall.Controllers
                     {
                         await formFile.CopyToAsync(stream);
                     }
+
+                    //新建商品
                 }
             }
             return Ok(new { count = files.Count, size });

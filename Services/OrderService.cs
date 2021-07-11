@@ -52,22 +52,22 @@ namespace InternetMall.Services
         }
 
         // 创建订单
-        public bool createOrder(string buyerid, string shopName, short category, string description)
-        {
-            Shop shop = _context.Shops.Where(x => x.SellerId == sellerid && x.Name == shopName).FirstOrDefault();
+        //public bool createOrder(string buyerid, string shopName, short category, string description)
+        //{
+        //    Shop shop = _context.Shops.Where(x => x.SellerId == sellerid && x.Name == shopName).FirstOrDefault();
 
-            if (shop == null)
-            {
-                shop = new Shop { SellerId = sellerid, ShopId = GetShopCount().ToString(), Name = shopName, Category = category, Description = description };
+        //    if (shop == null)
+        //    {
+        //        shop = new Shop { SellerId = sellerid, ShopId = GetShopCount().ToString(), Name = shopName, Category = category, Description = description };
 
-                _context.Shops.Add(shop);
-            }
+        //        _context.Shops.Add(shop);
+        //    }
 
-            if (_context.SaveChanges() > 0)
-                return true;
+        //    if (_context.SaveChanges() > 0)
+        //        return true;
 
-            return false;
-        }
+        //    return false;
+        //}
         public void createOrder(string buyerid, string commodityid)
         {
             AddShoppingCart cart = _context.AddShoppingCarts.Where(x => x.BuyerId == buyerid && x.CommodityId == commodityid).FirstOrDefault();
