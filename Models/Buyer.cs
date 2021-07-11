@@ -11,6 +11,7 @@ namespace InternetMall.Models
         {
             AddShoppingCarts = new HashSet<AddShoppingCart>();
             BuyerCoupons = new HashSet<BuyerCoupon>();
+            Chatusers = new HashSet<Chatuser>();
             FavoriteProducts = new HashSet<FavoriteProduct>();
             FollowShops = new HashSet<FollowShop>();
             Orders = new HashSet<Order>();
@@ -28,6 +29,7 @@ namespace InternetMall.Models
 
         public virtual ICollection<AddShoppingCart> AddShoppingCarts { get; set; }
         public virtual ICollection<BuyerCoupon> BuyerCoupons { get; set; }
+        public virtual ICollection<Chatuser> Chatusers { get; set; }
         public virtual ICollection<FavoriteProduct> FavoriteProducts { get; set; }
         public virtual ICollection<FollowShop> FollowShops { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
