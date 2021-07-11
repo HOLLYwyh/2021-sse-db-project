@@ -51,7 +51,7 @@ function getCookie(cname) {
 function getid() {
     let id = getCookie("buyerID")
     if (id) {
-        document.getElementById("utility1").innerHTML = `<a href="/Entry/BuyerLogIn" >注销</a>`
+        document.getElementById("utility1").innerHTML = `<a href="/Entry/BuyerLogOut">注销</a>`
     }
     return id
 }
