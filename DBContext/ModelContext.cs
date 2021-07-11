@@ -1,7 +1,7 @@
 ﻿using System;
-using InternetMall.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using InternetMall.Models;
 
 #nullable disable
 
