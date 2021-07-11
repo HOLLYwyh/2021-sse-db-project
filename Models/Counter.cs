@@ -7,6 +7,7 @@ namespace InternetMall.Models
 {
     public partial class Counter
     {
+        public string ID { get; set; }
         public int Buyercount { get; set; }
         public int Sellercount { get; set; }
         public int Administratorcount { get; set; }
