@@ -55,6 +55,7 @@ namespace InternetMall.Services
                 if (buyer.Phone == null || buyer.Phone == oldPhone)  // 比对电话号码
                 {
                     buyer.Phone = newPhone;
+                    _ctx.Buyers.Update(buyer);
                     await _ctx.SaveChangesAsync();
                     return true;
                 }
