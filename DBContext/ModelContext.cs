@@ -26,7 +26,7 @@ namespace InternetMall.DBContext
         public virtual DbSet<Chatroom> Chatrooms { get; set; }
         public virtual DbSet<Chatuser> Chatusers { get; set; }
         public virtual DbSet<Commodity> Commodities { get; set; }
-       // public virtual DbSet<Counter> Counters { get; set; }
+        public virtual DbSet<Counter> Counters { get; set; }
         public virtual DbSet<Coupon> Coupons { get; set; }
         public virtual DbSet<CouponShop> CouponShops { get; set; }
         public virtual DbSet<FavoriteProduct> FavoriteProducts { get; set; }
@@ -358,10 +358,15 @@ namespace InternetMall.DBContext
 
             modelBuilder.Entity<Counter>(entity =>
             {
-                entity.HasKey(e => new { e.Buyercount, e.Sellercount, e.Administratorcount, e.Commoditycount })
+                entity.HasKey(e => new { e.ID, e.Buyercount, e.Sellercount, e.Administratorcount, e.Commoditycount })
                     .HasName("COUNTER_PK");
 
                 entity.ToTable("COUNTER");
+
+                entity.Property(e => e.ID)
+                   .HasMaxLength(10)
+                   .IsUnicode(false)
+                   .HasColumnName("ID");
 
                 entity.Property(e => e.Buyercount)
                     .HasPrecision(10)

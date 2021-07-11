@@ -12,9 +12,15 @@ namespace InternetMall.Interfaces
        　public bool createShop(string sellerid, string shopName, short category, string description);
 
         // 查看卖家所有店铺
-        public Task<List<Shop>> viewSellerShop(string sellerid);
-       
+        public List<Shop> viewSellerShop(string sellerid);
+
+        // 查看卖家一个店铺
+        public Shop viewOneShop(string sellerid, string shopName);
+
+        // 判断卖家是否拥有店铺
+        public bool sellerShopExist(string sellerid);
+
         // 删除店铺
-        public Task<bool> deleteShop(string sellerid, string shopid);     
+        public bool deleteShop(string sellerid, string shopid);
     }
 }
