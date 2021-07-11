@@ -7,7 +7,7 @@ Vue.component('shop', {
                 name:'袁阿姨的中药铺',
                 credit:23,
                 type:'OFFICIAL_FLAGSHIP',
-                picURL:'../../../wwwroot/Images/SellerBackground/null.png'
+                picURL:'../../Images/SellerBackground/null.png'
             },
             {
                 id: '123457',
@@ -15,7 +15,7 @@ Vue.component('shop', {
                 name:'萌萌哒鸡蛋饼铺子',
                 credit:66,
                 type:'PLATFORM_AUTH',
-                picURL:'../../../wwwroot/Images/SellerBackground/null.png'
+                picURL:'../../Images/SellerBackground/null.png'
             },
             {
                 id: '123457',
@@ -23,7 +23,7 @@ Vue.component('shop', {
                 name:'萌萌哒鸡蛋饼铺子',
                 credit:66,
                 type:'PLATFORM_AUTH',
-                picURL:'../../../wwwroot/Images/SellerBackground/null.png'
+                picURL:'../../Images/SellerBackground/null.png'
             },
             {
                 id: '123457',
@@ -31,7 +31,7 @@ Vue.component('shop', {
                 name:'萌萌哒鸡蛋饼铺子',
                 credit:66,
                 type:'PLATFORM_AUTH',
-                picURL:'../../../wwwroot/Images/SellerBackground/null.png'
+                picURL:'../../Images/SellerBackground/null.png'
             }]
         }
     },
@@ -51,6 +51,7 @@ Vue.component('shop', {
         },
         handleClick(id){
             console.log(id);
+            
         }
     },
     template: `
