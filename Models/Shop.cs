@@ -21,6 +21,7 @@ namespace InternetMall.Models
         public string Name { get; set; }
         public short? CreditScore { get; set; }
         public short? Category { get; set; }
+        public string Url { get; set; }
 
         public virtual Seller Seller { get; set; }
         public virtual ICollection<Commodity> Commodities { get; set; }

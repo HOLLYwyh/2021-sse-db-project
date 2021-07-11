@@ -11,6 +11,7 @@ namespace InternetMall.Controllers
 {
     public class SellerBackgroundController : Controller
     {
+        //显示页面
         public IActionResult Home()
         {
             return View();
@@ -20,5 +21,12 @@ namespace InternetMall.Controllers
         {
             return View();
         }
+
+        //前后端交互
+       //[HttpPost]
+       //public IActionResult UploadCommodity()
+       //{
+
+       //}
     }
 }
