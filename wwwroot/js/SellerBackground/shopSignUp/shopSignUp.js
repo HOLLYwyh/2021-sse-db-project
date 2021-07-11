@@ -1,46 +1,10 @@
 Vue.component('upload', {
     data: function () {
-        let checkPrice = (rule, value, callback) => {
-            let val = Number(value);
-            if (!value) {
-                return callback(new Error('不能为空'));
-            }
-            if (isNaN(value)) {
-                callback(new Error('请输入数字值'));
-            } else {
-                if ((val <= 0) || (val > 100000000000.00)) {
-                    callback(new Error('大小在 0.00 到 100000000000.00'));
-                } else {
-                    callback();
-                }
-            }
-        };
-        let checkNum = (rule, value, callback) => {
-            if (!value) {
-                return callback(new Error('不能为空'));
-            }
-            if (!Number.isInteger(value)) {
-                callback(new Error('请输入数字值'));
-            } else {
-                let val = Number(value);
-                if ((val <= 0)||(val > 1000000)) {
-                    callback(new Error('大小在 0 到 1000000'));
-                } else {
-                    callback();
-                }
-            }
-        };
         return {
-            origionData: [{
-                discription: '大榴莲',
-                price: '233',
-                sale: '123',
-                num: '456',
-                category: 'FOOD',
-                time: '2016-05-02',
-                tag: 'ON_SALE',
-                condition: '销售中',
-                show: true
+            data: [{
+                name:'',
+                category:'',
+                detail:''
             }],
             ruleForm: {
                 name: '',
