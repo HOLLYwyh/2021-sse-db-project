@@ -800,7 +800,7 @@ namespace InternetMall.DBContext
                     .HasColumnName("SELLER_ID");
 
                 entity.Property(e => e.Url)
-                    .HasMaxLength(40)
+                    .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("URL");
 
