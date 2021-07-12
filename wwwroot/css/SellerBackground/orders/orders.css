@@ -8,8 +8,22 @@
     padding-top: 10px; 
 }
 
+.el-card{
+    padding-top: 10px;
+}
+
+.search-card{
+    
+    padding-left: 250px;
+}
+
+.el-row{
+    padding-top: 10px;
+    width:600px;
+}
+
 .el-select{
-    width:100px;
+    width:150px;
 }
 
 .el-input{
@@ -18,4 +32,8 @@
 
 .input-with-select{
     background-color: #fff;
+}
+
+.btn{
+    float:none;
 }

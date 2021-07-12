@@ -1,72 +1,49 @@
 Vue.component('search', {
     data: function () {
-        let checkPrice = (rule, value, callback) => {
-            let val = Number(value);
-            if (!value) {
-                return callback(new Error('不能为空'));
-            }
-            if (isNaN(value)) {
-                callback(new Error('请输入数字值'));
-            } else {
-                if ((val <= 0) || (val > 100000000000.00)) {
-                    callback(new Error('大小在 0.00 到 100000000000.00'));
-                } else {
-                    callback();
-                }
-            }
-        };
-        let checkNum = (rule, value, callback) => {
-            if (!value) {
-                return callback(new Error('不能为空'));
-            }
-            if (!Number.isInteger(value)) {
-                callback(new Error('请输入数字值'));
-            } else {
-                let val = Number(value);
-                if ((val <= 0)||(val > 1000000)) {
-                    callback(new Error('大小在 0 到 1000000'));
-                } else {
-                    callback();
-                }
-            }
-        };
         return {
+            pickerOptions: {
+                disabledDate(time) {
+                    return time.getTime() > Date.now();
+                },
+                shortcuts: [{
+                    text: '今天',
+                    onClick(picker) {
+                        picker.$emit('pick', new Date());
+                    }
+                }, {
+                    text: '昨天',
+                    onClick(picker) {
+                        const date = new Date();
+                        date.setTime(date.getTime() - 3600 * 1000 * 24);
+                        picker.$emit('pick', date);
+                    }
+                }, {
+                    text: '一周前',
+                    onClick(picker) {
+                        const date = new Date();
+                        date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                        picker.$emit('pick', date);
+                    }
+                }]
+            },
             ruleForm: {
-                name: '',
-                price: '',
-                num: '',
-                category: '',
-                condition: false,
-                detail: '',
-                picture: '',
+                id: '',
+                commodity: '',
+                receiver: '',
+                startTime: '',
+                endTime: ''
             },
             rules: {
-                name: [
-                    { required: true, message: '请输入商品名称', trigger: 'blur' },
-                    { min: 1, max: 30, message: '长度在 1 到 30 个字符', trigger: 'blur' }
+                id: [
+                    { min: 1, max: 6, message: '长度在 1 到 6 个字符', trigger: 'blur' }
                 ],
-                price: [
-                    { required: true, message: '请输入商品价格', trigger: 'blur' },
-                    { validator: checkPrice, trigger: 'blur' },
+                commodity: [
+                    { min: 1, max: 6, message: '长度在 1 到 6 个字符', trigger: 'blur' }
                 ],
-                num: [
-                    { required: true, message: '请输入商品库存' },
-                    { validator: checkNum, trigger: 'blur' },
-                ],
-                category: [
-                    { required: true, message: '请选择商品类别', trigger: 'change' }
-                ],
-                detail: [
-                    { required: true, message: '请填写商品详情', trigger: 'blur' },
-                    { min: 1, max: 200, message: '长度在 1 到 300 个字符', trigger: 'blur' }
-                ]
             }
         }
     },
     methods: {
-        isFloat(n) {
-            return /^-?\d*\.\d+$/.test(n);
-        },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
@@ -106,87 +83,69 @@ Vue.component('search', {
         },
     },
     template: `
-    <el-card>
-    <div style="margin-top: 15px;">
-        <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
-            <el-select v-model="select" slot="prepend" placeholder="请选择">
-                <el-option label="餐厅名" value="1"></el-option>
-                <el-option label="订单号" value="2"></el-option>
-                <el-option label="用户电话" value="3"></el-option>
-            </el-select>
-            <el-button slot="append" icon="el-icon-search"></el-button>
-        </el-input>
-    </div>
-
+    <el-card class="search-card">
     <el-form method="post" enctype="multipart/form-data" id="uploadForm" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-row>
-                <el-col :span="6">
-                    <el-form-item label="订单搜索" prop="name">
-                        <div style="margin-top: 15px;">
-                            <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
-                                <el-select v-model="select" slot="prepend" placeholder="请选择">
-                                    <el-option label="餐厅名" value="1"></el-option>
-                                    <el-option label="订单号" value="2"></el-option>
-                                    <el-option label="用户电话" value="3"></el-option>
-                                </el-select>
-                                <el-button slot="append" icon="el-icon-search"></el-button>
-                            </el-input>
-                        </div>
+                <el-col :span="24">
+                    <el-form-item label="商品信息：" prop="commodity">
+                        <el-input placeholder="请输入内容" v-model="ruleForm.commodity" class="input-with-select">
+                            <el-select v-model="ruleForm.commodity" slot="prepend" placeholder="请选择">
+                                <el-option label="商品名称" value="1"></el-option>
+                                <el-option label="商品id" value="2"></el-option>
+                            </el-select>
+                        </el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="6">
-                    <el-form-item label="商品价格" prop="price">
-                        <el-input id="price" v-model="ruleForm.price"></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="6">
-                    <el-form-item label="商品库存" prop="num">
-                        <el-input id="storage" v-model.number="ruleForm.num"></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="6">
-                    <el-form-item label="商品类别" prop="category">
-                        <el-select id="category" v-model="ruleForm.category" placeholder="请选择商品类别">
-                            <el-option label="服装" value="CLOTHING"></el-option>
-                            <el-option label="电子产品" value="ELECTRONICS"></el-option>
-                            <el-option label="书籍" value="BOOKS"></el-option>
-                            <el-option label="宠物" value="PETS"></el-option>
-                            <el-option label="运动" value="SPORTS"></el-option>
-                            <el-option label="食品" value="FOOD"></el-option>
-                            <el-option label="家居" value="HOME"></el-option>
-                            <el-option label="美妆" value="BEAUTY"></el-option>
-                            <el-option label="洗护" value="BODYCARE"></el-option>
-                        </el-select>
+            </el-cow>
+            <el-row>
+                <el-col :span="24">
+                    <el-form-item label="收货信息：" prop="receiver">
+                        <el-input placeholder="请输入内容" v-model="ruleForm.receiver" class="input-with-select">
+                            <el-select v-model="ruleForm.receiver" slot="prepend" placeholder="请选择">
+                                <el-option label="收货人姓名" value="1"></el-option>
+                                <el-option label="收货人手机号" value="2"></el-option>
+                                <el-option label="下单人账号" value="3"></el-option>
+                            </el-select>
+                        </el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
             <el-row>
-                <el-col :span="12">
-                    <el-form-item  label="上传图片" prop="picture">
-                        <el-upload class="upload-demo" drag action="" limit=1
-                             :auto-upload="false" :on-change="handleChange">
-                            <i class="el-icon-upload"></i>
-                            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-                            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-                        </el-upload>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="商品详情" prop="detail">
-                        <el-input id="description" type="textarea" :autosize="{ minRows: 10, maxRows: 11}" v-model="ruleForm.detail"></el-input>
+                <el-col :span="24">
+                    <el-form-item label="订单id：" prop="id">
+                        <el-input id="description" v-model="ruleForm.id"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
             <el-row>
-                <el-col :span="12">
-                    <el-form-item label="是否上架" prop="condition">
-                        <el-switch id="onSale" v-model="ruleForm.condition"></el-switch>
-                    </el-form-item>
+                <el-col :span="10">
+                <el-form-item label="时间：" prop="startTime">
+                    <el-date-picker
+                        v-model="ruleForm.startTime"
+                        align="right"
+                        type="date"
+                        placeholder="选择开始日期"
+                        :picker-options="pickerOptions">
+                    </el-date-picker>
+                </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item style="float: right">
-                        <el-button type="primary" v-on:click="submitForm('ruleForm')">立即创建</el-button>
-                        <el-button v-on:click="resetForm('ruleForm')">重置</el-button>
+                <el-form-item label="至" prop="endTime">
+                    <el-date-picker
+                        v-model="ruleForm.endTime"
+                        align="right"
+                        type="date"
+                        placeholder="选择结束日期"
+                        :picker-options="pickerOptions">
+                    </el-date-picker>
+                </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="24">
+                    <el-form-item>
+                        <el-button style="margin-left:100px" class="btn" type="primary" v-on:click="submitForm('ruleForm')">搜索</el-button>
+                        <el-button class="btn" v-on:click="resetForm('ruleForm')">重置</el-button>
                     </el-form-item>
                 </el-col>
             </el-row>
