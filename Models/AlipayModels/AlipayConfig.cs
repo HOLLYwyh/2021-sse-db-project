@@ -1,0 +1,28 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Internetmall.Models.AlipayModels
+{
+	public class AlipayConfig
+	{
+		// 应用ID,您的APPID
+		public static string AppId = "2021000117684735";
+
+		// 支付宝网关
+		public static string Gatewayurl = "https://openapi.alipaydev.com/gateway.do";
+
+		// 商户私钥，您的原始格式RSA私钥
+		public static string PrivateKey = "MIIEowIBAAKCAQEAguuNMFGsQSwqufwJ81JdMPCMgD4ysMKGYsV5mkDH411HtsQp/BEX0pp2xzNFUn/FmvQGmG5AOosB5QVNz3HZWmB2e6fu8pOqjVkQptGsxLzf6f1M92XdS5kuqJjFOjJRDfKW+pPZksp7hv7J3EW3VJ9Oe21w1dSqgFWvkFJUfU/lmVV7AuYosdwQ2D2kbMs8llzTFzAdsS947ipSRclv6QhHe8aMo0DI0oHECL4cbTJdYPC3C76L/Sgtj3eou9/UEJby2WvpJ1nji4q4mPKEZTJd6BBNvufGkzsrOOXgS4kdqRsUDhsq/XLLbN7SYXM3kSTxdeWnljziJ1cVj/U0sQIDAQABAoIBAE/mbEOqBMO9rdHWFUiP4tokZMs7qnogLh4HwSA4GwYS/tp3O9xfnjdlF8qY6tzfp/zao0/SMZbJEX3xT7ykEe/LYWQ0aGtZXcRoL/Zvjs5/KvTGJ3vxii5CLaytl+jdnoQxop0JMMcalmscApxRXALkOuSvNSb7ZJdwM/aTmIblGv6ZQ87l0HJe+y3UZCjNmg5oDsFUEZowH2cOL8TDqQ1jOzP1WTJ2efenKiRDojpIMMXPhtjtKd1g5YIry1WIkfuu6PD5erqbkgitJ07Vc2TNy+vUmWDM7/WkDJvyOWp4j9inN8xXRTIeINWk+6Hs6CGL+CSmbHNs0wP2XrZgdkECgYEA+M9AEegV3U5xf/HeP0aQLuLMnn8B3J37+5m7xZtiaGn+IbX66hvd+vu+V7cyxUEbwXsfDFZP+kgdePMPHztmEhOXyhL0DSaG5ZA4m7gtWc6hYq8CQAR8bLaOAMBiYA6ZWcpjpf7rbLWz/4EqS74ixUdqNnHZAzL3H55NEkrGWikCgYEAhrQg2h3yJpwpAj9I0hjZSyIXq6qgxABnmTcvLEzh3lP7VubJUSD2DqFRimrQmNKOQ/5X/vLteq5jCGl6UH2dfqdSES1scwC2pY0VhqVhtTVHHx6Am6tJXbLXxBHLHrdDQD4kD/f7/E4I7wJ1xhsOsALmq/vIYWAvioAe6zgHZ0kCgYBKjxidBRZgPhyHAbze609TrYUxzc+KBBG5wMTjH4Aq1/Beu8DYHMe1aXENqgld0Pf3T+Tq9oZ68tdaIkQa0NryecqXtHxL4Iq2CjTcfSGh8uirwNQEyRNcJIyDLyOLs3RC0wJvgOedqQmqfFNnZS/YPGFYtV8ZtVEWuYJRA/VSmQKBgDlbhgmaarvqDsQ4MkfT8OK/N5kPZLlQ+swQ5XNVoW/MDt/oEZ0MDfoY0uG/recE8TMeoFWdF2X/z4eLclvHwUJm+Nj7oIwvp5ZCxwG4dix07T3g/R5MB0dwmdORSA5iNq6qRyzNiWzbxY4QXBno944XDiX5Zk+gZ13wRDogd3aRAoGBAPGE+HK1GqyCNTJihg+kh05a5nGu6cWs8L7Ejp36vMxCkGjQOom3WpslWOaEWqxH7EDhQxjtHc9fQer23c9ShStJMRcbe7jx3xM3Zjn8Ix2Lqbdj7SSLFUROBaNu8grWTf6/C3rsPUg05St7fyNvVfH9zIzyvI4s/Y4dF5gEfp0b";
+
+		// 支付宝公钥,查看地址：https://openhome.alipay.com/platform/keyManage.htm 对应APPID下的支付宝公钥。
+		public static string AlipayPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0M3bG3F9kVi7j9mnjVFRK9qEE88j/iEeaL3hFeOmUpad8NJPPyiOniokgKFogTJz79Pkj85LfPDJN3HRwfpNmB6QCA2xpyX6WNp0uXA8lHwPWBvsMdEMKs3rZfWjzKqUVEDbx0qShw8eZvVttG8x+Ct8uEZN7qKOuNdsBpp9rXAPYjZp8nh2tsFGGAXb4sWhHxUGGFMVSvT0xJBfGzDOpxYI/gaSFonT3f4Ldb3LT/Ba6rDT5uRsX2RASx5mXTBqP2XatczjEKpf0YHUoLSY567ar235zRdKOj7muVWBGU9woghHv+nacDMevn5cB0SoPEGHCb5iFLzjVyGVstn4LwIDAQAB";
+
+		// 签名方式
+		public static string SignType = "RSA2";
+
+		// 编码格式
+		public static string CharSet = "UTF-8";
+	}
+}

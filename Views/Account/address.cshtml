@@ -28,7 +28,7 @@
                         <el-button type="primary" v-on:click="dialogFormVisible = true">新建收货地址</el-button>
                     </el-col>
                 </el-row>
-                <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+                <el-dialog title="收货地址" :visible.sync="dialogFormVisible" width="30%">
                     <el-form :model="form">
                         <!--label必须按如下方式命名，浏览器才支持自动填充-->
                         <el-form-item label="姓名" :label-width="formLabelWidth">
@@ -81,7 +81,7 @@
                         </div>
                     </el-card>
                 </el-row>
-                <el-dialog title="收货地址" :visible.sync="editVisible">
+                <el-dialog title="收货地址" :visible.sync="editVisible" width="30%">
                     <el-form :model="form">
                         <!--label必须按如下方式命名，浏览器才支持自动填充-->
                         <el-form-item label="姓名" :label-width="formLabelWidth">

@@ -98,9 +98,9 @@ namespace InternetMall.Controllers
             if (buyer != null)
             {
                //设置cookie
-               HttpContext.Response.Cookies.Append("buyerNickName", buyer.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
-               HttpContext.Response.Cookies.Append("buyerID", buyer.BuyerId, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
-               //HttpContext.Response.Cookies.Append("buyerURL", buyer.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+               HttpContext.Response.Cookies.Append("buyerNickName", buyer.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(3600) });
+               HttpContext.Response.Cookies.Append("buyerID", buyer.BuyerId, new CookieOptions { Expires = DateTime.Now.AddSeconds(3600) });
+               //HttpContext.Response.Cookies.Append("buyerURL", buyer.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(3600) });
                return Redirect("/Home/Index");
             }
             else
@@ -136,9 +136,9 @@ namespace InternetMall.Controllers
             if(seller != null)
             {
                 //设置cookie
-                HttpContext.Response.Cookies.Append("sellerNickName", seller.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
-                HttpContext.Response.Cookies.Append("sellerID", seller.SellerId, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
-                //HttpContext.Response.Cookies.Append("sellerURL", seller.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+                HttpContext.Response.Cookies.Append("sellerNickName", seller.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(3600) });
+                HttpContext.Response.Cookies.Append("sellerID", seller.SellerId, new CookieOptions { Expires = DateTime.Now.AddSeconds(3600) });
+                //HttpContext.Response.Cookies.Append("sellerURL", seller.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(3600) });
                 JsonData jsondata = new JsonData();
                 jsondata["sellerNickName"] = seller.Nickname;
                 return Json(jsondata.ToJson());
@@ -155,7 +155,7 @@ namespace InternetMall.Controllers
         [HttpPost]
         public IActionResult SellerSignUpForm([FromBody] EntrySignUpSeller signUpSeller)  //卖家注册
         {
-            if (service.SignUp(signUpSeller.phoneNumber, signUpSeller.nickName, signUpSeller.password))
+            if (sellerService.SignUp(signUpSeller.phoneNumber, signUpSeller.nickName, signUpSeller.password))
             {
                 JsonData jsondata = new JsonData();
                 jsondata["signUp"] = "SUCCESS";
