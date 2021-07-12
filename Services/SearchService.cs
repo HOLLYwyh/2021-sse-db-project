@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using InternetMall.Models;
 using InternetMall.DBContext;
 using Internetmall.Interfaces;
+using Newtonsoft.Json;
 
 namespace Internetmall.Services
 {
@@ -42,9 +43,14 @@ namespace Internetmall.Services
             }
             return ansCom;
         }
+        /*
         public Commodity GetCommodity(string name)
         {
             return _context.Commodities.FirstOrDefault(c => c.Name == name);
+        }*/
+        public string GetCommodity(string name)
+        {
+            return JsonConvert.SerializeObject(_context.Commodities.FirstOrDefault(c => c.Name == name));
         }
     }
 
