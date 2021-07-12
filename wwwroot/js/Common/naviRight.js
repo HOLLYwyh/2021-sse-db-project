@@ -24,10 +24,10 @@ Vue.component('naviright', {
                     
                     </div>
                     <div>
-                        id
+                        id:{{this.id}}
                     </div>
                     <div>
-                        昵称
+                        {{this.name}}
                     </div>
                     <div class="listli">
                         <a href="">用户中心</a>
@@ -74,6 +74,50 @@ Vue.component('naviright', {
 
     </div>
 </div>
-  `
+  `,
+
+ data: function () {
+        return {
+            id:'',
+            name: '昵称',
+            img:''
+        }
+    },
+    mounted() {
+        //将Vue方法传到全局对象window中
+        window.setid = this.setid;
+        window.setName = this.setName
+    },
+    methods: {
+        
+        setid(idx) {
+            console.log("22")
+            this.id=idx
+        },
+        setName(namex) {
+            this.name = namex
+        },
+        getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+    },
+    created(){
+            let name = this.getCookie("buyerNickName")
+            let id = this.getCookie("buyerID")
+            console.log(name)
+            console.log("11")
+            console.log(decodeURI(name))
+            if (name) {
+                this.setid(decodeURI(id))
+                this.setName(decodeURI(name))
+            
+        }
+    }
 })
 

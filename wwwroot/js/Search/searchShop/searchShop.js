@@ -1,3 +1,8 @@
+//右边栏
+new Vue({
+    el: "#naviRight"
+})
+
 //渲染导航栏
 new Vue({
     el: "#shortcutlg"
