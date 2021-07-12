@@ -6,9 +6,9 @@ Vue.component('search', {
                     return callback(new Error('不能为空'));
                 }
                 if (this.ruleForm.commodityTag === 'commodityName') {
-                    if((value.length<=0)||(value.length>30)){
+                    if ((value.length <= 0) || (value.length > 30)) {
                         callback(new Error('字符数在 1 到 30 个'));
-                    }else{
+                    } else {
                         callback();
                     }
                 } else if (this.ruleForm.commodityTag === 'commodityId') {
@@ -27,9 +27,9 @@ Vue.component('search', {
                     return callback(new Error('不能为空'));
                 }
                 if (this.ruleForm.receiverTag === 'commodityName') {
-                    if((value.length<=0)||(value.length>30)){
+                    if ((value.length <= 0) || (value.length > 30)) {
                         callback(new Error('字符数在 1 到 30 个'));
-                    }else{
+                    } else {
                         callback();
                     }
                 } else if (this.ruleForm.commodityTag === 'commodityId') {
@@ -44,38 +44,39 @@ Vue.component('search', {
         };
         return {
             pickerOptions: {
-                disabledDate(time) {
-                    return time.getTime() > Date.now();
-                },
                 shortcuts: [{
-                    text: '今天',
+                    text: '最近一周',
                     onClick(picker) {
-                        picker.$emit('pick', new Date());
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                        picker.$emit('pick', [start, end]);
                     }
                 }, {
-                    text: '昨天',
+                    text: '最近一个月',
                     onClick(picker) {
-                        const date = new Date();
-                        date.setTime(date.getTime() - 3600 * 1000 * 24);
-                        picker.$emit('pick', date);
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                        picker.$emit('pick', [start, end]);
                     }
                 }, {
-                    text: '一周前',
+                    text: '最近三个月',
                     onClick(picker) {
-                        const date = new Date();
-                        date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-                        picker.$emit('pick', date);
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                        picker.$emit('pick', [start, end]);
                     }
                 }]
             },
+            time: '',   //[ "2021-08-03T16:00:00.000Z", "2021-08-18T16:00:00.000Z" ]
             ruleForm: {
                 id: '',
                 commodityTag: '',
                 commodity: '',
                 receiverTag: '',
                 receiver: '',
-                startTime: '',
-                endTime: ''
             },
             rules: {
                 id: [
@@ -84,51 +85,21 @@ Vue.component('search', {
                 commodity: [
                     { validator: checkCommodity, trigger: 'blur' },
                 ],
-                receiver:[
-                    { validator: checkReceiver, trigger: 'blur'}
+                receiver: [
+                    { validator: checkReceiver, trigger: 'blur' }
                 ]
             }
         }
     },
     methods: {
         submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                /*if (valid) {
-                    //通过AJAX的方式向后端传送数据
-                    var formData = new FormData();
-                    formData.append("name", $("#picName").val());                //商品名称
-                    formData.append("price", $("#price").val());                //商品价格
-                    formData.append("storage", $("#storage").val());            //商品库存
-                    formData.append("category", $("#category").val());          //商品类别
-                    formData.append("file", this.upFile);
-                    formData.append("description", $("#description").val());    //商品描述
-                    formData.append("onSale", $("#onSale").val());              //商品是否上架
 
-                    $.ajax({
-                        url: '/SellerBackground/UploadCommodity',
-                        type: 'POST',
-                        data: formData,
-                        async: false,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: function (returndata) {
-                            alert("成功");
-                        },
-                        error: function (returndata) {
-                            alert("失败");
-                        }
-                    });
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }*/
-            });
         },
         resetForm(formName) {
             this.$refs[formName].resetFields();
         },
     },
+
     template: `
     <el-card class="search-card">
     <el-form method="post" enctype="multipart/form-data" id="uploadForm" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
@@ -165,27 +136,19 @@ Vue.component('search', {
                 </el-col>
             </el-row>
             <el-row>
-                <el-col :span="10">
-                <el-form-item label="时间：" prop="startTime">
+                <el-col :span="24">
+                    <el-form-item label="时间：" prop="time">
                     <el-date-picker
-                        v-model="ruleForm.startTime"
+                        v-model="time"
+                        type="daterange"
                         align="right"
-                        type="date"
-                        placeholder="选择开始日期"
+                        unlink-panels
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期"
                         :picker-options="pickerOptions">
                     </el-date-picker>
-                </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                <el-form-item label="至" prop="endTime">
-                    <el-date-picker
-                        v-model="ruleForm.endTime"
-                        align="right"
-                        type="date"
-                        placeholder="选择结束日期"
-                        :picker-options="pickerOptions">
-                    </el-date-picker>
-                </el-form-item>
+                    </el-form-item>
                 </el-col>
             </el-row>
             <el-row>
