@@ -7,5 +7,9 @@ namespace Internetmall.Models
 {
     public class SellerDetailedOrder
     {
+        public string buyerJson { get; set; }
+        public string sellerJson { get; set; }
+        public string ReceiveInformationJson { get; set; }
+        public string commodityJson { get; set; }
     }
 }

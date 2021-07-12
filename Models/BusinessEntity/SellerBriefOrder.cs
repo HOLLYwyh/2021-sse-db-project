@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Internetmall.Models.BusinessEntity
 {
-    public class SellerDetailedOrder
+    public class SellerBriefOrder
     {
         public string buyerNickname { get; set; }
         public string url { get; set; }

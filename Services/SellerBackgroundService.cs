@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Internetmall.Models;
 using Internetmall.Models.BusinessEntity;
 using InternetMall.DBContext;
 using InternetMall.Interfaces;
@@ -133,7 +134,7 @@ namespace InternetMall.Services
         //显示简略订单信息
         public async Task<string> DisplayBriefOrder(string shopId)
         {
-            List<SellerDetailedOrder> newOrderList = new List<SellerDetailedOrder>();
+            List<SellerBriefOrder> newOrderList = new List<SellerBriefOrder>();
             if (shopId == null)
             {
                 return null;
@@ -148,7 +149,7 @@ namespace InternetMall.Services
                 foreach(Order newOrder in modelContext)
                 {
                     decimal? orderPrice=0;
-                    SellerDetailedOrder briefOrder = new SellerDetailedOrder();
+                    SellerBriefOrder briefOrder = new SellerBriefOrder();
                     briefOrder.buyerNickname = newOrder.Buyer.Nickname;
                     briefOrder.url = newOrder.Buyer.Url;
                     foreach(OrdersCommodity newCommodity in newOrder.OrdersCommodities)
@@ -164,22 +165,25 @@ namespace InternetMall.Services
 
         }
         //显示订单详情
-        public async Task<string> DisplayDetailedOrder(string orderID)
+        public async Task<SellerDetailedOrder> DisplayDetailedOrder(string orderID)
         {
+            SellerDetailedOrder returnJson = new SellerDetailedOrder();
             if (orderID == null)
             {
                 return null;
             }
-            {
-                SellerDetailedOrder newOrderList = new SellerDetailedOrder();
+            else {
                 var modelContext = await _context.Orders.Where(o => o.OrdersId == orderID)
                                                         .Include(o => o.Buyer)
                                                         .Include(o => o.Shop)
                                                         .Include(o => o.OrdersCommodities)
-                                                           .ThenInclude(c => c.Commodity).ToListAsync();
+                                                           .ThenInclude(c => c.Commodity).FirstOrDefaultAsync();
+                returnJson.buyerJson = JsonConvert.SerializeObject(modelContext.Buyer);
+                returnJson.sellerJson = JsonConvert.SerializeObject(modelContext.Shop.Seller);
+                returnJson.ReceiveInformationJson= JsonConvert.SerializeObject(modelContext.Shop.Seller);
+                returnJson.commodityJson= JsonConvert.SerializeObject(modelContext.OrdersCommodities);
             }
-
-
+            return returnJson;
         }
         //搜索订单
         public async Task<List<Order>> SearchOrder(string orderId, string commodityId, string commodityName, string recieverName, string recieverPhone, string buyerId)

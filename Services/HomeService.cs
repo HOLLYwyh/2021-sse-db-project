@@ -67,24 +67,18 @@ namespace Internetmall.Services
                     judge2[i] = judge1[maxIndex];
                     judge1[maxIndex] = 0;
                 }
-                for (int i = 1; i <= 6; i++)//对于judge2数组中的商品种类，每种随机选择一个商品加入到返回列表中
+                for (int i = 1; i <= 6; i++)
                 {
                     List<Commodity> commoditiesList = await _context.Commodities.Where(c => c.Category == judge2[i]).Include(c => c.Shop).Include(c => c.OrdersCommodities).ToListAsync();
-                    int temp1 = random.Next();
-                    string temp2 = temp1.ToString();
-                    tempResultList.Add(commoditiesList.FirstOrDefault(c => c.CommodityId == temp2));
+                    int temp = random.Next(0, commoditiesList.Capacity-1);
+                    tempResultList.Add(commoditiesList[temp]);
                 }
             }
             else
             {
-                int[] judge1 = new int[6];
-                for(int i=0;i<6;i++)
-                {
-                    judge1[i]= random.Next(0,9);
-                }
+                List<Commodity> commoditiesList = await _context.Commodities.Include(c => c.Shop).Include(c => c.OrdersCommodities).ToListAsync();
                 for (int i = 0; i < 6; i++)
                 {
-                    List<Commodity> commoditiesList = await _context.Commodities.Where(c => c.Category == judge1[i]).Include(c => c.Shop).Include(c => c.OrdersCommodities).ToListAsync();
                     int temp1 = random.Next(0,15);
                     string temp2 = temp1.ToString();
                     tempResultList.Add(commoditiesList.FirstOrDefault(c => c.CommodityId == temp2));
@@ -96,6 +90,7 @@ namespace Internetmall.Services
                 newGood.img = newCommodity.Url;
                 newGood.intro = newCommodity.Name;
                 newGood.shop = newCommodity.Shop.Name;
+                newGood.ID = newCommodity.Shop.ShopId;
                 goods.Add(newGood);
             }
             return goods;
@@ -111,9 +106,8 @@ namespace Internetmall.Services
                 List<Commodity> commoditiesList = await _context.Commodities.Where(c => c.Category == commodityCategory).Include(c => c.Shop).Include(c => c.OrdersCommodities).ToListAsync();
                 for (int i = 0; i < 8; i++)
                 {
-                    int temp1 = random.Next(0,15);
-                    string temp2 = temp1.ToString();
-                    tempResultList.Add(commoditiesList.FirstOrDefault(c => c.CommodityId == temp2));
+                    int temp = random.Next(0, commoditiesList.Capacity - 1);
+                    tempResultList.Add(commoditiesList[temp]);
                 }
                 foreach (Commodity newCommodity in tempResultList)
                 {
