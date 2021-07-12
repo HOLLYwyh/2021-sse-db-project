@@ -35,8 +35,8 @@ Vue.component('naviright', {
                     <div class="listli">
                         我的订单
                     </div>
-                    <div class="listli" onclick="/Entry/BuyerLogOut">
-                        退出
+                    <div class="listli">
+                        <a href="/Entry/BuyerLogOut">退出登录</a>
                         <i class="fa fa-sign-out" aria-hidden="true"></i> 
                     </div>
                 </div>
