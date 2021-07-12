@@ -1,4 +1,5 @@
 ﻿using Internetmall.Models;
+using Internetmall.Models.BusinessEntity;
 using InternetMall.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace Internetmall.Interfaces
     interface IHomeService
     {
         //首页展示商品推荐
-        public Task<ListToJsonView<Commodity>> RecommendingCommodities(bool inFo, string buyerId = null, int commodityCategory = -1);
+        public Task<List<Good>> RecommendingCommodities(bool inFo, string buyerId = null, int commodityCategory = -1);
     }
 }

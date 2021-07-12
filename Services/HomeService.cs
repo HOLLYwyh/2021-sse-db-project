@@ -1,5 +1,6 @@
 ﻿using Internetmall.Interfaces;
 using Internetmall.Models;
+using Internetmall.Models.BusinessEntity;
 using InternetMall.DBContext;
 using InternetMall.Models;
 using Microsoft.EntityFrameworkCore;
@@ -24,10 +25,11 @@ namespace Internetmall.Services
         }
 
         //首页展示商品推荐
-        public async Task<ListToJsonView<Commodity>> RecommendingCommodities(bool inFo, string buyerId , int commodityCategory)
+        public async Task<List<Good>> RecommendingCommodities(bool inFo, string buyerId , int commodityCategory)
         {
             Random random = new Random(GetRandomSeedbyGuid());
-            List<Commodity> resultList = new List<Commodity>();
+            List<Commodity> tempResultList = new List<Commodity>();
+            List<Good> goods = new List<Good>();
             if (inFo==true)
             {
                 int []judge1 = new int[10];//对于十个商品大类进行权重标记的数组
@@ -67,25 +69,31 @@ namespace Internetmall.Services
                 }
                 for(int i=1;i<=6;i++)//对于judge2数组中的商品种类，每种随机选择一个商品加入到返回列表中
                 {
-                    List<Commodity> commoditiesList = await _context.Commodities.Where(c => c.Category == judge2[i]).Include(o => o.OrdersCommodities).ToListAsync();
+                    List<Commodity> commoditiesList = await _context.Commodities.Where(c => c.Category == judge2[i]).Include(c => c.Shop).Include(c => c.OrdersCommodities).ToListAsync();
                     int temp1 = random.Next();
                     string temp2 = temp1.ToString();
-                    resultList.Add(commoditiesList.FirstOrDefault(c => c.CommodityId == temp2));
-                }
+                    tempResultList.Add(commoditiesList.FirstOrDefault(c => c.CommodityId == temp2));
+                }    
             }
             else if(commodityCategory != -1)
             {
-                List<Commodity> commoditiesList = await _context.Commodities.Where(c => c.Category == commodityCategory).Include(o => o.OrdersCommodities).ToListAsync();       
+                List<Commodity> commoditiesList = await _context.Commodities.Where(c => c.Category == commodityCategory).Include(c => c.Shop).Include(c => c.OrdersCommodities).ToListAsync();       
                 for(int i=0;i<8;i++)
                 {
                     int temp1 = random.Next();
                     string temp2 = temp1.ToString();
-                    resultList.Add(commoditiesList.FirstOrDefault(c => c.CommodityId == temp2));
+                    tempResultList.Add(commoditiesList.FirstOrDefault(c => c.CommodityId == temp2));
                 }
             }
-            ListToJsonView<Commodity> finalResultList = new ListToJsonView<Commodity>(resultList);
-            //string returnList1 = Newtonsoft.Json.JsonConvert.SerializeObject(resultList);
-            return finalResultList;
+            foreach (Commodity newCommodity in tempResultList)
+            {
+                Good newGood = new Good();
+                newGood.img = newCommodity.Url;
+                newGood.intro = newCommodity.Name;
+                newGood.shop = newCommodity.Shop.Name;
+                goods.Add(newGood);
+            }
+            return goods ;
         }   
     }
 }
