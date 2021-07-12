@@ -30,13 +30,13 @@ Vue.component('naviright', {
                         {{this.name}}
                     </div>
                     <div class="listli">
-                        <a href="">用户中心</a>
+                        <a href="/Account/PersonalInformation"><div>用户中心</div></a>
                     </div>
                     <div class="listli">
                         我的订单
                     </div>
                     <div class="listli">
-                        退出
+                        <a href="/Entry/BuyerLogOut">退出登录</a>
                         <i class="fa fa-sign-out" aria-hidden="true"></i> 
                     </div>
                 </div>
@@ -44,7 +44,7 @@ Vue.component('naviright', {
             </div>
 
             <div class="sidebaPersonage">
-                <a href="www.baidu.com" class="topa">
+                <a href="/Favorites/Follow" class="topa">
                     <i class="fa fa-heart-o fa-lg user"></i>
                     <em class="tab-text">关注</em>
                 </a>
@@ -59,7 +59,7 @@ Vue.component('naviright', {
             </div>
             <!--收藏-->
             <div class="sidebaPersonage ">
-                <a href="www.baidu.com" class="topa">
+                <a href="/Favorites/favorite" class="topa">
                     <i class="fa fa-diamond fa-lg user"></i>
                     <em class="tab-text">收藏</em>
                 </a>

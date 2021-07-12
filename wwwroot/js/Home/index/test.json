@@ -1,0 +1,40 @@
+﻿{
+  "goods": [
+    {
+      "img": "../../Images/Home/index/a1.png",
+      "intro": "泰国进口金枕鲜榴莲1,泰国进口金枕鲜榴莲,泰国进口金枕1",
+      "shop": "金轮",
+      "link": "https://www.baidu.com/"
+    },
+    {
+      "img": "../../Images/Home/index/a2.png",
+      "intro": "泰国进口金枕鲜榴莲2,泰国进口金枕鲜榴莲,泰国进口金枕2",
+      "shop": "金轮",
+      "link": ""
+    },
+    {
+      "img": "../../Images/Home/index/a3.png",
+      "intro": "泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲,泰国进口金枕3",
+      "shop": "金轮",
+      "link": ""
+    },
+    {
+      "img": "../../Images/Home/index/a4.png",
+      "intro": "泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲,泰国进口金枕4",
+      "shop": "金轮",
+      "link": ""
+    },
+    {
+      "img": "../../Images/Home/index/a5.png",
+      "intro": "泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲,泰国进口金枕5",
+      "shop": "金轮",
+      "link": ""
+    },
+    {
+      "img": "../../Images/Home/index/a1.png",
+      "intro": "泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲,泰国进口金枕1",
+      "shop": "金轮",
+      "link": ""
+    }
+  ]
+}
