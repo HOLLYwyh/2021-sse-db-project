@@ -58,5 +58,14 @@ namespace InternetMall.Controllers
             string str = JsonConvert.SerializeObject(goods);
             return new ContentResult { Content = str, ContentType = "application/json" };
         }
+
+        public IActionResult RecmdZoneCommodities()
+        {
+            List<Good> goods = new List<Good>();
+            int category = 1;
+            goods = homeService.RecommendingZoneCommodities(category);
+            string str = JsonConvert.SerializeObject(goods);
+            return new ContentResult { Content = str, ContentType = "application/json" };
+        }
     }
 }

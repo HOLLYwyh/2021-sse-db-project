@@ -94,7 +94,7 @@ namespace Internetmall.Services
                 newGood.img = newCommodity.Url;
                 newGood.intro = newCommodity.Name;
                 newGood.shop = newCommodity.Shop.Name;
-                newGood.ID = newCommodity.Shop.ShopId;
+                newGood.ID = newCommodity.CommodityId;
                 goods.Add(newGood);
             }
             return goods;
@@ -119,6 +119,7 @@ namespace Internetmall.Services
                     newGood.img = newCommodity.Url;
                     newGood.intro = newCommodity.Name;
                     newGood.shop = newCommodity.Shop.Name;
+                    newGood.ID = newCommodity.CommodityId;
                     goods.Add(newGood);
                 }
                 return goods;
