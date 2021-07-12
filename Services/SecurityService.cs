@@ -19,6 +19,16 @@ namespace InternetMall.Services
             _context = ctx;
         }
 
+        // 返回Buyer所有信息
+        public Buyer getBuyInformation(string buyerid)
+        {
+            Buyer buyer = _context.Buyers.Where(x => x.BuyerId == buyerid).FirstOrDefault();
+            if (buyer != null)
+                return buyer;
+            else
+                return null;
+        }
+
         // 显示用户绑定手机号
         public string displayPhone(string buyerid)
         {

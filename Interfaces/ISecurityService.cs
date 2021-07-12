@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InternetMall.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,9 @@ namespace InternetMall.Interfaces
 {
     public interface ISecurityService
     {
+        // 返回Buyer所有信息
+        public Buyer getBuyInformation(string buyerid);
+
         // 显示用户电话号码：不存在返回null
         public string displayPhone(string buyerid);
 
