@@ -18,48 +18,13 @@ namespace InternetMall.Services
         {
             _context = context;
         }
-        /*
-        public async Task<bool> Create(decimal price, string category, string description, int storage, string name, string shopId,string url)
-        {
-            Commodity commodity = new Commodity();
-            //result是查找结果:查看店内是否已经有了重名的商品
-            var result = await _context.Commodities
-                .Where(c => c.ShopId == shopId && c.Name == name).ToListAsync();
-            if (result == null)                   //不存在，则插入该商品
-            {
-                commodity.CommodityId = "000001"; //暂时随便生成一个商品ID，后续商讨设计生成规则
-                commodity.Price = price;
-                switch (category)
-                {
-                    case "Unkown": commodity.Category = 0;break;                //未定义 
-                    case "Clothing": commodity.Category = 1;break;              //服装 
-                    case "Electronics": commodity.Category = 2;break;           //电子产品
-                    case "Books": commodity.Category = 3;break;                 //书籍
-                    case "Pets": commodity.Category = 4;break;                  //宠物
-                    case "Sports": commodity.Category = 5;break;                //运动 
-                    case "Food": commodity.Category = 6;break;                  //食品 
-                    case "Home": commodity.Category = 7;break;                  //家居
-                    case "Beauty": commodity.Category = 8;break;                //美妆 
-                    case "Bodycare": commodity.Category = 9;break;              //洗护 
-                }
-                commodity.Storage = storage;
-                commodity.Name = name;
-                commodity.ShopId = shopId;
-                commodity.Url = url;
-
-                _context.Add(commodity);
-                await _context.SaveChangesAsync();//保存更新（异步保存，避免等待）
-                return true;
-            }
-            else return false;                    
-        }
-        */
+ 
         public bool Create(decimal price, string category, string description, int storage, string name, string shopId, string url)
         {
             Commodity commodity = new Commodity();
             //result是查找结果:查看店内是否已经有了重名的商品
-            var result =  _context.Commodities
-                .Where(c => c.ShopId == shopId && c.Name == name).ToList();
+            Commodity result =  _context.Commodities
+                .Where(c => c.ShopId == shopId && c.Name == name).FirstOrDefault();
             if (result == null)                   //不存在，则插入该商品
             {
                 Counter counts = _context.Counters.FirstOrDefault(c=>c.ID=="0");
@@ -68,6 +33,7 @@ namespace InternetMall.Services
                 counts.Commoditycount = counts.Commoditycount + 1;
                 _context.Counters.Update(counts);
 
+                commodity.Description = description;
                 commodity.Price = price;
                 commodity.Storage = storage;
                 commodity.Name = name;
@@ -75,19 +41,19 @@ namespace InternetMall.Services
                 commodity.Url = url;
                 switch (category)
                 {
-                    case "Unkown": commodity.Category = 0; break;                //未定义 
-                    case "Clothing": commodity.Category = 1; break;              //服装 
-                    case "Electronics": commodity.Category = 2; break;           //电子产品
-                    case "Books": commodity.Category = 3; break;                 //书籍
-                    case "Pets": commodity.Category = 4; break;                  //宠物
-                    case "Sports": commodity.Category = 5; break;                //运动 
-                    case "Food": commodity.Category = 6; break;                  //食品 
-                    case "Home": commodity.Category = 7; break;                  //家居
-                    case "Beauty": commodity.Category = 8; break;                //美妆 
-                    case "Bodycare": commodity.Category = 9; break;              //洗护 
+                    case "未定义": commodity.Category = 0; break;                //未定义 
+                    case "服装": commodity.Category = 1; break;                  //服装 
+                    case "电子产品": commodity.Category = 2; break;           //电子产品
+                    case "书籍": commodity.Category = 3; break;                 //书籍
+                    case "宠物": commodity.Category = 4; break;                  //宠物
+                    case "运动": commodity.Category = 5; break;                //运动 
+                    case "食品": commodity.Category = 6; break;                  //食品 
+                    case "家居": commodity.Category = 7; break;                  //家居
+                    case "美妆": commodity.Category = 8; break;                //美妆 
+                    case "洗护": commodity.Category = 9; break;              //洗护
                 }
                 
-                _context.Add(commodity);
+                _context.Commodities.Add(commodity);
                  _context.SaveChanges();//保存更新（异步保存，避免等待）
                 return true;
             }
@@ -103,7 +69,7 @@ namespace InternetMall.Services
             {
                 foreach (Commodity commodity in result) //挨个检查
                 {
-                    _context.Remove(commodity);
+                    _context.Commodities.Remove(commodity);
                     _context.SaveChanges();
                 }
                 return true;
@@ -111,31 +77,6 @@ namespace InternetMall.Services
 
             return false; //没有需要删除的元组
         }
-
-        /*
-        public async Task<List<Commodity>> ShowCommodities(string shopId, string searchCondition)
-        {
-            List<Commodity> commoditiesList;    //用来存放查找结果
-
-            if (searchCondition== "ON_SALE")    //还有库存的商品
-            {
-                commoditiesList = await _context.Commodities
-                    .Where(c => c.ShopId == shopId && c.Storage > 0).ToListAsync();
-            }
-            else if(searchCondition== "SOLD_OUT") //没有库存的商品
-            {
-                commoditiesList = await _context.Commodities
-                    .Where(c => c.ShopId == shopId && c.Storage == 0).ToListAsync();
-            }
-            else                                 //所有的商品
-            {
-                commoditiesList = await _context.Commodities
-                    .Where(c => c.ShopId == shopId).ToListAsync();
-            }
-           
-            return commoditiesList;
-        }
-        */
 
         public  string ShowCommodities(string shopId, string searchCondition)
         {

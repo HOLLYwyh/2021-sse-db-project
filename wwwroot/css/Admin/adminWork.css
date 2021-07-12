@@ -1,0 +1,42 @@
+﻿.headpic{
+    margin-top:20px;
+    display:block;
+    width:50%;
+    height:50%;
+}
+
+#content{
+    height:100%;
+    width:100%;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+.el-tabs__item{
+    width:200px;
+    
+    text-align:center!important;
+   
+    
+}
+
+.cardd{
+    position:relative;
+    margin-left:100px;
+    display:block;
+    height:100%;
+   
+}
+
+.cancel{
+    height:550px;
+   
+}
+
+.carddd {
+    height: 550px;
+    width:1050px;
+}

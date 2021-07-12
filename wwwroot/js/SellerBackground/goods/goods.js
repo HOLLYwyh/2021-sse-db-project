@@ -247,7 +247,7 @@ Vue.component('upload', {
             <el-row>
                 <el-col :span="12">
                     <el-form-item  label="上传图片" prop="picture">
-                        <el-upload class="upload-demo" drag action="" limit=1
+                        <el-upload class="upload-demo" drag action=""
                              :auto-upload="false" :on-change="handleChange">
                             <i class="el-icon-upload"></i>
                             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
