@@ -23,7 +23,7 @@ namespace InternetMall.Services
             var count = _context.Counters.FirstOrDefault(m => m.ID == "0");
             int shopCount = count.Shopcount + 1;
             count.Shopcount += 1;
-            _context.Update(count);
+            _context.Counters.Update(count);
             _context.SaveChanges();
             return shopCount;
         }

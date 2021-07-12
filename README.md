@@ -14,3 +14,5 @@
 - Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation  （这个好像是系统自带的？）  
 - Microsoft.EntityFrameworkCore (数据库相关)  
 - Oracle.EntityFrameworkCore (数据库相关)  
+- Newtonsoft.Json(JSON相关)
+- Alipay.AopSdk.Core(支付宝接口相关)
