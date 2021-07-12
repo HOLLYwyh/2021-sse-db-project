@@ -24,3 +24,4 @@ namespace InternetMall.Interfaces
         public bool deleteShop(string sellerid, string shopid);
     }
 }
+

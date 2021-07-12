@@ -1,6 +1,7 @@
 ﻿using InternetMall.DBContext;
 using InternetMall.Interfaces;
 using InternetMall.Models;
+using InternetMall.Models.ControllerModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,24 +19,17 @@ namespace InternetMall.Services
         {
             _context = context;
         }
-        private int GetShopCount()
-        {
-            var count = _context.Counters.FirstOrDefault(m => m.ID == "0");
-            int shopCount = count.Shopcount + 1;
-            count.Shopcount += 1;
-            _context.Counters.Update(count);
-            _context.SaveChanges();
-            return shopCount;
-        }
 
         // 生成店铺
-       　public bool createShop(string sellerid, string shopName, short category, string description)
+        public bool createShop(string sellerid, string shopName, short category, string description)
         {
             Shop shop = _context.Shops.Where(x => x.SellerId == sellerid && x.Name == shopName).FirstOrDefault();
 
+            CreateIdCount shopid = new CreateIdCount(_context);   // ID生成
+
             if (shop == null)
             {
-                shop = new Shop { SellerId = sellerid, ShopId = GetShopCount().ToString(), Name = shopName, Category = category, Description = description };
+                shop = new Shop { SellerId = sellerid, ShopId = shopid.GetShopCount(), Name = shopName, Category = category, Description = description };
 
                 _context.Shops.Add(shop);
             }
@@ -83,3 +77,4 @@ namespace InternetMall.Services
 
     }
 }
+
