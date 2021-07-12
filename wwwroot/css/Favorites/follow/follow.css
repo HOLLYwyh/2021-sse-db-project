@@ -50,12 +50,6 @@ body {
     line-height: 12px;
 }
 
-.button {
-    padding: 0;
-    left: 100px;
-    float: center;
-}
-
 .image {
     position: relative;
     left: 40%;
