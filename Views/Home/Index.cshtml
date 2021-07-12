@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/css/Home/index/index.css" type="text/css" rel="stylesheet" />
     <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
-    <link href="~/css/Home/index/shortcut_index.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/shortcut_five.css" type="text/css" rel="stylesheet" />
+
     <link rel="stylesheet" href="~/css/Home/index/carousel.css" type="text/css">
     <link href="~/css/Home/index/animate.css" type="text/css" rel="stylesheet" />
     <link href="~/css/Home/index/part.css" type="text/css" rel="stylesheet" />
@@ -20,105 +21,28 @@
     @await Html.PartialAsync("~/Views/Shared/backToTop.cshtml")
 </head>
 <body>
+    <div id="lift">
+        <ul>
+            <li class="item"><a href="#part1">服装</a></li>
+            <li class="item">电子</li>
+            <li class="item">书籍</li>
+            <li class="item">宠物</li>
+            <li class="item">运动</li>
+            <li class="item">食品</li>
+            <li class="item">家居</li>
+            <li class="item">美妆</li>
+            <li class="item">洗护</li>
+           
+        </ul>
+    </div>
+    
     <div id="naviRight">
         <naviright>
 
         </naviright>
     </div>
-    <div class="shortcut">
-        <ul>
-            <li>
-                <div class="col_EF4F00">
-                    <div>
-                        <a href="/Home/Index">特价</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_FFCC00">
-                    <div>
-                        <a href="../Views/Home/Index.cshtml">首页</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_9FCC48">
-                    <div>
-                        <a href="http://">饮食</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_00A3E7">
-                    <div>
-                        <a href="http://">家居</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_EF4F00">
-                    <div>
-                        <a href="http://">服装</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_FFCC00">
-                    <div>
-                        <a href="http://">美妆</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_9FCC48">
-                    <div>
-                        <a href="http://">运动</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_00A3E7">
-                    <div>
-                        <a href="http://">珠宝</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_EF4F00">
-                    <div>
-                        <a href="http://">汽车</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_FFCC00">
-                    <div>
-                        <a href="http://">医疗保健</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_9FCC48">
-                    <div>
-                        <a href="http://">图书</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_00A3E7">
-                    <div>
-                        <a href="http://">全部分类</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="col_EF4F00">
-                    <div>
-                        <a href="http://">帮助</a>
-                    </div>
-                </div>
-            </li>
-        </ul>
+    <div id="shortcut">
+        <shortcut></shortcut>
     </div>
     <div class="search">
         <div class="fl huicui">
@@ -130,23 +54,15 @@
         <button class="fl" onclick="window.location.href = '/Search/SearchCommodity'"></button>
         <div class="nav fr">
 
-            <transition enter-active-class="animate__animated animate__fadeIn"
-                        leave-active-class="animate__animated animate__fadeOut">
-                <div class="login_box" v-show="appearance==true" @@mouseenter="appear" @@mouseleave="disappear('B')" style="animation-duration: 200ms">
-                    <div class="avator" @@mouseenter="appear" @@mouseleave="disappear('A')">
-                    </div>
-                    <div class="nickname">
-                        我的昵称
-                    </div>
 
-                </div>
-            </transition>
 
             <div class="nav_son login">
-                <img src="/Images/Home/index/u64.svg" @@mouseenter="appear" @@mouseleave="disappear('A')">
-                <a href="/Entry/BuyerLogIn" class="fl">登录</a>
-                <p class="fl">|</p>
-                <a href="/Entry/BuyerSignUp" class="fl">注册</a>
+                <img src="/Images/Home/index/u64.svg">
+                <div id="utility1">
+                    <a href="/Entry/BuyerLogIn" class="fl">登录</a>
+                    <p class="fl">|</p>
+                    <a href="/Entry/BuyerSignUp" class="fl">注册</a>
+                </div>
             </div>
 
             <div class="nav_son">
@@ -177,38 +93,67 @@
         </div>
     </div>
     <div class="different_kind">
-
+        <img src="~/Images/Home/index/indextop.png" alt="Alternate Text" />
     </div>
     <div class="recommend">
         <div id="carousel1">
             <carousel class="carousel1"></carousel>
         </div>
         <div class="rcmd_box">
+            <ul>
+                <li v-for='(thing,index) in goods' :key='index'>
+                    <a :href="thing.link">
+                        <img :src="thing.img">
+                        <div class="introduce">
+
+                            {{thing.intro}}
+
+                        </div>
+                        <div class="shop">
+                            店铺：{{thing.shop}}
+                        </div>
+                    </a>
+                </li>
+            </ul>
             <div class="change_btn">
-                <i class="change_ico"></i>
+
                 换一换
             </div>
         </div>
     </div>
 
     <div id="part1">
-        <part></part>
+        <part type="服装"></part>
     </div>
     <div id="part2">
-        <part></part>
+        <part type="电子产品"></part>
     </div>
     <div id="part3">
-        <part></part>
+        <part type="书籍"></part>
     </div>
     <div id="part4">
-        <part></part>
+        <part type="宠物"></part>
     </div>
     <div id="part5">
-        <part></part>
+        <part type="运动"></part>
     </div>
+    <div id="part6">
+        <part type="食品"></part>
+    </div>
+    <div id="part7">
+        <part type="家居"></part>
+    </div>
+    <div id="part8">
+        <part type="美妆"></part>
+    </div>
+    <div id="part9">
+        <part type="洗护"></part>
+    </div>
+
 
     <script type="text/javascript" src="~/js/Home/index/part.js"></script>
     <script type="text/javascript" src="~/js/Common/carousel.js"></script>
+    <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
     <script type="text/javascript" src="~/js/Common/naviRight.js"></script>
     <script type="text/javascript" src="~/js/Home/index/index.js"></script>
 

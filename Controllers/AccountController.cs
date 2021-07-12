@@ -14,7 +14,7 @@ namespace InternetMall.Controllers
         // 返回页面
         public IActionResult PersonalInformation()
         {
-            if (Request.Cookies["nickName"] != null)
+            if (Request.Cookies["buyerNickName"] != null)
             {
                 return View();
             }
@@ -25,7 +25,18 @@ namespace InternetMall.Controllers
         }
         public IActionResult Security()
         {
-            if (Request.Cookies["nickName"] != null)
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
+        }
+        public IActionResult Address()
+        {
+            if (Request.Cookies["buyerNickName"] != null)
             {
                 return View();
             }

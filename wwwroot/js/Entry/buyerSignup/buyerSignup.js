@@ -45,6 +45,31 @@ function validateForm() {
         alert("两次输入密码不一致");
         return false;
     }
+    return true;
 }
 
+
+function signup() {
+    if (!validateForm()) {
+        return false;
+    }
+
+    $.ajax({
+        type: "post",
+        url: "/Entry/BuyerSignUpForm",
+        async: false,
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ phoneNumber: $("#phoneNumber").val(), nickName: $("#nickName").val(), password: $("#password").val() }),
+        success: function (result) {
+            var jsonData = eval("(" + result + ")");   //将json转换成对象
+            if (jsonData.signUp != "ERROR") {
+                window.location = "/Entry/BuyerLogIn";
+            }
+            else {
+                alert("此号码已被注册!");
+            }
+        }
+    });
+}
 

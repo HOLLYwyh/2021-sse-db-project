@@ -1,1 +1,60 @@
 <!--总排行榜-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>排行榜</title>
+    <link href="~/css/Chart/chart.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/shortcut_five.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="~/js/Common/vue.js"></script>
+</head>
+<body>
+    <div id="shortcutlg">
+        <shortcut></shortcut>
+    </div>
+    <!-- 排行榜分类 -->
+    <div class="f2">
+        <div id="hot" v-on:click="divClick" :class="{f21:isActive,f24:checkf24}">
+            <span><img src="~/Images/Chart/data.png" /></span>
+            <span><a href="#new">热卖排行</a></span>
+        </div>
+
+        <div id="search" v-on:click="divClick" :class="{f22:isActive,f25:checkf25}">
+            <span><img src="~/Images/Chart/crown.png" /></span>
+            <span><a href="#new">搜索指数排行</a></span>
+        </div>
+
+        <div id="praise" v-on:click="divClick" :class="{f23:isActive,f26:checkf26}">
+            <span><img src="~/Images/Chart/thumb.png" /></span>
+            <span><a href="#new">口碑排行</a></span>
+        </div>
+    </div>
+    <!-- 内容 -->
+    <div id="content" class="n1">
+        <div v-for="(item,index) in object" class="n2">
+            <div class="num">{{index+1}}</div>
+            <div class="img"><img :src="item.pic" /></div>
+            <div class="n4">
+                <a class="title" v-on:click="aClick(index)" :href="aClick(index)">{{item.name}}</a>
+                <div class="box">
+                    <span class="date-box">
+                        <i class="icon ion-play"></i>
+                        口碑评分：10
+                    </span>
+                    <a>
+                        <span class="date-box">
+                            <i class="icon ion-person"></i>
+                            {{item.description}}
+                        </span>
+                    </a>
+                </div>
+                <div class="box2">
+                    <div class="fs">￥{{item.price}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="~/js/Chart/chart.js"></script>
+</body>
+</html>
