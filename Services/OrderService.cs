@@ -6,6 +6,7 @@ using InternetMall.Models.BusinessEntity;
 using InternetMall.Models.ControllerModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,7 +91,7 @@ namespace InternetMall.Services
         }
 
         // 查看买家所有订单
-        public List<OrderView> getOrderByBuyerId(string buyerid)
+        public string getOrderByBuyerId(string buyerid)
         {
             List<OrderView> ordersView = new List<OrderView>();
 
@@ -122,7 +123,7 @@ namespace InternetMall.Services
                 ordersView.Add(orderView);
             }
 
-            return ordersView;
+            return JsonConvert.SerializeObject(ordersView);
         }
 
         // 根据状态查看买家订单
@@ -162,12 +163,39 @@ namespace InternetMall.Services
         }
 
         // 查看订单详情
-        public List<OrderView> getOrderByStatus(string orderid)
+        public OrderDetailView getOrderByStatus(string orderid)
         {
-            List<OrderView> orders = new List<OrderView>();
+            Order order = _context.Orders.Where(x => x.OrdersId == orderid).FirstOrDefault();
+            OrdersCommodity ordersCommodity = _context.OrdersCommodities.Where(x => x.OrdersId == orderid).FirstOrDefault();
+            Commodity commodity = _context.Commodities.Where(x => x.CommodityId == ordersCommodity.CommodityId).FirstOrDefault();
+            Shop shop = _context.Shops.Where(x => x.ShopId == order.ShopId).FirstOrDefault();
+            ReceiveInformation receive = _context.ReceiveInformations.Where(x => x.ReceivedId == order.ReceivedId).FirstOrDefault();
 
+            OrderDetailView orderDetail = new OrderDetailView
+            {
+                OrdersId = order.OrdersId,           // 订单ID
+                BuyerId = order.BuyerId,             // 买家ID
+                ReceivedId = order.ReceivedId,       // 收货详情ID
+                ShopId = order.ShopId,               // 店铺ID         
+                Status = order.Status,               // 订单的状态
+                OrdersDate = order.OrdersDate,       // 下单时间
 
-            return orders;
+                // Orderamount // 订单包含物品数量      
+                Price = commodity.Price,             // 商品价格
+                Category = commodity.Category,        // 商品类别          
+                CommodityName = commodity.Name,      // 商品名称    
+                CommodityUrl = commodity.Url,        // 商品图片
+                ShopName = shop.Name,                 // 店铺名称
+                ReceiverPhone = receive.Phone,        // 收货人电话号码
+                ReceiverName = receive.ReceiverName, // 收货人姓名
+                Country = receive.Country,           // 国家
+                Province = receive.Province,          // 省份
+                City = receive.City,                  // 城市
+                District = receive.District,          // 街区
+                DetailAddr = receive.DetailAddr       // 地址详情
+            };
+
+            return orderDetail;
         }
 
         // 删除订单

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace InternetMall.Models.ControllerModels
 {
+    /// <summary>
+    /// ID生成器接口
+    /// </summary>
     public class CreateIdCount
     {
         // 构造函数

@@ -41,18 +41,18 @@ namespace InternetMall.Models.BusinessEntity
     }
 
     // 盈利分析 —— 按日，周，月，年进行分析
-    public class ShopMonthlyProfit
+    public class ShopProfit
     {
         // 店铺名称
         public string ShopName { get; set; }
 
         // 时间段
-        public DateTime StartTime { get; set; }  // 开始时间
+        // public DateTime StartTime { get; set; }   // 开始时间
 
-        public DateTime EndTime { get; set; }   // 结束时间
+        // public DateTime EndTime { get; set; }     // 结束时间
 
         // 盈利值
-        public double monthProfit { get; set; }
+        public decimal? Profit { get; set; }
     }
 }
 

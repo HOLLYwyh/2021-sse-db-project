@@ -22,13 +22,13 @@ namespace InternetMall.Interfaces
         public bool updateCommodityStatus(string commodityid, int newStatus);
 
         // 查看买家所有订单
-        public List<OrderView> getOrderByBuyerId(string buyerid);
+        public string getOrderByBuyerId(string buyerid);
 
         // 根据状态查看买家订单
         public List<OrderView> getOrderByStatus(string buyerid, int status);
 
         // 查看订单详情
-        public List<OrderView> getOrderByStatus(string orderid);
+        public OrderDetailView getOrderByStatus(string orderid);
 
         // 删除订单
         public bool removeOrder(string buyerid, string commodityid);

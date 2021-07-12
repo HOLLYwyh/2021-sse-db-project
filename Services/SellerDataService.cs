@@ -11,6 +11,9 @@ using InternetMall.Models.BusinessEntity;
 
 namespace InternetMall.Services
 {
+    /// <summary>
+    /// 后台数据分析管理中心
+    /// </summary>
     public class SellerDataService : ISellerDataService
     {
         // 构造函数
@@ -41,13 +44,43 @@ namespace InternetMall.Services
             return shopFavotitesNum;
         }
 
-        // 本月盈利  --- 待定！！！
-        public int getMonthProfit(string sellerid)
+        // 根据时间段查看卖家各店铺的销售额
+        public List<ShopProfit> getShopProfit(string sellerid, DateTime startTime, DateTime endTime)
         {
-            int monthProfit = 100;
+            List<Shop> shops = _context.Shops.Where(x => x.SellerId == sellerid).ToList();
 
-            return monthProfit;
+            List<ShopProfit> shopProfits = new List<ShopProfit>();
 
+            foreach (Shop shop in shops)
+            {
+                // 找到时间段内店铺的所有订单
+                // List<Order> shopOrders = _context.Orders.Where(x => x.ShopId == shop.ShopId && x.Status == COrders.Done
+                //                        && x.OrdersDate > startTime && x.OrdersDate < endTime).ToList();
+
+                decimal? profit = _context.OrdersCommodities.Include(x => x.Orders).Where(x => x.Orders.ShopId == shop.ShopId && x.Status == COrders.Done
+                                         && x.Orders.OrdersDate > startTime && x.Orders.OrdersDate < endTime).Include(x => x.Commodity).Sum(x => x.Commodity.Price);
+                // 找到订单的联系集
+                // List<OrdersCommodity> shopOrdersCommodities = _context.OrdersCommodities.Where(x => x.OrdersId == shopOrders.OrderId)
+
+                // 查找销售额
+                //double profit = 0.0;
+
+                //foreach (OrdersCommodity ordersCommodity in shopOrdersCommodities)
+                //{
+                //    Commodity commodity = _context.Commodities.Where(x => x.CommodityId == ordersCommodity.CommodityId).FirstOrDefault();
+                //    profit = profit + (double)commodity.Price;
+                //}
+
+                ShopProfit shopProfit = new ShopProfit
+                {
+                    ShopName = shop.Name,
+                    Profit = profit
+                };
+
+                shopProfits.Add(shopProfit);
+            }
+
+            return shopProfits;
         }
 
         // 待发货总数
