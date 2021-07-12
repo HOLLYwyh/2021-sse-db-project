@@ -15,8 +15,12 @@ namespace Internetmall.Services
     {
         static int GetRandomSeedbyGuid()
         {
-            return new Guid().GetHashCode();
+            byte[] bytes = new byte[4];
+            System.Security.Cryptography.RNGCryptoServiceProvider rng = new System.Security.Cryptography.RNGCryptoServiceProvider();
+            rng.GetBytes(bytes);
+            return BitConverter.ToInt32(bytes, 0);
         }
+
         private readonly ModelContext _context;
 
         public HomeService(ModelContext context)
@@ -76,12 +80,12 @@ namespace Internetmall.Services
             }
             else
             {
-                List<Commodity> commoditiesList =  _context.Commodities.Include(c => c.Shop).Include(c => c.OrdersCommodities).ToList();
                 for (int i = 0; i < 6; i++)
                 {
-                    int temp1 = random.Next(0,15);
-                    string temp2 = temp1.ToString();
-                    tempResultList.Add(commoditiesList.FirstOrDefault(c => c.CommodityId == temp2));
+                    int randCategory = random.Next(1, 9);
+                    List<Commodity> commoditiesList =  _context.Commodities.Where(c => c.Category == randCategory).Include(c => c.Shop).Include(c => c.OrdersCommodities).ToList();
+                    int temp = random.Next(0, commoditiesList.Count - 1);
+                    tempResultList.Add(commoditiesList[temp]);
                 }
             }
             foreach (Commodity newCommodity in tempResultList)
