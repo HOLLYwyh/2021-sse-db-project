@@ -1,11 +1,11 @@
 // 首页中每个商品种类模块
-Vue.component('part', {
+Vue.component('part',{
     template: `
     <div class="kind">
         
     <div class="card_list">
         <div class="part_title">
-            <p class="ti">数码</p>
+            <p class="ti">{{this.type}}</p>
             <div class="more">
              更多
             </div>
@@ -16,11 +16,11 @@ Vue.component('part', {
         </div>
     <ul>
     <li v-for='(image,index) in img' :key='index' >
-        <a href="/Commodity/Details">
+        <a href="javascript:;">
                 <img :src="image">
                 <div class="introduce">
                     
-                   泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲
+                    泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲
                     
                 </div>
                 <div class="shop">
@@ -47,9 +47,11 @@ Vue.component('part', {
     </div>
     </div>
     `,
-    data: function () {
+    props:['type'],
+    data:function () {
         return {
-            mark: 0,
+            typex: this.type,
+            mark:0,
             img: [
                 '../../Images/Home/index/a1.png',
                 '../../Images/Home/index/a2.png',
@@ -60,19 +62,19 @@ Vue.component('part', {
                 '../../Images/Home/index/a4.png',
                 '../../Images/Home/index/a5.png'
             ],
-            rank: [
-                { rk: 1, name: '一号榴莲超大超甜6666666' },
-                { rk: 2, name: '一号榴莲超大超甜6666666' },
-                { rk: 3, name: '一号榴莲超大超甜6666666' },
-                { rk: 4, name: '一号榴莲超大超甜6666666' },
-                { rk: 5, name: '一号榴莲超大超甜6666666' },
-                { rk: 6, name: '一号榴莲超大超甜6666666' },
-                { rk: 7, name: '一号榴莲超大超甜6666666' },
-                { rk: 8, name: '一号榴莲超大超甜6666666' },
-                { rk: 9, name: '一号榴莲超大超甜6666666' },
-                { rk: 10, name: '一号榴莲超大超甜6666666' },
+            rank:[
+                { rk: 1,  name:'一号榴莲超大超甜666666666666666668888888888'},
+                { rk: 2, name:'一号榴莲超大超甜666666666666666668888888888'},
+                { rk: 3, name:'一号榴莲超大超甜666666666666666668888888888'},
+                { rk: 4, name:'一号榴莲超大超甜666666666666666668888888888'},
+                { rk: 5, name:'一号榴莲超大超甜666666666666666668888888888'},
+                { rk: 6, name:'一号榴莲超大超甜666666666666666668888888888'},
+                { rk: 7, name:'一号榴莲超大超甜666666666666666668888888888'},
+                { rk: 8, name:'一号榴莲超大超甜666666666666666668888888888'},
+                { rk: 9, name:'一号榴莲超大超甜666666666666666668888888888'},
+                { rk: 10, name:'一号榴莲超大超甜666666666666666668888888888'},
             ],
-            time: null
-        }
-    },
+            time:null
+            }
+        },
 })
