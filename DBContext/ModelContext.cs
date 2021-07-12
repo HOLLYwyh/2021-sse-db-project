@@ -318,7 +318,7 @@ namespace InternetMall.DBContext
                     .HasColumnName("CATEGORY");
 
                 entity.Property(e => e.Name)
-                    .HasMaxLength(30)
+                    .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("NAME");
 
