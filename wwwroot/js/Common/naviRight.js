@@ -30,12 +30,12 @@ Vue.component('naviright', {
                         {{this.name}}
                     </div>
                     <div class="listli">
-                        <a href="">用户中心</a>
+                        <a href=""><div>用户中心</div></a>
                     </div>
                     <div class="listli">
                         我的订单
                     </div>
-                    <div class="listli">
+                    <div class="listli" onclick="/Entry/BuyerLogOut">
                         退出
                         <i class="fa fa-sign-out" aria-hidden="true"></i> 
                     </div>
