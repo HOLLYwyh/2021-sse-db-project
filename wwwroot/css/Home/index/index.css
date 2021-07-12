@@ -8,10 +8,9 @@ body{
     top: 170px;
     left: 35px;
     width: 50px;
-    /*height: ;导航高度自适应*/
     background: #fff;
     border: 1px solid #bfbfbf;
-    border-radius: 5px; /*圆角属性*/
+    border-radius: 5px;
 }
 
 .item {
@@ -37,7 +36,7 @@ body{
 
     .item:hover {
         background: deepskyblue;
-        color: #fff; /*鼠标滑过,背景变蓝,字体颜色变白*/
+        color: #fff;
     }
 
 .carousel1 {
@@ -58,7 +57,6 @@ body{
     background-color: rgba(255, 255, 255);
     position: absolute;
     z-index: 4;
-    /* display: none; */
     box-shadow: 0 3px 6px 0 rgb(0 0 0 / 20%);
 }
 
@@ -173,7 +171,6 @@ body{
 .recommend{
     height: 200px;
     width: 999px;
-   /* background-color: rgb(54, 22, 240);*/
     display: block;
     position: relative;
     margin: 20px auto 0;
@@ -183,7 +180,6 @@ body{
     width: 529px;
     height: 200px;
     float: right;
-    /*background-color: rgb(233, 21, 21);*/
 }
 
 .rcmd_box ul li {
