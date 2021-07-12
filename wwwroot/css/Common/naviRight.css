@@ -162,3 +162,8 @@
     height: 260px;
     overflow: hidden;
 }
+
+.sidebaPersonage .listli a {
+    text-decoration:none;
+    color:black;
+}
