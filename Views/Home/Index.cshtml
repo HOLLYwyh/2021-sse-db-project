@@ -101,7 +101,7 @@
         <div class="rcmd_box">
             <ul>
                 <li v-for='(thing,index) in goods' :key='index'>
-                    <a :href="thing.link">
+                    <!--<a>-->
                         <img :src="thing.img">
                         <div class="introduce">
 
@@ -111,10 +111,10 @@
                         <div class="shop">
                             店铺：{{thing.shop}}
                         </div>
-                    </a>
+                    <!--</a>-->
                 </li>
             </ul>
-            <div class="change_btn">
+            <div class="change_btn" onclick="getRcmd()">
 
                 换一换
             </div>
