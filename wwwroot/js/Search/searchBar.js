@@ -35,13 +35,39 @@ Vue.component('searchbar', {
         }
     },
     methods: {
-        searchClick(){    //根据选择类型搜索
-            if ($('#select option:selected').text() === "店铺") {
-                window.location.href = "/Search/SearchShop";
-            }
-            else {
-                window.location.href = "/Search/SearchCommodity";
-            }
+        searchClick() {    //根据选择类型搜索
+            $.ajax({
+                type: "post",
+                url: "/Search/SetSearchName",
+                async: false,
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify({ Context: $("#searchContext").val()}),
+                success: function (result) {
+                    if ($('#select option:selected').text() === "店铺") {
+                        window.location.href = "/Search/SearchShop";
+                    }
+                    else {
+                        window.location.href = "/Search/SearchCommodity";
+                    }
+                }
+            });
         }
+    },
+    created() {
+        var that;
+        $.ajax({
+            url: "/Search/GetSearchName",
+            type: "get",
+            dataType: "json", //返回数据格式为json
+            async:false,
+            success:  function (result) {//请求成功完成后要执行的方法
+                var jsonData = eval("(" + result + ")");   //将json转换成对象
+                that = jsonData.searchResult;
+                console.log(jsonData.searchResult);
+            }
+        })
+        this.input = that;
+        this.$forceUpdate();
     }
 })
