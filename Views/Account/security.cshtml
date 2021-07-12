@@ -31,9 +31,9 @@
 
                                     <div style="padding: 8px">
                                         <span>手机号码<br></span>
-                                        <span style="padding:8px;color:#aaaaaa">{{phone}}</span>
+                                        <span style="padding:8px;color:#aaaaaa">{{ phone[0] }}{{ phone[1] }}{{ phone[2] }}****{{ phone[7] }}{{ phone[8] }}{{ phone[9] }}{{ phone[10] }}</span>
                                         <div class="bottom clearfix">
-                                            <el-button type="primary" round>修改</el-button>
+                                            <phonebut></phonebut>
                                         </div>
                                     </div>
                                 </el-card>
@@ -45,9 +45,9 @@
 
                                     <div style="padding: 8px">
                                         <span>登录密码<br></span>
-                                        <span style="padding:8px;color:#aaaaaa">*********</span>
+                                        <span style="padding:8px;color:#aaaaaa"></span>
                                         <div class="bottom clearfix">
-                                            <el-button type="primary" round>修改</el-button>
+                                            <passwordbut></passwordbut>
                                         </div>
                                     </div>
                                 </el-card>
@@ -59,7 +59,7 @@
 
                                     <div style="padding: 8px">
                                         <span>支付密码<br></span>
-                                        <span style="padding:8px;color:#aaaaaa">******</span>
+                                        <span style="padding:8px;color:#aaaaaa"></span>
                                         <div class="bottom clearfix">
                                             <el-button type="primary" round>修改</el-button>
                                         </div>

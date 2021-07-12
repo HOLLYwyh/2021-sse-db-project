@@ -1,0 +1,22 @@
+@import url("//unpkg.com/element-ui@2.15.2/lib/theme-chalk/index.css");
+
+.main{
+    margin-left:15%;
+    width:1150px;
+    padding-left:30px;
+    padding-right:30px;
+    padding-top: 10px; 
+}
+
+.el-card{
+    width:600px;
+    margin-top:50px;
+    margin-bottom: 50px;
+    margin-left: 300px;
+}
+
+#form{
+    padding-left:50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}

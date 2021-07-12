@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/Entry/sellorSignup/sellor_signup.css" type="text/css" rel="stylesheet" />
+    <link href="/css/Entry/sellerSignup/sellerSignup.css" type="text/css" rel="stylesheet" />
     <link href="/css/Common/common.css" type="text/css" rel="stylesheet" />
     <link href="/css/Common/shortcut_five.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
@@ -29,21 +29,21 @@
                 <div class="forem">
 
                     <el-form ref="form" :model="form" label-width="80px">
-                        <el-form-item label="昵称">
-                            <el-input v-model="form.name"></el-input>
-                        </el-form-item>
                         <el-form-item label="手机号码">
-                            <el-input v-model="form.phone"></el-input>
+                            <el-input id="phoneNumber" v-model="form.phone"></el-input>
+                        </el-form-item>
+                        <el-form-item label="昵称">
+                            <el-input id="nickName" v-model="form.name"></el-input>
                         </el-form-item>
 
                         <el-form-item label="登录密码">
-                            <el-input v-model="form.pswd"></el-input>
+                            <el-input id="password" v-model="form.pswd" type="password"></el-input>
                         </el-form-item>
                         <div class="note">
                             密码的位数在6~18位，可以包含大小写字母，数字，横杠和下划线
                         </div>
                         <el-form-item label="确认密码">
-                            <el-input v-model="form.pswd2"></el-input>
+                            <el-input v-model="form.pswd2" type="password"></el-input>
                         </el-form-item>
 
                         <el-form-item>
@@ -62,6 +62,6 @@
 
 
         <script type="text/javascript" src="/js/Common/shortcutFive.js"></script>
-        <script type="text/javascript" src="/js/Entry/sellorSignup/sellor_signup.js"></script>
+        <script type="text/javascript" src="/js/Entry/sellerSignup/sellerSignup.js"></script>
 </body>
 </html>

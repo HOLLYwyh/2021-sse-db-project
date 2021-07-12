@@ -12,10 +12,6 @@ namespace InternetMall.Controllers
 {
     public class PurchaseController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
         #region 发起支付
         /// 发起支付请求
         /// </summary>

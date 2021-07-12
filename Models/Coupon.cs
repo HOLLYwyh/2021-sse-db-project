@@ -19,7 +19,7 @@ namespace InternetMall.Models
         public decimal? Threshold { get; set; }
         public decimal? Discount1 { get; set; }
         public decimal? Discount2 { get; set; }
-        public short ? Category { get; set; }
+        public short? Category { get; set; }
         public string ShopId { get; set; }
         public string CommodityId { get; set; }
 

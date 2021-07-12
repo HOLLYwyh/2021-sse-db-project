@@ -23,7 +23,10 @@ namespace InternetMall.DBContext
         public virtual DbSet<Administrator> Administrators { get; set; }
         public virtual DbSet<Buyer> Buyers { get; set; }
         public virtual DbSet<BuyerCoupon> BuyerCoupons { get; set; }
+        public virtual DbSet<Chatroom> Chatrooms { get; set; }
+        public virtual DbSet<Chatuser> Chatusers { get; set; }
         public virtual DbSet<Commodity> Commodities { get; set; }
+        public virtual DbSet<Counter> Counters { get; set; }
         public virtual DbSet<Coupon> Coupons { get; set; }
         public virtual DbSet<CouponShop> CouponShops { get; set; }
         public virtual DbSet<FavoriteProduct> FavoriteProducts { get; set; }
@@ -39,8 +42,6 @@ namespace InternetMall.DBContext
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-               
             }
         }
 
@@ -60,6 +61,11 @@ namespace InternetMall.DBContext
                 entity.Property(e => e.Category)
                     .HasPrecision(2)
                     .HasColumnName("CATEGORY");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("DESCRIPTION");
 
                 entity.Property(e => e.EndTime)
                     .HasColumnType("DATE")
@@ -91,6 +97,14 @@ namespace InternetMall.DBContext
                     .HasMaxLength(6)
                     .IsUnicode(false)
                     .HasColumnName("COMMODITY_ID");
+
+                entity.Property(e => e.DateCreated)
+                    .HasColumnType("DATE")
+                    .HasColumnName("DATE_CREATED");
+
+                entity.Property(e => e.Quantity)
+                    .HasPrecision(6)
+                    .HasColumnName("QUANTITY");
 
                 entity.HasOne(d => d.Buyer)
                     .WithMany(p => p.AddShoppingCarts)
@@ -142,6 +156,11 @@ namespace InternetMall.DBContext
                     .IsUnicode(false)
                     .HasColumnName("PHONE")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.Url)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("URL");
             });
 
             modelBuilder.Entity<Buyer>(entity =>
@@ -184,6 +203,11 @@ namespace InternetMall.DBContext
                     .IsUnicode(false)
                     .HasColumnName("PHONE")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.Url)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("URL");
             });
 
             modelBuilder.Entity<BuyerCoupon>(entity =>
@@ -220,6 +244,66 @@ namespace InternetMall.DBContext
                     .HasConstraintName("SYS_C0010049");
             });
 
+            modelBuilder.Entity<Chatroom>(entity =>
+            {
+                entity.ToTable("CHATROOM");
+
+                entity.Property(e => e.Chatroomid)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("CHATROOMID");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("NAME");
+
+                entity.Property(e => e.Type)
+                    .HasColumnType("NUMBER(38)")
+                    .HasColumnName("TYPE");
+            });
+
+            modelBuilder.Entity<Chatuser>(entity =>
+            {
+                entity.HasKey(e => new { e.Buyerid, e.Sellerid, e.Chatroomid })
+                    .HasName("CHATUSER_PK");
+
+                entity.ToTable("CHATUSER");
+
+                entity.Property(e => e.Buyerid)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("BUYERID");
+
+                entity.Property(e => e.Sellerid)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SELLERID");
+
+                entity.Property(e => e.Chatroomid)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("CHATROOMID");
+
+                entity.HasOne(d => d.Buyer)
+                    .WithMany(p => p.Chatusers)
+                    .HasForeignKey(d => d.Buyerid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("BUYERFK");
+
+                entity.HasOne(d => d.Chatroom)
+                    .WithMany(p => p.Chatusers)
+                    .HasForeignKey(d => d.Chatroomid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("ROOMFK");
+
+                entity.HasOne(d => d.Seller)
+                    .WithMany(p => p.Chatusers)
+                    .HasForeignKey(d => d.Sellerid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("SELLERFK");
+            });
+
             modelBuilder.Entity<Commodity>(entity =>
             {
                 entity.ToTable("COMMODITY");
@@ -234,7 +318,7 @@ namespace InternetMall.DBContext
                     .HasColumnName("CATEGORY");
 
                 entity.Property(e => e.Name)
-                    .HasMaxLength(30)
+                    .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("NAME");
 
@@ -247,14 +331,83 @@ namespace InternetMall.DBContext
                     .IsUnicode(false)
                     .HasColumnName("SHOP_ID");
 
+                entity.Property(e => e.Soldnum)
+                    .HasPrecision(10)
+                    .HasColumnName("SOLDNUM")
+                    .HasDefaultValueSql("0 ");
+
                 entity.Property(e => e.Storage)
                     .HasPrecision(6)
                     .HasColumnName("STORAGE");
+
+                entity.Property(e => e.Url)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("URL");
+
+                entity.Property(e => e.Description)
+                   .HasMaxLength(1000)
+                   .IsUnicode(false)
+                   .HasColumnName("DESCRIPTION");
 
                 entity.HasOne(d => d.Shop)
                     .WithMany(p => p.Commodities)
                     .HasForeignKey(d => d.ShopId)
                     .HasConstraintName("SYS_C0010019");
+            });
+
+            modelBuilder.Entity<Counter>(entity =>
+            {               
+                entity.ToTable("COUNTER");
+
+                entity.Property(e => e.ID)
+                   .HasMaxLength(10)
+                   .IsUnicode(false)
+                   .HasColumnName("ID");
+
+                entity.Property(e => e.Buyercount)
+                    .HasPrecision(10)
+                    .HasColumnName("BUYERCOUNT");
+
+                entity.Property(e => e.Sellercount)
+                    .HasPrecision(10)
+                    .HasColumnName("SELLERCOUNT");
+
+                entity.Property(e => e.Administratorcount)
+                    .HasPrecision(10)
+                    .HasColumnName("ADMINISTRATORCOUNT");
+
+                entity.Property(e => e.Commoditycount)
+                    .HasPrecision(10)
+                    .HasColumnName("COMMODITYCOUNT");
+
+                entity.Property(e => e.Shopcount)
+                    .HasPrecision(10)
+                    .HasColumnName("SHOPCOUNT");
+       
+                entity.Property(e => e.Ordercount)
+                   .HasPrecision(10)
+                   .HasColumnName("ORDERCOUNT");
+
+                entity.Property(e => e.Couponcount)
+                   .HasPrecision(10)
+                   .HasColumnName("COUPONCOUNT");
+
+                entity.Property(e => e.Activitycount)
+                   .HasPrecision(10)
+                   .HasColumnName("ACTIVITYCOUNT");
+
+                entity.Property(e => e.Receivedcount)
+                   .HasPrecision(10)
+                   .HasColumnName("RECEIVEDCOUNT");
+
+                entity.Property(e => e.Messagecount)
+                   .HasPrecision(10)
+                   .HasColumnName("MESSAGECOUNT");
+
+                entity.Property(e => e.Chatroomcount)
+                   .HasPrecision(10)
+                   .HasColumnName("CHATROOMCOUNT");
             });
 
             modelBuilder.Entity<Coupon>(entity =>
@@ -362,6 +515,10 @@ namespace InternetMall.DBContext
                     .IsUnicode(false)
                     .HasColumnName("COMMODITY_ID");
 
+                entity.Property(e => e.DateCreated)
+                    .HasColumnType("DATE")
+                    .HasColumnName("DATE_CREATED");
+
                 entity.HasOne(d => d.Buyer)
                     .WithMany(p => p.FavoriteProducts)
                     .HasForeignKey(d => d.BuyerId)
@@ -392,6 +549,10 @@ namespace InternetMall.DBContext
                     .IsUnicode(false)
                     .HasColumnName("BUYER_ID");
 
+                entity.Property(e => e.DateCreated)
+                    .HasColumnType("DATE")
+                    .HasColumnName("DATE_CREATED");
+
                 entity.HasOne(d => d.Buyer)
                     .WithMany(p => p.FollowShops)
                     .HasForeignKey(d => d.BuyerId)
@@ -407,25 +568,39 @@ namespace InternetMall.DBContext
 
             modelBuilder.Entity<Message>(entity =>
             {
-                entity.HasKey(e => new { e.UserId, e.ShopId })
-                    .HasName("MESSAGE_PK");
-
                 entity.ToTable("MESSAGE");
 
-                entity.Property(e => e.UserId)
-                    .HasMaxLength(20)
+                entity.Property(e => e.Messageid)
+                    .HasMaxLength(6)
                     .IsUnicode(false)
-                    .HasColumnName("USER_ID");
+                    .HasColumnName("MESSAGEID");
 
-                entity.Property(e => e.ShopId)
-                    .HasMaxLength(20)
+                entity.Property(e => e.Chatroomid)
+                    .IsRequired()
+                    .HasMaxLength(6)
                     .IsUnicode(false)
-                    .HasColumnName("SHOP_ID");
+                    .HasColumnName("CHATROOMID");
 
-                entity.Property(e => e.FilePath)
-                    .HasMaxLength(40)
+                entity.Property(e => e.Text)
+                    .HasMaxLength(500)
                     .IsUnicode(false)
-                    .HasColumnName("FILE_PATH");
+                    .HasColumnName("TEXT");
+
+                entity.Property(e => e.Timestamp)
+                    .HasColumnType("DATE")
+                    .HasColumnName("TIMESTAMP");
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("USERNAME");
+
+                entity.HasOne(d => d.Chatroom)
+                    .WithMany(p => p.Messages)
+                    .HasForeignKey(d => d.Chatroomid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("MESSAGEFK");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -444,6 +619,10 @@ namespace InternetMall.DBContext
                     .HasMaxLength(6)
                     .IsUnicode(false)
                     .HasColumnName("BUYER_ID");
+
+                entity.Property(e => e.Orderamount)
+                    .HasColumnType("NUMBER(11,2)")
+                    .HasColumnName("ORDERAMOUNT");
 
                 entity.Property(e => e.OrdersDate)
                     .HasColumnType("DATE")
@@ -495,6 +674,10 @@ namespace InternetMall.DBContext
                     .HasMaxLength(6)
                     .IsUnicode(false)
                     .HasColumnName("COMMODITY_ID");
+
+                entity.Property(e => e.Status)
+                    .HasPrecision(1)
+                    .HasColumnName("STATUS");
 
                 entity.HasOne(d => d.Commodity)
                     .WithMany(p => p.OrdersCommodities)
@@ -608,6 +791,11 @@ namespace InternetMall.DBContext
                     .IsUnicode(false)
                     .HasColumnName("PHONE")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.Url)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("URL");
             });
 
             modelBuilder.Entity<Shop>(entity =>
@@ -637,10 +825,20 @@ namespace InternetMall.DBContext
                     .IsUnicode(false)
                     .HasColumnName("SELLER_ID");
 
+                entity.Property(e => e.Url)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("URL");
+
                 entity.HasOne(d => d.Seller)
                     .WithMany(p => p.Shops)
                     .HasForeignKey(d => d.SellerId)
                     .HasConstraintName("SYS_C0010017");
+
+                entity.Property(e => e.Description)
+                   .HasMaxLength(1000)
+                   .IsUnicode(false)
+                   .HasColumnName("DESCRIPTION");
             });
 
             OnModelCreatingPartial(modelBuilder);

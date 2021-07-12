@@ -12,5 +12,6 @@ namespace InternetMall.Models
         public DateTime? EndTime { get; set; }
         public string Name { get; set; }
         public short? Category { get; set; }
+        public string Description { get; set; }
     }
 }
