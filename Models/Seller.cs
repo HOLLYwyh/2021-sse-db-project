@@ -20,7 +20,6 @@ namespace InternetMall.Models
         public string IdNumber { get; set; }
         public string Phone { get; set; }
         public string Url { get; set; }
-
         public virtual ICollection<Chatuser> Chatusers { get; set; }
         public virtual ICollection<Shop> Shops { get; set; }
     }
