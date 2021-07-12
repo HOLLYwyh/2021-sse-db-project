@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Internetmall.Models.BusinessEntity;
 using InternetMall.DBContext;
 using InternetMall.Interfaces;
 using InternetMall.Models;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace InternetMall.Services
 {
@@ -128,15 +130,56 @@ namespace InternetMall.Services
             var modelContext = await _context.Shops.Where(s => s.SellerId == sellerId).Include(s => s.Seller).ToListAsync();
             return modelContext;
         }
-        //展示订单
-        public async Task<List<Order>> DisplayOrder(string shopId)
+        //显示简略订单信息
+        public async Task<string> DisplayBriefOrder(string shopId)
         {
+            List<SellerDetailedOrder> newOrderList = new List<SellerDetailedOrder>();
             if (shopId == null)
             {
                 return null;
             }
-            var modelContext = await _context.Orders.Where(o => o.ShopId == shopId).Include(o => o.Buyer).Include(o => o.Received).Include(o => o.Shop).ToListAsync();
-            return modelContext;
+            else
+            {
+                var modelContext = await _context.Orders.Where(o => o.ShopId == shopId)
+                                                    .Include(o => o.Buyer)
+                                                    .Include(o => o.Shop)
+                                                    .Include(o => o.OrdersCommodities)
+                                                       .ThenInclude(c => c.Commodity).ToListAsync();
+                foreach(Order newOrder in modelContext)
+                {
+                    decimal? orderPrice=0;
+                    SellerDetailedOrder briefOrder = new SellerDetailedOrder();
+                    briefOrder.buyerNickname = newOrder.Buyer.Nickname;
+                    briefOrder.url = newOrder.Buyer.Url;
+                    foreach(OrdersCommodity newCommodity in newOrder.OrdersCommodities)
+                    {
+                        orderPrice = orderPrice + newCommodity.Commodity.Price;
+                    }
+                    briefOrder.price = orderPrice;
+                    briefOrder.date = newOrder.OrdersDate;
+                    newOrderList.Add(briefOrder);
+                }
+            }
+            return JsonConvert.SerializeObject(newOrderList);
+
+        }
+        //显示订单详情
+        public async Task<string> DisplayDetailedOrder(string orderID)
+        {
+            if (orderID == null)
+            {
+                return null;
+            }
+            {
+                SellerDetailedOrder newOrderList = new SellerDetailedOrder();
+                var modelContext = await _context.Orders.Where(o => o.OrdersId == orderID)
+                                                        .Include(o => o.Buyer)
+                                                        .Include(o => o.Shop)
+                                                        .Include(o => o.OrdersCommodities)
+                                                           .ThenInclude(c => c.Commodity).ToListAsync();
+            }
+
+
         }
         //搜索订单
         public async Task<List<Order>> SearchOrder(string orderId, string commodityId, string commodityName, string recieverName, string recieverPhone, string buyerId)
@@ -187,6 +230,13 @@ namespace InternetMall.Services
                 }
             }
             return newList;
+        }
+        public async Task<List<Order>> FilterOrder(int orderStatus)
+        {
+            var modelContext = await _context.Orders.Where(o => o.Status == orderStatus).Include(o => o.Buyer)
+                                                    .Include(o => o.Received)
+                                                    .Include(o => o.Shop).ToListAsync();
+            return modelContext;
         }
     }
 }
