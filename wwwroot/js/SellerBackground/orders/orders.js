@@ -92,8 +92,8 @@ Vue.component('search', {
         }
     },
     methods: {
-        submitForm(formName) {
-
+        submitForm() {
+            //前后端交互
         },
         resetForm(formName) {
             this.$refs[formName].resetFields();

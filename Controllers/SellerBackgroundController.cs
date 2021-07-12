@@ -61,6 +61,11 @@ namespace InternetMall.Controllers
             return View();
         }
 
+        public IActionResult Orders()
+        {
+            return View();
+        }
+
         //前后端交互
         [HttpPost]
         [Obsolete]
