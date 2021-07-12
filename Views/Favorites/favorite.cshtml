@@ -13,86 +13,90 @@
         <el-container direction="vertical">
             <shortcut></shortcut>
             <el-container direction="horizontal">
-                <el-aside style="
-            background-color: rgb(238, 241, 246);
-            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-            width: 300px;
-          ">
-                    <img style="padding: 20px"
-                         src="~/Images/Home/index/yinghaohuicui.png" />
-                    <index></index>
-                </el-aside>
-                <el-container>
-                    <el-main style="min-height: 600px" direction="vertical">
-                        <el-row>
-                            <el-col :span="14">
-                                <tabs></tabs>
-                            </el-col>
-                            <el-col :span="4">
-                                <el-input :span="4"
-                                          v-model="input"
-                                          placeholder="请输入关键字"></el-input>
-                            </el-col>
-                            <el-col :span="1">
-                                <el-button icon="el-icon-search" plain></el-button>
-                            </el-col>
-                            <el-button type="danger">我的购物车</el-button>
-                        </el-row>
-                        <el-row>
-                            <el-col :span="4"
-                                    v-for="(o, index) in 5"
-                                    :key="o"
-                                    :offset="index > 0 ? 1 : 0">
-                                <el-card :body-style="{ padding: '0px' }" shadow="hover">
-                                    <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                                         class="image" />
-                                    <div style="padding: 8px">
-                                        <span>英豪巨无霸</span>
-                                        <el-rate v-model="rate"
-                                                 disabled
-                                                 show-score
-                                                 text-color="#ff9900"
-                                                 score-template="{value}">
-                                        </el-rate>
-                                        <span><strong>¥9.9</strong></span>
-                                        <div class="bottom clearfix">
-                                            <time class="time">{{ currentDate }}</time>
-                                            <el-button type="text" class="button" style="padding: 4px">查看详情</el-button>
-                                        </div>
-                                    </div>
-                                </el-card>
-                            </el-col>
-                        </el-row>
-                        <el-row>
-                            <el-col :span="4"
-                                    v-for="(o, index) in 5"
-                                    :key="o"
-                                    :offset="index > 0 ? 1 : 0">
-                                <el-card :body-style="{ padding: '0px' }" shadow="hover">
-                                    <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                                         class="image" />
-                                    <div style="padding: 8px">
-                                        <span>英豪巨无霸</span>
-                                        <el-rate v-model="rate"
-                                                 disabled
-                                                 show-score
-                                                 text-color="#ff9900"
-                                                 score-template="{value}">
-                                        </el-rate>
-                                        <span><strong>¥9.9</strong></span>
-                                        <div class="bottom clearfix">
-                                            <time class="time">{{ currentDate }}</time>
-                                            <el-button type="text" class="button" style="padding: 4px">查看详情</el-button>
-                                        </div>
-                                    </div>
-                                </el-card>
-                            </el-col>
-                        </el-row>
-                    </el-main>
-                    <el-footer>
-                        <pagination></pagination>
-                    </el-footer>
-                </el-container>
+                <el-row>
+                    <el-col :span="5">
+                        <div style="background-color: rgb(238, 241, 246);
+                                    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+                                    min-height: 800px;">
+                            <img style="padding: 20px"
+                                 src="~/Images/Home/index/yinghaohuicui.png" />
+                            <index></index>
+                        </div>
+                    </el-col>
+                    <el-col :span="19">
+                        <el-container style="margin-left:20px;">
+                            <el-main style="min-height: 600px" direction="vertical">
+                                <el-row>
+                                    <el-col :span="14">
+                                        <tabs></tabs>
+                                    </el-col>
+                                    <el-col :span="4">
+                                        <el-input :span="4"
+                                                  v-model="input"
+                                                  placeholder="请输入关键字"></el-input>
+                                    </el-col>
+                                    <el-col :span="1">
+                                        <el-button icon="el-icon-search" plain></el-button>
+                                    </el-col>
+                                    <el-button type="danger">我的购物车</el-button>
+                                </el-row>
+                                <el-row>
+                                    <el-col :span="4"
+                                            v-for="(o, index) in 5"
+                                            :key="o"
+                                            :offset="index > 0 ? 1 : 0">
+                                        <el-card :body-style="{ padding: '0px' }" shadow="hover">
+                                            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                                                 class="image" />
+                                            <div style="padding: 8px">
+                                                <span>英豪巨无霸</span>
+                                                <el-rate v-model="rate"
+                                                         disabled
+                                                         show-score
+                                                         text-color="#ff9900"
+                                                         score-template="{value}">
+                                                </el-rate>
+                                                <span><strong>¥9.9</strong></span>
+                                                <div class="bottom clearfix">
+                                                    <time class="time">{{ currentDate }}</time>
+                                                    <el-button type="text" class="button" style="padding: 4px">查看详情</el-button>
+                                                </div>
+                                            </div>
+                                        </el-card>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+                                    <el-col :span="4"
+                                            v-for="(o, index) in 5"
+                                            :key="o"
+                                            :offset="index > 0 ? 1 : 0">
+                                        <el-card :body-style="{ padding: '0px' }" shadow="hover">
+                                            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                                                 class="image" />
+                                            <div style="padding: 8px">
+                                                <span>英豪巨无霸</span>
+                                                <el-rate v-model="rate"
+                                                         disabled
+                                                         show-score
+                                                         text-color="#ff9900"
+                                                         score-template="{value}">
+                                                </el-rate>
+                                                <span><strong>¥9.9</strong></span>
+                                                <div class="bottom clearfix">
+                                                    <time class="time">{{ currentDate }}</time>
+                                                    <el-button type="text" class="button" style="padding: 4px">查看详情</el-button>
+                                                </div>
+                                            </div>
+                                        </el-card>
+                                    </el-col>
+                                </el-row>
+                            </el-main>
+                            <el-footer>
+                                <pagination></pagination>
+                            </el-footer>
+                        </el-container>
+                    </el-col>
+                </el-row>
             </el-container>
         </el-container>
     </div>

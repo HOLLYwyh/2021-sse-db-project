@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,8 +13,16 @@ namespace InternetMall.Services
 {
     public class BuyerService:IBuyerService
     {
-        private ModelContext _context;
-        Random rd = new Random();
+        private ModelContext _context;      
+        public int GetBuyerCount()
+        {
+            var count = _context.Counters.FirstOrDefault(m => m.ID == "0");
+            int buyerCount = count.Buyercount + 1;
+            count.Buyercount += 1;
+            _context.Counters.Update(count);
+            _context.SaveChanges();
+            return buyerCount;
+        }
         public bool SignUp(string phone, string nickName, string passwd)//注册
         {
             //如果要注册的用户电话不存在，说明可以注册
@@ -26,7 +34,7 @@ namespace InternetMall.Services
                 newBuyer.Nickname = nickName;
                 newBuyer.Passwd = passwd;
                 //为新用户随机生成一个用户ID
-                newBuyer.BuyerId = rd.Next(0, 1000).ToString();
+                newBuyer.BuyerId = GetBuyerCount().ToString();
                 //其他信息可以为空（初始即为空），用户后续添加即可
 
                 Create(newBuyer);
