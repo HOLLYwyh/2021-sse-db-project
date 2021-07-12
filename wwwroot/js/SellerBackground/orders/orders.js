@@ -37,9 +37,6 @@ Vue.component('search', {
                 id: [
                     { min: 1, max: 6, message: '长度在 1 到 6 个字符', trigger: 'blur' }
                 ],
-                commodity: [
-                    { min: 1, max: 6, message: '长度在 1 到 6 个字符', trigger: 'blur' }
-                ],
             }
         }
     },
@@ -96,7 +93,7 @@ Vue.component('search', {
                         </el-input>
                     </el-form-item>
                 </el-col>
-            </el-cow>
+            </el-row>
             <el-row>
                 <el-col :span="24">
                     <el-form-item label="收货信息：" prop="receiver">
@@ -113,7 +110,7 @@ Vue.component('search', {
             <el-row>
                 <el-col :span="24">
                     <el-form-item label="订单id：" prop="id">
-                        <el-input id="description" v-model="ruleForm.id"></el-input>
+                        <el-input v-model="ruleForm.id"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
