@@ -61,7 +61,7 @@
                                         <span>支付密码<br></span>
                                         <span style="padding:8px;color:#aaaaaa"></span>
                                         <div class="bottom clearfix">
-                                            <el-button type="primary" round @@click>修改</el-button>
+                                            <el-button type="primary" v-on:click="smile()" round>修改</el-button>
                                         </div>
                                     </div>
                                 </el-card>
@@ -75,7 +75,7 @@
                                         <span>实名认证<br></span>
                                         <span style="padding:8px;color:#aaaaaa">{{name}}</span>
                                         <div class="bottom clearfix">
-                                            <el-button type="primary" round>立即认证</el-button>
+                                            <el-button type="primary" v-on:click="smile()" round>立即认证</el-button>
                                         </div>
                                     </div>
                                 </el-card>
