@@ -110,7 +110,7 @@ namespace Internetmall.Services
                 List<Commodity> commoditiesList =  _context.Commodities.Where(c => c.Category == commodityCategory).Include(c => c.Shop).Include(c => c.OrdersCommodities).ToList();
                 for (int i = 0; i < 8; i++)
                 {
-                    int temp = random.Next(0, commoditiesList.Capacity - 1);
+                    int temp = random.Next(0, commoditiesList.Count - 1);
                     tempResultList.Add(commoditiesList[temp]);
                 }
                 foreach (Commodity newCommodity in tempResultList)
@@ -123,6 +123,29 @@ namespace Internetmall.Services
                     goods.Add(newGood);
                 }
                 return goods;
+            }
+            else return null;
+        }
+        public List<rankView> Rank(int commodityCategory = -1)   //产生排行榜文件
+        {
+            int[] resultcommodities = new int[10];
+            List<rankView> rankList = new List<rankView>();
+            if (commodityCategory != -1)
+            {
+                List<Commodity> commoditiesList = _context.Commodities.Where(c => c.Category == commodityCategory).OrderBy(c => c.Soldnum).ToList();
+                for (int i = 0; i < 10; i++)
+                {
+                    resultcommodities[i] = int.Parse(commoditiesList[i].CommodityId);
+                }
+                for (int i = 0; i < 10; i++)
+                {
+                    Commodity tempCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == resultcommodities[i].ToString());
+                    rankView tempRank = new rankView();
+                    tempRank.commodityId = tempCommodity.CommodityId;
+                    tempRank.commodityName = tempCommodity.Name;
+                    rankList.Add(tempRank);
+                }
+                return rankList;
             }
             else return null;
         }
