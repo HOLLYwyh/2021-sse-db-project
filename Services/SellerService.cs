@@ -1,4 +1,5 @@
-﻿using System;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,14 +8,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using InternetMall.Models;
 using InternetMall.DBContext;
-using Internetmall.Interfaces;
+using InternetMall.Interfaces;
 
-namespace Internetmall.Services
+namespace InternetMall.Services
 {
     public class SellerService : ISellerService
     {
         private readonly ModelContext _context;
         Random rd = new Random();
+
+        public int GetSellerCount()
+        {
+            var count = _context.Counters.FirstOrDefault(m => m.ID == "0");
+            int sellerCount = count.Sellercount + 1;
+            count.Sellercount += 1;
+            _context.Counters.Update(count);
+            _context.SaveChanges();
+            return sellerCount;
+        }
 
         public bool SignUp(string phone, string nickName, string passwd)//注册
         {
@@ -27,7 +38,7 @@ namespace Internetmall.Services
                 newSeller.Nickname = nickName;
                 newSeller.Passwd = passwd;
                 //为新用户随机生成一个用户ID
-                newSeller.SellerId = rd.Next(0, 1000).ToString();
+                newSeller.SellerId = GetSellerCount().ToString();
                 //其他信息可以为空（初始即为空），用户后续添加即可
 
                 Create(newSeller);
