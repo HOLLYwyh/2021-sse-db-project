@@ -13,10 +13,10 @@ namespace InternetMall.Services
     /// </summary>
     public class SecurityService : ISecurityService
     {
-        private ModelContext _ctx;
+        private ModelContext _context;
         public SecurityService(ModelContext ctx)
         {
-            _ctx = ctx;
+            _context = ctx;
         }
 
         // 显示用户绑定手机号
@@ -25,9 +25,9 @@ namespace InternetMall.Services
             // 检测用户是否存在，但应该没有必要，因为已经登录
             /*if(_ctx.Buyers.Any(e => e.BuyerId == id))
             */
-            Buyer buyer = _ctx.Buyers.FirstOrDefault(x => x.BuyerId == buyerid);
+            Buyer buyer = _context.Buyers.Where(x => x.BuyerId == buyerid).FirstOrDefault();
             // 电话号码需要检测是否存在
-            if (buyer.Phone != null)
+            if (buyer != null && buyer.Phone != null)
                 return buyer.Phone;
             else
                 return null;
@@ -36,55 +36,59 @@ namespace InternetMall.Services
         // 显示用户密码
         public string displayPasswd(string buyerid)
         {
-            Buyer buyer = _ctx.Buyers.FirstOrDefault(x => x.BuyerId == buyerid);
-            return buyer.Passwd;
+            Buyer buyer = _context.Buyers.Where(x => x.BuyerId == buyerid).FirstOrDefault();
+            if (buyer != null && buyer.Passwd != null)
+                return buyer.Passwd;
+            else
+                return null;
         }
 
         // 修改用户绑定的手机号码
-        public async Task<bool> updatePhone(string buyerid, string oldPhone, string newPhone)
+        public bool updatePhone(string buyerid, string oldPhone, string newPhone)
         {
-            Buyer buyer = _ctx.Buyers.FirstOrDefault(x => x.BuyerId == buyerid);   
+            Buyer buyer = _context.Buyers.Where(x => x.BuyerId == buyerid).FirstOrDefault();
 
-            if (buyer == null)
+            if (buyer != null)
             {
-                return false;
-                throw new DllNotFoundException();
-            }
-            else
-            {
-                if (buyer.Phone == null || buyer.Phone == oldPhone)  // 比对电话号码
+                if (buyer.Phone == null || buyer.Phone == oldPhone)   // 电话号码比对
                 {
                     buyer.Phone = newPhone;
-                    _ctx.Buyers.Update(buyer);
-                    await _ctx.SaveChangesAsync();
-                    return true;
+                    _context.Buyers.Update(buyer);
+
+                    if (_context.SaveChanges() > 0)
+                        return true;
+                    else
+                        return false;
                 }
-                else
+                else      // 电话号码比对错误
                     return false;
             }
+            else
+                return false; // 该用户不存在
         }
 
         // 修改用户密码
-        public async Task<bool> updatePasswd(string buyerid, string oldPasswd, string newPasswd)
+        public bool updatePasswd(string buyerid, string oldPasswd, string newPasswd)
         {
-            Buyer buyer = _ctx.Buyers.FirstOrDefault(x => x.BuyerId == buyerid);
+            Buyer buyer = _context.Buyers.Where(x => x.BuyerId == buyerid).FirstOrDefault();
 
-            if (buyer == null)
+            if (buyer != null)
             {
-                return false;
-                throw new DllNotFoundException();
-            }
-            else
-            {
-                if (buyer.Passwd == oldPasswd)  // 比对密码
+                if (buyer.Passwd == null || buyer.Passwd == oldPasswd)   // 电话号码比对
                 {
                     buyer.Passwd = newPasswd;
-                    await _ctx.SaveChangesAsync();
-                    return true;
+                    _context.Buyers.Update(buyer);
+
+                    if (_context.SaveChanges() > 0)
+                        return true;
+                    else
+                        return false;
                 }
-                else
+                else  // 密码比对错误
                     return false;
             }
+            else
+                return false; // 该用户不存在
         }
     }
 }

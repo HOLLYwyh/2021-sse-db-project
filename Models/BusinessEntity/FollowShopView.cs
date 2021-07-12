@@ -12,9 +12,9 @@ namespace InternetMall.Models.BusinessEntity
     {
         public string ShopId { get; set; }
         public string BuyerId { get; set; }
-        public DateTime DateCreated { get; set; }     // 关注时间
+        public DateTime? DateCreated { get; set; }     // 关注时间
         public string ShopName { get; set; }          // 店铺名称
-        //public int Score { get; set; }                // 店铺评分
-  
+        public List<Commodity> commodities { get; set; }   // 店铺首选商品
+                                                      
     }
 }

@@ -23,61 +23,81 @@ namespace InternetMall.Services
         }
 
         //添加关注
-        public void addToFollowShop(string buyerid, string shopid)
+        public bool addToFollowShop(string buyerid, string shopid)
         {
             FollowShop followShop = _context.FollowShops.Where(x => x.BuyerId == buyerid && x.ShopId == shopid).FirstOrDefault();
             if (followShop == null)
             {
-                followShop = new FollowShop { BuyerId = buyerid, ShopId = shopid,  DateCreated = DateTime.Now };
+                followShop = new FollowShop { BuyerId = buyerid, ShopId = shopid, DateCreated = DateTime.Now };
                 _context.FollowShops.Add(followShop);
-            }
 
-            _context.SaveChanges();
+                if (_context.SaveChanges() > 0)
+                    return true;
+                else
+                    return false;
+            }
+            else            // 已存在，不许添加
+                return true;        
         }
 
         // 取消关注
-        public async Task removeFollowShop(string buyerid, string shopid)
+        public bool removeFollowShop(string buyerid, string shopid)
         {
             FollowShop followShop = _context.FollowShops.Where(x => x.BuyerId == buyerid && x.ShopId == shopid).FirstOrDefault();
             if (followShop != null)
             {
                 _context.FollowShops.Remove(followShop);
-                await _context.SaveChangesAsync();
+
+                if (_context.SaveChanges() > 0)
+                    return true;
+                else
+                    return false;
             }
+            else
+                return true;
+        }
+
+        // 清除所有关注
+        public bool removeAllFollowShop(string buyerid)
+        {
+            List<FollowShop> followShops = _context.FollowShops.Where(x => x.BuyerId == buyerid).ToList();
+
+            _context.FollowShops.RemoveRange(followShops);
+
+            if (_context.SaveChanges() > 0)
+                return true;
+            else
+                return false;
+
         }
 
         // 查看关注信息
-        public IEnumerable<FollowShopView> GetCartProduct(string buyerid)
+        public List<FollowShopView> getCartProduct(string buyerid)
         {
-            List<FollowShopView> followShops = new List<FollowShopView>();    //  关注信息显示类 列表
+            List<FollowShopView> followShopViews = new List<FollowShopView>();    //  买家关注 列表        
 
-            // 查询商品信息
-            var query = from followShop in _context.FollowShops
-                        join buyer in _context.Buyers on followShop.BuyerId equals buyer.BuyerId
-                        join shop in _context.Shops on followShop.ShopId equals shop.ShopId
-                        where followShop.BuyerId == buyerid
-                        select new
-                        {
-                            BuyerId = buyer.BuyerId,
-                            ShopId = shop.ShopId,
-                            ShopName = shop.Name,       
-                            DateCreated = followShop.DateCreated
-                        };
+            List<FollowShop> followShops = _context.FollowShops.Where(x => x.BuyerId == buyerid).ToList();
 
-            foreach (var item in query)
-            {
-                FollowShopView followShopView = new FollowShopView();
+            foreach (FollowShop followShop in followShops)
+            {            
+                Shop shop = _context.Shops.Where(x => x.ShopId == followShop.ShopId).FirstOrDefault();
 
-                followShopView.BuyerId = item.BuyerId;
-                followShopView.ShopId = item.ShopId;
-                followShopView.DateCreated = (DateTime)item.DateCreated;
-                followShopView.ShopName = item.ShopName;
-                
+                List<Commodity> shopCommodities = _context.Commodities.Where(x => x.ShopId == followShop.ShopId).ToList();
 
-                followShops.Add(followShopView);
+                FollowShopView followShopView = new FollowShopView
+                {
+                    BuyerId = followShop.BuyerId,
+                    ShopId = followShop.ShopId,
+                    DateCreated = followShop.DateCreated,
+                    ShopName = shop.Name,  
+                    commodities = shopCommodities
+                };
+
+                followShopViews.Add(followShopView);
             }
 
-            return followShops;
+            return followShopViews;
         }
+        
     }
 }
