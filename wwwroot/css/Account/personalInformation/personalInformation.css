@@ -1,5 +1,7 @@
 body {
     margin: 0;
+    min-width: 1200px;
+    max-height: 1500px; 
 }
 
 #app {
@@ -21,7 +23,8 @@ body {
 
 .aria {
     background-image: url(../../../Images/Account/buyerAccount/background4.png);
-    background-size: 1220px 600px;
+    background-repeat:no-repeat;
+    background-size: 1235px 600px;
 }
 
 .avatar-uploader .el-upload {
