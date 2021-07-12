@@ -16,7 +16,8 @@ namespace InternetMall.Services
         {
             _context = context;
         }
-        public int GetActivityCount()//创建活动ID
+        //创建活动ID
+        public int GetActivityCount()
         {
             var count = _context.Counters.FirstOrDefault(m => m.ID == "0");
             int activityCount = count.Activitycount + 1;
@@ -25,7 +26,8 @@ namespace InternetMall.Services
             _context.SaveChanges();
             return activityCount;
         }
-        public int GetCouponCount()//创建优惠券ID
+        //创建优惠券ID
+        public int GetCouponCount()
         {
             var count = _context.Counters.FirstOrDefault(m => m.ID == "0");
             int couponCount = count.Couponcount + 1;
@@ -34,7 +36,8 @@ namespace InternetMall.Services
             _context.SaveChanges();
             return couponCount;
         }
-        public async Task<string> Refundment(string orderId, string commodityId)//退款售后
+        //退款售后
+        public async Task<string> Refundment(string orderId, string commodityId)
         {
             var modelContext = await _context.Orders.Include(o => o.Buyer)
                                                     .Include(o => o.Received)
@@ -67,7 +70,8 @@ namespace InternetMall.Services
             }
             else return "NOTDONE";
         }
-        public async Task<bool> delivery(string orderId)//发货
+        //发货
+        public async Task<bool> delivery(string orderId)
         {
             var modelContext = await _context.Orders.Where(o => o.OrdersId == orderId).Include(o => o.Buyer)
                                                     .Include(o => o.Received)
@@ -88,7 +92,8 @@ namespace InternetMall.Services
             _context.Activities.Add(newActivity);
             _context.SaveChanges();
         }
-        public async Task<List<Activity>> DisPlayActivity(string activityID)//显示活动
+        //显示活动
+        public async Task<List<Activity>> DisPlayActivity(string activityID)
         {
             if (activityID == null)
             {
@@ -103,7 +108,8 @@ namespace InternetMall.Services
             _context.Coupons.Add(coupon);
             _context.SaveChanges();
         }
-        public async Task<List<Coupon>> DisplayCoupon(string couponID)//显示优惠券
+        //显示优惠券
+        public async Task<List<Coupon>> DisplayCoupon(string couponID)
         {
             if (couponID == null)
             {
@@ -112,7 +118,8 @@ namespace InternetMall.Services
             var modelContext = await _context.Coupons.Where(a => a.CouponId == couponID).ToListAsync();
             return modelContext;
         }
-        public async Task<List<Shop>> ChooseShop(string sellerId)//筛选店铺
+        //筛选店铺
+        public async Task<List<Shop>> ChooseShop(string sellerId)
         {
             if (sellerId == null)
             {
@@ -121,8 +128,8 @@ namespace InternetMall.Services
             var modelContext = await _context.Shops.Where(s => s.SellerId == sellerId).Include(s => s.Seller).ToListAsync();
             return modelContext;
         }
-
-        public async Task<List<Order>> DisplayOrder(string shopId)//展示订单
+        //展示订单
+        public async Task<List<Order>> DisplayOrder(string shopId)
         {
             if (shopId == null)
             {
@@ -131,8 +138,8 @@ namespace InternetMall.Services
             var modelContext = await _context.Orders.Where(o => o.ShopId == shopId).Include(o => o.Buyer).Include(o => o.Received).Include(o => o.Shop).ToListAsync();
             return modelContext;
         }
-
-        public async Task<List<Order>> SearchOrder(string orderId, string commodityId, string commodityName, string recieverName, string recieverPhone, string buyerId)//搜索订单
+        //搜索订单
+        public async Task<List<Order>> SearchOrder(string orderId, string commodityId, string commodityName, string recieverName, string recieverPhone, string buyerId)
         {
             List<Order> newList;
             var modelContext = await _context.Orders.Include(o => o.Buyer)
