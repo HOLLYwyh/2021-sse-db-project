@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace InternetMall.Controllers
 {
-    public class DetailsController : Controller   //商品详情与店铺详情
+    public class DetailController : Controller   //商品详情与店铺详情
     {
-        
+        public IActionResult CommodityDetails()
+        {
+            return View();
+        }
     }
 }
