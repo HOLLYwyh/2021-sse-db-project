@@ -1,5 +1,47 @@
 Vue.component('search', {
     data: function () {
+        let checkCommodity = (rule, value, callback) => {
+            if (this.ruleForm.commodityTag !== '') {
+                if (!value) {
+                    return callback(new Error('不能为空'));
+                }
+                if (this.ruleForm.commodityTag === 'commodityName') {
+                    if((value.length<=0)||(value.length>30)){
+                        callback(new Error('字符数在 1 到 30 个'));
+                    }else{
+                        callback();
+                    }
+                } else if (this.ruleForm.commodityTag === 'commodityId') {
+                    let val = Number(value);
+                    if ((val <= 0) || (val > 1000000)) {
+                        callback(new Error('位数在 1 到 6 位'));
+                    } else {
+                        callback();
+                    }
+                }
+            }
+        };
+        let checkReceiver = (rule, value, callback) => {
+            if (this.ruleForm.receiverTag !== '') {
+                if (!value) {
+                    return callback(new Error('不能为空'));
+                }
+                if (this.ruleForm.receiverTag === 'commodityName') {
+                    if((value.length<=0)||(value.length>30)){
+                        callback(new Error('字符数在 1 到 30 个'));
+                    }else{
+                        callback();
+                    }
+                } else if (this.ruleForm.commodityTag === 'commodityId') {
+                    let val = Number(value);
+                    if ((val <= 0) || (val > 1000000)) {
+                        callback(new Error('位数在 1 到 6 位'));
+                    } else {
+                        callback();
+                    }
+                }
+            }
+        };
         return {
             pickerOptions: {
                 disabledDate(time) {
@@ -28,7 +70,9 @@ Vue.component('search', {
             },
             ruleForm: {
                 id: '',
+                commodityTag: '',
                 commodity: '',
+                receiverTag: '',
                 receiver: '',
                 startTime: '',
                 endTime: ''
@@ -37,13 +81,19 @@ Vue.component('search', {
                 id: [
                     { min: 1, max: 6, message: '长度在 1 到 6 个字符', trigger: 'blur' }
                 ],
+                commodity: [
+                    { validator: checkCommodity, trigger: 'blur' },
+                ],
+                receiver:[
+                    { validator: checkReceiver, trigger: 'blur'}
+                ]
             }
         }
     },
     methods: {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
-                if (valid) {
+                /*if (valid) {
                     //通过AJAX的方式向后端传送数据
                     var formData = new FormData();
                     formData.append("name", $("#picName").val());                //商品名称
@@ -72,7 +122,7 @@ Vue.component('search', {
                 } else {
                     console.log('error submit!!');
                     return false;
-                }
+                }*/
             });
         },
         resetForm(formName) {
@@ -86,9 +136,9 @@ Vue.component('search', {
                 <el-col :span="24">
                     <el-form-item label="商品信息：" prop="commodity">
                         <el-input placeholder="请输入内容" v-model="ruleForm.commodity" class="input-with-select">
-                            <el-select v-model="ruleForm.commodity" slot="prepend" placeholder="请选择">
-                                <el-option label="商品名称" value="1"></el-option>
-                                <el-option label="商品id" value="2"></el-option>
+                            <el-select v-model="ruleForm.commodityTag" slot="prepend" placeholder="请选择">
+                                <el-option label="商品名称" value="commodityName"></el-option>
+                                <el-option label="商品id" value="commodityId"></el-option>
                             </el-select>
                         </el-input>
                     </el-form-item>
@@ -98,10 +148,10 @@ Vue.component('search', {
                 <el-col :span="24">
                     <el-form-item label="收货信息：" prop="receiver">
                         <el-input placeholder="请输入内容" v-model="ruleForm.receiver" class="input-with-select">
-                            <el-select v-model="ruleForm.receiver" slot="prepend" placeholder="请选择">
-                                <el-option label="收货人姓名" value="1"></el-option>
-                                <el-option label="收货人手机号" value="2"></el-option>
-                                <el-option label="下单人账号" value="3"></el-option>
+                            <el-select v-model="ruleForm.receiverTag" slot="prepend" placeholder="请选择">
+                                <el-option label="收货人姓名" value="receiverName"></el-option>
+                                <el-option label="收货人手机号" value="recerverPhone"></el-option>
+                                <el-option label="下单人账号" value="buyerId"></el-option>
                             </el-select>
                         </el-input>
                     </el-form-item>
