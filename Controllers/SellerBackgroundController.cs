@@ -56,6 +56,16 @@ namespace InternetMall.Controllers
             }
         }
 
+        public IActionResult SwitchShop()
+        {
+            return View();
+        }
+
+        public IActionResult Orders()
+        {
+            return View();
+        }
+
         //前后端交互
         [HttpPost]
         [Obsolete]

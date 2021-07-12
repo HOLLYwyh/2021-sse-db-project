@@ -13,7 +13,7 @@ Vue.component('side-bar', {
                     window.location.href = '/SellerBackground/Home';
                     break;
                 case 2:
-                    window.location.href = '#';
+                    window.location.href = '/SellerBackground/Orders';
                     break;
                 case 3:
                     window.location.href = '#';
@@ -25,13 +25,13 @@ Vue.component('side-bar', {
                     window.location.href = '/SellerBackground/Goods';
                     break;
                 case 6:
-                    window.location.href = '#';
+                    window.location.href = '/Entry/SellerLogIn';
                     break;
                 case 7:
                     window.location.href = '/SellerBackground/ShopSignUp';
                     break;
                 case 8:
-                    window.location.href = '#';
+                    window.location.href = '/SellerBackground/SwitchShop';
                     break;
                 default:
                     window.location.href = '#';
