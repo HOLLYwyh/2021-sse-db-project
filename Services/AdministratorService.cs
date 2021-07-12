@@ -28,6 +28,7 @@ namespace Internetmall.Services
             _context.SaveChanges();
             return adminCount;
         }
+        //没有注册的话，就不用这个函数了
         public bool SignUp(string phone, string nickName, string passwd)//注册
         {
             //如果要注册的用户电话不存在，说明可以注册
