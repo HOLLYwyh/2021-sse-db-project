@@ -42,6 +42,10 @@ namespace Internetmall.Services
             }
             return ansCom;
         }
+        public Commodity GetCommodity(string name)
+        {
+            return _context.Commodities.FirstOrDefault(c => c.Name == name);
+        }
     }
 
 
