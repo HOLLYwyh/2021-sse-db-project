@@ -13,5 +13,6 @@ namespace Internetmall.Interfaces
 
         public List<Commodity> SearchCommodity(string commodityName);
 
+        //public string GetCommodityById(string id);
     }
 }

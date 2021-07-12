@@ -2,15 +2,19 @@
 <html>
 <head>
     <title>商品详情</title>
+    <link href="~/css/Entry/buyerLogin/buyerLogin.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
+    <!--引入与导航栏有关的配置-->
+    <link href="/css/Common/shortcut_five.css" rel="stylesheet">
 
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
 </head>
 <body>
-    @*
-    <style>
-        div {
-            border: 1px solid red;
-        }
-    </style>*@
+    <!--渲染导航栏-->
+    <div id="shortcutlg">
+        <shortcut></shortcut>
+    </div>
+
     <div id="container" style="width:1200px">
         <div id="header" style="width: 1200px; background-color: #f75404;">
             <h1 style="margin-bottom:0;">高级优质国家级精品运动鞋</h1>
@@ -21,7 +25,11 @@
                 <h3 style="margin-bottom: 0;">商品简介</h3>
                 获取商品简介
             </div>
-
+            <form method="post">
+                请输入商品名称：<input id="commodityName" />
+                <button onclick="details()">搜索</button>
+            </form>
+            <br />
             名称 name <br />
             价格 price <br />
             尺码 size <br />
@@ -42,7 +50,8 @@
     <div id="footer" style="background-color:#f0f43c;clear:both;text-align:center;">
         版权-我
     </div>
-
+    <script type="text/javascript" src="/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="/js/Commodity/details/details.js"></script>
 
 
 </body>

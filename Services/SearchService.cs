@@ -43,15 +43,14 @@ namespace Internetmall.Services
             }
             return ansCom;
         }
-        /*
-        public Commodity GetCommodity(string name)
+        public Commodity GetCommodityById(string id)
         {
-            return _context.Commodities.FirstOrDefault(c => c.Name == name);
-        }*/
-        public string GetCommodity(string name)
-        {
-            return JsonConvert.SerializeObject(_context.Commodities.FirstOrDefault(c => c.Name == name));
+            return _context.Commodities.FirstOrDefault(c => c.CommodityId == id);
         }
+        //    public string GetCommodityById(string id)
+        //    {
+        //        return JsonConvert.SerializeObject(_context.Commodities.FirstOrDefault(c => c.CommodityId == id));
+        //    }
     }
 
 

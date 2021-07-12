@@ -26,5 +26,26 @@ namespace InternetMall.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public JsonResult GetCommodityDetails([FromBody] CommodityId commodityId)
+        {
+            var com = service.GetCommodityById(commodityId.id);
+            JsonData jsondata = new JsonData();
+            if (com != null)
+            {
+                jsondata["Id"] = com.CommodityId;
+                jsondata["Price"] = com.Price.ToString();
+                jsondata["Category"] = com.Category;
+                jsondata["Storage"] = com.Storage;
+                jsondata["Name"] = com.Name;
+                jsondata["ShopId"] = com.ShopId;
+                jsondata["Url"] = com.Url;
+                jsondata["Soldnum"] = com.Soldnum;
+                jsondata["Description"] = com.Description;
+            }
+           
+            return Json(jsondata.ToJson());
+        }
+
     }
 }
