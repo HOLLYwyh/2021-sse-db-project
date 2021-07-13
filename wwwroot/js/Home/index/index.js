@@ -19,7 +19,7 @@ var part1 = new Vue({
         ],
         rank: [
         ],
-        number:-999,
+        number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     }
 });
 
@@ -31,7 +31,7 @@ var part2 = new Vue({
         ],
         rank: [
         ],
-        number: -999,
+        number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     }
 });
 
@@ -43,7 +43,7 @@ var part3 = new Vue({
         ],
         rank: [
         ],
-        number: -999,
+        number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     }
 });
 
@@ -55,7 +55,7 @@ var part4 = new Vue({
         ],
         rank: [
         ],
-        number: -999,
+        number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     }
 });
 
@@ -67,7 +67,7 @@ var part5 = new Vue({
         ],
         rank: [
         ],
-        number: -999,
+        number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     }
 });
 
@@ -79,7 +79,7 @@ var part6 = new Vue({
         ],
         rank: [
         ],
-        number: -999,
+        number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     }
 });
 
@@ -91,7 +91,7 @@ var part7 = new Vue({
         ],
         rank: [
         ],
-        number: -999,
+        number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     }
 });
 
@@ -103,7 +103,7 @@ var part8 = new Vue({
         ],
         rank: [
         ],
-        number: -999,
+        number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     }
 });
 
@@ -115,7 +115,7 @@ var part9 = new Vue({
         ],
         rank: [
         ],
-        number: -999,
+        number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     }
 });
 
@@ -145,6 +145,7 @@ function getRcmd() {
         type: "get",
         dataType: "json", //返回数据格式为json
         success: function (data) {//请求成功完成后要执行的方法
+            console.log(data)
             rcmd.goods = data
             console.log("1")
         }

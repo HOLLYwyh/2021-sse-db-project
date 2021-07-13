@@ -9,6 +9,7 @@ using InternetMall.Models;
 using InternetMall.DBContext;
 using Internetmall.Interfaces;
 using Internetmall.Models.BusinessEntity;
+using System.Text.RegularExpressions;
 
 namespace Internetmall.Services
 {
@@ -33,43 +34,60 @@ namespace Internetmall.Services
             List<Commodity> newCommodityList = new List<Commodity>();
             List<Good> returnList = new List<Good>(); 
             int count = 0;
-            if(searchType == 0)
+            int number = 0;
+            if (commodityName == "")
+            {
+                for (int i = 0; i < 12; i++)
+                {
+                    string randCommodityID = random.Next(1, 120).ToString();
+                    Commodity newCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == randCommodityID);//Include(c => c.Shop).FirstOrDefault(c =>c.CommodityId == randCommodityID);
+                    Good newGood = new Good();
+                    newGood.img = newCommodity.Url;
+                    newGood.intro = newCommodity.Name;
+                    //newGood.shop = newCommodity.Shop.Name;
+                    newGood.ID = newCommodity.CommodityId;
+                    newGood.price = newCommodity.Price;
+                    returnList.Add(newGood);
+                }
+            }
+            else if (searchType == 0)
             {
                 List<Commodity> commodityList = _context.Commodities.Include(c => c.Shop).ToList();
                 foreach (var item in commodityList)
                 {
-                    if (item.Name.Contains(commodityName))
+                    Regex r = new Regex("["+commodityName+"]");
+                    MatchCollection m = r.Matches(item.Name);
+                    if (m.Count != 0)
                     {
                         count++;
                         newCommodityList.Add(item);//把搜索到包含关键字的商品加入列表
                     }
                 }
-                if (count >= 12)
+                foreach (Commodity newCommodity in newCommodityList)
                 {
-                    foreach (Commodity newCommodity in newCommodityList)
-                    {
-                        count++;
-                        Good newGood = new Good();
-                        newGood.img = newCommodity.Url;
-                        newGood.intro = newCommodity.Name;
-                        newGood.shop = newCommodity.Shop.Name;
-                        newGood.ID = newCommodity.CommodityId;
-                        returnList.Add(newGood);
-                        if (count == 12)
-                            break;
-                    }
+                    number++;
+                    Good newGood = new Good();
+                    newGood.img = newCommodity.Url;
+                    newGood.intro = newCommodity.Name;
+                    //newGood.shop = newCommodity.Shop.Name;
+                    newGood.ID = newCommodity.CommodityId;
+                    newGood.price = newCommodity.Price;
+                    returnList.Add(newGood);
+                    if (number == 12)
+                        break;
                 }
-                else
+                if (count < 12)
                 {
-                    for(int i=count;i<=12; i++)
+                    for(int i=count;i < 12; i++)
                     {
-                        string randCommodityID = random.Next(0, 120).ToString();
-                        Commodity newCommodity = _context.Commodities.Include(c => c.Shop).FirstOrDefault(c =>c.CommodityId == randCommodityID);
+                        string randCommodityID = random.Next(1, 120).ToString();
+                        Commodity newCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == randCommodityID);//Include(c => c.Shop).FirstOrDefault(c =>c.CommodityId == randCommodityID);
                         Good newGood = new Good();
                         newGood.img = newCommodity.Url;
                         newGood.intro = newCommodity.Name;
-                        newGood.shop = newCommodity.Shop.Name;
+                        //newGood.shop = newCommodity.Shop.Name;
                         newGood.ID = newCommodity.CommodityId;
+                        newGood.price = newCommodity.Price;
                         returnList.Add(newGood);
                     }
                 }
@@ -79,38 +97,39 @@ namespace Internetmall.Services
                 List<Commodity> commodityList = _context.Commodities.OrderByDescending(c => c.Price).Include(c => c.Shop).ToList();
                 foreach (var item in commodityList)
                 {
-                    if (item.Name.Contains(commodityName))
+                    Regex r = new Regex("[" + commodityName + "]");
+                    MatchCollection m = r.Matches(item.Name);
+                    if (m.Count != 0)
                     {
                         count++;
-                        newCommodityList.Add(item);//把搜索到包含关键字的商品加入列表
+                        newCommodityList.Add(item);
                     }
                 }
-                if (count >= 12)
+                foreach (Commodity newCommodity in newCommodityList)
                 {
-                    foreach (Commodity newCommodity in newCommodityList)
+                    number++;
+                    Good newGood = new Good();
+                    newGood.img = newCommodity.Url;
+                    newGood.intro = newCommodity.Name;
+                    //newGood.shop = newCommodity.Shop.Name;
+                    newGood.ID = newCommodity.CommodityId;
+                    newGood.price = newCommodity.Price;
+                    returnList.Add(newGood);
+                    if (number == 12)
+                        break;
+                }
+                if (count < 12)
+                {
+                    for (int i = count; i < 12; i++)
                     {
-                        count++;
+                        string randCommodityID = random.Next(1, 120).ToString();
+                        Commodity newCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == randCommodityID);//.Include(c => c.Shop).FirstOrDefault(c => c.CommodityId == randCommodityID);
                         Good newGood = new Good();
                         newGood.img = newCommodity.Url;
                         newGood.intro = newCommodity.Name;
-                        newGood.shop = newCommodity.Shop.Name;
+                        //newGood.shop = newCommodity.Shop.Name;
                         newGood.ID = newCommodity.CommodityId;
-                        returnList.Add(newGood);
-                        if (count == 12)
-                            break;
-                    }
-                }
-                else
-                {
-                    for (int i = count; i <= 12; i++)
-                    {
-                        string randCommodityID = random.Next(0, 120).ToString();
-                        Commodity newCommodity = _context.Commodities.Include(c => c.Shop).FirstOrDefault(c => c.CommodityId == randCommodityID);
-                        Good newGood = new Good();
-                        newGood.img = newCommodity.Url;
-                        newGood.intro = newCommodity.Name;
-                        newGood.shop = newCommodity.Shop.Name;
-                        newGood.ID = newCommodity.CommodityId;
+                        newGood.price = newCommodity.Price;
                         returnList.Add(newGood);
                     }
                 }
@@ -120,38 +139,39 @@ namespace Internetmall.Services
                 List<Commodity> commodityList = _context.Commodities.OrderBy(c => c.Price).Include(c => c.Shop).ToList();
                 foreach (var item in commodityList)
                 {
-                    if (item.Name.Contains(commodityName))
+                    Regex r = new Regex("[" + commodityName + "]");
+                    MatchCollection m = r.Matches(item.Name);
+                    if (m.Count != 0)
                     {
                         count++;
-                        newCommodityList.Add(item);//把搜索到包含关键字的商品加入列表
+                        newCommodityList.Add(item);
                     }
                 }
-                if (count >= 12)
+                foreach (Commodity newCommodity in newCommodityList)
                 {
-                    foreach (Commodity newCommodity in newCommodityList)
+                    number++;
+                    Good newGood = new Good();
+                    newGood.img = newCommodity.Url;
+                    newGood.intro = newCommodity.Name;
+                    //newGood.shop = newCommodity.Shop.Name;
+                    newGood.ID = newCommodity.CommodityId;
+                    newGood.price = newCommodity.Price;
+                    returnList.Add(newGood);
+                    if (number == 12)
+                        break;
+                }
+                if (count < 12)
+                {
+                    for (int i = count; i < 12; i++)
                     {
-                        count++;
+                        string randCommodityID = random.Next(1, 120).ToString();
+                        Commodity newCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == randCommodityID);//.Include(c => c.Shop).FirstOrDefault(c => c.CommodityId == randCommodityID);
                         Good newGood = new Good();
                         newGood.img = newCommodity.Url;
                         newGood.intro = newCommodity.Name;
-                        newGood.shop = newCommodity.Shop.Name;
+                        //newGood.shop = newCommodity.Shop.Name;
                         newGood.ID = newCommodity.CommodityId;
-                        returnList.Add(newGood);
-                        if (count == 12)
-                            break;
-                    }
-                }
-                else
-                {
-                    for (int i = count; i <= 12; i++)
-                    {
-                        string randCommodityID = random.Next(0, 120).ToString();
-                        Commodity newCommodity = _context.Commodities.Include(c => c.Shop).FirstOrDefault(c => c.CommodityId == randCommodityID);
-                        Good newGood = new Good();
-                        newGood.img = newCommodity.Url;
-                        newGood.intro = newCommodity.Name;
-                        newGood.shop = newCommodity.Shop.Name;
-                        newGood.ID = newCommodity.CommodityId;
+                        newGood.price = newCommodity.Price;
                         returnList.Add(newGood);
                     }
                 }
@@ -161,37 +181,37 @@ namespace Internetmall.Services
                 List<Commodity> commodityList = _context.Commodities.OrderByDescending(c => c.Soldnum).Include(c => c.Shop).ToList();
                 foreach (var item in commodityList)
                 {
-                    if (item.Name.Contains(commodityName))
+                    Regex r = new Regex("[" + commodityName + "]");
+                    MatchCollection m = r.Matches(item.Name);
+                    if (m.Count != 0)
                     {
                         count++;
-                        newCommodityList.Add(item);//把搜索到包含关键字的商品加入列表
+                        newCommodityList.Add(item);
                     }
                 }
-                if (count >= 12)
+                foreach (Commodity newCommodity in newCommodityList)
                 {
-                    foreach (Commodity newCommodity in newCommodityList)
+                    number++;
+                    Good newGood = new Good();
+                    newGood.img = newCommodity.Url;
+                    newGood.intro = newCommodity.Name;
+                    //newGood.shop = newCommodity.Shop.Name;
+                    newGood.ID = newCommodity.CommodityId;
+                    newGood.price = newCommodity.Price;
+                    returnList.Add(newGood);
+                    if (number == 12)
+                        break;
+                }
+                if (count < 12)
+                {
+                    for (int i = count; i < 12; i++)
                     {
-                        count++;
+                        string randCommodityID = random.Next(1, 120).ToString();
+                        Commodity newCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == randCommodityID);//.Include(c => c.Shop).FirstOrDefault(c => c.CommodityId == randCommodityID);
                         Good newGood = new Good();
                         newGood.img = newCommodity.Url;
                         newGood.intro = newCommodity.Name;
-                        newGood.shop = newCommodity.Shop.Name;
-                        newGood.ID = newCommodity.CommodityId;
-                        returnList.Add(newGood);
-                        if (count == 12)
-                            break;
-                    }
-                }
-                else
-                {
-                    for (int i = count; i <= 12; i++)
-                    {
-                        string randCommodityID = random.Next(0, 120).ToString();
-                        Commodity newCommodity = _context.Commodities.Include(c => c.Shop).FirstOrDefault(c => c.CommodityId == randCommodityID);
-                        Good newGood = new Good();
-                        newGood.img = newCommodity.Url;
-                        newGood.intro = newCommodity.Name;
-                        newGood.shop = newCommodity.Shop.Name;
+                        //newGood.shop = newCommodity.Shop.Name;
                         newGood.ID = newCommodity.CommodityId;
                         returnList.Add(newGood);
                     }
@@ -200,42 +220,56 @@ namespace Internetmall.Services
             return returnList;
         }
         //搜索店铺
-        public List<ShopView> SearchShop(string shopName, int searchType)//根据搜索字，寻找所有包含关键字的店铺，返回店铺列表
+        public List<ShopView> SearchShop(string shopName, int searchType = 0)//根据搜索字，寻找所有包含关键字的店铺，返回店铺列表
         {
             Random random = new Random(GetRandomSeedbyGuid());
             List<Shop> newShopList = new List<Shop>();
             List<ShopView> returnList = new List<ShopView>();
             int count = 0;
-            if (searchType == 0)
+            int number = 0;
+            if(shopName == "")
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    string randShopID = random.Next(1, 1).ToString();
+                    Shop newShop = _context.Shops.FirstOrDefault(c => c.ShopId == randShopID);
+                    ShopView newShopView = new ShopView();
+                    newShopView.shopName = newShop.Name;
+                    newShopView.shopDescription = newShop.Description;
+                    newShopView.img = newShop.Url;
+                    newShopView.creditScore = newShop.CreditScore;
+                    returnList.Add(newShopView);
+                }
+            }
+            else if (searchType == 0)
             {
                 List<Shop> shopList = _context.Shops.ToList();
                 foreach (var item in shopList)
                 {
-                    if (item.Name.Contains(shopName))
+                    Regex r = new Regex("[" + shopName + "]");
+                    MatchCollection m = r.Matches(item.Name);
+                    if (m.Count != 0)
                     {
                         count++;
-                        newShopList.Add(item);//把搜索到包含关键字的商品加入列表
+                        shopList.Add(item);
                     }
                 }
-                if (count >= 4)
+                foreach (Shop newShop in newShopList)
                 {
-                    foreach (Shop newShop in newShopList)
-                    {
-                        count++;
-                        ShopView newShopView = new ShopView();
-                        newShopView.shopID = newShop.ShopId;
-                        newShopView.shopName = newShop.Name;
-                        newShopView.shopDescription = newShop.Description;
-                        newShopView.img = newShop.Url;
-                        newShopView.creditScore = newShop.CreditScore;
-                        returnList.Add(newShopView);
-                        if (count == 4)
-                            break;
-                    }
+                    number++;
+                    ShopView newShopView = new ShopView();
+                    newShopView.shopID = newShop.ShopId;
+                    newShopView.shopName = newShop.Name;
+                    newShopView.shopDescription = newShop.Description;
+                    newShopView.img = newShop.Url;
+                    newShopView.creditScore = newShop.CreditScore;
+                    returnList.Add(newShopView);
+                    if (number == 4)
+                        break;
                 }
-                else
+                if (count < 4)
                 {
-                    for (int i = count; i <= 4; i++)
+                    for (int i = count; i < 4; i++)
                     {
                         string randShopID = random.Next(1, 1).ToString();
                         Shop newShop = _context.Shops.FirstOrDefault(c => c.ShopId == randShopID);
@@ -253,31 +287,30 @@ namespace Internetmall.Services
                 List<Shop> shopList = _context.Shops.OrderByDescending(s => s.CreditScore).ToList();
                 foreach (var item in shopList)
                 {
-                    if (item.Name.Contains(shopName))
+                    Regex r = new Regex("[" + shopName + "]");
+                    MatchCollection m = r.Matches(item.Name);
+                    if (m.Count != 0)
                     {
                         count++;
-                        newShopList.Add(item);//把搜索到包含关键字的商品加入列表
+                        shopList.Add(item);
                     }
                 }
-                if (count >= 4)
+                foreach (Shop newShop in newShopList)
                 {
-                    foreach (Shop newShop in newShopList)
-                    {
-                        count++;
-                        ShopView newShopView = new ShopView();
-                        newShopView.shopID = newShop.ShopId;
-                        newShopView.shopName = newShop.Name;
-                        newShopView.shopDescription = newShop.Description;
-                        newShopView.img = newShop.Url;
-                        newShopView.creditScore = newShop.CreditScore;
-                        returnList.Add(newShopView);
-                        if (count == 4)
-                            break;
-                    }
+                    number++;
+                    ShopView newShopView = new ShopView();
+                    newShopView.shopID = newShop.ShopId;
+                    newShopView.shopName = newShop.Name;
+                    newShopView.shopDescription = newShop.Description;
+                    newShopView.img = newShop.Url;
+                    newShopView.creditScore = newShop.CreditScore;
+                    returnList.Add(newShopView);
+                    if (number == 4)
+                        break;
                 }
-                else
+                if (count < 4)
                 {
-                    for (int i = count; i <= 4; i++)
+                    for (int i = count; i < 4; i++)
                     {
                         string randShopID = random.Next(1, 1).ToString();
                         Shop newShop = _context.Shops.FirstOrDefault(c => c.ShopId == randShopID);
