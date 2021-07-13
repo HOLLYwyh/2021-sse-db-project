@@ -29,7 +29,7 @@ namespace InternetMall.Controllers
         [HttpPost]
         public JsonResult GetCommodityDetails([FromBody] CommodityId commodityId)
         {
-            var com = service.GetCommodityById(commodityId.id);
+            var com = service.GetCommodityById(commodityId.commodityId);
             JsonData jsondata = new JsonData();
             if (com != null)
             {

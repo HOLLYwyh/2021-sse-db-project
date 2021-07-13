@@ -11,10 +11,11 @@ function details() {
         async: false,
         contentType: "application/json",
         dataType: "json",
-        data: JSON.stringify({ commodityName: $("#commodityName").val() }),
+        data: JSON.stringify({ commodityId: $("#commodityId").val() }),
         success: function (result) {
-            var jsonData = eval("(" + result + ")");  //将json转换成对象
-            console.log(jsonData);//目前得到了对应商品的所有属性，再把属性展示到前端即可
+            console.log($("#commodityId").val());
+            //var jsonData = eval("(" + result + ")");  //将json转换成对象
+            console.log(result);//目前得到了对应商品的所有属性，再把属性展示到前端即可
             
         }
     });

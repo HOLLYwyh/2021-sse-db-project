@@ -7,6 +7,6 @@ namespace InternetMall.Models
 {
     public class CommodityId
     {
-        public string id { get; set; }
+        public string commodityId { get; set; }
     }
 }

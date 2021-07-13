@@ -62,7 +62,7 @@ const server = ws.createServer(connect => {
         count--;
         console.log('有用户连接断开了');
         broadcast({
-            type: TYPE_MSG,
+            type: TYPE_LEAVE,
             msg: `${connect.userName}离开了聊天室`,
             time: new Date().toLocaleTimeString(),
         })

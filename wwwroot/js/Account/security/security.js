@@ -33,11 +33,11 @@ Vue.component('phonebut', {
 
         <el-form :model="form1">
         <el-form-item label="旧手机号" :label-width="formLabelWidth">
-        <el-input v-model="form1.oldno" ></el-input>
+        <el-input id="oldno" v-model="form1.oldno" ></el-input>
         </el-form-item>
 
         <el-form-item label="新手机号" :label-width="formLabelWidth">
-        <el-input v-model="form1.newno" ></el-input>
+        <el-input id="newno" v-model="form1.newno" ></el-input>
         </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -65,6 +65,10 @@ Vue.component('phonebut', {
                 alert("请输入旧手机号码！");
                 return false;
             }
+            if (x !== app.phone) {
+                alert("您输入的旧手机号码与账户绑定号码不一致");
+                return false;
+            }
             if (y.length != 11) {
                 alert("请输入正确的新手机号！");
                 return false;
@@ -90,6 +94,8 @@ Vue.component('phonebut', {
             else {
                 alert("手机号码修改成功！");
                 this.visible1 = false;
+                updatePhone(app.id);
+                console.log(app.phone);
             }
         },
     }
@@ -139,7 +145,11 @@ Vue.component('passwordbut', {
                 alert("请输入旧密码！");
                 return false;
             }
-            //后端实现检查旧密码是否正确，如正确更新密码，密码格式检查放在前端
+            if (x !== app.password) {
+                alert("密码输入错误！");
+                return false;
+            }
+
             let y = this.form.newpw1;
             let z = this.form.newpw2;
             if (y == null || y == "") {
@@ -178,9 +188,7 @@ Vue.component('passwordbut', {
 
 })
 
-
-
-new Vue({
+let app = new Vue({
     el: '#app',
     data() {
         return {
@@ -188,9 +196,62 @@ new Vue({
             password: "Aa123456",
             pin: "",
             name: "",
+            id: "",
         };
     },
     methods: {
+        getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+
     },
 
+    created() {
+        this.id = this.getCookie("buyerID")
+    }
+
 })
+function details(id) {
+    //console.log(id);
+    $.ajax({
+        type: "post",
+        url: "/Account/GetPhonePasswdById",
+        async: false,
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ BuyerId: id }),
+        success: function (result) {
+            var object = eval('(' + result + ')');//string类型转换成Json对象方法
+            app.phone = object["buyerPhone"];
+            app.password = object["buyerPasswd"];
+            //console.log(object["buyerPhone"]);
+            //console.log(object["buyerPhone"]);
+        }
+    });
+}
+function updatePhone(id) {
+    console.log(id);
+    $.ajax({
+        type: "post",
+        url: "/Account/UpdatePhoneById",
+        async: false,
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ OldNo: $("#oldno").val(), NewNo: $("#newno").val(), BuyerId: id}),
+        success: function (result) {
+            var object = eval('(' + result + ')');//string类型转换成Json对象方法
+            console.log($("#oldno").val() + $("#newno").val());
+            console.log(1);
+            app.phone = object["buyerPhone"];
+            //console.log(object["buyerPhone"]);
+            //console.log(object["buyerPhone"]);
+        }
+    });
+}
+window.onload = details(app.id);
