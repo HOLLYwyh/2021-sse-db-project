@@ -202,7 +202,7 @@ let content = new Vue({
         aClick(index) {
             return this.object[index].ID;
         },
-    }
+    },
 })
 
 
@@ -265,9 +265,12 @@ function getData() {
         success: function (result) {
             //var jsonData = eval("(" + result + ")");
             //content.object = jsonData;
-            content.object = result
+            content.object = result;
             console.log(result)
-        }
+        },
     });
+    for (let i = 0; i < 15; i++) {
+        content.object[i].description = content.object[i].description.substr(0, 50);
+    }
 }
 window.onload = getData();
