@@ -117,7 +117,7 @@ cart_item_template.innerHTML = `
 `;
 
 class CartItem extends HTMLElement {
-    constructor() {
+    constructor(item_data) {
         super();
 
         this._shadowRoot = this.attachShadow({mode: 'closed'});
@@ -148,10 +148,6 @@ class CartItem extends HTMLElement {
             cart.setAttribute("cartnum", num.toString());
             cart.setAttribute("cartprice", price.toFixed(2).toString());
         });
-        let price = parseFloat(this.$perprice.innerHTML.toString());
-        let num = parseFloat(this.$amount.innerHTML.toString());
-        this.$totprice.innerHTML = (price * num).toFixed(2).toString();
-
         this.$delete.addEventListener("click", () => {
             if (this.$checkbox.checked == true) {
             let cart = document.getElementsByTagName("cart-sum")[0];
@@ -165,6 +161,13 @@ class CartItem extends HTMLElement {
             }
             this.parentNode.removeChild(this);
         });
+        this.$name.innerHTML = item_data.intro;
+        this.$amount.innerHTML = "1";
+        this.$image.setAttribute("src", item_data.img);
+        this.$perprice.innerHTML = item_data.price;
+        let price = parseFloat(this.$perprice.innerHTML.toString());
+        let num = parseFloat(this.$amount.innerHTML.toString());
+        this.$totprice.innerHTML = (price * num).toFixed(2).toString();
     }
 }
 
@@ -279,3 +282,33 @@ class CartSum extends HTMLElement {
 }
 
 customElements.define("cart-sum", CartSum);
+window.onload = function () {
+    var dataArr;
+    $.ajax({
+        url: "/Home/RecmdZoneCommodities",//json文件位置
+
+        type: "post",
+
+        contentType: "application/json",
+        dataType: "json", //返回数据格式为json
+        data: JSON.stringify({ "type": "1" }),
+        success: function (data) {//请求成功完成后要执行的方法
+            console.log("cart json get");
+            dataArr = data;
+            console.log(typeof (dataArr));
+            //dataArr = JSON.parse(data);
+            console.log(dataArr);
+            let cart_item_list = document.getElementById("cart_itembox");
+            console.log(cart_item_list);
+            let len = dataArr.length;
+            console.log(len);
+            for (i = 0; i < len; i++) {
+                //window.alert("1");
+                cart_item_list.appendChild(new CartItem(data[i]));
+                console.log(data[i]);
+            }
+            cart_item_list.parentNode.appendChild(new CartSum());
+        }
+    })
+
+}
