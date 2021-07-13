@@ -44,15 +44,22 @@ namespace InternetMall.Controllers
             return Json(jsondata.ToJson());
         }
 
-        [HttpPost]
-        public IActionResult GetCommodity()      //返回商品
+        
+        public IActionResult GetMainCommodity()      //返回商品
         {
-            //这里还需要修改
             CommodityDetailsView commodity = new CommodityDetailsView();
             commodity = commdDetailService.DisplayCommodityDetails(Global.GCommodityID);
             string str = JsonConvert.SerializeObject(commodity);
             return new ContentResult { Content = str, ContentType = "application/json" };
         }
 
+        
+        public IActionResult GetRecomCommodity()   //返回推荐商品
+        {
+            List<Good> commodityList = new List<Good>();
+            commodityList = commdDetailService.recommendCommodity(Global.GCommodityID);
+            string str = JsonConvert.SerializeObject(commodityList);
+            return new ContentResult { Content = str, ContentType = "application/json" };
+        }
     }
 }
