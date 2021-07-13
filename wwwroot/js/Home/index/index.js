@@ -145,6 +145,7 @@ function getRcmd() {
         type: "get",
         dataType: "json", //返回数据格式为json
         success: function (data) {//请求成功完成后要执行的方法
+            console.log(data)
             rcmd.goods = data
             console.log("1")
         }

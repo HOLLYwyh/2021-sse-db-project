@@ -8,6 +8,7 @@ namespace InternetMall
     public static class Global
     {
         public static string GSearchName = "";
+        public static string GCommodityType = "0";
+        public static string GShopType = "0";
     }
-    
 }

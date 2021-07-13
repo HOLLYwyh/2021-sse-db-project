@@ -31,68 +31,15 @@ new Vue({
 
 
 //商品结果列表
-new Vue({
+var commodity = new Vue({
     el: "#commodity-list",
     data: {
-        goods: [{
-            "img": "../../Images/Home/index/a1.png",
-            "intro": "1",
-        },
-            {
-                "img": "../../Images/Home/index/a2.png",
-                "intro": "2",
-            }, {
-                "img": "../../Images/Home/index/a3.png",
-                "intro": "3",
-            },
-            {
-                "img": "../../Images/Home/index/a2.png",
-                "intro": "4",
-            },
-            {
-                "img": "../../Images/Home/index/a3.png",
-                "intro": "5",
-            },
-            {
-                "img": "../../Images/Home/index/a1.png",
-                "intro": "6",
-            }, {
-                "img": "../../Images/Home/index/a3.png",
-                "intro": "7",
-            }, {
-                "img": "../../Images/Home/index/a1.png",
-                "intro": "8",
-            }, {
-                "img": "../../Images/Home/index/a2.png",
-                "intro": "9",
-            }, {
-                "img": "../../Images/Home/index/a1.png",
-                "intro": "10",
-                "shop": "金轮",
-                "link": "https://www.baidu.com/"
-            }, {
-                "img": "../../Images/Home/index/a2.png",
-                "intro": "11",
-                "shop": "金轮",
-                "link": "https://www.baidu.com/"
-            }, {
-                "img": "../../Images/Home/index/a3.png",
-                "intro": "12",
-                "shop": "金轮",
-                "link": "https://www.baidu.com/"
-            }     ],
+        goods: [
+        ],
         number: 0
-    }
+    },
 })
 
-function update() {
-    if (number > 1) {
-        number = 0;
-    }
-    else {
-        number++;
-    }
-}
 
 //搜索分类菜单
 new Vue({
@@ -107,33 +54,90 @@ new Vue({
     }
 })
 
-function getSearchName() {
+
+function getCommodities() {    //渲染商品
     $.ajax({
-        url: "/Search/GetSearchName",
-        type: "get",
+        url: "/Search/GetCommodities",
+        type: "post",
         dataType: "json", //返回数据格式为json
+        contentType: "application/json; charset=utf-8",  
+        async:false,
+        data: JSON.stringify({ Context: $("#searchContext").val() }),
         success: function (data) {//请求成功完成后要执行的方法
-            var jsonData = eval("(" + data + ")");   //将json转换成对象
-            data.input = jsonData.searchResult;
+            console.log(commodity.goods);
+            commodity.goods = data
+            console.log(data);
+            console.log(commodity.goods);
         }
     })
 }
 
-function getCommodities() {
+function setCommodDefault() {  //默认排序
+    //还需要修改
     $.ajax({
-        url: "/Search/GetCommodities",
-        type: "get",
+        url: "/Search/SetSearchCommodityType",
+        type: "post",
         dataType: "json", //返回数据格式为json
-        data: JSON.stringify({ Context: $("#searchContext").val() }),
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        data: JSON.stringify({ Type: "0" }),
         success: function (data) {//请求成功完成后要执行的方法
-            data.goods = data
+            console.log("success");
+            window.location = "/Search/SearchCommodity"
+        }
+    })
+
+}
+
+function setCommodDesc() {  //价格降序排序
+    //还需要修改
+    $.ajax({
+        url: "/Search/SetSearchCommodityType",
+        type: "post",
+        dataType: "json", //返回数据格式为json
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        data: JSON.stringify({ Type:"1"}),
+        success: function (data) {//请求成功完成后要执行的方法
+            console.log("success");
+            window.location="/Search/SearchCommodity"
+        }
+    })
+
+}
+
+function setCommodAsc(){   //价格升序排序
+    $.ajax({
+        url: "/Search/SetSearchCommodityType",
+        type: "post",
+        dataType: "json", //返回数据格式为json
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        data: JSON.stringify({ Type: "2" }),
+        success: function (data) {//请求成功完成后要执行的方法
+            console.log("success");
+            window.location = "/Search/SearchCommodity"
+        }
+    })
+}
+
+function setCommodByAmount(){   //销量排序
+    $.ajax({
+        url: "/Search/SetSearchCommodityType",
+        type: "post",
+        dataType: "json", //返回数据格式为json
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        data: JSON.stringify({ Type: "3" }),
+        success: function (data) {//请求成功完成后要执行的方法
+            console.log("success");
+            window.location = "/Search/SearchCommodity"
         }
     })
 }
 
 function start() {
-    //getSearchName()
-    //getCommodities()
+    getCommodities()
 }
 
 window.onload = start()

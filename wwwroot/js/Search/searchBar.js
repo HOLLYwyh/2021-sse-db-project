@@ -29,7 +29,7 @@ Vue.component('searchbar', {
     `,
     data: () => {
         return {
-            input: "大榴莲",
+            input: "",
             first: (window.location.pathname === '/Search/SearchShop') ? "店铺" : "商品" ,
             second: (window.location.pathname === '/Search/SearchShop') ? "商品" : "店铺"
         }
