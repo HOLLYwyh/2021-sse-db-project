@@ -12,4 +12,18 @@ namespace InternetMall.Models
         public string Category { get; set; }
         public string Description { get; set; }
     }
+
+    public class DisplayOrders //显示店铺订单
+    {
+        public string ShopID { get; set; }
+    }
+
+    public class DisplayShops  //显示卖家拥有的订单
+    {
+        public string SellerID { get; set; }
+    }
+    
+
 }
+
+

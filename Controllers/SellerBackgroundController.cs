@@ -12,6 +12,8 @@ using InternetMall.Models;
 using InternetMall.DBContext;
 using InternetMall.Services;
 using ThirdParty.Json.LitJson;
+using Newtonsoft.Json;
+using InternetMall.Models.BusinessEntity;
 
 namespace InternetMall.Controllers
 {
@@ -21,6 +23,7 @@ namespace InternetMall.Controllers
         private readonly ModelContext _context;   //数据库上下文
         private ShopService shopService;
         private CommodityService commodityService;
+        private SellerBackgroundServices sellerBackgroundService;
         [Obsolete]
         private readonly IHostingEnvironment _hostingEnvironment;
 
@@ -31,6 +34,7 @@ namespace InternetMall.Controllers
             _context = context;
             shopService = new ShopService(_context);
             commodityService = new CommodityService(_context);
+            sellerBackgroundService = new SellerBackgroundServices(_context);
             _hostingEnvironment = hostingEnvironment;
         }
         //显示页面
@@ -56,20 +60,10 @@ namespace InternetMall.Controllers
             }
         }
 
-        public IActionResult SwitchShop()
-        {
-            return View();
-        }
-
-        public IActionResult Orders()
-        {
-            return View();
-        }
-
         //前后端交互
         [HttpPost]
         [Obsolete]
-        public  IActionResult UploadCommodity()      //上传商品
+        public IActionResult UploadCommodity()      //上传商品
         {
             var date = Request;
             var files = Request.Form.Files;   //上传的图片
@@ -85,17 +79,17 @@ namespace InternetMall.Controllers
 
                     var exetent = Path.GetExtension(formFile.FileName); //文件后缀名
                     var shopDicName = webRootPath + "/uploads/shops/1";//+ Request.Cookies["shopName"].ToString();
-                    if(!Directory.Exists(shopDicName))
+                    if (!Directory.Exists(shopDicName))
                     {
                         //新建对应的文件夹
                         Directory.CreateDirectory(shopDicName);
                     }
                     string newFileName = System.Guid.NewGuid().ToString(); //随机生成新的文件名
-                    var filePath = shopDicName +"/" + newFileName + exetent; //newFileName;
+                    var filePath = shopDicName + "/" + newFileName + exetent; //newFileName;
                     var url = "/uploads/shops/1/" + newFileName + exetent;    //存入数据库中实际的内容
 
                     //新建商品
-                    if(commodityService.Create(decimal.Parse(data["price"]), data["category"], data["description"], int.Parse(data["storage"])
+                    if (commodityService.Create(decimal.Parse(data["price"]), data["category"], data["description"], int.Parse(data["storage"])
                         , data["name"], "1", url))
                     {
                         using (var stream = new FileStream(filePath, FileMode.Create))
@@ -109,14 +103,14 @@ namespace InternetMall.Controllers
         }
 
         [HttpPost]
-        public IActionResult ShopSignUpForm([FromBody] ShopSignUp  shopSignUp)     //申请店铺
+        public IActionResult ShopSignUpForm([FromBody] ShopSignUp shopSignUp)     //申请店铺
         {
             short shopCategory;
-            if(shopSignUp.Category == "官方旗舰店")
+            if (shopSignUp.Category == "官方旗舰店")
             {
                 shopCategory = 1;
             }
-            else if(shopSignUp.Category == "平台认证店")
+            else if (shopSignUp.Category == "平台认证店")
             {
                 shopCategory = 2;
             }
@@ -128,12 +122,12 @@ namespace InternetMall.Controllers
             {
                 shopCategory = 0;
             }
-            
-            if(shopService.createShop(shopSignUp.SellerID, shopSignUp.Name, shopCategory, shopSignUp.Description))
+
+            if (shopService.createShop(shopSignUp.SellerID, shopSignUp.Name, shopCategory, shopSignUp.Description))
             {
                 JsonData jsondata = new JsonData();
                 jsondata["signUp"] = "SUCCESS";
-                HttpContext.Response.Cookies.Append("shopName",shopSignUp.Name, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+                HttpContext.Response.Cookies.Append("shopName", shopSignUp.Name, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
                 return Json(jsondata.ToJson());
             }
             else
@@ -142,6 +136,27 @@ namespace InternetMall.Controllers
                 jsondata["signUp"] = "ERROR";
                 return Json(jsondata.ToJson());
             }
+        }
+
+        [HttpPost]
+        public IActionResult DisplayOrdersForm([FromBody] DisplayOrders displayOrders)
+        {
+            var str = sellerBackgroundService.DisplayBriefOrder(displayOrders.ShopID);
+            
+            return new ContentResult { Content = str, ContentType = "application/json" };
+
+        }
+
+        [HttpPost]
+        public IActionResult DisplayShopsForm([FromBody] DisplayShopsView displayshops)
+        {
+            var str = sellerBackgroundService.DisplayShops(displayshops.SellerID);
+
+            if (str==null)
+            {
+                return Redirect("SellerBackground/ShopSignUp");  //无店铺，切换到“创建店铺”界面
+            }
+            return Redirect("SellerBackground/SwitchShop");      //进入“选择店铺”页面
         }
     }
 }
