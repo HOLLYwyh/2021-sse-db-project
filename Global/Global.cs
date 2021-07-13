@@ -7,8 +7,9 @@ namespace InternetMall
 {
     public static class Global
     {
-        public static string GSearchName = "";
-        public static string GCommodityType = "0";
-        public static string GShopType = "0";
+        public static string GSearchName = "";      //搜索时搜索名称
+        public static string GCommodityType = "0";  //商品种类
+        public static string GShopType = "0";       //店铺种类
+        public static string GCommodityID = "1";    //商品ID
     }
 }

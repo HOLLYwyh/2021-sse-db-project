@@ -92,7 +92,7 @@ h3 {
 .aria {
     background-image: url(../../../Images/Entry/background4.png);
     background-repeat:no-repeat;
-    background-size: 1235px 600px;
+    background-size: 100% 100%;
 }
 
 .el-dialog{

@@ -2,7 +2,7 @@ Vue.component('index', {
     template: `
   <el-container direction="vertical">
     <h3>订单中心</h3>
-    <el-link :underline="false" href="https://">历史订单</el-link>  
+    <el-link :underline="false" href="/Account/orders">历史订单</el-link>  
 
     <h3>我的钱包</h3>
     <el-link :underline="false" href="https://">购物车</el-link>  
@@ -191,6 +191,8 @@ new Vue({
         };
     },
     methods: {
-    },
-
+        smile() {
+            alert("该功能正在开发中哦~(*^_^*)");
+        }
+    },    
 })
