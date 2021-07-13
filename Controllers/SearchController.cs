@@ -94,5 +94,19 @@ namespace InternetMall.Controllers
             return new ContentResult { Content = str, ContentType = "application/json" };
         }
 
+        [HttpPost]
+        public IActionResult GetShops([FromBody]SearchName name)  //根据名称和类别来返回店铺
+        {
+            List<ShopView> shopList = new List<ShopView>();
+            string shopName = name.Context;
+            int type = int.Parse(Global.GShopType);
+            shopList = searchService.SearchShop(shopName,type);
+            foreach (var shop in shopList)
+            {
+                shop.img = "../.." + shop.img;
+            }
+            string str = JsonConvert.SerializeObject(shopList);
+            return new ContentResult { Content = str, ContentType = "application/json" };
+        }
     }
 }

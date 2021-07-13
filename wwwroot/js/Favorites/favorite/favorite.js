@@ -2,8 +2,6 @@ Vue.component('tabs', {
     template: `
     <el-tabs v-model="activeName" @tab-click="handleClick" >
         <el-tab-pane label="按关注时间" name="1"></el-tab-pane>
-        <el-tab-pane label="按购买次数" name="2"></el-tab-pane>
-        <el-tab-pane label="按价格" name="3"></el-tab-pane>
     </el-tabs >
     `,
     data: function () {
@@ -18,55 +16,11 @@ Vue.component('tabs', {
 
     }
 })
-Vue.component('radio', {
-    template: `
-
-    <el-radio-group v-model="radio">
-        <el-radio :label="3">按关注时间</el-radio>
-        <el-radio :label="6">按购买次数</el-radio>
-        <el-radio :label="9">按价格</el-radio>
-    <el-radio-group>
-`,
-
-    data() {
-        return {
-            radio: 3
-        };
-    },
-})
-Vue.component('pagination', {
-    template: `
-    <div class="block">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page.sync="currentPage1"
-        :page-size="100"
-        layout="prev, pager, next, jumper"
-        :total="1000"
-      >
-      </el-pagination>
-    </div>
-`,
-    methods: {
-        handleCurrentChange(val) {
-            console.log(`当前页: ${val}`);
-        },
-    },
-    data() {
-        return {
-            currentPage1: 1,
-            currentPage2: 2,
-            currentPage3: 3,
-            currentPage4: 4,
-        };
-    },
-})
 Vue.component('index', {
     template: `
   <el-container direction="vertical">
     <h3>订单中心</h3>
-    <el-link :underline="false" href="https://">历史订单</el-link>  
+    <el-link :underline="false" href="/Account/orders">历史订单</el-link>  
 
     <h3>我的钱包</h3>
     <el-link :underline="false" href="https://">购物车</el-link>  
@@ -93,29 +47,74 @@ Vue.component('index', {
 new Vue({
     el: '#app',
     data() {
-        list: [
-            {
-                img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
-                name: "好登西",
-                date: "",
-            },
-            {
-                img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
-                name: "好登西",
-                date: "",
-            },
-            {
-                img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
-                name: "好登西",
-                date: "",
-            },
-            {
-                img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
-                name: "好登西",
-                date: "",
-            },
-        ];
         return {
+            list: [
+                {
+                    img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
+                    name: "英豪巨无霸",
+                    date: "2020-05-01",
+                    price: "9.9",
+                    details:"/Home/Index", //该项为商品详情页url
+                },
+                {
+                    img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
+                    name: "英豪巨无霸",
+                    date: "2020-05-01",
+                    price: "9.9",
+                    details: "",
+                },
+                {
+                    img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
+                    name: "英豪巨无霸",
+                    date: "2020-05-01",
+                    price: "9.9",
+                    details: "",
+                },
+                {
+                    img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
+                    name: "英豪巨无霸",
+                    date: "2020-05-01",
+                    price: "9.9",
+                    details: "",
+                },
+                {
+                    img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
+                    name: "英豪巨无霸",
+                    date: "2020-05-01",
+                    price: "9.9",
+                    details: "",
+                },
+                {
+                    img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
+                    name: "英豪巨无霸",
+                    date: "2020-05-01",
+                    price: "9.9",
+                    details: "",
+                },
+                {
+                    img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
+                    name: "英豪巨无霸",
+                    date: "2020-05-01",
+                    price: "9.9",
+                    details: "",
+                },
+                {
+                    img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
+                    name: "英豪巨无霸",
+                    date: "2020-05-01",
+                    price: "9.9",
+                    details: "",
+                },
+                {
+                    img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
+                    name: "英豪巨无霸",
+                    date: "2020-05-01",
+                    price: "9.9",
+                    details: "",
+                },
+
+            ],
+
             input: '',
             currentDate: new Date(),
             rate: 4.9,
