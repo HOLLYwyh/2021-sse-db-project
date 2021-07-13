@@ -10,7 +10,7 @@ new Vue({
 
 //搜索框
 new Vue({
-    el:"#search-bar"
+    el: "#search-bar"
 })
 
 //商品结果列表
@@ -21,6 +21,22 @@ var commodity = new Vue({
         ],
         number: 0
     },
+    methods: {
+        commodityDetial(id) {                 //进入上象棋
+            console.log(id);
+            $.ajax({
+                url: "/Commodity/SetCommodityID",
+                type: "post",
+                dataType: "json", //返回数据格式为json
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                data: JSON.stringify({ ID:  id}),
+                success: function (data) {//请求成功完成后要执行的方法
+                    console.log(data);
+                }
+            })
+        }
+    }
 })
 
 
@@ -43,8 +59,8 @@ function getCommodities() {    //渲染商品
         url: "/Search/GetCommodities",
         type: "post",
         dataType: "json", //返回数据格式为json
-        contentType: "application/json; charset=utf-8",  
-        async:false,
+        contentType: "application/json; charset=utf-8",
+        async: false,
         data: JSON.stringify({ Context: $("#searchContext").val() }),
         success: function (data) {//请求成功完成后要执行的方法
             console.log(commodity.goods);
@@ -78,16 +94,16 @@ function setCommodDesc() {  //价格降序排序
         dataType: "json", //返回数据格式为json
         contentType: "application/json; charset=utf-8",
         async: false,
-        data: JSON.stringify({ Type:"1"}),
+        data: JSON.stringify({ Type: "1" }),
         success: function (data) {//请求成功完成后要执行的方法
             console.log("success");
-            window.location="/Search/SearchCommodity"
+            window.location = "/Search/SearchCommodity"
         }
     })
 
 }
 
-function setCommodAsc(){   //价格升序排序
+function setCommodAsc() {   //价格升序排序
     $.ajax({
         url: "/Search/SetSearchCommodityType",
         type: "post",
@@ -102,7 +118,7 @@ function setCommodAsc(){   //价格升序排序
     })
 }
 
-function setCommodByAmount(){   //销量排序
+function setCommodByAmount() {   //销量排序
     $.ajax({
         url: "/Search/SetSearchCommodityType",
         type: "post",
@@ -123,19 +139,19 @@ function start() {
 
 window.onload = start()
 
-function commodityDetial(index) {                 //进入上象棋
-    //还没有写完'
-    console.log(index)
-    $.ajax({
-        url: "/Commodity/SetCommodityID",
-        type: "post",
-        dataType: "json", //返回数据格式为json
-        contentType: "application/json; charset=utf-8",
-        async: false,
-        data: JSON.stringify({ ID:  commodity.goods[index].ID}),
-        success: function (data) {//请求成功完成后要执行的方法
-            console.log(data);
-            console.log()
-        }
-    })
-}
+//function commodityDetial(index) {                 //进入上象棋
+//    //还没有写完'
+//    console.log(index);
+//    /*$.ajax({
+//        url: "/Commodity/SetCommodityID",
+//        type: "post",
+//        dataType: "json", //返回数据格式为json
+//        contentType: "application/json; charset=utf-8",
+//        async: false,
+//        data: JSON.stringify({ ID:  commodity.goods[index].ID}),
+//        success: function (data) {//请求成功完成后要执行的方法
+//            console.log(data);
+//            console.log()
+//        }
+//    })*/
+//}
