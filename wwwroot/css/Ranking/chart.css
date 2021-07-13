@@ -125,6 +125,8 @@
 .img img{
 	display: block;
 	border-radius: 4px;
+	width:110px;
+	height:70px;
 }
 .n4{
 	width: 870px;
