@@ -21,11 +21,11 @@ Vue.component('carousel',{
             
             mark:0,
             img:[
-                    '../../../Images/Home/index/a1.png',
-                    '../../../Images/Home/index/a2.png',
-                    '../../../Images/Home/index/a3.png',
-                    '../../../Images/Home/index/a4.png',
-                    '../../../Images/Home/index/a5.png'
+                    '../../../Images/Home/index/poster1.jpg',
+                    '../../../Images/Home/index/poster2.jpg',
+                    '../../../Images/Home/index/poster3.jpg',
+                    '../../../Images/Home/index/poster6.jpg',
+                    '../../../Images/Home/index/poster7.jpg'
             ],
             time:null
             }

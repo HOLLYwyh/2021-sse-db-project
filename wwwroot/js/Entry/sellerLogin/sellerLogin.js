@@ -26,7 +26,7 @@ new Vue({
                     data: JSON.stringify({ ID: $("#ID").val(), password: $("#password").val() }),
                     success: function (result) {
                         var jsonData = eval("(" + result + ")");   //将json转换成对象
-                        if (jsonData.signUp != "ERROR") {
+                        if (jsonData.LogIn != "ERROR") {
                             window.location.href = "/SellerBackground/Home";
                         }
                         else {
