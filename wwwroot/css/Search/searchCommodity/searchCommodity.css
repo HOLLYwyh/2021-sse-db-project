@@ -20,11 +20,6 @@ body {
     margin-top:50px;
 }
 
-/*换页部分*/
-.turn-to-page {
-    margin-left:27%;
-}
-
 
 /*搜索结果部分*/
 .commodity-list {
@@ -66,7 +61,19 @@ body {
     margin-bottom: 17px;
 }
 
+/*el-card以及其中的内容*/
 .el-card{
     width :300px;
     height:300px;
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+}
+
+.commodityImage {
+    width: 300px;
+    height: 230px;
+}
+.intro{
+    color:cornflowerblue;
+}
+.price{
+
+}

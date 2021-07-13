@@ -47,3 +47,11 @@ new Vue({
         currentPage1: 1,
     }
 })
+
+function getShops() {   //默认值返回店铺
+
+}
+
+function getShopsByCredit() { //按照商家信用返回店铺
+
+}
