@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>英豪荟萃 - 数据分析 </title>
+  <!--左上角的图标信息-->
+  <link rel="icon" href="~/icon.ico" type="image/x-icon" />
+  <!--引入vue.js的cdn配置 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!--vue.js-->
+  <script type="text/javascript" src="../../wwwroot/js/Common/vue.js"></script>
+  <!-- element-ui.css -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- element-ui.js -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../wwwroot/css/SellerBackground/tailwind.output.css" />
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
+
+  <link rel="stylesheet" href="../../wwwroot/css/SellerBackground/sidebar.css">
+  <link rel="stylesheet" href="../../wwwroot/css/SellerBackground/dropdownmenu.css">
+</head>
+
+<body>
+  <div>
+    <div class="nav-area">
+      <el-aside id="nav" style="width:100%;">
+        <side-bar></side-bar>
+      </el-aside>
+    </div>
+    <div class="main-body">
+      <ul class="header">
+        <li class="avatar" id="avatar">
+          <dropdown-menu v-bind:list="[{icon:'el-icon-user',text:'个人信息'},
+                                             {icon:'el-icon-setting',text:'设置'},
+                                             {icon:'el-icon-switch-button',text:'退出登录'}]" v-bind:tag="'avatar'">
+          </dropdown-menu>
+        </li>
+        <li class="message-box" id="message-box">
+          <dropdown-menu v-bind:list="[{icon:'el-icon-chat-dot-square',text:'我的消息'},
+                                             {icon:'el-icon-message',text:'系统通知'}]" v-bind:tag="'message'">
+          </dropdown-menu>
+        </li>
+      </ul>
+
+      <div class="main">
+        <div class="main">
+          <main class="h-full pb-16 overflow-y-auto">
+            <div class="container px-6 mx-auto grid">
+              <div class="grid gap-6 mb-8 md:grid-cols-2">
+                <!-- Doughnut/Pie chart -->
+                <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                  <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+                    Doughnut/Pie
+                  </h4>
+                  <canvas id="pie"></canvas>
+                  <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
+                    <!-- Chart legend -->
+                    <div class="flex items-center">
+                      <span class="inline-block w-3 h-3 mr-1 bg-blue-600 rounded-full"></span>
+                      <span>Shirts</span>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="inline-block w-3 h-3 mr-1 bg-teal-500 rounded-full"></span>
+                      <span>Shoes</span>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
+                      <span>Bags</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Lines chart -->
+                <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                  <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+                    Lines
+                  </h4>
+                  <canvas id="line"></canvas>
+                  <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
+                    <!-- Chart legend -->
+                    <div class="flex items-center">
+                      <span class="inline-block w-3 h-3 mr-1 bg-teal-500 rounded-full"></span>
+                      <span>Organic</span>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
+                      <span>Paid</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Bars chart -->
+                <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                  <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+                    Bars
+                  </h4>
+                  <canvas id="bars"></canvas>
+                  <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
+                    <!-- Chart legend -->
+                    <div class="flex items-center">
+                      <span class="inline-block w-3 h-3 mr-1 bg-teal-500 rounded-full"></span>
+                      <span>Shoes</span>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
+                      <span>Bags</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../../wwwroot/js/SellerBackground/sidebar.js"></script>
+  <script src="../../wwwroot/js/SellerBackground/dropdownMenu.js"></script>
+  <script src="../../wwwroot/js/SellerBackground/analysis/init-alpine.js"></script>
+  <script src="../../wwwroot/js/SellerBackground/analysis/charts-lines.js" defer></script>
+  <script src="../../wwwroot/js/SellerBackground/analysis/charts-pie.js" defer></script>
+  <script src="../../wwwroot/js/SellerBackground/analysis/charts-bars.js" defer></script>
+</body>
+
+</html>

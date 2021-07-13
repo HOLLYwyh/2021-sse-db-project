@@ -70,3 +70,35 @@ Vue.component('shop', {
 })
 
 let shop = new Vue({ el: '#shop' });
+
+function getid() {
+    let id = getCookie("sellerID")
+    if (id) {
+        //这里要修改
+        //document.getElementById("utility1").innerHTML = `<a href="/Entry/BuyerLogOut" >注销</a>`
+    }
+    return id
+}
+
+function getRcmd() {
+    $.ajax({
+        url: "/Home/RcmdCommodity",
+        type: "get",
+        dataType: "json", //返回数据格式为json
+        success: function (data) {//请求成功完成后要执行的方法
+            rcmd.goods = data
+            console.log("1")
+        }
+    })
+
+}
+
+function start() {
+    getid();
+    getRcmd();
+
+}
+
+window.onload = start();
+
+
