@@ -50,21 +50,21 @@
     <!--商品部分-->
     <div class="commodities bg-gray-100 rounded-lg  border-opacity-0">
         <div id="commodity-list" class="commodity-list">
+            <div>
         <el-row :span="0" v-for="(o, index) in 4" :key="o">
             <el-col :span="6" v-for="(o, index) in 3" :key="o" :offset="index > 0 ? 2 : 0">
-               <el-card class="transition duration-150 ease-in-out transform hover:-translate-y-1 hover:border-2 hover:border-blue-700" 
+                <div>
+                    <el-card class="transition duration-150 ease-in-out transform hover:-translate-y-1 hover:border-2 hover:border-blue-700"
                              :body-style="{ padding: '0px' }">
-                  <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-                     <div style="padding: 0px;">
-                        <span>好吃的汉堡</span>
-                          <div class="bottom clearfix">
-                             <time class="time">{{ currentDate }}</time>
-                             <el-button type="text" class="button">详情</el-button>
-                          </div>
-                      </div>
-               </el-card>
+                        <img :src="goods[number].img">
+                        <div style="padding: 0px;">
+                            <span>{{goods[number++].intro}}</span>
+                        </div>
+                    </el-card>
+                <div>
             </el-col>
         </el-row>
+                </div>
         </div>
     </div>
 

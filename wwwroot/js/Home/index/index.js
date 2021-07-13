@@ -8,39 +8,116 @@ var rcmd = new Vue({
     data: {
         mark: 0,
         goods:[]
-        /*goods: [
-            {
-                img: '../../Images/Home/index/a1.png', intro: "泰国进口金枕鲜榴莲1,泰国进口金枕鲜榴莲,泰国进口金枕1", shop: '金轮', link:'https://www.baidu.com/'
-            },
-            {
-                img: '../../Images/Home/index/a2.png', intro: '泰国进口金枕鲜榴莲2,泰国进口金枕鲜榴莲,泰国进口金枕2', shop: '金轮', link:''
-            },
-            {
-                img: '../../Images/Home/index/a3.png', intro: '泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲,泰国进口金枕3', shop: '金轮', link: ''
-            },
-            {
-                img: '../../Images/Home/index/a4.png', intro: '泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲,泰国进口金枕4', shop: '金轮', link: ''
-            },
-            {
-                img: '../../Images/Home/index/a5.png', intro: '泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲,泰国进口金枕5', shop: '金轮', link: ''
-            },
-            {
-                img: '../../Images/Home/index/a1.png', intro: '泰国进口金枕鲜榴莲,泰国进口金枕鲜榴莲,泰国进口金枕1', shop: '金轮', link: ''
-            },
-        ],*/
     }
 })
 
-let part1 = new Vue({ el: '#part1' });
+var part1 = new Vue({
+    el: '#part1',
+    data: {
+        type: "服装",
+        goods: [
+        ],
+        rank: [
+        ],
+        number:-999,
+    }
+});
 
-let part2 = new Vue({ el: '#part2' });
-let part3 = new Vue({ el: '#part3' });
-let part4 = new Vue({ el: '#part4' });
-let part5 = new Vue({ el: '#part5' });
-let part6 = new Vue({ el: '#part6' });
-let part7 = new Vue({ el: '#part7' });
-let part8 = new Vue({ el: '#part8' });
-let part9 = new Vue({ el: '#part9' });
+var part2 = new Vue({
+    el: '#part2',
+    data: {
+        type: "电子设备",
+        goods: [
+        ],
+        rank: [
+        ],
+        number: -999,
+    }
+});
+
+var part3 = new Vue({
+    el: '#part3',
+    data: {
+        type: "书籍",
+        goods: [
+        ],
+        rank: [
+        ],
+        number: -999,
+    }
+});
+
+var part4 = new Vue({
+    el: '#part4',
+    data: {
+        type: "宠物",
+        goods: [
+        ],
+        rank: [
+        ],
+        number: -999,
+    }
+});
+
+var part5 = new Vue({
+    el: '#part5',
+    data: {
+        type: "运动",
+        goods: [
+        ],
+        rank: [
+        ],
+        number: -999,
+    }
+});
+
+var part6 = new Vue({
+    el: '#part6',
+    data: {
+        type: "食品",
+        goods: [
+        ],
+        rank: [
+        ],
+        number: -999,
+    }
+});
+
+var part7 = new Vue({
+    el: '#part7',
+    data: {
+        type: "家居",
+        goods: [
+        ],
+        rank: [
+        ],
+        number: -999,
+    }
+});
+
+var part8 = new Vue({
+    el: '#part8',
+    data: {
+        type: "美妆",
+        goods: [
+        ],
+        rank: [
+        ],
+        number: -999,
+    }
+});
+
+var part9 = new Vue({
+    el: '#part9',
+    data: {
+        type: "洗护",
+        goods: [
+        ],
+        rank: [
+        ],
+        number: -999,
+    }
+});
 
 let naviright = new Vue({ el: '#naviRight' })
 
@@ -62,30 +139,14 @@ function getid() {
     return id
 }
 
-function getRcmd() {                            //获取推荐栏里的6个商品信息
+function getRcmd() {
     $.ajax({
-        type: "post",
-        url: "/Entry/SellerSignUpForm",
-        async: false,
-        contentType: "application/json",
-        dataType: "json",
-        data: JSON.stringify({ getType: "rcmd" }), //请求类型
-        success: function (result) {
-               //需要获取一个goods数组
-            rcmd.goods=result.goods 
-        }
-    });
-}
-
-function test() {
-    $.ajax({
-        url: "../../js/Home/index/test.json",//json文件位置
+        url: "/Home/RcmdCommodity",
         type: "get",
         dataType: "json", //返回数据格式为json
         success: function (data) {//请求成功完成后要执行的方法
-            
-            console.log(data.goods)
-            rcmd.goods=data.goods
+            rcmd.goods = data
+            console.log("1")
         }
     })
     
@@ -93,9 +154,316 @@ function test() {
 
 function start() {
     getid()
-    test()
+    getRcmd()
+    setGoods("服装")
+    setRank("服装")
+    setGoods("电子产品")
+    setRank("电子产品")
+    setGoods("书籍")
+    setRank("书籍")
+    setGoods("宠物")
+    setRank("宠物")
+    setGoods("运动")
+    setRank("运动")
+    setGoods("食品")
+    setRank("食品")
+    setGoods("家居")
+    setRank("家居")
+    setGoods("美妆")
+    setRank("美妆")
+    setGoods("洗护")
+    setRank("洗护")
 }
-
 window.onload = start()
 
 
+function setGoods(type) {
+    if (type == "服装") {
+        $.ajax({
+            url: "/Home/RecmdZoneCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "1" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part1.goods = data
+            }
+        })
+        return
+    }
+    else if (type == "电子产品") {
+        $.ajax({
+            url: "/Home/RecmdZoneCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "2" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part2.goods = data
+            }
+        })
+        return
+    }
+    else if (type == "书籍") {
+        $.ajax({
+            url: "/Home/RecmdZoneCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "3" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part3.goods = data
+            }
+        })
+        return
+    }
+    else if (type == "宠物") {
+        $.ajax({
+            url: "/Home/RecmdZoneCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "4" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part4.goods = data
+            }
+        })
+        return
+    }
+    else if (type == "运动") {
+        $.ajax({
+            url: "/Home/RecmdZoneCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "5" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part5.goods = data
+            }
+        })
+        return
+    }
+    else if (type == "食品") {
+        $.ajax({
+            url: "/Home/RecmdZoneCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "6" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part6.goods = data
+            }
+        })
+        return
+    }
+    else if (type == "家居") {
+        $.ajax({
+            url: "/Home/RecmdZoneCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "7" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part7.goods = data
+            }
+        })
+        return
+    }
+    else if (type == "美妆") {
+        $.ajax({
+            url: "/Home/RecmdZoneCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "8" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part8.goods = data
+            }
+        })
+        return
+    }
+    else if (type == "洗护") {
+        $.ajax({
+            url: "/Home/RecmdZoneCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "9" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part9.goods = data
+            }
+        })
+        return
+    }
+}
+
+function setRank(type) {
+    if (type == "服装") {
+        $.ajax({
+            url: "/Home/RankCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "1" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part1.rank = data
+            }
+        })
+        return
+    }
+    else if (type == "电子产品") {
+        $.ajax({
+            url: "/Home/RankCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "2" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part2.rank = data
+            }
+        })
+        return
+    }
+    else if (type == "书籍") {
+        $.ajax({
+            url: "/Home/RankCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "3" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part3.rank = data
+            }
+        })
+        return
+    }
+    else if (type == "宠物") {
+        $.ajax({
+            url: "/Home/RankCommodities",
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "4" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part4.rank = data
+            }
+        })
+        return
+    }
+    else if (type == "运动") {
+        $.ajax({
+            url: "/Home/RankCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "5" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part5.rank = data
+            }
+        })
+        return
+    }
+    else if (type == "食品") {
+        $.ajax({
+            url: "/Home/RankCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "6" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part6.rank = data
+            }
+        })
+        return
+    }
+    else if (type == "家居") {
+        $.ajax({
+            url: "/Home/RankCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "7" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part7.rank = data
+            }
+        })
+        return
+    }
+    else if (type == "美妆") {
+        $.ajax({
+            url: "/Home/RankCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "8" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part8.rank = data
+            }
+        })
+        return
+    }
+    else if (type == "洗护") {
+        $.ajax({
+            url: "/Home/RankCommodities",//json文件位置
+            type: "post",
+            contentType: "application/json",
+            dataType: "json", //返回数据格式为json
+            data: JSON.stringify({ "type": "9" }),
+            success: function (data) {//请求成功完成后要执行的方法
+                console.log(data)
+                console.log("12")
+                part9.rank = data
+            }
+        })
+        return
+    }
+}
+
+
+function submitSearch() {
+    $.ajax({
+        url: "/Search/SetSearchName",//json文件位置
+        type: "post",
+        contentType: "application/json",
+        dataType: "json", //返回数据格式为json
+        data: JSON.stringify({ Context: $("#Context").val() }),
+        success: function (data) {//请求成功完成后要执行的方法
+            console.log(data)
+            window.location = "/Search/SearchCommodity";
+        }
+    })
+}

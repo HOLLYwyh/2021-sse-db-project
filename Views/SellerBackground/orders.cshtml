@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
+
 <head>
-    <title>英豪荟萃 - 商家注册</title>
+    <title>英豪荟萃 - 订单</title>
     <script src="//unpkg.com/element-ui@@2.15.2/lib/index.js"></script>
 
-    <link rel="stylesheet" href="~/css/SellerBackground/shopSignUp/shopSignUp.css">
+    <link rel="stylesheet" href="~/css/SellerBackground/orders/orders.css">
     <link rel="stylesheet" href="~/css/SellerBackground/sidebar.css">
+    <link rel="stylesheet" href="~/css/SellerBackground/list.css">
     <link rel="stylesheet" href="~/css/SellerBackground/dropdownmenu.css">
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
 </head>
+
 <body>
     <div>
         <div class="nav-area">
@@ -30,13 +33,21 @@
                     </dropdown-menu>
                 </li>
             </ul>
-            <div class="main" id="upload">
-                <upload></upload>
+            <div class="main" >
+                <div id="search">
+                    <search></search>
+                </div>
+                <div id="list">
+                    <list></list> 
+                </div>
             </div>
         </div>
+
     </div>
     <script src="~/js/SellerBackground/sidebar.js"></script>
     <script src="~/js/SellerBackground/dropdownMenu.js"></script>
-    <script src="~/js/SellerBackground/shopSignUp/shopSignUp.js"></script>
+    <script src="~/js/SellerBackground/orders/orders.js"></script>
+    <script src="~/js/SellerBackground/list.js"></script>
 </body>
+
 </html>

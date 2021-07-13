@@ -18,5 +18,6 @@ namespace InternetMall.Interfaces
         public Task<List<Shop>> ChooseShop(string sellerID);//选择店铺
         public Task<List<Order>> DisplayOrder(string shopID);//显示订单
         public Task<List<Order>> SearchOrder(string orderId = null, string commodityId = null, string commodityName = null, string recieverName = null, string receiverPhone = null, string sellerId = null);//筛选订单
+
     }
 }

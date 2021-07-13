@@ -11,6 +11,8 @@ namespace Internetmall.Interfaces
     interface IHomeService
     {
         //首页展示商品推荐
-        public Task<List<Good>> RecommendingCommodities(bool inFo, string buyerId = null, int commodityCategory = -1);
+        public List<Good> RecommendingCommodities(bool inFo = false, string buyerId = null);
+        public List<Good> RecommendingZoneCommodities(int commodityCategory = -1);
+        public List<rankView> Rank(int commodityCategory = -1);   //产生排行榜文件
     }
 }
