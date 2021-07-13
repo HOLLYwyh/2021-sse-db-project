@@ -1,0 +1,39 @@
+@import url("//unpkg.com/element-ui@2.15.3/lib/theme-chalk/index.css");
+
+#search{
+    margin-left:200px;
+    width:1150px;
+    padding-left:30px;
+    padding-right:30px;
+    padding-top: 10px; 
+}
+
+.el-card{
+    padding-top: 10px;
+}
+
+.search-card{
+    
+    padding-left: 250px;
+}
+
+.el-row{
+    padding-top: 10px;
+    width:600px;
+}
+
+.el-select{
+    width:150px;
+}
+
+.el-input{
+    width:300px;
+}
+
+.input-with-select{
+    background-color: #fff;
+}
+
+.btn{
+    float:none;
+}

@@ -1,0 +1,46 @@
+@import url("//unpkg.com/element-ui@2.15.2/lib/theme-chalk/index.css");
+
+.el-card{
+    margin-left:220px;
+    width:1150px;
+    padding-top: 10px; 
+    margin-top:40px;
+}
+
+#shop-list{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding-bottom: 20px;
+}
+
+.shop img{
+    width:60px;
+    float:left;
+    margin-left: 30px;
+    padding-bottom: 30px;
+    padding-top:10px;
+}
+
+.shop .info{
+    float:left;
+    width:200px;
+    padding-left: 20px;
+    padding-right:20px;
+    margin-bottom: 15px;
+    margin-right: 30px;
+}
+
+.shop .info .name{
+    font:bold 15px/30px arial,sans-serif;
+}
+
+.shop .info .type{
+    font:12px/30px arial,sans-serif;
+    color:gray;
+}
+
+.shop .info .btn{
+    float:right;
+    margin-bottom: 20px;
+}

@@ -6,6 +6,7 @@ Vue.component('list', {
       currentPage: 1,
       activeName: 'ALL',
       origionData: [{
+        id:'123456',
         date: '2016-05-02',
         name: '王小虎',
         address: '上海市普陀区金沙江路 1518 弄',
@@ -14,6 +15,7 @@ Vue.component('list', {
         tag: 'TO_BE_SHIP',
         show: true
       }, {
+        id:'123457',
         date: '2016-05-04',
         name: '王小虎',
         address: '上海市普陀区金沙江路 1517 弄',
@@ -22,6 +24,7 @@ Vue.component('list', {
         tag: 'TO_BE_SHIP',
         show: true
       }, {
+        id:'123458',
         date: '2016-05-04',
         name: '王小虎',
         address: '上海市普陀区金沙江路 1517 弄',
@@ -30,6 +33,7 @@ Vue.component('list', {
         tag: 'TO_BE_RECEIVE',
         show: true
       }, {
+        id:'123459',
         date: '2016-05-04',
         name: '王小虎',
         address: '上海市普陀区金沙江路 1517 弄',
@@ -38,6 +42,7 @@ Vue.component('list', {
         tag: 'TO_BE_RECEIVE',
         show: true
       }, {
+        id:'123460',
         date: '2016-05-04',
         name: '王小虎',
         address: '上海市普陀区金沙江路 1517 弄',
@@ -46,6 +51,7 @@ Vue.component('list', {
         tag: 'DONE',
         show: true
       }, {
+        id:'123461',
         date: '2016-05-04',
         name: '王小虎',
         address: '上海市普陀区金沙江路 1517 弄',
@@ -54,6 +60,7 @@ Vue.component('list', {
         tag: 'TO_BE_PAY',
         show: true
       }, {
+        id:'123462',
         date: '2016-05-04',
         name: '王小虎',
         address: '上海市普陀区金沙江路 1517 弄',
@@ -70,6 +77,11 @@ Vue.component('list', {
     this.handleClick('ALL');
   },
   methods: {
+    deliver(row){
+      //修改状态为待收货TO_BE_RECEIVE，更新数据库，再刷新页面
+      //AJAX
+      //此处还没有写
+    },
     formatter(row) {
       return row.address;
     },
@@ -78,7 +90,7 @@ Vue.component('list', {
         return 'success';
       } else if (tag === 'TO_BE_RECEIVE') { //待收货
         return '';
-      } else if (tag === 'TO_BE_SHIP') { //代发货
+      } else if (tag === 'TO_BE_SHIP') { //待发货
         return 'danger';
       } else if (tag === 'TO_BE_PAY') {  //待付款
         return 'warning';
@@ -156,6 +168,14 @@ Vue.component('list', {
         </template>
     </el-table-column>
     <el-table-column prop="date" label="日期" sortable width="180">
+    </el-table-column>
+    <el-table-column label="发货" width="60">
+      <template slot-scope="scope">
+        <el-button type="primary" icon="el-icon-truck" circle 
+                  v-if="scope.row.tag==='TO_BE_SHIP'"
+                  v-on:click="deliver(scope.row)">
+        </el-button>
+      </template>
     </el-table-column>
 </el-table>
 <div class="paginationClass">

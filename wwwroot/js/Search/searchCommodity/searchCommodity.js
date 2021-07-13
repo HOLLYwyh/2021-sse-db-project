@@ -34,9 +34,65 @@ new Vue({
 new Vue({
     el: "#commodity-list",
     data: {
-           currentDate: new Date()
+        goods: [{
+            "img": "../../Images/Home/index/a1.png",
+            "intro": "1",
+        },
+            {
+                "img": "../../Images/Home/index/a2.png",
+                "intro": "2",
+            }, {
+                "img": "../../Images/Home/index/a3.png",
+                "intro": "3",
+            },
+            {
+                "img": "../../Images/Home/index/a2.png",
+                "intro": "4",
+            },
+            {
+                "img": "../../Images/Home/index/a3.png",
+                "intro": "5",
+            },
+            {
+                "img": "../../Images/Home/index/a1.png",
+                "intro": "6",
+            }, {
+                "img": "../../Images/Home/index/a3.png",
+                "intro": "7",
+            }, {
+                "img": "../../Images/Home/index/a1.png",
+                "intro": "8",
+            }, {
+                "img": "../../Images/Home/index/a2.png",
+                "intro": "9",
+            }, {
+                "img": "../../Images/Home/index/a1.png",
+                "intro": "10",
+                "shop": "金轮",
+                "link": "https://www.baidu.com/"
+            }, {
+                "img": "../../Images/Home/index/a2.png",
+                "intro": "11",
+                "shop": "金轮",
+                "link": "https://www.baidu.com/"
+            }, {
+                "img": "../../Images/Home/index/a3.png",
+                "intro": "12",
+                "shop": "金轮",
+                "link": "https://www.baidu.com/"
+            }     ],
+        number: 0
     }
 })
+
+function update() {
+    if (number > 1) {
+        number = 0;
+    }
+    else {
+        number++;
+    }
+}
 
 //搜索分类菜单
 new Vue({
@@ -50,3 +106,34 @@ new Vue({
         }
     }
 })
+
+function getSearchName() {
+    $.ajax({
+        url: "/Search/GetSearchName",
+        type: "get",
+        dataType: "json", //返回数据格式为json
+        success: function (data) {//请求成功完成后要执行的方法
+            var jsonData = eval("(" + data + ")");   //将json转换成对象
+            data.input = jsonData.searchResult;
+        }
+    })
+}
+
+function getCommodities() {
+    $.ajax({
+        url: "/Search/GetCommodities",
+        type: "get",
+        dataType: "json", //返回数据格式为json
+        data: JSON.stringify({ Context: $("#searchContext").val() }),
+        success: function (data) {//请求成功完成后要执行的方法
+            data.goods = data
+        }
+    })
+}
+
+function start() {
+    //getSearchName()
+    //getCommodities()
+}
+
+window.onload = start()
