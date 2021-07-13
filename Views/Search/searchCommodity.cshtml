@@ -50,22 +50,20 @@
     <!--商品部分-->
     <div class="commodities bg-gray-100 rounded-lg  border-opacity-0">
         <div id="commodity-list" class="commodity-list">
-            <div>
-        <el-row :span="0" v-for="(o, index) in 4" :key="o">
-            <el-col :span="6" v-for="(o, index) in 3" :key="o" :offset="index > 0 ? 2 : 0">
-                <div>
-                    <el-card class="transition duration-150 ease-in-out transform hover:-translate-y-1 hover:border-2 hover:border-blue-700"
-                             :body-style="{ padding: '0px' }">
-                        <img class="commodityImage" :src="goods[number].img">
+           <el-row :span="0" v-for="(o, index) in 4" :key="o">
+               <el-col :span="6" v-for="(o, index) in 3" :key="o" :offset="index > 0 ? 2 : 0">
+                  <div>
+                     <el-card class="transition duration-150 ease-in-out transform hover:-translate-y-1 hover:border-2 hover:border-blue-700"
+                                     :body-style="{ padding: '0px' }">
+                        <img class="commodityImage" :src="goods[number].img" onclick="commodityDetial()">
                         <div style="padding: 0px;">
-                            <span class="intro">{{goods[number].intro}}</span>
+                          <span class="intro">{{goods[number].intro}}</span>
                             <p class="price">￥{{goods[number++].price}}</p>
                         </div>
-                    </el-card>
-                <div>
-            </el-col>
-        </el-row>
-                </div>
+                     </el-card>
+                  </div>
+               </el-col>
+           </el-row>
         </div>
     </div>
 

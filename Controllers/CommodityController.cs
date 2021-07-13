@@ -1,5 +1,9 @@
-﻿using InternetMall.Models;
+﻿using Internetmall.Models.BusinessEntity;
+using Internetmall.Services;
+using InternetMall.DBContext;
+using InternetMall.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +14,14 @@ namespace InternetMall.Controllers
 {
     public class CommodityController : Controller   //商品详情与店铺详情
     {
+        private readonly ModelContext _context;   //数据库上下文
+        private CommodityDetailsService commdDetailService;             //后端service
+
+        public CommodityController(ModelContext context)
+        {
+            _context = context;
+            commdDetailService = new CommodityDetailsService(_context);
+        }
         public IActionResult Details()
         {
             if (Request.Cookies["buyerNickName"] != null)
@@ -24,7 +36,7 @@ namespace InternetMall.Controllers
 
         //前后端交互
         [HttpPost]
-        public IActionResult SetCommodityID([FromBody] CommodityID commodity)   //设置卖家ID
+        public IActionResult SetCommodityID([FromBody] CommodityID commodity)   //设置商品ID
         {
             Global.GCommodityID = commodity.ID;
             JsonData jsondata = new JsonData();
@@ -32,10 +44,14 @@ namespace InternetMall.Controllers
             return Json(jsondata.ToJson());
         }
 
+        [HttpPost]
         public IActionResult GetCommodity()      //返回商品
         {
             //这里还需要修改
-            return Ok();
+            CommodityDetailsView commodity = new CommodityDetailsView();
+            commodity = commdDetailService.DisplayCommodityDetails(Global.GCommodityID);
+            string str = JsonConvert.SerializeObject(commodity);
+            return new ContentResult { Content = str, ContentType = "application/json" };
         }
 
     }

@@ -123,17 +123,19 @@ function start() {
 
 window.onload = start()
 
-function commodityDetial(number) {                 //设置订单详情
-    //还没有写完
+function commodityDetial(index) {                 //进入上象棋
+    //还没有写完'
+    console.log(index)
     $.ajax({
         url: "/Commodity/SetCommodityID",
         type: "post",
         dataType: "json", //返回数据格式为json
         contentType: "application/json; charset=utf-8",
         async: false,
-        data: JSON.stringify({ ID:  commodity.goods[number].ID}),
+        data: JSON.stringify({ ID:  commodity.goods[index].ID}),
         success: function (data) {//请求成功完成后要执行的方法
             console.log(data);
+            console.log()
         }
     })
 }
