@@ -3,11 +3,35 @@ let carousel1 = new Vue({ el: '#carousel1' });
 
 let shortcut1 = new Vue({ el: '#shortcut' });
 
+function selectGoods(id) {
+    console.log(id)
+    $.ajax({
+        url: "/Commodity/SetCommodityID",
+        type: "post",
+        contentType: "application/json",
+        async:false,
+        dataType: "json", //返回数据格式为json
+        data: JSON.stringify({ "ID": id }),
+        success: function (data) {//请求成功完成后要执行的方法
+            console.log(data)
+            window.location = "/Commodity/Details"
+
+        }
+    })
+}
+
 var rcmd = new Vue({
     el: '.rcmd_box',
     data: {
         mark: 0,
         goods:[]
+    },
+    methods: {
+        chooseAddress(thing, index) {
+            console.log(thing.ID)
+            selectGoods(thing.ID)
+            return thing.ID
+        }
     }
 })
 
@@ -20,6 +44,18 @@ var part1 = new Vue({
         rank: [
         ],
         number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+    },
+    methods: {
+        chooseAddress(thing, index) {
+            console.log(thing.ID)
+            selectGoods(thing.ID)
+            return thing.ID
+        },
+        chooseAddressRank(thing, index) {
+            console.log(thing.commodityId)
+            selectGoods(thing.commodityId)
+            return thing.commodityId
+        },
     }
 });
 
@@ -32,6 +68,18 @@ var part2 = new Vue({
         rank: [
         ],
         number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+    },
+    methods: {
+        chooseAddress(thing, index) {
+            console.log(thing.ID)
+            selectGoods(thing.ID)
+            return thing.ID
+        },
+        chooseAddressRank(thing, index) {
+            console.log(thing.commodityId)
+            selectGoods(thing.commodityId)
+            return thing.commodityId
+        },
     }
 });
 
@@ -44,6 +92,18 @@ var part3 = new Vue({
         rank: [
         ],
         number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+    },
+    methods: {
+        chooseAddress(thing, index) {
+            console.log(thing.ID)
+            selectGoods(thing.ID)
+            return thing.ID
+        },
+        chooseAddressRank(thing, index) {
+            console.log(thing.commodityId)
+            selectGoods(thing.commodityId)
+            return thing.commodityId
+        },
     }
 });
 
@@ -56,6 +116,18 @@ var part4 = new Vue({
         rank: [
         ],
         number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+    },
+    methods: {
+        chooseAddress(thing, index) {
+            console.log(thing.ID)
+            selectGoods(thing.ID)
+            return thing.ID
+        },
+        chooseAddressRank(thing, index) {
+            console.log(thing.commodityId)
+            selectGoods(thing.commodityId)
+            return thing.commodityId
+        },
     }
 });
 
@@ -68,6 +140,18 @@ var part5 = new Vue({
         rank: [
         ],
         number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+    },
+    methods: {
+        chooseAddress(thing, index) {
+            console.log(thing.ID)
+            selectGoods(thing.ID)
+            return thing.ID
+        },
+        chooseAddressRank(thing, index) {
+            console.log(thing.commodityId)
+            selectGoods(thing.commodityId)
+            return thing.commodityId
+        },
     }
 });
 
@@ -80,6 +164,18 @@ var part6 = new Vue({
         rank: [
         ],
         number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+    },
+    methods: {
+        chooseAddress(thing, index) {
+            console.log(thing.ID)
+            selectGoods(thing.ID)
+            return thing.ID
+        },
+        chooseAddressRank(thing, index) {
+            console.log(thing.commodityId)
+            selectGoods(thing.commodityId)
+            return thing.commodityId
+        },
     }
 });
 
@@ -92,6 +188,18 @@ var part7 = new Vue({
         rank: [
         ],
         number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+    },
+    methods: {
+        chooseAddress(thing, index) {
+            console.log(thing.ID)
+            selectGoods(thing.ID)
+            return thing.ID
+        },
+        chooseAddressRank(thing, index) {
+            console.log(thing.commodityId)
+            selectGoods(thing.commodityId)
+            return thing.commodityId
+        },
     }
 });
 
@@ -104,6 +212,18 @@ var part8 = new Vue({
         rank: [
         ],
         number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+    },
+    methods: {
+        chooseAddress(thing, index) {
+            console.log(thing.ID)
+            selectGoods(thing.ID)
+            return thing.ID
+        },
+        chooseAddressRank(thing, index) {
+            console.log(thing.commodityId)
+            selectGoods(thing.commodityId)
+            return thing.commodityId
+        },
     }
 });
 
@@ -116,6 +236,18 @@ var part9 = new Vue({
         rank: [
         ],
         number: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+    },
+    methods: {
+        chooseAddress(thing, index) {
+            console.log(thing.ID)
+            selectGoods(thing.ID)
+            return thing.ID
+        },
+        chooseAddressRank(thing, index) {
+            console.log(thing.commodityId)
+            selectGoods(thing.commodityId)
+            return thing.commodityId
+        },
     }
 });
 
@@ -467,3 +599,4 @@ function submitSearch() {
         }
     })
 }
+
