@@ -16,39 +16,11 @@ Vue.component('tabs', {
 
     }
 })
-Vue.component('pagination', {
-    template: `
-    <div class="block">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page.sync="currentPage1"
-        :page-size="100"
-        layout="prev, pager, next, jumper"
-        :total="1000"
-      >
-      </el-pagination>
-    </div>
-`,
-    methods: {
-        handleCurrentChange(val) {
-            console.log(`当前页: ${val}`);
-        },
-    },
-    data() {
-        return {
-            currentPage1: 1,
-            currentPage2: 2,
-            currentPage3: 3,
-            currentPage4: 4,
-        };
-    },
-})
 Vue.component('index', {
     template: `
   <el-container direction="vertical">
     <h3>订单中心</h3>
-    <el-link :underline="false" href="https://">历史订单</el-link>  
+    <el-link :underline="false" href="/Account/orders">历史订单</el-link>  
 
     <h3>我的钱包</h3>
     <el-link :underline="false" href="https://">购物车</el-link>  
@@ -74,29 +46,28 @@ Vue.component('index', {
 new Vue({
     el: '#app',
     data() {
-        list: [
-            {
-                img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
-                name: "好登西",
-                date: "",
-            },
-            {
-                img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
-                name: "好登西",
-                date: "",
-            },
-            {
-                img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
-                name: "好登西",
-                date: "",
-            },
-            {
-                img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
-                name: "好登西",
-                date: "",
-            },
-        ];
         return {
+            list: [
+                {
+                    img: "https://idreamleaguesoccerkits.com/wp-content/uploads/2018/03/China-Logo-512x512-URL.png",
+                    name: "英豪荟萃官方店铺",
+                    date: "2020-05-01",
+                    shop: "",
+                },
+                {
+                    img: "https://idreamleaguesoccerkits.com/wp-content/uploads/2018/03/China-Logo-512x512-URL.png",
+                    name: "英豪荟萃官方店铺",
+                    date: "2020-05-01",
+                    shop: "",
+                },
+                {
+                    img: "https://idreamleaguesoccerkits.com/wp-content/uploads/2018/03/China-Logo-512x512-URL.png",
+                    name: "英豪荟萃官方店铺",
+                    date: "2020-05-01",
+                    shop: "",
+                },
+            ],
+
             input: '',
             currentDate: new Date(),
             rate: 4.9,

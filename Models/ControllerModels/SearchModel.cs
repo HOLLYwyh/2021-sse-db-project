@@ -9,4 +9,19 @@ namespace InternetMall.Models
    {
         public string Context { get; set; }
    }
+   public class SearchCommodityType
+   {
+        public string Type { get; set; }
+   }
+
+   public class SearchShopType
+   {
+        public string Type { get; set; }
+   }
+
+   public class SearchNameType
+   {
+        public string Context { get; set; }
+        public string Category { get; set; }
+   }
 }

@@ -49,14 +49,29 @@ namespace InternetMall.Controllers
 
         //前后端交互
         [HttpPost]
-        public IActionResult SetSearchName([FromBody] SearchName name)
+        public IActionResult SetSearchName([FromBody] SearchName name)   //设置搜索框内容
         {
             Global.GSearchName = name.Context;
             JsonData jsondata = new JsonData();
             jsondata["searchResult"] = name.Context;
             return Json(jsondata.ToJson());
         }
-
+        [HttpPost]
+        public IActionResult SetSearchCommodityType([FromBody] SearchCommodityType name)  //设置商品类别
+        {
+            Global.GCommodityType = name.Type;
+            JsonData jsondata = new JsonData();
+            jsondata["commodityType"] = name.Type;
+            return Json(jsondata.ToJson());
+        }
+        [HttpPost]
+        public IActionResult SetSearchShopType([FromBody]SearchShopType name)   //设置店铺类别
+        {
+            Global.GShopType = name.Type;
+            JsonData jsondata = new JsonData();
+            jsondata["shopType"] = name.Type;
+            return Json(jsondata.ToJson());
+        }
         public IActionResult GetSearchName()
         {
             JsonData jsondata = new JsonData();
@@ -64,12 +79,33 @@ namespace InternetMall.Controllers
             return Json(jsondata.ToJson());
         }
 
-        public IActionResult GetCommodities([FromBody] SearchName name)   //按照默认值
+        [HttpPost]
+        public IActionResult GetCommodities([FromBody] SearchName name)   //根据名称和类别来渲染页面
         {
             List<Good> commodityList = new List<Good>();
             string commodityName = name.Context;
-            commodityList = searchService.SearchCommodity(commodityName);
+            int type = int.Parse(Global.GCommodityType);
+            commodityList = searchService.SearchCommodity(commodityName,type);
+            foreach (var good in commodityList)
+            {
+                good.img = "../.." + good.img;
+            }
             string str = JsonConvert.SerializeObject(commodityList);
+            return new ContentResult { Content = str, ContentType = "application/json" };
+        }
+
+        [HttpPost]
+        public IActionResult GetShops([FromBody]SearchName name)  //根据名称和类别来返回店铺
+        {
+            List<ShopView> shopList = new List<ShopView>();
+            string shopName = name.Context;
+            int type = int.Parse(Global.GShopType);
+            shopList = searchService.SearchShop(shopName,type);
+            foreach (var shop in shopList)
+            {
+                shop.img = "../.." + shop.img;
+            }
+            string str = JsonConvert.SerializeObject(shopList);
             return new ContentResult { Content = str, ContentType = "application/json" };
         }
     }
