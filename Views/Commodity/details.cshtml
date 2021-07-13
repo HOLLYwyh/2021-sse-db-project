@@ -8,84 +8,171 @@
     <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
     <link href="~/css/Common/shortcut_five.css" type="text/css" rel="stylesheet" />
     <link href="~/css/Commodity/details.css" type="text/css" rel="stylesheet" />
+
+    <title>商品详情</title>
+    
+
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
-    @await Html.PartialAsync("~/Views/Shared/backToTop.cshtml")
+
 </head>
 <body>
     <div id="shortcut">
         <shortcut></shortcut>
     </div>
-    <div class="comoinfo_outerbox" id="infox">
-        <div class="comoinfo_imgbox">
-            <div class="comoinfo_mainimgbox">
-                <img src="">
+
+
+
+    <div class="qbspfl">
+        <div class="djfl">
+            商品详情
+        </div>
+
+    </div>
+    <script>
+        $(function () {
+            $("#banner_menu_wrap").mouseleave(function () {
+                $(this).hide()
+                $("#big_banner_wrap").hide()
+            });
+            $(".djfl").mouseenter(function () {
+                $("#big_banner_wrap").show()
+                $("#banner_menu_wrap").show()
+            });
+        })
+
+    </script>
+
+    <div class="nowweizhi">
+        <span></span>
+    </div>
+
+    <div class="theshopshow" id="infox">
+
+        <script src="~/js/Commodity/163css.js"></script>
+        <script src="~/js/Commodity/lib.js"></script>
+        <div id="preview">
+            <div class=jqzoom id="spec-n1">
+                <img height="350" :src="input.img" v-bind:jqimg="input.img" width="350">
             </div>
-            <div class="comoinfo_imglistbox">
+            <div id="spec-n5">
 
             </div>
         </div>
-        <div class="comoinfo_infobox">
-            <div class="comoinfo_namebox">
-                <p>商品名称：{{input.name}}</p>
-            </div>
-            <div class="comoinfo_introbox">
-                <p>
-                    {{input.intro}}长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试
-                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
-                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
-                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
-                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
-                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
-                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
-                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
-                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
-                </p>
-            </div>
-            <div class="comoinfo_pricebox">
-                <p style="color: gray; font-size: medium;"><br />价格：</p>
-                <p>¥</p>
-                <p>{{input.price}}</p>
-            </div>
-            <div class="comoinfo_amountbox">
-                <p style="color: gray; font-size: medium; font-weight: bold;"><br /><br />商品数量：</p>
-                <div class="comoinfo_amountbutton comoinfo_amountminus"onclick="vm.minus()">
-                    -
+        <SCRIPT type=text/javascript>
+            $(function () {
+                $(".jqzoom").jqueryzoom({
+                    xzoom: 400,
+                    yzoom: 400,
+                    offset: 10,
+                    position: "right",
+                    preload: 1,
+                    lens: 1
+                });
+                $("#spec-list").jdMarquee({
+                    deriction: "left",
+                    width: 350,
+                    height: 56,
+                    step: 2,
+                    speed: 4,
+                    delay: 10,
+                    control: true,
+                    _front: "#spec-right",
+                    _back: "#spec-left"
+                });
+                $("#spec-list img").bind("mouseover", function () {
+                    var src = $(this).attr("src");
+                    $("#spec-n1 img").eq(0).attr({
+                        src: src.replace("\/n5\/", "\/n1\/"),
+                        jqimg: src.replace("\/n5\/", "\/n0\/")
+                    });
+                    $(this).css({
+                        "border": "2px solid #ff6600",
+                        "padding": "1px"
+                    });
+                }).bind("mouseout", function () {
+                    $(this).css({
+                        "border": "1px solid #ccc",
+                        "padding": "2px"
+                    });
+                });
+            })
+        </SCRIPT>
+
+        <div class="shoppnum">
+            <!--n1-->
+            <div class="shanpmai">
+                <h1 class="spdname">{{input.name}} </h1>
+                <br />
+                <h2 class="spdname">{{input.intro}}</h2>
+                <br />
+                <div class="hotspeak">
+
                 </div>
-                <div class="comoinfo_amountshow">{{number}}</div>
-                <div class="comoinfo_amountbutton comoinfo_amountplus" onclick="vm.plus()">
-                    +
+                <div class="shoujiap">
+                    <span>商城价格</span>
+                    <i>{{input.price}}</i>￥
+                </div>
+                <div class="chuxinxi">
+
+                </div>
+                <div class="shoujigm">
+
+                </div>
+                <div class="peisongzhi">
+
+                </div>
+                <div class="xuanzcolor">
+
+
+
+                    <div class="goumaijiajian">
+                        <span>购买数量</span>
+                        <input id="min" name="" type="button" value="减" / style=" width:30px; height:30px; font-size:12px; line-height:30px; color:#333; float:left; cursor:pointer" onclick="vm.minus()">
+                        <input id="text_box" name="" type="text" :value=number style="width:60px;height:30px; font-size:12px; text-align:center; float:left" />
+                        <input id="add" name="" type="button" value="加" / style=" width:30px; height:30px; font-size:12px; line-height:30px; color:#333; float:left; cursor:pointer" onclick="vm.plus()">
+                    </div>
+                    <br />
+                    <!--加入购物车与收藏商品-->
+                    <div class="joinspadsp">
+                        <a href="#" style=" margin-left:67px">立即购买</a>
+                        <a href="#" style=" margin-left:6px">加入购物车</a>
+                        <a href="#" style=" margin-left:6px">收藏该商品</a>
+                    </div>
+                    <br />
+                    <!--商品编号-->
+                    <div class="shopbh">
+                        <span>商品编号</span>
+                        <em>{{input.id}}</em>
+                    </div>
                 </div>
             </div>
-            <div class="comoinfo_buttonbox">
-                <div class="comoinfo_buybutton" onclick="vm.sendBuy()">立即购买</div>
-                <div class="comoinfo_addtocartbutton">加入购物车</div>
+
+            <div class="daitianc" id="rcmd_box">
+                <span class="lkadlk">瞧了又瞧</span>
+                <div class="lklksp">
+                    <ul>
+                        <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
+                            <a href="javascript:;">
+                                <b>
+                                    <img :src="thing.img">
+                                </b>
+                                <h5>
+                                    {{thing.intro}}
+                                </h5>
+                                <p>{{thing.intro}}</p>
+                                <div class="shop">
+                                    店铺：{{thing.shop}}
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
+
+    
+
     <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
     <script type="text/javascript" src="~/js/Commodity/details.js"></script>
 </body>

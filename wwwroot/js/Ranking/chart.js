@@ -74,127 +74,7 @@ let content = new Vue({
     el: '#content',
     data:
     {
-        object:
-            [
-                {
-                    ID: "123",
-                    img: '../../Images/Ranking/1.png',
-                    intro: "歪比歪比",
-                    shop: "金轮",
-                    description: "歪比八卜",
-                    price: 999.9,
-                },
-                {
-                    ID: "132",
-                    img: '../../Images/Ranking/1.png',
-                    intro: "歪比歪比",
-                    shop: "金轮",
-                    description: "歪比八卜",
-                    price: 999.9,
-                },
-                {
-                    ID: "123",
-                    img: '../../Images/Ranking/1.png',
-                    intro: "歪比歪比",
-                    shop: "金轮",
-                    description: "歪比八卜",
-                    price: 999.9,
-                },
-                {
-                    ID: "123",
-                    img: '../../Images/Ranking/1.png',
-                    intro: "歪比歪比",
-                    shop: "金轮",
-                    description: "歪比八卜",
-                    price: 999.9,
-                },
-                {
-                    ID: "123",
-                    img: '../../Images/Ranking/1.png',
-                    intro: "歪比歪比",
-                    shop: "金轮",
-                    description: "歪比八卜",
-                    price: 999.9,
-                },
-                {
-                    ID: "123",
-                    img: '../../Images/Ranking/1.png',
-                    intro: "歪比歪比",
-                    shop: "金轮",
-                    description: "歪比八卜",
-                    price: 999.9,
-                },
-                {
-                    ID: "123",
-                    img: '../../Images/Ranking/1.png',
-                    intro: "歪比歪比",
-                    shop: "金轮",
-                    description: "歪比八卜",
-                    price: 999.9,
-                },
-                {
-                    ID: "123",
-                    img: '../../Images/Ranking/1.png',
-                    intro: "歪比歪比",
-                    shop: "金轮",
-                    description: "歪比八卜",
-                    price: 999.9,
-                },
-                {
-                    ID: "123",
-                    img: '../../Images/Ranking/1.png',
-                    intro: "歪比歪比",
-                    shop: "金轮",
-                    description: "歪比八卜",
-                    price: 999.9,
-                },
-                {
-                    ID: "123",
-                    img: '../../Images/Ranking/1.png',
-                    intro: "歪比歪比",
-                    shop: "金轮",
-                    description: "歪比八卜",
-                    price: 999.9,
-                },
-                {
-                    ID: "123",
-                    img: '../../Images/Ranking/1.png',
-                    intro: "歪比歪比",
-                    description: "歪比八卜",
-                    price: 999.9,
-                },
-                {
-                    ID: "123",
-                    img: '../../Images/Ranking/1.png',
-                    intro: "歪比歪比",
-                    shop: "金轮",
-                    description: "歪比八卜",
-                    price: 999.9,
-                },
-                {
-                    ID: "123",
-                    img: '../../Images/Ranking/1.png',
-                    intro: "歪比歪比",
-                    shop: "金轮",
-                    description: "歪比八卜",
-                    price: 999.9,
-                },
-                {
-                    ID: "123",
-                    img: '../../Images/Ranking/1.png',
-                    intro: "歪比歪比",
-                    shop: "金轮",
-                    description: "歪比八卜",
-                    price: 999.9,
-                },
-                {
-                    ID: "123",
-                    img: '../../Images/Ranking/1.png',
-                    intro: "歪比歪比",
-                    shop: "金轮",
-                    description: "歪比八卜",
-                    price: 999.9,
-                },
+        object:[
             ],
     },
     methods: {
@@ -213,10 +93,12 @@ let content = new Vue({
                     dataType: "json",
                     data: JSON.stringify({ Type: which }), //请求类型
                     success: function (result) {
-                        // var jsonData = eval("(" + result + ")");
-                        content.object = jsonData;
+                        content.object = result;
                     }
                 });
+                for (let i = 0; i < 15; i++) {
+                    content.object[i].description = content.object[i].description.substr(0, 50);
+                }
             }
             else if (window.which == 2) {
                 $.ajax({
@@ -227,10 +109,12 @@ let content = new Vue({
                     dataType: "json",
                     data: JSON.stringify({ Type: which }), //请求类型
                     success: function (result) {
-                        // var jsonData = eval("(" + result + ")");
-                        content.object = jsonData;
+                        content.object = result;
                     }
                 });
+                for (let i = 0; i < 15; i++) {
+                    content.object[i].description = content.object[i].description.substr(0, 50);
+                }
             }
             else if (window.which == 3) {
                 $.ajax({
@@ -241,63 +125,17 @@ let content = new Vue({
                     dataType: "json",
                     data: JSON.stringify({ Type: which }), //请求类型
                     success: function (result) {
-                        // var jsonData = eval("(" + result + ")");
-                        content.object = jsonData;
+                        content.object = result;
                     }
                 });
+                for (let i = 0; i < 15; i++) {
+                    content.object[i].description = content.object[i].description.substr(0, 50);
+                }
             }
             else alert("bug")
         }
     },
 })
-
-
-/*function refresh() {
-    if (content.which == 1) {
-        $.ajax({
-            type: "post",
-            url: "/Ranking/GetRankList",
-            async: false,
-            contentType: "application/json",
-            dataType: "json",
-            data: JSON.stringify({ Type: which }), //请求类型
-            success: function (result) {
-               // var jsonData = eval("(" + result + ")");
-                content.object = jsonData;
-            }
-        });
-    }
-    else if (content.which == 2) {
-        $.ajax({
-            type: "post",
-            url: "/Ranking/GetRankList",
-            async: false,
-            contentType: "application/json",
-            dataType: "json",
-            data: JSON.stringify({ Type: which }), //请求类型
-            success: function (result) {
-               // var jsonData = eval("(" + result + ")");
-                content.object = jsonData;
-            }
-        });
-    }
-    else if (content.which == 3) {
-        $.ajax({
-            type: "post",
-            url: "/Ranking/GetRankList",
-            async: false,
-            contentType: "application/json",
-            dataType: "json",
-            data: JSON.stringify({ Type: which }), //请求类型
-            success: function (result) {
-               // var jsonData = eval("(" + result + ")");
-                content.object = jsonData;
-            }
-        });
-    }
-    else alert("bug")
-}*/
-
 
 function getData() {
     console.log(window.which)
@@ -307,10 +145,8 @@ function getData() {
         async: false,
         contentType: "application/json",
         dataType: "json",
-        data: JSON.stringify({ "Type": which/*content.which*/ }), //请求类型
+        data: JSON.stringify({ "Type": which }), //请求类型
         success: function (result) {
-            //var jsonData = eval("(" + result + ")");
-            //content.object = jsonData;
             content.object = result;
             console.log(result)
         },

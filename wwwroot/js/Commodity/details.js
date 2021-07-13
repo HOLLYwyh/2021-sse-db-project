@@ -4,16 +4,18 @@ let vm = new Vue({
     el: "#infox",
     data: {
         input:{
-            code:"",id: "",
+            code: "",
+            id: "1234",
             price: "222",
             storage:"",
-            name: 'xbt',
-            intro: "6666666",
-            img: "",
+            name: 'xbtfdgdgfgs',
+            intro: "6666666sdfgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+            img: '../../Images/Home/index/a2.png',
             shopid: "",
             category:""
         },
-        number:1,
+        number: 1,
+        
     },
     methods: {
         plus() {
@@ -58,7 +60,33 @@ let vm = new Vue({
     }*/
 })
 
+function getRcmd() {
+    $.ajax({
+        url: "/Home/RcmdCommodity",
+        type: "get",
+        dataType: "json", //返回数据格式为json
+        success: function (data) {//请求成功完成后要执行的方法
+            console.log(data)
+            rcmd.goods = data
+        }
+    })
 
+}
+
+var rcmd = new Vue({
+    el: '#rcmd_box',
+    data: {
+        mark: 0,
+        goods: []
+    },
+    methods: {
+        chooseAddress(thing, index) {
+            console.log(thing.ID)
+            selectGoods(thing.ID)
+            return thing.ID
+        }
+    }
+})
 
 class CommodityDetails extends HTMLElement {
     constructor() {
