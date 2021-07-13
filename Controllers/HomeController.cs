@@ -33,6 +33,8 @@ namespace InternetMall.Controllers
 
         public ActionResult Index()
         {
+            Global.GCommodityType = "0";
+            Global.GShopType = "0";
             return View();
         }
 
@@ -66,6 +68,10 @@ namespace InternetMall.Controllers
             List<Good> goods = new List<Good>();
             int category = int.Parse(commodityType.type);
             goods = homeService.RecommendingZoneCommodities(category);
+            foreach (var good in goods)
+            {
+                good.img = "../.." + good.img;
+            }
             string str = JsonConvert.SerializeObject(goods);
             return new ContentResult { Content = str, ContentType = "application/json" };
         }
@@ -78,8 +84,6 @@ namespace InternetMall.Controllers
             rankList = homeService.Rank(category);
             string str = JsonConvert.SerializeObject(rankList);
             return new ContentResult { Content = str, ContentType = "application/json" };
-            return Ok();
-
         }
     }
 }

@@ -66,7 +66,19 @@ body {
     margin-bottom: 17px;
 }
 
+/*el-card以及其中的内容*/
 .el-card{
     width :300px;
     height:300px;
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+}
+
+.commodityImage {
+    width: 300px;
+    height: 230px;
+}
+.intro{
+    color:cornflowerblue;
+}
+.price{
+
+}
