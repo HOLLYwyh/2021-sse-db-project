@@ -251,7 +251,7 @@ namespace Internetmall.Services
                     if (m.Count != 0)
                     {
                         count++;
-                        shopList.Add(item);
+                        newShopList.Add(item);
                     }
                 }
                 foreach (Shop newShop in newShopList)
@@ -292,7 +292,7 @@ namespace Internetmall.Services
                     if (m.Count != 0)
                     {
                         count++;
-                        shopList.Add(item);
+                        newShopList.Add(item);
                     }
                 }
                 foreach (Shop newShop in newShopList)

@@ -56,7 +56,6 @@ function getCommodities() {    //渲染商品
 }
 
 function setCommodDefault() {  //默认排序
-    //还需要修改
     $.ajax({
         url: "/Search/SetSearchCommodityType",
         type: "post",
@@ -73,7 +72,6 @@ function setCommodDefault() {  //默认排序
 }
 
 function setCommodDesc() {  //价格降序排序
-    //还需要修改
     $.ajax({
         url: "/Search/SetSearchCommodityType",
         type: "post",

@@ -14,8 +14,13 @@ new Vue({
 })
 
 //商品结果列表
-new Vue({
-    el: "#shop-list"
+var shop = new Vue({
+    el: "#shop-list",
+    data: {
+        shops: [
+        ],
+        number: 0
+    },
 })
 
 //搜索分类菜单
@@ -31,27 +36,52 @@ new Vue({
     }
 })
 
-
-//翻页
-new Vue({
-    el: "#turn-to-page",
-    methods: {
-        handleSizeChange(val) {
-            console.log(`每页 ${val} 条`);
-        },
-        handleCurrentChange(val) {
-            console.log(`当前页: ${val}`);
+function setShopsDefault() {   //默认值返回店铺
+    $.ajax({
+        url: "/Search/SetSearchShopType",
+        type: "post",
+        dataType: "json", //返回数据格式为json
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        data: JSON.stringify({ Type: "0" }),
+        success: function (data) {//请求成功完成后要执行的方法
+            console.log("success");
+            window.location = "/Search/SearchShop"
         }
-    },
-    data: {
-        currentPage1: 1,
-    }
-})
-
-function getShops() {   //默认值返回店铺
-
+    })
 }
 
-function getShopsByCredit() { //按照商家信用返回店铺
-
+function setShopsByCredit() { //按照商家信用返回店铺
+    $.ajax({
+        url: "/Search/SetSearchShopType",
+        type: "post",
+        dataType: "json", //返回数据格式为json
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        data: JSON.stringify({ Type: "1" }),
+        success: function (data) {//请求成功完成后要执行的方法
+            console.log("success");
+            window.location = "/Search/SearchShop"
+        }
+    })
 }
+
+function getShops() {    //渲染店铺
+    //还需要写
+    $.ajax({
+        url: "/Search/GetShops",
+        type: "post",
+        dataType: "json", //返回数据格式为json
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        data: JSON.stringify({ Context: $("#searchContext").val() }),
+        success: function (data) {//请求成功完成后要执行的方法
+        }
+    })
+}
+
+function start() {
+    getShops()
+}
+
+window.onload = start()
