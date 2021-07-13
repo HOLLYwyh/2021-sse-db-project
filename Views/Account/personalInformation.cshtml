@@ -60,7 +60,11 @@
                             <p>性别：</p>
                         </el-col>
                         <el-col :span="5">
-                            <radio></radio>
+                            <el-radio-group v-model="gender">
+                                <el-radio :label="1">男</el-radio>
+                                <el-radio :label="2">女</el-radio>
+                                <el-radio :label="0">保密</el-radio>
+                            </el-radio-group>
                         </el-col>
                     </el-row>
                     <el-row>
@@ -68,7 +72,8 @@
                             <p>生日：</p>
                         </el-col>
                         <el-col :span="5">
-                            <birthday></birthday>
+                            <el-date-picker :picker-options="pickerOptions"  v-model="birthday" type="date" placeholder="选择日期">
+                            </el-date-picker>
                         </el-col>
                     </el-row>
                     <el-row>

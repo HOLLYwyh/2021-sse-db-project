@@ -1,19 +1,3 @@
-Vue.component('radio', {
-    template: `
-
-    <el-radio-group v-model="gender">
-        <el-radio :label="1">男</el-radio>
-        <el-radio :label="2">女</el-radio>
-        <el-radio :label="0">保密</el-radio>
-    </el-radio-group>
-`,
-
-    data() {
-        return {
-            gender: 0
-        };
-    },
-})
 Vue.component('index', {
     template: `
   <el-container direction="vertical">
@@ -72,26 +56,9 @@ Vue.component('promptbox', {
         },
     },
 })
-Vue.component('birthday', {
-    template: `
-    <el-date-picker v-model="birthday" type="date" placeholder="选择日期">
-    </el-date-picker>
-`,
-    data() {
-        return {
-            pickerOptions: {
-                disabledDate(time) {
-                    return time.getTime() > Date.now();
-                },
-            },
-            birthday: "",
-        };
-    },
-    methods: {}
-})
 
 
-new Vue({
+let app = new Vue({
     el: '#app',
     data() {
         return {
@@ -99,6 +66,14 @@ new Vue({
             ID: "123456789",
             nickname: "HollyWYH",
             imageUrl: "",
+            gender:0,
+            pickerOptions: {
+                disabledDate(time) {
+                    return time.getTime() > Date.now();
+                },
+            },
+            birthday: "",
+
         };
     },
     methods: {
@@ -117,8 +92,44 @@ new Vue({
             }
             return isJPG && isLt2M;
         },
+        getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+
+    },
+    created() {
+        this.id = this.getCookie("buyerID")
     }
 
-})
 
+})
+function display(id) {
+    //console.log(id);
+    $.ajax({
+        type: "post",
+        url: "/Account/DisplayBuyerInfo",
+        async: false,
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ BuyerId: id }),
+        success: function (result) {
+            var object = eval('(' + result + ')');//string类型转换成Json对象方法
+            app.ID = object["buyerPhone"];
+            app.nickname = object["buyerNickname"];
+            app.gender = object["buyerGender"];
+            app.birthday = object["buyerBirth"];
+            console.log(object);
+
+            //console.log(object["buyerPhone"]);
+            //console.log(object["buyerPhone"]);
+        }
+    });
+}
+window.onload = display(app.id);
 

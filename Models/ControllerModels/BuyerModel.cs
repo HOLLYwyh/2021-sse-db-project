@@ -15,6 +15,12 @@ namespace InternetMall.Models
         public string OldNo { get; set; }
         public string NewNo { get; set; }
     }
+    public class BuyerPasswd
+    {
+        public string BuyerId { get; set; }
+        public string OldPasswd { get; set; }
+        public string NewPasswd { get; set; }
+    }
 
 
 }

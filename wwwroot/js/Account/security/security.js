@@ -108,7 +108,7 @@ Vue.component('passwordbut', {
     <el-dialog title="密码修改" :visible.sync="Visible" width="30%">
       <el-form :model="form">
         <el-form-item label="旧密码" :label-width="formLabelWidth">
-          <el-input v-model="form.oldpw" autocomplete="off"></el-input>
+          <el-input id="oldpasswd" v-model="form.oldpw" autocomplete="off"></el-input>
         </el-form-item>
 
         <el-form-item label="新密码" :label-width="formLabelWidth">
@@ -116,7 +116,7 @@ Vue.component('passwordbut', {
         </el-form-item>
 
         <el-form-item label="确认新密码" :label-width="formLabelWidth">
-          <el-input v-model="form.newpw2" autocomplete="off"></el-input>
+          <el-input id="newpasswd" v-model="form.newpw2" autocomplete="off"></el-input>
         </el-form-item>
       </el-form >
       <div slot="footer" class="dialog-footer">
@@ -156,7 +156,7 @@ Vue.component('passwordbut', {
                 alert("请输入新密码！");
                 return false;
             }
-
+            console.log(y);
             let pat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{6, 18}$/;
             if (!pat.test(y)) {
                 alert("密码至少包含小写字母、大写字母和数字,且长度为6-18位");
@@ -182,6 +182,7 @@ Vue.component('passwordbut', {
             } else {
                 alert("密码修改成功！");
                 this.Visible = false;
+                updatePasswd(app.id);
             }
         },
     },
@@ -247,11 +248,29 @@ function updatePhone(id) {
         success: function (result) {
             var object = eval('(' + result + ')');//string类型转换成Json对象方法
             console.log($("#oldno").val() + $("#newno").val());
-            console.log(1);
             app.phone = object["buyerPhone"];
             //console.log(object["buyerPhone"]);
             //console.log(object["buyerPhone"]);
         }
     });
 }
+function updatePasswd(id) {
+    console.log(id);
+    $.ajax({
+        type: "post",
+        url: "/Account/UpdatePasswdById",
+        async: false,
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ OldPasswd: $("#oldpasswd").val(), NewPasswd: $("#newpasswd").val(), BuyerId: id }),
+        success: function (result) {
+            var object = eval('(' + result + ')');//string类型转换成Json对象方法
+            console.log($("#oldpasswd").val() + $("#newpasswd").val());
+            app.password = object["buyerPasswd"];
+            //console.log(object["buyerPhone"]);
+            //console.log(object["buyerPhone"]);
+        }
+    });
+}
+
 window.onload = details(app.id);
