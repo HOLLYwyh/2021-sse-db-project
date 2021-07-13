@@ -210,13 +210,13 @@ function refresh() {
     if (content.which == 1) {
         $.ajax({
             type: "post",
-            url: "",
+            url: "/Ranking/GetRankList",
             async: false,
             contentType: "application/json",
             dataType: "json",
-            data: JSON.stringify({ "ID": which }), //请求类型
+            data: JSON.stringify({ Type: which }), //请求类型
             success: function (result) {
-                var jsonData = eval("(" + result + ")");
+               // var jsonData = eval("(" + result + ")");
                 content.object = jsonData;
             }
         });
@@ -224,13 +224,13 @@ function refresh() {
     else if (content.which == 2) {
         $.ajax({
             type: "post",
-            url: "",
+            url: "/Ranking/GetRankList",
             async: false,
             contentType: "application/json",
             dataType: "json",
-            data: JSON.stringify({ "ID": which }), //请求类型
+            data: JSON.stringify({ Type: which }), //请求类型
             success: function (result) {
-                var jsonData = eval("(" + result + ")");
+               // var jsonData = eval("(" + result + ")");
                 content.object = jsonData;
             }
         });
@@ -238,13 +238,13 @@ function refresh() {
     else if (content.which == 3) {
         $.ajax({
             type: "post",
-            url: "",
+            url: "/Ranking/GetRankList",
             async: false,
             contentType: "application/json",
             dataType: "json",
-            data: JSON.stringify({ "ID": which }), //请求类型
+            data: JSON.stringify({ Type: which }), //请求类型
             success: function (result) {
-                var jsonData = eval("(" + result + ")");
+               // var jsonData = eval("(" + result + ")");
                 content.object = jsonData;
             }
         });
@@ -254,16 +254,19 @@ function refresh() {
 
 
 function getData() {
+    console.log(content.which)
     $.ajax({
         type: "post",
-        url: "",
+        url: "/Ranking/GetRankList",
         async: false,
         contentType: "application/json",
         dataType: "json",
-        data: JSON.stringify({ "ID": which }), //请求类型
+        data: JSON.stringify({ "Type": content.which/*content.which*/ }), //请求类型
         success: function (result) {
-            var jsonData = eval("(" + result + ")");
-            content.object = jsonData;
+            //var jsonData = eval("(" + result + ")");
+            //content.object = jsonData;
+            content.object = result
+            console.log(result)
         }
     });
 }

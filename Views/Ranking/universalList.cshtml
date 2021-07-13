@@ -27,17 +27,17 @@
     <div class="f2">
         <div id="hot" v-on:click="divClick" :class="{f21:isActive,f24:checkf24}">
             <span><img src="~/Images/Ranking/data.png" /></span>
-            <span><a href="#new">热卖排行</a></span>
+            <span><a v-on:click="divClick()">热卖排行</a></span>
         </div>
 
         <div id="search" v-on:click="divClick" :class="{f22:isActive,f25:checkf25}">
             <span><img src="~/Images/Ranking/crown.png" /></span>
-            <span><a href="#new">搜索指数排行</a></span>
+            <span><a v-on:click="divClick()">搜索指数排行</a></span>
         </div>
 
         <div id="praise" v-on:click="divClick" :class="{f23:isActive,f26:checkf26}">
             <span><img src="~/Images/Ranking/thumb.png" /></span>
-            <span><a href="#new">口碑排行</a></span>
+            <span><a v-on:click="divClick()">口碑排行</a></span>
         </div>
     </div>
     <!-- 内容 -->
