@@ -7,13 +7,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
     <link href="~/css/Common/shortcut_five.css" type="text/css" rel="stylesheet" />
-
+    <link href="~/css/Commodity/details.css" type="text/css" rel="stylesheet" />
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
     @await Html.PartialAsync("~/Views/Shared/backToTop.cshtml")
 </head>
 <body>
     <div id="shortcut">
         <shortcut></shortcut>
+    </div>
+    <div class="comoinfo_outerbox" id="infox">
+        <div class="comoinfo_imgbox">
+            <div class="comoinfo_mainimgbox">
+                <img src="">
+            </div>
+            <div class="comoinfo_imglistbox">
+
+            </div>
+        </div>
+        <div class="comoinfo_infobox">
+            <div class="comoinfo_namebox">
+                <p>商品名称：{{input.name}}</p>
+            </div>
+            <div class="comoinfo_introbox">
+                <p>
+                    {{input.intro}}长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试长文本测试
+                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
+                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
+                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
+                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
+                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
+                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
+                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
+                    商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                    accomodity introductionsafjddslkgahkghahgljdkghaccomodity introducasdas
+                </p>
+            </div>
+            <div class="comoinfo_pricebox">
+                <p style="color: gray; font-size: medium;"><br />价格：</p>
+                <p>¥</p>
+                <p>{{input.price}}</p>
+            </div>
+            <div class="comoinfo_amountbox">
+                <p style="color: gray; font-size: medium; font-weight: bold;"><br /><br />商品数量：</p>
+                <div class="comoinfo_amountbutton comoinfo_amountminus"onclick="vm.minus()">
+                    -
+                </div>
+                <div class="comoinfo_amountshow">{{number}}</div>
+                <div class="comoinfo_amountbutton comoinfo_amountplus" onclick="vm.plus()">
+                    +
+                </div>
+            </div>
+            <div class="comoinfo_buttonbox">
+                <div class="comoinfo_buybutton" onclick="vm.sendBuy()">立即购买</div>
+                <div class="comoinfo_addtocartbutton">加入购物车</div>
+            </div>
+        </div>
     </div>
     <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
     <script type="text/javascript" src="~/js/Commodity/details.js"></script>
