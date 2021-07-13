@@ -10,9 +10,9 @@ namespace Internetmall.Interfaces
 {
     interface ISearchService
     {
-        //������Ʒ
+
         public List<Good> SearchCommodity(string commodityName, int searchType = 0);
-        //��������
+
         public List<ShopView> SearchShop(string shopName, int searchType = 0);
     }
 }
