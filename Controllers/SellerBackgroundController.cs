@@ -69,7 +69,7 @@ namespace InternetMall.Controllers
         //前后端交互
         [HttpPost]
         [Obsolete]
-        public  IActionResult UploadCommodity()      //上传商品
+        public IActionResult UploadCommodity()      //上传商品
         {
             var date = Request;
             var files = Request.Form.Files;   //上传的图片

@@ -16,6 +16,7 @@ function details() {
             console.log($("#commodityId").val());
             //var jsonData = eval("(" + result + ")");  //将json转换成对象
             console.log(result);//目前得到了对应商品的所有属性，再把属性展示到前端即可
+            console.log(eval("(" + result + ")"));
             
         }
     });

@@ -70,6 +70,7 @@ Vue.component('phonebut', {
                 return false;
             }
             if (y.length != 11) {
+                console.log(y)
                 alert("请输入正确的新手机号！");
                 return false;
             }
@@ -156,12 +157,27 @@ Vue.component('passwordbut', {
                 alert("请输入新密码！");
                 return false;
             }
-            console.log(y);
+            /*
+            //console.log(y);
             let pat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{6, 18}$/;
             if (!pat.test(y)) {
+                console.log(y)
+                alert("密码至少包含小写字母、大写字母和数字,且长度为6-18位");
+                return false;
+            }*/
+            /*if (y.length < 6 || y.length>18) {
                 alert("密码至少包含小写字母、大写字母和数字,且长度为6-18位");
                 return false;
             }
+
+            //后端实现检查旧手机号码是否匹配，如正确更新该账户手机号码
+            for (let i = 0; i < y.length; i++) {
+                if (y[i] < '0' || y[i] > '9') {
+                    alert("请输入正确的新手机号！");
+                    return false;
+                }
+            }*/
+
             if (x == y) {
                 alert("新旧密码不能相同！");
                 return false;

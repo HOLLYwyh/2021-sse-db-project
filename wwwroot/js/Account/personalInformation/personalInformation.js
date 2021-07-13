@@ -5,7 +5,7 @@ Vue.component('index', {
     <el-link :underline="false" href="https://">历史订单</el-link>  
 
     <h3>我的钱包</h3>
-    <el-link :underline="false" href="https://">购物车</el-link>  
+    <el-link :underline="false" href="/Purchase/shoppingCart">购物车</el-link>  
     <el-link :underline="false" href="https://">优惠券</el-link>  
 
     <h3>我的关注</h3>
@@ -68,8 +68,10 @@ let app = new Vue({
         return {
             avatar: "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
             ID: "123456789",
+            id: "",
             nickname: "HollyWYH",
             imageUrl: "",
+            upFile: "", //上传的图片
             gender: 0,
             pickerOptions: {
                 disabledDate(time) {
@@ -81,9 +83,10 @@ let app = new Vue({
         };
     },
     methods: {
-        handleAvatarSuccess(res, file) {
-            this.imageUrl = file.raw;
-            //this.imageUrl = URL.createObjectURL(file.raw);
+        handleAvatarSuccess(res, file) {          
+            this.imageUrl = URL.createObjectURL(file.raw);
+            this.upFile = file.raw;
+            console.log(file.raw);
             //console.log(typeof (this.imageUrl));
             //console.log(this.imageUrl);
         },
@@ -132,7 +135,7 @@ function display(id) {
             app.gender = object["buyerGender"];
             app.birthday = object["buyerBirth"];
             app.imageUrl = object["buyerUrl"];
-            
+
         }
     });
 }
@@ -143,26 +146,19 @@ function updateInfo(id) {
     formData.append("UpdatedNickname", $("#updatedNickname").val());
     formData.append("UpdatedGender", app.gender);
     formData.append("UpdatedBirth", app.birthday);
-    formData.append("UpdatedUrl", app.imageUrl);
+    formData.append("UpdatedUrl", app.upFile);
     formData.append("BuyerId", id);
 
     $.ajax({
         type: "post",
         url: "/Account/UpdateInfoById",
         async: false,
-        cache: false,
-        contentType: false,
-        processData: false,     
+        cache: false, //不必须不从缓存中读取
+        processData: false,//必须处理数据，上传文件的时候，则不需要把其转换为字符串，因此要改成false
+        contentType: false,//必须发送数据的格式    
         data: formData,
         success: function (result) {
-            //var object = eval('(' + result + ')');//string类型转换成Json对象方法
-
-            //console.log(object);     
-
-            //app.nickname = object["buyerNickname"];
-            //app.gender = object["buyerGender"];
-            //app.birthday = object["buyerBirth"];
-            //app.imageUrl = object["buyerUrl"];
+            console.log(result);
         }
     });
 }

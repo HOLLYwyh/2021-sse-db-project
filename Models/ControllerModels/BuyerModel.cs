@@ -30,5 +30,38 @@ namespace InternetMall.Models
         public string UpdatedUrl { get; set; }
        
     }
+    /************************ 买家收货信息 *******************************/
+    public class AddReceiveInformation                                 // 添加收货信息
+    {
+        public string BuyerId { get; set; }
+        public string Phone { get; set; }
+        public string ReceiverName { get; set; }
 
+        // public string Country { get; set; }
+        // public string Province { get; set; }
+        // public string City { get; set; }
+        // public string District { get; set; }
+        public string DetailAddr { get; set; }
+        public string Tag { get; set; }
+    }
+
+    public class UpdateReceiveInformation                            // 更新收货信息
+    {
+        public string ReceivedId { get; set; }
+        public string Phone { get; set; }
+        public string ReceiverName { get; set; }
+
+        // public string Country { get; set; }
+        // public string Province { get; set; }
+        // public string City { get; set; }
+        // public string District { get; set; }
+        public string DetailAddr { get; set; }
+        public string Tag { get; set; }
+    }
+
+
+    public class DeleteReceiveInformation                           // 删除收货地址
+    {
+        public string ReceiveId { get; set; }
+    }
 }

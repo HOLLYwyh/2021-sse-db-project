@@ -29,27 +29,7 @@ namespace Internetmall.Services
             return adminCount;
         }
         //没有注册的话，就不用这个函数了
-        public bool SignUp(string phone, string nickName, string passwd)//注册
-        {
-            //如果要注册的用户电话不存在，说明可以注册
-            if (AdministratorExists(phone) == false)
-            {
-                Administrator newAdmin = new Administrator();
-
-                newAdmin.Phone = phone;
-                newAdmin.Nickname = nickName;
-                newAdmin.Passwd = passwd;
-                //为新用户随机生成一个用户ID
-                newAdmin.AdministratorId = GetAdministratorCount().ToString();
-                //其他信息可以为空（初始即为空），用户后续添加即可
-
-                Create(newAdmin);
-
-                return true;
-            }
-            //否则，不能注册已经存在的用户
-            return false;
-        }
+       
         public Administrator Login(string s, string passwd)//登录
         {
             Administrator admin;
@@ -75,16 +55,7 @@ namespace Internetmall.Services
         public bool AdministratorExists(string phone)
         {
             return _context.Administrators.Any(e => e.Phone == phone);
-        }
-        public void Create([Bind("AdministratorId,Phone,Passwd,Nickname,IdNumber,Name,Url")] Administrator admin)
-        {
-            //if (ModelState.IsValid)
-            //{
-            _context.Add(admin);
-            _context.SaveChanges();
-            //return RedirectToAction(nameof(Index));
-            //}
-        }
+        }     
         public Administrator SearchByPhone(string phone)
         {
             if (phone == null)

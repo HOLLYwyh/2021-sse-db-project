@@ -710,7 +710,7 @@ namespace InternetMall.DBContext
                     .HasColumnName("BUYER_ID");
 
                 entity.Property(e => e.City)
-                    .HasMaxLength(2)
+                    .HasMaxLength(3)
                     .IsUnicode(false)
                     .HasColumnName("CITY")
                     .IsFixedLength(true);
@@ -721,15 +721,21 @@ namespace InternetMall.DBContext
                     .HasColumnName("COUNTRY");
 
                 entity.Property(e => e.DetailAddr)
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false)
                     .HasColumnName("DETAIL_ADDR");
 
                 entity.Property(e => e.District)
-                    .HasMaxLength(2)
+                    .HasMaxLength(3)
                     .IsUnicode(false)
                     .HasColumnName("DISTRICT")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.Tag)
+                   .HasMaxLength(10)
+                   .IsUnicode(false)
+                   .HasColumnName("TAG")
+                   .IsFixedLength(true);
 
                 entity.Property(e => e.Phone)
                     .HasMaxLength(11)
@@ -738,7 +744,7 @@ namespace InternetMall.DBContext
                     .IsFixedLength(true);
 
                 entity.Property(e => e.Province)
-                    .HasMaxLength(2)
+                    .HasMaxLength(3)
                     .IsUnicode(false)
                     .HasColumnName("PROVINCE")
                     .IsFixedLength(true);
