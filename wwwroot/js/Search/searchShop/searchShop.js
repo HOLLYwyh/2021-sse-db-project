@@ -76,6 +76,8 @@ function getShops() {    //渲染店铺
         async: false,
         data: JSON.stringify({ Context: $("#searchContext").val() }),
         success: function (data) {//请求成功完成后要执行的方法
+            console.log(data)
+            shop.shops = data
         }
     })
 }

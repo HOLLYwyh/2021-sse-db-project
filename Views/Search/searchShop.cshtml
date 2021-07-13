@@ -53,7 +53,7 @@
                         <div style="padding: 10px;">
                             <span>{{shops[number].shopName}}</span>
                             <div class="bottom clearfix">
-                                <el-button type="text" class="button">{{shops[number++].shopDescription}}</el-button>
+                                <el-button type="text" class="button">进入店铺</el-button>
                             </div>
                         </div>
                     </el-card>
@@ -62,7 +62,7 @@
                 <el-col :span="16">
                     <el-card class="card description" shadow="never">
                         <div class="text-blue-700">店铺详情</div>
-                        <p>阿巴阿巴</p>
+                        <p>{{shops[number++].shopDescription}}</p>
                     </el-card>
                 </el-col>
 
