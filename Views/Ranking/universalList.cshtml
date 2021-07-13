@@ -33,13 +33,13 @@
     <div id="content" class="n1">
         <div v-for="(item,index) in object" class="n2">
             <div class="num">{{index+1}}</div>
-            <div class="img"><img :src="item.pic" alt="?"></div>
+            <div class="img"><img :src="item.img" alt="?"></div>
             <div class="n4">
-                <a class="title" v-on:click="aClick(index)" :href="aClick(index)">{{item.name}}</a>
+                <a class="title" v-on:click="aClick(index)" :href="aClick(index)">{{item.intro}}</a>
                 <div class="box">
                     <span class="date-box">
                         <i class="icon ion-play"></i>
-                        口碑评分：10
+                         {{item.shop}}
                     </span>
                     <a>
                         <span class="date-box">
