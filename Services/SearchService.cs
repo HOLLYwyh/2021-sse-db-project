@@ -47,6 +47,7 @@ namespace Internetmall.Services
                     //newGood.shop = newCommodity.Shop.Name;
                     newGood.ID = newCommodity.CommodityId;
                     newGood.price = newCommodity.Price;
+                    newGood.Soldnum = newCommodity.Soldnum;
                     returnList.Add(newGood);
                 }
             }
@@ -72,6 +73,7 @@ namespace Internetmall.Services
                     //newGood.shop = newCommodity.Shop.Name;
                     newGood.ID = newCommodity.CommodityId;
                     newGood.price = newCommodity.Price;
+                    newGood.Soldnum = newCommodity.Soldnum;
                     returnList.Add(newGood);
                     if (number == 12)
                         break;
@@ -88,6 +90,7 @@ namespace Internetmall.Services
                         //newGood.shop = newCommodity.Shop.Name;
                         newGood.ID = newCommodity.CommodityId;
                         newGood.price = newCommodity.Price;
+                        newGood.Soldnum = newCommodity.Soldnum;
                         returnList.Add(newGood);
                     }
                 }
@@ -114,12 +117,14 @@ namespace Internetmall.Services
                     //newGood.shop = newCommodity.Shop.Name;
                     newGood.ID = newCommodity.CommodityId;
                     newGood.price = newCommodity.Price;
+                    newGood.Soldnum = newCommodity.Soldnum;
                     returnList.Add(newGood);
                     if (number == 12)
                         break;
                 }
                 if (count < 12)
                 {
+                    List<Good> tempList = new List<Good>();
                     for (int i = count; i < 12; i++)
                     {
                         string randCommodityID = random.Next(1, 120).ToString();
@@ -130,7 +135,21 @@ namespace Internetmall.Services
                         //newGood.shop = newCommodity.Shop.Name;
                         newGood.ID = newCommodity.CommodityId;
                         newGood.price = newCommodity.Price;
-                        returnList.Add(newGood);
+                        newGood.Soldnum = newCommodity.Soldnum;
+                        tempList.Add(newGood);
+                    }
+                    for (int i=0;i<tempList.Count;i++)
+                    {
+                        int maxIndex=i;
+                        for(int j=0;j<tempList.Count;j++)
+                        {
+                            if (tempList[j].price > tempList[maxIndex].price)
+                                maxIndex = j;
+                        }
+                        Good tempGood = new Good();
+                        tempGood = tempList[maxIndex];
+                        returnList.Add(tempGood);
+                        tempList[maxIndex].price = -1;
                     }
                 }
             }
@@ -156,12 +175,14 @@ namespace Internetmall.Services
                     //newGood.shop = newCommodity.Shop.Name;
                     newGood.ID = newCommodity.CommodityId;
                     newGood.price = newCommodity.Price;
+                    newGood.Soldnum = newCommodity.Soldnum;
                     returnList.Add(newGood);
                     if (number == 12)
                         break;
                 }
                 if (count < 12)
                 {
+                    List<Good> tempList = new List<Good>();
                     for (int i = count; i < 12; i++)
                     {
                         string randCommodityID = random.Next(1, 120).ToString();
@@ -172,7 +193,21 @@ namespace Internetmall.Services
                         //newGood.shop = newCommodity.Shop.Name;
                         newGood.ID = newCommodity.CommodityId;
                         newGood.price = newCommodity.Price;
-                        returnList.Add(newGood);
+                        newGood.Soldnum = newCommodity.Soldnum;
+                        tempList.Add(newGood);
+                    }
+                    for (int i = 0; i < tempList.Count; i++)
+                    {
+                        int maxIndex = i;
+                        for (int j = 0; j < tempList.Count; j++)
+                        {
+                            if (tempList[j].price < tempList[maxIndex].price)
+                                maxIndex = j;
+                        }
+                        Good tempGood = new Good();
+                        tempGood = tempList[maxIndex];
+                        returnList.Add(tempGood);
+                        tempList[maxIndex].price = int.MaxValue;
                     }
                 }
             }
@@ -198,12 +233,14 @@ namespace Internetmall.Services
                     //newGood.shop = newCommodity.Shop.Name;
                     newGood.ID = newCommodity.CommodityId;
                     newGood.price = newCommodity.Price;
+                    newGood.Soldnum = newCommodity.Soldnum;
                     returnList.Add(newGood);
                     if (number == 12)
                         break;
                 }
                 if (count < 12)
                 {
+                    List<Good> tempList = new List<Good>();
                     for (int i = count; i < 12; i++)
                     {
                         string randCommodityID = random.Next(1, 120).ToString();
@@ -213,7 +250,22 @@ namespace Internetmall.Services
                         newGood.intro = newCommodity.Name;
                         //newGood.shop = newCommodity.Shop.Name;
                         newGood.ID = newCommodity.CommodityId;
-                        returnList.Add(newGood);
+                        newGood.price = newCommodity.Price;
+                        newGood.Soldnum = newCommodity.Soldnum;
+                        tempList.Add(newGood);
+                    }
+                    for (int i = 0; i < tempList.Count; i++)
+                    {
+                        int maxIndex = i;
+                        for (int j = 0; j < tempList.Count; j++)
+                        {
+                            if (tempList[j].Soldnum > tempList[maxIndex].Soldnum)
+                                maxIndex = j;
+                        }
+                        Good tempGood = new Good();
+                        tempGood = tempList[maxIndex];
+                        returnList.Add(tempGood);
+                        tempList[maxIndex].price = -1;
                     }
                 }
             }
@@ -310,6 +362,7 @@ namespace Internetmall.Services
                 }
                 if (count < 4)
                 {
+                    List<ShopView> tempList = new List<ShopView>();
                     for (int i = count; i < 4; i++)
                     {
                         string randShopID = random.Next(1, 1).ToString();
@@ -320,7 +373,20 @@ namespace Internetmall.Services
                         newShopView.shopDescription = newShop.Description;
                         newShopView.img = newShop.Url;
                         newShopView.creditScore = newShop.CreditScore;
-                        returnList.Add(newShopView);
+                        tempList.Add(newShopView);
+                    }
+                    for (int i = 0; i < tempList.Count; i++)
+                    {
+                        int maxIndex = i;
+                        for (int j = 0; j < tempList.Count; j++)
+                        {
+                            if (tempList[j].creditScore > tempList[maxIndex].creditScore)
+                                maxIndex = j;
+                        }
+                        ShopView tempShopView = new ShopView();
+                        tempShopView = tempList[maxIndex];
+                        returnList.Add(tempShopView);
+                        tempList[maxIndex].creditScore = -1;
                     }
                 }
             }

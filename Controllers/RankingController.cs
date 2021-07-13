@@ -13,7 +13,14 @@ namespace InternetMall.Controllers
     {
         public IActionResult UniversalList()
         {
-            return View();
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
         }
     }
 

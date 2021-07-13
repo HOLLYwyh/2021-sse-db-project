@@ -1,6 +1,12 @@
 let shortlg=new Vue({
     el: "#shortcutlg"
 })
+
+//右边栏
+new Vue({
+    el: "#naviRight"
+})
+
 //排行榜分类
 let hot=new Vue({
     el:'#hot',
