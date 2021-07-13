@@ -16,4 +16,5 @@ namespace InternetMall.Controllers
             return View();
         }
     }
+
 }
