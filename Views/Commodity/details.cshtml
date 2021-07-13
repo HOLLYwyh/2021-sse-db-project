@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-ch">
+<head>
+    <script type="text/javascript" src="~/js/Common/vue.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/shortcut_five.css" type="text/css" rel="stylesheet" />
+
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/backToTop.cshtml")
+</head>
+<body>
+    <div id="shortcut">
+        <shortcut></shortcut>
+    </div>
+    <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="~/js/Commodity/details.js"></script>
+</body>
+</html>
