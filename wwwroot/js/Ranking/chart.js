@@ -70,107 +70,201 @@ let praise=new Vue({
     }
 })
 //内容
-let content=new Vue({
-    el:'#content',
+let content = new Vue({
+    el: '#content',
     data:
     {
         which: 1,
         object:
-        [
-        {   id:"123",
-            pic: '../../Images/Ranking/1.png',
-            name:"歪比歪比",
-            description:"歪比八卜",
-            price:999,}, 
-        {   id:"132",
-            pic: '../../Images/Ranking/1.png',
-            name:"歪比歪比",
-            description:"歪比八卜",
-            price:999,},  
-        {   id:"123",
-            pic: '../../Images/Ranking/1.png',
-            name:"歪比歪比",
-            description:"歪比八卜",
-            price:999,},
-        {   id:"123",
-            pic: '../../Images/Ranking/1.png',
-            name:"歪比歪比",
-            description:"歪比八卜",
-            price:999,},
-        {   id:"123",
-            pic: '../../Images/Ranking/1.png',
-            name:"歪比歪比",
-            description:"歪比八卜",
-            price:999,},
-         {  id:"123",
-             pic: '../../Images/Ranking/1.png',
-            name:"歪比歪比",
-            description:"歪比八卜",
-            price:999,},
-         {  id:"123",
-             pic: '../../Images/Ranking/1.png',
-            name:"歪比歪比",
-            description:"歪比八卜",
-            price:999,},
-        {   id:"123",
-            pic: '../../Images/Ranking/1.png',
-            name:"歪比歪比",
-            description:"歪比八卜",
-            price:999,},
-        {   id:"123",
-            pic: '../../Images/Ranking/1.png',
-            name:"歪比歪比",
-            description:"歪比八卜",
-            price:999,},
-        {   id:"123",
-            pic: '../../Images/Ranking/1.png',
-            name:"歪比歪比",
-            description:"歪比八卜",
-            price:999,},
-        {   id:"123",
-            pic: '../../Images/Ranking/1.png',
-            name:"歪比歪比",
-            description:"歪比八卜",
-            price:999,},
-        {  id:"123",
-            pic: '../../Images/Ranking/1.png',
-            name:"歪比歪比",
-            description:"歪比八卜",
-            price:999,},
-        {  id:"123",
-            pic: '../../Images/Ranking/1.png',
-            name:"歪比歪比",
-            description:"歪比八卜",
-            price:999,},
-        {   id:"123",
-            pic: '../../Images/Ranking/1.png',
-            name:"歪比歪比",
-            description:"歪比八卜",
-            price:999,},
-        {   id:"123",
-            pic: '../../Images/Ranking/1.png',
-            name:"歪比歪比",
-            description:"歪比八卜",
-            price:999,},
-        ], 
+            [
+                {
+                    ID: "123",
+                    img: '../../Images/Ranking/1.png',
+                    intro: "歪比歪比",
+                    shop: "金轮",
+                    description: "歪比八卜",
+                    price: 999.9,
+                },
+                {
+                    ID: "132",
+                    img: '../../Images/Ranking/1.png',
+                    intro: "歪比歪比",
+                    shop: "金轮",
+                    description: "歪比八卜",
+                    price: 999.9,
+                },
+                {
+                    ID: "123",
+                    img: '../../Images/Ranking/1.png',
+                    intro: "歪比歪比",
+                    shop: "金轮",
+                    description: "歪比八卜",
+                    price: 999.9,
+                },
+                {
+                    ID: "123",
+                    img: '../../Images/Ranking/1.png',
+                    intro: "歪比歪比",
+                    shop: "金轮",
+                    description: "歪比八卜",
+                    price: 999.9,
+                },
+                {
+                    ID: "123",
+                    img: '../../Images/Ranking/1.png',
+                    intro: "歪比歪比",
+                    shop: "金轮",
+                    description: "歪比八卜",
+                    price: 999.9,
+                },
+                {
+                    ID: "123",
+                    img: '../../Images/Ranking/1.png',
+                    intro: "歪比歪比",
+                    shop: "金轮",
+                    description: "歪比八卜",
+                    price: 999.9,
+                },
+                {
+                    ID: "123",
+                    img: '../../Images/Ranking/1.png',
+                    intro: "歪比歪比",
+                    shop: "金轮",
+                    description: "歪比八卜",
+                    price: 999.9,
+                },
+                {
+                    ID: "123",
+                    img: '../../Images/Ranking/1.png',
+                    intro: "歪比歪比",
+                    shop: "金轮",
+                    description: "歪比八卜",
+                    price: 999.9,
+                },
+                {
+                    ID: "123",
+                    img: '../../Images/Ranking/1.png',
+                    intro: "歪比歪比",
+                    shop: "金轮",
+                    description: "歪比八卜",
+                    price: 999.9,
+                },
+                {
+                    ID: "123",
+                    img: '../../Images/Ranking/1.png',
+                    intro: "歪比歪比",
+                    shop: "金轮",
+                    description: "歪比八卜",
+                    price: 999.9,
+                },
+                {
+                    ID: "123",
+                    img: '../../Images/Ranking/1.png',
+                    intro: "歪比歪比",
+                    description: "歪比八卜",
+                    price: 999.9,
+                },
+                {
+                    ID: "123",
+                    img: '../../Images/Ranking/1.png',
+                    intro: "歪比歪比",
+                    shop: "金轮",
+                    description: "歪比八卜",
+                    price: 999.9,
+                },
+                {
+                    ID: "123",
+                    img: '../../Images/Ranking/1.png',
+                    intro: "歪比歪比",
+                    shop: "金轮",
+                    description: "歪比八卜",
+                    price: 999.9,
+                },
+                {
+                    ID: "123",
+                    img: '../../Images/Ranking/1.png',
+                    intro: "歪比歪比",
+                    shop: "金轮",
+                    description: "歪比八卜",
+                    price: 999.9,
+                },
+                {
+                    ID: "123",
+                    img: '../../Images/Ranking/1.png',
+                    intro: "歪比歪比",
+                    shop: "金轮",
+                    description: "歪比八卜",
+                    price: 999.9,
+                },
+            ],
     },
-    methods:{
-        aClick(index){
-            return this.object[index].id;
+    methods: {
+        aClick(index) {
+            return this.object[index].ID;
         },
-        refresh(){
-            if(this.which==1){
-               alert("1")
-            }
-            else if(this.which==2)
-            {
-                alert("2")
-            }
-            else if(this.which==3)
-            {
-                alert("3")
-            }
-            else alert("bug")
-        }
     }
 })
+
+
+function refresh() {
+    if (content.which == 1) {
+        $.ajax({
+            type: "post",
+            url: "",
+            async: false,
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify({ "ID": which }), //请求类型
+            success: function (result) {
+                var jsonData = eval("(" + result + ")");
+                content.object = jsonData;
+            }
+        });
+    }
+    else if (content.which == 2) {
+        $.ajax({
+            type: "post",
+            url: "",
+            async: false,
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify({ "ID": which }), //请求类型
+            success: function (result) {
+                var jsonData = eval("(" + result + ")");
+                content.object = jsonData;
+            }
+        });
+    }
+    else if (content.which == 3) {
+        $.ajax({
+            type: "post",
+            url: "",
+            async: false,
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify({ "ID": which }), //请求类型
+            success: function (result) {
+                var jsonData = eval("(" + result + ")");
+                content.object = jsonData;
+            }
+        });
+    }
+    else alert("bug")
+}
+
+
+function getData() {
+    $.ajax({
+        type: "post",
+        url: "",
+        async: false,
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ "ID": which }), //请求类型
+        success: function (result) {
+            var jsonData = eval("(" + result + ")");
+            content.object = jsonData;
+        }
+    });
+}
+window.onload = getData();
