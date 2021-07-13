@@ -112,7 +112,7 @@ Vue.component('upload', {
                 if (valid) {
                     //通过AJAX的方式向后端传送数据
                     var formData = new FormData();
-                    formData.append("name",$("#picName").val());                //商品名称
+                    formData.append("name",$("#name").val());                //商品名称
                     formData.append("price", $("#price").val());                //商品价格
                     formData.append("storage", $("#storage").val());            //商品库存
                     formData.append("category", $("#category").val());          //商品类别
@@ -215,7 +215,7 @@ Vue.component('upload', {
             <el-row>
                 <el-col :span="6">
                     <el-form-item label="商品名称" prop="name">
-                        <el-input id="picName" v-model="ruleForm.name"></el-input>
+                        <el-input id="name" v-model="ruleForm.name"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="6">

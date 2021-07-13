@@ -34,7 +34,7 @@
             <li class="item"><a href="#part9"><div>洗护</div></a></li>
         </ul>
     </div>
-    
+
     <div id="naviRight">
         <naviright>
 
@@ -48,9 +48,9 @@
             <img src="~/Images/Home/index/yinghaohuicui.png">
         </div>
         <div>
-            <input type="text" placeholder="关键词搜索" class="fl">
+            <input id="Context" type="text" placeholder="关键词搜索" class="fl">
         </div>
-        <button class="fl" onclick="window.location.href = '/Search/SearchCommodity'"></button>
+        <button class="fl" onclick="submitSearch()"></button>
         <div class="nav fr">
 
 
@@ -101,17 +101,16 @@
         <div class="rcmd_box">
             <ul>
                 <li v-for='(thing,index) in goods' :key='index'>
-                    <!--<a>-->
+                    <a>
                         <img :src="thing.img">
                         <div class="introduce">
-
                             {{thing.intro}}
-
                         </div>
                         <div class="shop">
                             店铺：{{thing.shop}}
                         </div>
-                    <!--</a>-->
+                    </a>
+
                 </li>
             </ul>
             <div class="change_btn" onclick="getRcmd()">
@@ -122,35 +121,404 @@
     </div>
 
     <div id="part1">
-        <part type="服装"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+                    <div class="more">
+                        更多
+                    </div>
+                    <div class="change_bt">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li v-for='(item,index) in goods' :key='item.key'>
+                        <a href="javascript:;">
+                            <img :src="item.img">
+                            <div class="introduce">
+                                {{item.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{item.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li v-for='(ran,index) in rank' :key='index'>
+                            <div class="rk">{{number++}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{ran.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part2">
-        <part type="电子产品"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+                    <div class="more">
+                        更多
+                    </div>
+                    <div class="change_bt">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li v-for='(item,index) in goods' :key='item.key'>
+                        <a href="javascript:;">
+                            <img :src="item.img">
+                            <div class="introduce">
+                                {{item.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{item.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li v-for='(ran,index) in rank' :key='index'>
+                            <div class="rk">{{number++}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{ran.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part3">
-        <part type="书籍"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+                    <div class="more">
+                        更多
+                    </div>
+                    <div class="change_bt">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li v-for='(item,index) in goods' :key='item.key'>
+                        <a href="javascript:;">
+                            <img :src="item.img">
+                            <div class="introduce">
+                                {{item.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{item.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li v-for='(ran,index) in rank' :key='index'>
+                            <div class="rk">{{number++}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{ran.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part4">
-        <part type="宠物"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+                    <div class="more">
+                        更多
+                    </div>
+                    <div class="change_bt">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li v-for='(item,index) in goods' :key='item.key'>
+                        <a href="javascript:;">
+                            <img :src="item.img">
+                            <div class="introduce">
+                                {{item.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{item.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li v-for='(ran,index) in rank' :key='index'>
+                            <div class="rk">{{number++}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{ran.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part5">
-        <part type="运动"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+                    <div class="more">
+                        更多
+                    </div>
+                    <div class="change_bt">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li v-for='(item,index) in goods' :key='item.key'>
+                        <a href="javascript:;">
+                            <img :src="item.img">
+                            <div class="introduce">
+                                {{item.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{item.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li v-for='(ran,index) in rank' :key='index'>
+                            <div class="rk">{{number++}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{ran.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part6">
-        <part type="食品"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+                    <div class="more">
+                        更多
+                    </div>
+                    <div class="change_bt">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li v-for='(item,index) in goods' :key='item.key'>
+                        <a href="javascript:;">
+                            <img :src="item.img">
+                            <div class="introduce">
+                                {{item.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{item.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li v-for='(ran,index) in rank' :key='index'>
+                            <div class="rk">{{number++}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{ran.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part7">
-        <part type="家居"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+                    <div class="more">
+                        更多
+                    </div>
+                    <div class="change_bt">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li v-for='(item,index) in goods' :key='item.key'>
+                        <a href="javascript:;">
+                            <img :src="item.img">
+                            <div class="introduce">
+                                {{item.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{item.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li v-for='(ran,index) in rank' :key='index'>
+                            <div class="rk">{{number++}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{ran.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part8">
-        <part type="美妆"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+                    <div class="more">
+                        更多
+                    </div>
+                    <div class="change_bt">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li v-for='(item,index) in goods' :key='item.key'>
+                        <a href="javascript:;">
+                            <img :src="item.img">
+                            <div class="introduce">
+                                {{item.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{item.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li v-for='(ran,index) in rank' :key='index'>
+                            <div class="rk">{{number++}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{ran.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part9">
-        <part type="洗护"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+                    <div class="more">
+                        更多
+                    </div>
+                    <div class="change_bt">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li v-for='(item,index) in goods' :key='item.key'>
+                        <a href="javascript:;">
+                            <img :src="item.img">
+                            <div class="introduce">
+                                {{item.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{item.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li v-for='(ran,index) in rank' :key='index'>
+                            <div class="rk">{{number++}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{ran.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
 
-    <script type="text/javascript" src="~/js/Home/index/part.js"></script>
+
     <script type="text/javascript" src="~/js/Common/carousel.js"></script>
     <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
     <script type="text/javascript" src="~/js/Common/naviRight.js"></script>

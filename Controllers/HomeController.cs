@@ -12,6 +12,7 @@ using Internetmall.Models.BusinessEntity;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Hosting;
 using ThirdParty.Json.LitJson;
+using InternetMall.Models;
 
 namespace InternetMall.Controllers
 {
@@ -57,6 +58,28 @@ namespace InternetMall.Controllers
             }
             string str = JsonConvert.SerializeObject(goods);
             return new ContentResult { Content = str, ContentType = "application/json" };
+        }
+
+        [HttpPost]
+        public IActionResult RecmdZoneCommodities([FromBody] CommodityType commodityType)  //首页分区推荐
+        {
+            List<Good> goods = new List<Good>();
+            int category = int.Parse(commodityType.type);
+            goods = homeService.RecommendingZoneCommodities(category);
+            string str = JsonConvert.SerializeObject(goods);
+            return new ContentResult { Content = str, ContentType = "application/json" };
+        }
+    
+        [HttpPost]
+        public IActionResult RankCommodities([FromBody] CommodityType commodityType)   //首页排行榜推荐
+        {
+            List<rankView> rankList = new List<rankView>();
+            int category = int.Parse(commodityType.type);
+            rankList = homeService.Rank(category);
+            string str = JsonConvert.SerializeObject(rankList);
+            return new ContentResult { Content = str, ContentType = "application/json" };
+            return Ok();
+
         }
     }
 }
