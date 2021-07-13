@@ -43,6 +43,16 @@ namespace InternetMall.Controllers
             //这里还需要再修改
             return View();
         }
+        public IActionResult SwitchShop()
+        {
+            //这里还需要再修改
+            return View();
+        }
+        public IActionResult Orders()
+        {
+            //这里还需要再修改
+            return View();
+        }
 
         public IActionResult Goods()
         {
