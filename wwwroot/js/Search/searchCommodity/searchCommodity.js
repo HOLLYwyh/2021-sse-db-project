@@ -13,23 +13,6 @@ new Vue({
     el:"#search-bar"
 })
 
-//翻页
-new Vue({
-    el: "#turn-to-page",
-        methods: {
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
-            }
-        },
-        data:{
-            currentPage1: 1,
-        }
-})
-
-
 //商品结果列表
 var commodity = new Vue({
     el: "#commodity-list",
