@@ -16,6 +16,7 @@
                 <el-aside style="
             background-color: rgb(238, 241, 246);
             box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+            min-height:800px;
             width: 300px;
           ">
                     <img style="padding: 20px"
@@ -38,15 +39,15 @@
                             </el-col>
                             <el-button type="danger">我的购物车</el-button>
                         </el-row>
-                        <el-row v-for="(o, index) in 4"
-                                :key="o"
+                        <el-row v-for="(item, index) in list"
+                                :key="index"
                                 :offset="index > 0 ? 1 : 0">
                             <el-col :span="5">
                                 <el-card :body-style="{ padding: '0px' }" style="height:211px;" shadow="hover">
-                                    <img src="https://idreamleaguesoccerkits.com/wp-content/uploads/2018/03/China-Logo-512x512-URL.png"
+                                    <img :src="item.img"
                                          class="image" />
                                     <div style="padding: 8px">
-                                        <p>英豪店铺{{ index }}</p>
+                                        <p>{{ item.name }}{{index}}</p>
                                         <el-rate v-model="rate"
                                                  disabled
                                                  show-score
@@ -54,8 +55,8 @@
                                                  score-template="{value}">
                                         </el-rate>
                                         <div class="bottom clearfix">
-                                            <el-button type="text" class="button">进入店铺</el-button>
-                                            <el-button type="text" class="button">联系客服</el-button>
+                                            <el-link type="primary" :underline="false" style="margin-right:10px;" :href="item.shop" >进入店铺</el-link>
+                                            <el-link type="primary" :underline="false" :href="item.shop">联系客服</el-link>
                                         </div>
                                     </div>
                                 </el-card>
@@ -86,9 +87,6 @@
                             </el-col>
                         </el-row>
                     </el-main>
-                    <el-footer>
-                        <pagination></pagination>
-                    </el-footer>
                 </el-container>
             </el-container>
         </el-container>
