@@ -138,20 +138,6 @@ namespace InternetMall.Services
             //return RedirectToAction(nameof(Index));
             //}
         }
-        public Buyer Edit(string id)
-        {
-            if (id == null)
-            {
-                return null;
-            }
-
-            var buyer = _context.Buyers.Find(id);
-            if (buyer == null)
-            {
-                return null;
-            }
-            return buyer;
-        }
         public Buyer Edit(string id, [Bind("BuyerId,Phone,Passwd,Nickname,Gender,DateBirth,IdNumber")] Buyer buyer)
         {
             if (id != buyer.BuyerId)

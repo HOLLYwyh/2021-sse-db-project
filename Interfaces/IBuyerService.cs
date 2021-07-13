@@ -26,8 +26,6 @@ namespace InternetMall.Interfaces
 
         public void Create([Bind("BuyerId,Phone,Passwd,Nickname,Gender,DateBirth,IdNumber")] Buyer buyer);
 
-        public Buyer Edit(string id);
-
         public Buyer Edit(string id, [Bind("BuyerId,Phone,Passwd,Nickname,Gender,DateBirth,IdNumber")] Buyer buyer);
 
         public Buyer Delete(string id);

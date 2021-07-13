@@ -36,7 +36,7 @@ Vue.component('promptbox', {
         <span>确定要提交并保存个人信息嘛~</span>
         <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="updateInformation()">确 定</el-button>
     </span >
     </el-dialog >
     </div>
@@ -54,6 +54,10 @@ Vue.component('promptbox', {
                 })
                 .catch((_) => { });
         },
+        updateInformation() {
+            this.dialogVisible = false;
+            updateInfo(app.id);
+        }
     },
 })
 
@@ -66,7 +70,7 @@ let app = new Vue({
             ID: "123456789",
             nickname: "HollyWYH",
             imageUrl: "",
-            gender:0,
+            gender: 0,
             pickerOptions: {
                 disabledDate(time) {
                     return time.getTime() > Date.now();
@@ -78,7 +82,10 @@ let app = new Vue({
     },
     methods: {
         handleAvatarSuccess(res, file) {
-            this.imageUrl = URL.createObjectURL(file.raw);
+            this.imageUrl = file.raw;
+            //this.imageUrl = URL.createObjectURL(file.raw);
+            //console.log(typeof (this.imageUrl));
+            //console.log(this.imageUrl);
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === "image/jpeg";
@@ -124,12 +131,41 @@ function display(id) {
             app.nickname = object["buyerNickname"];
             app.gender = object["buyerGender"];
             app.birthday = object["buyerBirth"];
-            console.log(object);
-
-            //console.log(object["buyerPhone"]);
-            //console.log(object["buyerPhone"]);
+            app.imageUrl = object["buyerUrl"];
+            
         }
     });
 }
+function updateInfo(id) {
+    console.log(id);
+
+    var formData = new FormData();
+    formData.append("UpdatedNickname", $("#updatedNickname").val());
+    formData.append("UpdatedGender", app.gender);
+    formData.append("UpdatedBirth", app.birthday);
+    formData.append("UpdatedUrl", app.imageUrl);
+    formData.append("BuyerId", id);
+
+    $.ajax({
+        type: "post",
+        url: "/Account/UpdateInfoById",
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,     
+        data: formData,
+        success: function (result) {
+            //var object = eval('(' + result + ')');//string类型转换成Json对象方法
+
+            //console.log(object);     
+
+            //app.nickname = object["buyerNickname"];
+            //app.gender = object["buyerGender"];
+            //app.birthday = object["buyerBirth"];
+            //app.imageUrl = object["buyerUrl"];
+        }
+    });
+}
+
 window.onload = display(app.id);
 

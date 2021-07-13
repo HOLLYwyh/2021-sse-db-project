@@ -265,7 +265,7 @@ function updatePasswd(id) {
         data: JSON.stringify({ OldPasswd: $("#oldpasswd").val(), NewPasswd: $("#newpasswd").val(), BuyerId: id }),
         success: function (result) {
             var object = eval('(' + result + ')');//string类型转换成Json对象方法
-            console.log($("#oldpasswd").val() + $("#newpasswd").val());
+            //console.log($("#oldpasswd").val() + $("#newpasswd").val());
             app.password = object["buyerPasswd"];
             //console.log(object["buyerPhone"]);
             //console.log(object["buyerPhone"]);
