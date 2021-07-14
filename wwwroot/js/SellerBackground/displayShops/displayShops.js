@@ -37,7 +37,7 @@ function displayshops(sellerID) {
             else {
                 sh.objectList = result;
                 sh.draw = true;
-                window.location.href = "/SellerBackground/shopSignUp";
+                window.location.href = "/SellerBackground/switchShop";
             }
         }
     });

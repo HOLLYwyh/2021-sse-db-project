@@ -164,11 +164,11 @@ namespace InternetMall.Controllers
         {
             var str = sellerBackgroundService.DisplayShops(displayshops.SellerID);
 
-            if (str==null)
-            {
-                return null;  //无店铺，切换到“创建店铺”界面
-            }
-            return new ContentResult { Content = str, ContentType = "application/json" }; ;      //进入“选择店铺”页面
+            //if (str==null)
+            //{
+            //    return null;  //无店铺，切换到“创建店铺”界面
+            //}
+            return new ContentResult { Content = str, ContentType = "application/json" }; ;  
         }
 
         public IActionResult SetShopIDForm([FromBody] DisplayOrders sh)  //卖家选择店铺后更改全局的shopID信息

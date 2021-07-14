@@ -26,7 +26,7 @@ Vue.component('shortcut',{
                 <li>
                     <div class="col_00A3E7">
                         <div>
-                            <a href="/SellerBackground/Home">英豪店铺</a>
+                            <a href="/SellerBackground/SwitchShop">英豪店铺</a>
                         </div>
                     </div>
                 </li>
