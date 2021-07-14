@@ -1,4 +1,12 @@
+let goods = new Vue({
+    el: '#upload',
+    data: {
+
+    }
+})
+
 Vue.component('upload', {
+    props:["objlist","draw"],
     data: function () {
         let checkPrice = (rule, value, callback) => {
             let val = Number(value);
@@ -44,26 +52,6 @@ Vue.component('upload', {
                 tag: 'ON_SALE',
                 condition: '销售中',
                 show: true
-            }, {
-                discription: '网球',
-                price: '123',
-                sale: '456',
-                num: '0',
-                category: 'SPORTS',
-                time: '2016-05-02',
-                tag: 'SOLD_OUT',
-                condition: '已售完',
-                show: true
-            }, {
-                discription: '充电宝',
-                price: '123',
-                sale: '456',
-                num: '789',
-                category: 'ELECTRONICS',
-                time: '2016-05-02',
-                tag: 'OFF_THE_SHELF',
-                condition: '已下架',
-                show: true
             }],
             filteredData: [],
             curpageData: [],
@@ -99,114 +87,6 @@ Vue.component('upload', {
                 ]
             }
         }
-    },
-    mounted() {
-        this.handleClick('ALL');
-    },
-    methods: {
-        isFloat(n){
-            return /^-?\d*\.\d+$/.test(n);
-        },
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    //通过AJAX的方式向后端传送数据
-                    var formData = new FormData();
-                    formData.append("name",$("#name").val());                //商品名称
-                    formData.append("price", $("#price").val());                //商品价格
-                    formData.append("storage", $("#storage").val());            //商品库存
-                    formData.append("category", $("#category").val());          //商品类别
-                    formData.append("file", this.upFile);
-                    formData.append("description", $("#description").val());    //商品描述
-                    formData.append("onSale", $("#onSale").val());              //商品是否上架
-
-                    $.ajax({
-                        url: '/SellerBackground/UploadCommodity',
-                        type: 'POST',
-                        data: formData,
-                        async: false,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: function (returndata) {
-                            window.location = "/SellerBackground/Goods";
-                        },
-                        error: function (returndata) {
-                            alert("失败");
-                        }
-                    });
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
-        },
-        resetForm(formName) {
-            this.$refs[formName].resetFields();
-        },
-        drawTag(tag) {
-            if (tag === 'ON_SALE') { //出售中
-                return 'success';
-            } else if (tag === 'OFF_THE_SHELF') { //已下架
-                return '';
-            } else if (tag === 'SOLD_OUT') {  //已售完
-                return 'warning';
-            } else {//OTHER
-                return 'info';
-            }
-        },
-        handleFilter(value, row) {
-            if (value === 'ALL') {
-                row.show = true;
-            } else {
-                if (row.tag === value) {
-                    row.show = true;
-                } else {
-                    row.show = false;
-                }
-            }
-        },
-        handleClick(activeName) {
-            console.log("!");
-            this.activeName = activeName;
-            this.filteredData.splice(0, this.filteredData.length);
-            let index = 0;
-            this.origionData.map((row) => {
-                this.handleFilter(this.activeName, row);
-                if (row.show === true) {
-                    this.filteredData[index] = Object.assign({}, row);
-                    index++;
-                }
-            });
-            this.currentChangePage(1);
-        },
-        handleSizeChange(pageSize) { // 每页条数切换
-            this.pageSize = pageSize;
-            this.handleCurrentChange(this.currentPage);
-        },
-        handleCurrentChange(currentPage) {//页码切换
-            this.currentPage = currentPage;
-            this.currentChangePage(currentPage);
-        },
-        //分页方法
-        currentChangePage(currentPage) {
-            let startIndex = (currentPage - 1) * this.pageSize;
-            let endIndex = startIndex + this.pageSize - 1;
-            this.curpageData.splice(0, this.curpageData.length);
-            let index = 0;
-            for (let i = startIndex; i <= endIndex; i++) {
-                if (i < this.filteredData.length) {
-                    this.curpageData[index] = Object.assign({}, this.filteredData[i]);
-                    index++;
-                }
-            }
-        },
-        //上传文件
-        handleChange(file, fileList) {
-            console.log(file, fileList)
-            this.upFile = file.raw
-            console.log(this.upFile)
-        },
     },
     template: `
     <div>
@@ -320,7 +200,117 @@ Vue.component('upload', {
     </div>
     </el-card>
     </div>
-    `
-})
+    `,
+    watch: {
+        draw: function (curVal, oldVal) {
+            if (curVal === true) {
+                this.handleClick('ALL');
+            }
+        }
+    },
+    methods: {
+        isFloat(n){
+            return /^-?\d*\.\d+$/.test(n);
+        },
+        submitForm(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    //通过AJAX的方式向后端传送数据
+                    var formData = new FormData();
+                    formData.append("name",$("#name").val());                //商品名称
+                    formData.append("price", $("#price").val());                //商品价格
+                    formData.append("storage", $("#storage").val());            //商品库存
+                    formData.append("category", $("#category").val());          //商品类别
+                    formData.append("file", this.upFile);
+                    formData.append("description", $("#description").val());    //商品描述
+                    formData.append("onSale", $("#onSale").val());              //商品是否上架
 
-let list = new Vue({ el: '#upload' });
+                    $.ajax({
+                        url: '/SellerBackground/UploadCommodity',
+                        type: 'POST',
+                        data: formData,
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (returndata) {
+                            window.location = "/SellerBackground/Goods";
+                        },
+                        error: function (returndata) {
+                            alert("失败");
+                        }
+                    });
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
+        },
+        resetForm(formName) {
+            this.$refs[formName].resetFields();
+        },
+        drawTag(tag) {
+            if (tag === 'ON_SALE') { //出售中
+                return 'success';
+            } else if (tag === 'OFF_THE_SHELF') { //已下架
+                return '';
+            } else if (tag === 'SOLD_OUT') {  //已售完
+                return 'warning';
+            } else {//OTHER
+                return 'info';
+            }
+        },
+        handleFilter(value, row) {
+            if (value === 'ALL') {
+                row.show = true;
+            } else {
+                if (row.tag === value) {
+                    row.show = true;
+                } else {
+                    row.show = false;
+                }
+            }
+        },
+        handleClick(activeName) {
+            console.log("!");
+            this.activeName = activeName;
+            this.filteredData.splice(0, this.filteredData.length);
+            let index = 0;
+            this.origionData.map((row) => {
+                this.handleFilter(this.activeName, row);
+                if (row.show === true) {
+                    this.filteredData[index] = Object.assign({}, row);
+                    index++;
+                }
+            });
+            this.currentChangePage(1);
+        },
+        handleSizeChange(pageSize) { // 每页条数切换
+            this.pageSize = pageSize;
+            this.handleCurrentChange(this.currentPage);
+        },
+        handleCurrentChange(page) {//页码切换
+            this.currentPage = page;
+            this.currentChangePage(page);
+        },
+        //分页方法
+        currentChangePage(currentPage) {
+            let startIndex = (currentPage - 1) * this.pageSize;
+            let endIndex = startIndex + this.pageSize - 1;
+            this.curpageData.splice(0, this.curpageData.length);
+            let index = 0;
+            for (let i = startIndex; i <= endIndex; i++) {
+                if (i < this.filteredData.length) {
+                    this.curpageData[index] = Object.assign({}, this.filteredData[i]);
+                    index++;
+                }
+            }
+        },
+        //上传文件
+        handleChange(file, fileList) {
+            console.log(file, fileList);
+            this.upFile = file.raw;
+            console.log(this.upFile);
+        },
+    }
+})

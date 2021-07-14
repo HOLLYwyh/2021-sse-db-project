@@ -1,3 +1,5 @@
+
+
 Vue.component('shop', {
     data: function () {
         return {

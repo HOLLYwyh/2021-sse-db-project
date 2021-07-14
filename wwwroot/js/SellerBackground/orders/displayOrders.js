@@ -1,12 +1,10 @@
 let ord = new Vue({
-    el: '#list',
+    el: '#orders-list',
     data:{
         objectList: [],
         draw:false,
     }
 })
-
-
 
 function displayorders(shopID) {
     $.ajax({
@@ -21,23 +19,14 @@ function displayorders(shopID) {
             //console.log(result);
             if (result==null) {
                 alert("No orders!");
-                console.log("null")
             }
             else {
                 ord.objectList = result;
                 ord.draw = true;
-                console.log("draw1");
-                console.log(ord.draw);
-                /*console.log("!!!result");
-                console.log(result);
-                console.log("ord.objectList!!!!");
-                console.log(ord.objectList)*/
-                console.log("not null");
             }
-            //console.log(result);
         }
     });
 }
 
-
+//这边修改传入的参数！！（从coockie中拿sellerID->shopID
 window.onload = displayorders("1");
