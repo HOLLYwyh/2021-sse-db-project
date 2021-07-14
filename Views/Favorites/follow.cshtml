@@ -43,19 +43,19 @@
                                 :key="index"
                                 :offset="index > 0 ? 1 : 0">
                             <el-col :span="5">
-                                <el-card :body-style="{ padding: '0px' }" style="height:211px;" shadow="hover">
-                                    <img :src="item.img"
+                                <el-card :body-style="{ padding: '0px' }" shadow="hover">
+                                    <img :src="item.Url"
                                          class="image" />
                                     <div style="padding: 8px">
-                                        <p>{{ item.name }}{{index}}</p>
+                                        <p>{{ item.ShopName }}</p>
                                         <el-rate v-model="rate"
                                                  disabled
-                                                 show-score
                                                  text-color="#ff9900"
                                                  score-template="{value}">
                                         </el-rate>
                                         <div class="bottom clearfix">
-                                            <el-link type="primary" :underline="false" style="margin-right:10px;" :href="item.shop" >进入店铺</el-link>
+                                            <time class="time">关注时间：{{ item.DateCreated }}</time><br />
+                                            <el-button type="text" style="margin-right:10px;" @@click="gotoshop(item.ShopId)">进入店铺</el-button>
                                             <el-link type="primary" :underline="false" :href="item.shop">联系客服</el-link>
                                         </div>
                                     </div>
@@ -63,26 +63,19 @@
                             </el-col>
                             <el-col :span="19">
                                 <div class="showcase">
-                                    <a style="position:relative;left:-70px;top:18px" href="http://">
-                                        <img src="https://img13.360buyimg.com/n3/jfs/t1/196610/20/6170/148870/60b86e7dEe7428125/448a80669a3ffe99.jpg"
-                                             title="橱窗商品" />
-                                    </a>
-                                    <a style="position:relative;left:-30px;top:18px" href="http://">
-                                        <img src="https://img10.360buyimg.com/n3/jfs/t1/155510/31/3909/125370/5f9a5f3bE03f8f8d7/b99e71abe796cc19.jpg"
-                                             title="橱窗商品" />
-                                    </a>
-                                    <a style="position:relative;left:10px;top:18px" href="http://">
-                                        <img src="https://img13.360buyimg.com/n3/jfs/t1/194264/27/8976/130394/60ccd85eE4041e8a4/a6f918d403719d10.jpg"
-                                             title="橱窗商品" />
-                                    </a>
-                                    <a style="position:relative;left:50px;top:18px" href="http://">
-                                        <img src="https://img12.360buyimg.com/n3/jfs/t1/130670/8/17371/211387/60b86e63E4ad5ce94/781fdb989c743377.jpg"
-                                             title="橱窗商品" />
-                                    </a>
-                                    <a style="position:relative;left:90px;top:18px" href="http://">
-                                        <img src="https://img13.360buyimg.com/n3/jfs/t1/193982/27/6256/167106/60b86e62E7d7c52dc/164d666601220de5.jpg"
-                                             title="橱窗商品" />
-                                    </a>
+                                    <el-row>
+                                        <el-col :span="5" v-for="(o, index) in item.commodityView"
+                                                :key="index"
+                                                :offset="index%4!==0 ? 1 : 0">
+                                            <!--a style="position:relative;left:-70px;top:18px" href="http://">
+                                                <img :src="item.commodities"
+                                                     title="橱窗商品" />
+                                            </a-->
+                                            <img style="position: relative;  left: 30%; top: 10px; width: 150px; height: 150px; display: block;" :src="o.Url" />
+                                            <h4 style="color:#808080">{{o.Name}}</h4>
+                                            <!--商品名称偏左，待调整-->
+                                        </el-col>
+                                    </el-row>
                                 </div>
                             </el-col>
                         </el-row>

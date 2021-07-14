@@ -10,10 +10,12 @@ namespace InternetMall.Models.BusinessEntity
     /// </summary>
     public class FavoriteProductView
     {
-        public string BuyerId { get; set; }         
+        public string BuyerId { get; set; }
         public string CommodityId { get; set; }
-        public DateTime DateCreated { get; set; }       // 收藏时间
-        public string CommodityName { get; set; }      // 商品名称
-        public decimal Price { get; set; }             // 商品价格    
+        public string CommodityImg { get; set; }         // 商品图片
+        public DateTime? DateCreated { get; set; }       // 收藏时间
+        public string ShopName { get; set; }             // 店铺名称
+        public string CommodityName { get; set; }       // 商品名称
+        public decimal? Price { get; set; }             // 商品价格    
     }
 }

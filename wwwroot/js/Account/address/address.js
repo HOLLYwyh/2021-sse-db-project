@@ -2,11 +2,11 @@ Vue.component('index', {
     template: `
   <el-container direction="vertical">
     <h3>订单中心</h3>
-    <el-link :underline="false" href="https://">历史订单</el-link>  
+    <el-link :underline="false" href="/Account/orders">历史订单</el-link>  
 
     <h3>我的钱包</h3>
-    <el-link :underline="false" href="https://">购物车</el-link>  
-    <el-link :underline="false" href="https://">优惠券</el-link>  
+    <el-link :underline="false" href="/Purchase/shoppingCart">购物车</el-link>  
+    <el-link :underline="false" href="/Account/coupon">优惠券</el-link>  
 
     <h3>我的关注</h3>
     <el-link :underline="false" href="/Favorites/favorite">关注商品</el-link>  

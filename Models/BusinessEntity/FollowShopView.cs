@@ -10,11 +10,13 @@ namespace InternetMall.Models.BusinessEntity
     /// </summary>
     public class FollowShopView
     {
+
         public string ShopId { get; set; }
         public string BuyerId { get; set; }
-        public DateTime DateCreated { get; set; }     // 关注时间
+        public string Url { get; set; }            // 店铺图片
+        public DateTime? DateCreated { get; set; }     // 关注时间
         public string ShopName { get; set; }          // 店铺名称
-        //public int Score { get; set; }                // 店铺评分
-  
-    }
+        public List<CommodityView> commodityView { get; set; } // 店铺首选商品
+
+    }   
 }
