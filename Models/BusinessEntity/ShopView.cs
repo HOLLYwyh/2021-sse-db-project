@@ -12,5 +12,6 @@ namespace Internetmall.Models.BusinessEntity
         public string shopDescription { get; set; }
         public string img { get; set; }
         public short? creditScore { get; set; }
+        public string type { get; set; }
     }
 }

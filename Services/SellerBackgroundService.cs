@@ -275,8 +275,17 @@ namespace InternetMall.Services
                     temp.shopDescription = shop.Description;
                     temp.creditScore = shop.CreditScore;
                     temp.img = "../.." + shop.Url;       //url的返回方式不确定，貌似豪哥说要写成绝对路径（我仿照的是SearchController）
+                    switch (shop.Category)
+                    {
+                        case 0: temp.type = "UNKNOWN"; break;
+                        case 1: temp.type = "OFFICIAL_FLAGSHIP"; break;
+                        case 2: temp.type = "PLATFORM_AUTH"; break;
+                        case 3: temp.type = "INDIVIDUAL"; break;
+                        case 4: temp.type = "BANNED_SHOP"; break;
+                    }
                     shops.Add(temp);
                 }
+                
                 return JsonConvert.SerializeObject(shops);
             }
         }
