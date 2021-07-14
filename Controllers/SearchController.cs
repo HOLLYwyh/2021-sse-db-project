@@ -108,5 +108,41 @@ namespace InternetMall.Controllers
             string str = JsonConvert.SerializeObject(shopList);
             return new ContentResult { Content = str, ContentType = "application/json" };
         }
+
+        public IActionResult GetCommodityType()    //返回商品筛选类别
+        {
+            JsonData jsondata = new JsonData();     
+            if (Global.GCommodityType == "0")
+            {
+                jsondata["type"] = "1";
+            }
+            else if(Global.GCommodityType == "1")
+            {
+                jsondata["type"] = "2-1";
+            }
+            else if (Global.GCommodityType == "2")
+            {
+                jsondata["type"] = "2-2";
+            }
+            else
+            {
+                jsondata["type"] = "3";
+            }
+            return Json(jsondata.ToJson());
+        }
+        public IActionResult GetShopType()   //返回店铺筛选类别
+        {
+            JsonData jsondata = new JsonData();
+
+            if (Global.GShopType == "0")
+            {
+                jsondata["type"] = "1";
+            }
+            else
+            {
+                jsondata["type"] = "2";
+            }
+            return Json(jsondata.ToJson());
+        }
     }
 }

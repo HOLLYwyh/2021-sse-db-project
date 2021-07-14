@@ -24,7 +24,7 @@ var shop = new Vue({
 })
 
 //搜索分类菜单
-new Vue({
+var searchCategory = new Vue({
     el: "#search-category",
     data: {
         activeIndex: '1'
@@ -82,8 +82,25 @@ function getShops() {    //渲染店铺
     })
 }
 
+function getShopType() {
+    //还需要写
+    $.ajax({
+        url: "/Search/GetShopType",
+        type: "get",
+        dataType: "json", //返回数据格式为json
+        async: false,
+        success: function (result) {//请求成功完成后要执行的方法
+            console.log(result)
+            var jsonData = eval("(" + result + ")");   //将json转换成对象
+            searchCategory.activeIndex = jsonData.type;
+            console.log(jsonData.type);
+        }
+    })
+}
+
 function start() {
     getShops()
+    getShopType()
 }
 
 window.onload = start()
