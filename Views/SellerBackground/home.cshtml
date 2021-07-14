@@ -44,7 +44,7 @@
                 </li>
             </ul>
 
-            <div class="main" id="list">
+            <div class="main" id="home-list">
                 <div id="card-list">
                     <el-card class="card">
                         <img src="~/Images/SellerBackground/home/followers_num.png">
@@ -75,8 +75,10 @@
                         </div>
                     </el-card>
                 </div>
-                <list v-bind:objlist="objectList"
-                      v-bind:draw="draw"></list>
+                <list 
+                      v-bind:objlist="objectList"
+                      v-bind:draw="draw"
+                ></list>
             </div>
 
         </div>

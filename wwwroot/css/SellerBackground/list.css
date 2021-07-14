@@ -1,11 +1,19 @@
 @import url("//unpkg.com/element-ui@2.15.2/lib/theme-chalk/index.css");
 
-#list{
+#home-list{
     margin-left:200px;
     width:1150px;
     padding-left:30px;
     padding-right:30px;
     padding-top: 10px; 
+}
+
+#orders-list {
+    margin-left: 200px;
+    width: 1150px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
 }
 
 .paginationClass{

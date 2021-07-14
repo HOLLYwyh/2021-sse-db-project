@@ -1,8 +1,7 @@
 /*只需要将objlist的内容进行修改，就能对页面进行重新渲染 */
- Vue.component('list',{
+Vue.component('list',{
     props: ["objlist","draw"],
-    data()
-    {
+    data(){
         return {
             pagesize: 5,
             currentpage: 1,
@@ -14,7 +13,6 @@
     template:
 `
 <el-card>
-<el-button v-on:click="test">test</el-button>
 <el-tabs v-model="this.activename"
          v-on:tab-click="handleClick(this.activename)">
     <el-tab-pane label="全部" name="ALL"></el-tab-pane>
@@ -68,22 +66,6 @@
         }
     },
     methods: {
-      test() {
-          /*console.log("------test-------");
-          console.log("objlist:");
-          console.log(this.objlist);
-          console.log("pagesize:");
-          console.log(this.pagesize);
-          console.log("currentPage:");
-          console.log(this.currentpage);
-          console.log("activename");
-          console.log(this.activename);
-          console.log("filteredData");
-          console.log(this.filtereddata);
-          console.log("curpageData");
-          console.log(this.curpagedata);
-          console.log("-------test------");*/
-      },
       formatter(row) {
           return row.address;
       },
