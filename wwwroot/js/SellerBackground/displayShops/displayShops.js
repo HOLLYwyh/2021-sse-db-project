@@ -16,6 +16,7 @@ function displayshops(sellerID) {
         dataType: "json",
         data: JSON.stringify({ "SellerID": sellerID }),
         success: function (result) {
+            console.log(result);
             sh.objectList = result;
             sh.draw = true;
         }
