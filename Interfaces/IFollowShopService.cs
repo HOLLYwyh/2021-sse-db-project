@@ -12,12 +12,15 @@ namespace InternetMall.Interfaces
     public interface IFollowShopService
     {
         //添加关注
-        public void addToFollowShop(string buyerid, string shopid);
+        public bool addToFollowShop(string buyerid, string shopid);
 
         // 取消关注
-        public Task removeFollowShop(string buyerid, string shopid);
+        public bool removeFollowShop(string buyerid, string shopid);
+
+        // 清除所有关注
+        public bool removeAllFollowShop(string buyerid);
 
         // 查看关注信息
-        public IEnumerable<FollowShopView> GetCartProduct(string buyerid);
+        public List<FollowShopView> getFollowShops(string buyerid);
     }
 }

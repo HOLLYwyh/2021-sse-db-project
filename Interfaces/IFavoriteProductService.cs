@@ -13,14 +13,14 @@ namespace InternetMall.Interfaces
     {
         //添加收藏夹
         public bool addToFavorite(string buyerid, string commodityid);
-       
+
         // 从收藏夹中删除
-        public Task removeFromFavorite(string buyerid, string commodityid);
-       
+        public bool removeFromFavorite(string buyerid, string commodityid);
+
         // 清除收藏夹
-        public Task removeAllFavorite(string buyerid);
-         
+        public bool removeAllFavorite(string buyerid);
+
         // 查看收藏夹
-        public IEnumerable<FavoriteProductView> GetFavoriteProduct(string buyerid);   
+        public List<FavoriteProductView> getFavoriteProduct(string buyerid);
     }
 }

@@ -64,4 +64,49 @@ namespace InternetMall.Models
     {
         public string ReceiveId { get; set; }
     }
+
+    /********************* 收藏夹服务 —— 关注商品 ***********************/
+    public class BuyerFavorites                         // 查看关注信息
+    {
+        public string BuyerId { get; set; }
+        public string CommodityId { get; set; }
+        public string CommodityImg { get; set; }         // 商品图片
+        public DateTime? DateCreated { get; set; }       // 收藏时间
+        public string ShopName { get; set; }             // 店铺名称
+        public string CommodityName { get; set; }        // 商品名称
+        public decimal? Price { get; set; }              // 商品价格  
+    }
+
+    public class AddOrDeleteFavorites                          // 添加或删除某件商品的关注
+    {
+        public string buyerid { get; set; }
+        public string commodityid { get; set; }
+    }
+
+    public class DeleteAllFavorites                          // 删除所有关注
+    {
+        public string buyerid { get; set; }
+    }
+
+    /********************** 买家关注店铺服务 ***************************/
+    public class AddOrDeleteFollowShop                         // 添加或删除某件店铺的关注
+    {
+        public string buyerid { get; set; }
+        public string shopid { get; set; }
+    }
+
+    public class DeleteAllFollowShops                          // 删除所有店铺关注
+    {
+        public string buyerid { get; set; }
+    }
+
+    public class LookFollowShops                              // 查看关注信息店铺
+    {
+        public string buyerid { get; set; }
+        public string shopid { get; set; }
+        public string imgPath { get; set; }
+        public DateTime DateCreated { get; set; }
+        public string shopName { get; set; }
+        List<Commodity> commodities { get; set; }
+    }
 }
