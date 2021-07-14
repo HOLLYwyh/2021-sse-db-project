@@ -40,7 +40,7 @@ namespace Internetmall.Services
             {
                 for (int i = 0; i < 12; i++)
                 {
-                    string randCommodityID = random.Next(1, 120).ToString();
+                    string randCommodityID = random.Next(2, 120).ToString();
                     Commodity newCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == randCommodityID);//Include(c => c.Shop).FirstOrDefault(c =>c.CommodityId == randCommodityID);
                     Good newGood = new Good();
                     newGood.img = newCommodity.Url;
@@ -83,7 +83,7 @@ namespace Internetmall.Services
                 {
                     for(int i=count;i < 12; i++)
                     {
-                        string randCommodityID = random.Next(1, 120).ToString();
+                        string randCommodityID = random.Next(2, 120).ToString();
                         Commodity newCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == randCommodityID);//Include(c => c.Shop).FirstOrDefault(c =>c.CommodityId == randCommodityID);
                         Good newGood = new Good();
                         newGood.img = newCommodity.Url;
@@ -128,7 +128,7 @@ namespace Internetmall.Services
                     
                     for (int i = count; i < 12; i++)
                     {
-                        string randCommodityID = random.Next(1, 120).ToString();
+                        string randCommodityID = random.Next(2, 120).ToString();
                         Commodity newCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == randCommodityID);//.Include(c => c.Shop).FirstOrDefault(c => c.CommodityId == randCommodityID);
                         Good newGood = new Good();
                         newGood.img = newCommodity.Url;
@@ -187,7 +187,7 @@ namespace Internetmall.Services
                 {
                     for (int i = count; i < 12; i++)
                     {
-                        string randCommodityID = random.Next(1, 120).ToString();
+                        string randCommodityID = random.Next(2, 120).ToString();
                         Commodity newCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == randCommodityID);//.Include(c => c.Shop).FirstOrDefault(c => c.CommodityId == randCommodityID);
                         Good newGood = new Good();
                         newGood.img = newCommodity.Url;
@@ -246,7 +246,7 @@ namespace Internetmall.Services
                 {
                     for (int i = count; i < 12; i++)
                     {
-                        string randCommodityID = random.Next(1, 120).ToString();
+                        string randCommodityID = random.Next(2, 120).ToString();
                         Commodity newCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == randCommodityID);//.Include(c => c.Shop).FirstOrDefault(c => c.CommodityId == randCommodityID);
                         Good newGood = new Good();
                         newGood.img = newCommodity.Url;
