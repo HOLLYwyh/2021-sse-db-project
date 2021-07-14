@@ -129,8 +129,13 @@ Vue.component('naviright', {
             dataType: "json", //返回数据格式为json
             success: function (data) {
                 console.log(data)
-                if (data.url != "FAILED") {
-                    that = data.url
+
+                var jsonData = eval("(" + data + ")")
+
+                console.log(jsonData)
+                if (jsonData.url != "FAILED") {
+                    
+                    that = jsonData.url
                 }
 
             }
