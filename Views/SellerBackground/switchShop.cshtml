@@ -2,12 +2,13 @@
 <html lang="zh-cn">
 <head>
     <title>英豪荟萃 - 切换店铺</title>
-    <script src="//unpkg.com/element-ui@@2.15.2/lib/index.js"></script>
+
 
     <link rel="stylesheet" href="~/css/SellerBackground/switchShop/switchShop.css">
     <link rel="stylesheet" href="~/css/SellerBackground/sidebar.css">
     <link rel="stylesheet" href="~/css/SellerBackground/dropdownmenu.css">
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+    <script src="//unpkg.com/element-ui@@2.15.2/lib/index.js"></script>
 </head>
 <body>
     <div>
@@ -32,7 +33,8 @@
             </ul>
             <div class="main" id="shop-list">
                 <div id="shop">
-                    <shop></shop>
+                    <shop v-bind:objlist="objectList"
+                          v-bind:draw="draw"></shop>
                 </div>
             </div>
         </div>
@@ -40,5 +42,6 @@
     <script src="~/js/SellerBackground/sidebar.js"></script>
     <script src="~/js/SellerBackground/dropdownMenu.js"></script>
     <script src="~/js/SellerBackground/switchShop/switchShop.js"></script>
+    <script src="~/js/SellerBackground/displayShops/displayShops.js"></script>
 </body>
 </html>

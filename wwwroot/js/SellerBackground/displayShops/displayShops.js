@@ -1,10 +1,11 @@
-////let sh = new Vue({
-////    el: '#list',    //某个组件或标签
-////    data: {
-////        objectList: [],
-////        draw: false,
-////    }
-////})
+let sh =new Vue({
+    el: "#shop",
+    data:
+    {
+        objectList: [],
+        draw:false,
+    }
+})
 
 function displayshops(sellerID) {
     $.ajax({
@@ -15,16 +16,10 @@ function displayshops(sellerID) {
         dataType: "json",
         data: JSON.stringify({ "SellerID": sellerID }),
         success: function (result) {
-
-            //console.log(result);
-
-            if (result == null) {
-                //alert("No Shops!");
-                //console.log("null");
-            }
-            else {
-                sh.objectList = result;//赋值给指定实例的数组
-            }
+            sh.objectList = result;
+            sh.draw = true;
         }
     });
 }
+
+window.onload = displayshops("1");

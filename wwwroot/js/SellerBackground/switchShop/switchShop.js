@@ -1,4 +1,5 @@
 Vue.component('shop', {
+    props:["objlist","draw"],
     data: function () {
         return {
             shopData: [{
@@ -35,6 +36,14 @@ Vue.component('shop', {
             }]
         }
     },
+    watch: {
+        draw: function (curVal, oldVal) {
+            if (curVal === true) {
+                
+                //this.handleClick('ALL');
+            }
+        }
+    },
     methods: {
         drawType(type){
             if(type==='OFFICIAL_FLAGSHIP'){
@@ -56,49 +65,15 @@ Vue.component('shop', {
     },
     template: `
         <el-card>
-            <div class="shop" v-for="item in shopData" >
-                <img :src="item.picURL" />
+            <div class="shop" v-for="item in objlist" >
+                <img :src="item.img" />
                 <div class="info">
-                    <div class="name">{{item.name}}</div>
+                    <div class="name">{{item.shopName}}</div>
                     <div class="type">{{drawType(item.type)}}</div>
-                    <div class="credit">{{item.credit}}</div>
-                    <el-button class="btn" type="primary" size="mini" v-on:click="handleClick(item.id)">进入店铺</el-button>
+                    <div class="credit">{{item.creditScore}}</div>
+                    <el-button class="btn" type="primary" size="mini" v-on:click="handleClick(item.shopID)">进入店铺</el-button>
                 </div>
             </div>
         </el-card>
     `
 })
-
-let shop = new Vue({ el: '#shop' });
-
-function getid() {
-    let id = getCookie("sellerID")
-    if (id) {
-        //这里要修改
-        //document.getElementById("utility1").innerHTML = `<a href="/Entry/BuyerLogOut" >注销</a>`
-    }
-    return id
-}
-
-function getRcmd() {
-    $.ajax({
-        url: "/Home/RcmdCommodity",
-        type: "get",
-        dataType: "json", //返回数据格式为json
-        success: function (data) {//请求成功完成后要执行的方法
-            rcmd.goods = data
-            console.log("1")
-        }
-    })
-
-}
-
-function start() {
-    getid();
-    getRcmd();
-
-}
-
-window.onload = start();
-
-
