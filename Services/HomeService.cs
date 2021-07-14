@@ -95,6 +95,7 @@ namespace Internetmall.Services
                 newGood.intro = newCommodity.Name;
                 newGood.shop = newCommodity.Shop.Name;
                 newGood.ID = newCommodity.CommodityId;
+                newGood.price = newCommodity.Price;
                 goods.Add(newGood);
             }
             return goods;
@@ -120,6 +121,7 @@ namespace Internetmall.Services
                     newGood.intro = newCommodity.Name;
                     newGood.shop = newCommodity.Shop.Name;
                     newGood.ID = newCommodity.CommodityId;
+                    newGood.price = newCommodity.Price;
                     goods.Add(newGood);
                 }
                 return goods;

@@ -13,16 +13,16 @@
         <el-container direction="vertical">
             <shortcut></shortcut>
             <el-container direction="horizontal">
-                <el-aside style="
-            background-color: rgb(238, 241, 246);
-            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-            width: 300px;
-          ">
+                <el-aside style="        background-color: rgb(238, 241, 246);
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+        width: 300px;
+        min-height: 800px;
+    ">
                     <img style="padding: 20px"
                          src="~/Images/Home/index/yinghaohuicui.png" />
                     <index></index>
                 </el-aside>
-                <el-container style="min-height: 600px" direction="vertical" class="aria">
+                <el-main style="min-height: 600px" direction="vertical" class="aria">
                         <el-row style="position:relative;top:50px">
                             <el-col :span="4"
                                     :offset="2">
@@ -61,7 +61,7 @@
                                         <span>支付密码<br></span>
                                         <span style="padding:8px;color:#aaaaaa"></span>
                                         <div class="bottom clearfix">
-                                            <el-button type="primary" round>修改</el-button>
+                                            <el-button type="primary" v-on:click="smile()" round>修改</el-button>
                                         </div>
                                     </div>
                                 </el-card>
@@ -75,14 +75,14 @@
                                         <span>实名认证<br></span>
                                         <span style="padding:8px;color:#aaaaaa">{{name}}</span>
                                         <div class="bottom clearfix">
-                                            <el-button type="primary" round>立即认证</el-button>
+                                            <el-button type="primary" v-on:click="smile()" round>立即认证</el-button>
                                         </div>
                                     </div>
                                 </el-card>
                             </el-col>
 
                         </el-row>
-                </el-container>
+                </el-main>
             </el-container>
         </el-container>
     </div>

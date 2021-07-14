@@ -74,7 +74,7 @@
             </div>
             <div class="nav_son">
                 <img src="~/Images/Home/index/bro_history.svg" alt="">
-                <a href="#">浏览记录</a>
+                <a href="/Ranking/UniversalList">排行榜</a>
             </div>
             <div class="nav_son">
                 <img src="~/Images/Home/index/bookmark.svg" alt="">
@@ -100,7 +100,7 @@
         </div>
         <div class="rcmd_box">
             <ul>
-                <li v-for='(thing,index) in goods' :key='index'>
+                <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='index'>
                     <a>
                         <img :src="thing.img">
                         <div class="introduce">
@@ -125,23 +125,21 @@
             <div class="card_list">
                 <div class="part_title">
                     <p class="ti">{{this.type}}</p>
-                    <div class="more">
-                        更多
-                    </div>
-                    <div class="change_bt">
+
+                    <div class="change_bt" onclick=" setGoods('服装') ">
                         换一换
                     </div>
 
                 </div>
                 <ul>
-                    <li v-for='(item,index) in goods' :key='item.key'>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
                         <a href="javascript:;">
-                            <img :src="item.img">
+                            <img :src="thing.img">
                             <div class="introduce">
-                                {{item.intro}}
+                                {{thing.intro}}
                             </div>
                             <div class="shop">
-                                店铺：{{item.shop}}
+                                店铺：{{thing.shop}}
                             </div>
                         </a>
                     </li>
@@ -153,10 +151,10 @@
                 </div>
                 <div class="ranklist">
                     <ul>
-                        <li v-for='(ran,index) in rank' :key='index'>
-                            <div class="rk">{{number++}}</div>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
                             <a href="javascript:;">
-                                <div class="name">{{ran.commodityName}}</div>
+                                <div class="name">{{thing.commodityName}}</div>
                             </a>
                         </li>
                     </ul>
@@ -169,23 +167,21 @@
             <div class="card_list">
                 <div class="part_title">
                     <p class="ti">{{this.type}}</p>
-                    <div class="more">
-                        更多
-                    </div>
-                    <div class="change_bt">
+
+                    <div class="change_bt" onclick="setGoods('电子产品')">
                         换一换
                     </div>
 
                 </div>
                 <ul>
-                    <li v-for='(item,index) in goods' :key='item.key'>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
                         <a href="javascript:;">
-                            <img :src="item.img">
+                            <img :src="thing.img">
                             <div class="introduce">
-                                {{item.intro}}
+                                {{thing.intro}}
                             </div>
                             <div class="shop">
-                                店铺：{{item.shop}}
+                                店铺：{{thing.shop}}
                             </div>
                         </a>
                     </li>
@@ -197,10 +193,10 @@
                 </div>
                 <div class="ranklist">
                     <ul>
-                        <li v-for='(ran,index) in rank' :key='index'>
-                            <div class="rk">{{number++}}</div>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
                             <a href="javascript:;">
-                                <div class="name">{{ran.commodityName}}</div>
+                                <div class="name">{{thing.commodityName}}</div>
                             </a>
                         </li>
                     </ul>
@@ -213,23 +209,21 @@
             <div class="card_list">
                 <div class="part_title">
                     <p class="ti">{{this.type}}</p>
-                    <div class="more">
-                        更多
-                    </div>
-                    <div class="change_bt">
+
+                    <div class="change_bt" onclick="setGoods('书籍')">
                         换一换
                     </div>
 
                 </div>
                 <ul>
-                    <li v-for='(item,index) in goods' :key='item.key'>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
                         <a href="javascript:;">
-                            <img :src="item.img">
+                            <img :src="thing.img">
                             <div class="introduce">
-                                {{item.intro}}
+                                {{thing.intro}}
                             </div>
                             <div class="shop">
-                                店铺：{{item.shop}}
+                                店铺：{{thing.shop}}
                             </div>
                         </a>
                     </li>
@@ -241,10 +235,10 @@
                 </div>
                 <div class="ranklist">
                     <ul>
-                        <li v-for='(ran,index) in rank' :key='index'>
-                            <div class="rk">{{number++}}</div>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
                             <a href="javascript:;">
-                                <div class="name">{{ran.commodityName}}</div>
+                                <div class="name">{{thing.commodityName}}</div>
                             </a>
                         </li>
                     </ul>
@@ -257,23 +251,21 @@
             <div class="card_list">
                 <div class="part_title">
                     <p class="ti">{{this.type}}</p>
-                    <div class="more">
-                        更多
-                    </div>
-                    <div class="change_bt">
+
+                    <div class="change_bt" onclick="setGoods('宠物')">
                         换一换
                     </div>
 
                 </div>
                 <ul>
-                    <li v-for='(item,index) in goods' :key='item.key'>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
                         <a href="javascript:;">
-                            <img :src="item.img">
+                            <img :src="thing.img">
                             <div class="introduce">
-                                {{item.intro}}
+                                {{thing.intro}}
                             </div>
                             <div class="shop">
-                                店铺：{{item.shop}}
+                                店铺：{{thing.shop}}
                             </div>
                         </a>
                     </li>
@@ -285,10 +277,10 @@
                 </div>
                 <div class="ranklist">
                     <ul>
-                        <li v-for='(ran,index) in rank' :key='index'>
-                            <div class="rk">{{number++}}</div>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
                             <a href="javascript:;">
-                                <div class="name">{{ran.commodityName}}</div>
+                                <div class="name">{{thing.commodityName}}</div>
                             </a>
                         </li>
                     </ul>
@@ -301,23 +293,21 @@
             <div class="card_list">
                 <div class="part_title">
                     <p class="ti">{{this.type}}</p>
-                    <div class="more">
-                        更多
-                    </div>
-                    <div class="change_bt">
+
+                    <div class="change_bt" onclick="setGoods('运动')">
                         换一换
                     </div>
 
                 </div>
                 <ul>
-                    <li v-for='(item,index) in goods' :key='item.key'>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
                         <a href="javascript:;">
-                            <img :src="item.img">
+                            <img :src="thing.img">
                             <div class="introduce">
-                                {{item.intro}}
+                                {{thing.intro}}
                             </div>
                             <div class="shop">
-                                店铺：{{item.shop}}
+                                店铺：{{thing.shop}}
                             </div>
                         </a>
                     </li>
@@ -329,10 +319,10 @@
                 </div>
                 <div class="ranklist">
                     <ul>
-                        <li v-for='(ran,index) in rank' :key='index'>
-                            <div class="rk">{{number++}}</div>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
                             <a href="javascript:;">
-                                <div class="name">{{ran.commodityName}}</div>
+                                <div class="name">{{thing.commodityName}}</div>
                             </a>
                         </li>
                     </ul>
@@ -345,23 +335,21 @@
             <div class="card_list">
                 <div class="part_title">
                     <p class="ti">{{this.type}}</p>
-                    <div class="more">
-                        更多
-                    </div>
-                    <div class="change_bt">
+
+                    <div class="change_bt" onclick="setGoods('食品')">
                         换一换
                     </div>
 
                 </div>
                 <ul>
-                    <li v-for='(item,index) in goods' :key='item.key'>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
                         <a href="javascript:;">
-                            <img :src="item.img">
+                            <img :src="thing.img">
                             <div class="introduce">
-                                {{item.intro}}
+                                {{thing.intro}}
                             </div>
                             <div class="shop">
-                                店铺：{{item.shop}}
+                                店铺：{{thing.shop}}
                             </div>
                         </a>
                     </li>
@@ -373,10 +361,10 @@
                 </div>
                 <div class="ranklist">
                     <ul>
-                        <li v-for='(ran,index) in rank' :key='index'>
-                            <div class="rk">{{number++}}</div>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
                             <a href="javascript:;">
-                                <div class="name">{{ran.commodityName}}</div>
+                                <div class="name">{{thing.commodityName}}</div>
                             </a>
                         </li>
                     </ul>
@@ -389,23 +377,21 @@
             <div class="card_list">
                 <div class="part_title">
                     <p class="ti">{{this.type}}</p>
-                    <div class="more">
-                        更多
-                    </div>
-                    <div class="change_bt">
+
+                    <div class="change_bt" onclick="setGoods('家居')">
                         换一换
                     </div>
 
                 </div>
                 <ul>
-                    <li v-for='(item,index) in goods' :key='item.key'>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
                         <a href="javascript:;">
-                            <img :src="item.img">
+                            <img :src="thing.img">
                             <div class="introduce">
-                                {{item.intro}}
+                                {{thing.intro}}
                             </div>
                             <div class="shop">
-                                店铺：{{item.shop}}
+                                店铺：{{thing.shop}}
                             </div>
                         </a>
                     </li>
@@ -417,10 +403,10 @@
                 </div>
                 <div class="ranklist">
                     <ul>
-                        <li v-for='(ran,index) in rank' :key='index'>
-                            <div class="rk">{{number++}}</div>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
                             <a href="javascript:;">
-                                <div class="name">{{ran.commodityName}}</div>
+                                <div class="name">{{thing.commodityName}}</div>
                             </a>
                         </li>
                     </ul>
@@ -433,23 +419,21 @@
             <div class="card_list">
                 <div class="part_title">
                     <p class="ti">{{this.type}}</p>
-                    <div class="more">
-                        更多
-                    </div>
-                    <div class="change_bt">
+
+                    <div class="change_bt" onclick="setGoods('美妆')">
                         换一换
                     </div>
 
                 </div>
                 <ul>
-                    <li v-for='(item,index) in goods' :key='item.key'>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
                         <a href="javascript:;">
-                            <img :src="item.img">
+                            <img :src="thing.img">
                             <div class="introduce">
-                                {{item.intro}}
+                                {{thing.intro}}
                             </div>
                             <div class="shop">
-                                店铺：{{item.shop}}
+                                店铺：{{thing.shop}}
                             </div>
                         </a>
                     </li>
@@ -461,10 +445,10 @@
                 </div>
                 <div class="ranklist">
                     <ul>
-                        <li v-for='(ran,index) in rank' :key='index'>
-                            <div class="rk">{{number++}}</div>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
                             <a href="javascript:;">
-                                <div class="name">{{ran.commodityName}}</div>
+                                <div class="name">{{thing.commodityName}}</div>
                             </a>
                         </li>
                     </ul>
@@ -477,23 +461,21 @@
             <div class="card_list">
                 <div class="part_title">
                     <p class="ti">{{this.type}}</p>
-                    <div class="more">
-                        更多
-                    </div>
-                    <div class="change_bt">
+
+                    <div class="change_bt" onclick="setGoods('洗护')">
                         换一换
                     </div>
 
                 </div>
                 <ul>
-                    <li v-for='(item,index) in goods' :key='item.key'>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
                         <a href="javascript:;">
-                            <img :src="item.img">
+                            <img :src="thing.img">
                             <div class="introduce">
-                                {{item.intro}}
+                                {{thing.intro}}
                             </div>
                             <div class="shop">
-                                店铺：{{item.shop}}
+                                店铺：{{thing.shop}}
                             </div>
                         </a>
                     </li>
@@ -505,10 +487,10 @@
                 </div>
                 <div class="ranklist">
                     <ul>
-                        <li v-for='(ran,index) in rank' :key='index'>
-                            <div class="rk">{{number++}}</div>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
                             <a href="javascript:;">
-                                <div class="name">{{ran.commodityName}}</div>
+                                <div class="name">{{thing.commodityName}}</div>
                             </a>
                         </li>
                     </ul>

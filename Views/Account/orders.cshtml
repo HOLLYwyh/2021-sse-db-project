@@ -1,0 +1,37 @@
+<!--历史订单页面 -->
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <link href="~/css/Account/orders/orders.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/shortcut_five.css" rel="stylesheet">
+    <title>历史订单</title>
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+</head>
+
+<body>
+    <div id="app">
+        <shortcut></shortcut>
+        <el-container direction="horizontal">
+            <el-aside style="
+          background-color: rgb(238, 241, 246);
+          box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+          width: 300px;
+          min-height:800px;
+
+        ">
+                <img style="padding: 20px"
+                     src="~/Images/Home/index/yinghaohuicui.png" />
+                <index></index>
+            </el-aside>
+            <el-main style="min-height: 600px;margin:20px;" direction="vertical">
+                <list></list>
+            </el-main>
+        </el-container>
+    </div>
+
+
+    <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="~/js/Account/orders/orders.js"></script>
+</body>
+
+</html>
