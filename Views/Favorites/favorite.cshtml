@@ -58,7 +58,7 @@
                                         <span><strong>¥{{item.price}}</strong></span><br />
                                         <div class="bottom clearfix">
                                             <time class="time">关注时间：{{ item.date }}</time><br />
-                                            <el-link type="primary" :underline="false" style="padding: 4px;float:right;" :href="item.details">查看详情</el-link>
+                                            <el-button type="text"  style="padding: 4px;float:right;" @@click="jumpto(item.details)">查看详情</el-button>
                                         </div>
                                     </div>
                                 </el-card>

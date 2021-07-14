@@ -1,10 +1,10 @@
-<!--收货管理页面 -->
+﻿<!--优惠券页面 -->
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-    <link href="~/css/Account/address/address.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Account/coupon/coupon.css" type="text/css" rel="stylesheet" />
     <link href="~/css/Common/shortcut_five.css" rel="stylesheet">
-    <title>收货管理</title>
+    <title>优惠券</title>
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
 </head>
 
@@ -33,13 +33,13 @@
                     <el-form :model="form">
                         <!--label必须按如下方式命名，浏览器才支持自动填充-->
                         <el-form-item label="姓名" :label-width="formLabelWidth">
-                            <el-input id="name" v-model="form.name"></el-input>
+                            <el-input v-model="form.name"></el-input>
                         </el-form-item>
                         <el-form-item label="收货地址" :label-width="formLabelWidth">
-                            <el-input id="address" v-model="form.address"></el-input>
+                            <el-input v-model="form.address"></el-input>
                         </el-form-item>
                         <el-form-item label="电话号码" :label-width="formLabelWidth">
-                            <el-input id="phone" v-model="form.phone"></el-input>
+                            <el-input v-model="form.phone"></el-input>
                         </el-form-item>
                         <el-form-item label="信息标签" :label-width="formLabelWidth">
                             <el-select v-model="form.tag"
@@ -64,20 +64,21 @@
                 <el-row v-for="(item, index) in info" :key="item.NO" :offset="1">
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
-                            <span style="float: left; margin-left: 20px"><strong>{{ item.Tag }}</strong></span>
+                            <span style="float: left; margin-left: 20px"><strong>{{ item.tag }}</strong></span>
                             <span style="float: center; color: #aaaaaa">
                                 {{item.first}}
                             </span>
                             <el-button style="float: right; padding: 3px 10px"
-                                       type="text">设为默认</el-button>
+                                       type="text"
+                                       v-on:click="setDefault(item.NO)">设为默认</el-button>
                             <el-button style="float: right; padding: 3px 0"
                                        type="text"
-                                       v-on:click="edit(index)">编辑</el-button>
+                                       v-on:click="edit(item.NO, index)">编辑</el-button>
                         </div>
                         <div class="text item">
-                            <span class="descriptor">人员姓名：</span><span class="data">{{ item.ReceiverName }}</span><br />
-                            <span class="descriptor">收货地址：</span><span class="data">{{ item.DetailAddr }}</span><br />
-                            <span class="descriptor">手机号码：</span><span class="data">{{ item.Phone }}</span>
+                            <span class="descriptor">人员姓名：</span><span class="data">{{ item.name }}</span><br />
+                            <span class="descriptor">收货地址：</span><span class="data">{{ item.address }}</span><br />
+                            <span class="descriptor">手机号码：</span><span class="data">{{ item.phone }}</span>
                         </div>
                     </el-card>
                 </el-row>
@@ -119,7 +120,7 @@
 
 
     <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
-    <script type="text/javascript" src="~/js/Account/address/address.js"></script>
+    <script type="text/javascript" src="~/js/Account/coupon/coupon.js"></script>
 </body>
 
 </html>
