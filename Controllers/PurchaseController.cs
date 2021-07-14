@@ -184,10 +184,19 @@ namespace InternetMall.Controllers
                 return Redirect("/Entry/BuyerLogIn");
             }
         }
-        public IActionResult Settle()
+
+        public IActionResult successPay()   //最终购买成功
         {
-            return View();
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
         }
+
         public IActionResult Payment()
         {
             return View();
