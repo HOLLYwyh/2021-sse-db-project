@@ -1,6 +1,201 @@
-.search-bar{
-    position :absolute;
-    top:52px;
-    width:100%;
-    height:100px;
+.shopinfo_outerbox {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 1280px;
+    background-color: #96969600;
+    margin: auto;
+    margin-top: 16px;
+}
+
+.shopinfo_titlebox {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 128px;
+    background-color: #7a7a6c;
+    font-family: cursive;
+}
+
+.shopinfo_name {
+    position: absolute;
+    left: 25%;
+    top: 0;
+    width: 50%;
+    height: 128px;
+    font-size: 64px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    text-align: center;
+    line-height: 194px;
+    font-family: cursive;
+    z-index: 1;
+    text-shadow: 0px 2px 16px white;
+}
+
+.divider {
+    position: absolute;
+    width: 100%;
+    height: 48px;
+    left: 0px;
+    top: 128px;
+    background-image: linear-gradient(black, black, black, rgb(128, 128, 128), rgb(128, 128, 128), black);
+    /*background-color: black;*/
+    box-shadow: 0px -4px 24px 16px white;
+}
+
+.shopinfo_displaybox {
+    position: absolute;
+    left: 0;
+    top: 176px;
+    height: 640px;
+    width: 100%;
+    background-color: rgba(173, 216, 230, 0);
+}
+
+.shopinfo_linebox {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    background-color: #bc8420;
+    perspective: 100px;
+    overflow: hidden;
+}
+
+.shopinfo_linebox_bottomboard_dark {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 16px;
+    background-color: #664526;
+    z-index: 1;
+}
+
+.shopinfo_linebox_bottomboard_light {
+    position: absolute;
+    left: 20px;
+    width: 1240px;
+    bottom: 16px;
+    height: 48px;
+    /*background-color: #f3cd9b;*/
+    background-color: #fcedbc;
+    /*默认视线在z轴方向上距离旋转中心的距离-设置在父级元素上*/
+    transform-style: preserve-3d;
+    transform-origin: 50% 50%; /*默认旋转中心*/
+    transform: rotateX(8deg);
+    z-index: 1;
+}
+
+.shopinfo_itembox {
+    float: left;
+    position: relative;
+    height: 144px;
+    width: 144px;
+    background-color: rgba(0, 0, 255, 0);
+    overflow: hidden;
+    z-index: 1;
+    margin-left: 4.5%;
+}
+
+.shopinfo_itembox_img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    /*border: 2px solid gray;*/
+    box-shadow: 0px 1px 2px 1px rgb(32, 32, 32);
+    pointer-events: none;
+}
+
+    .shopinfo_itembox_img img {
+        height: 100px;
+        width: 100px;
+        /*border: 1px solid rgb(94, 94, 94);*/
+        border-radius: 100%;
+        box-shadow: 0px 64px 10px -16px rgb(94, 94, 94);
+    }
+
+.shopinfo_itembox_light {
+    background-color: white;
+    border: transparent;
+    border-radius: 100%;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 0;
+    left: 60px;
+    transform: translateY(-8px);
+    box-shadow: 0px 0px 20px 20px rgba(255, 255, 255, 0.96);
+}
+
+.shopinfo_itembox_iteminfo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    z-index: -1;
+    overflow: hidden;
+}
+
+.shopinfo_itembox_itemname {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 42%;
+    top: 24%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+.shopinfo_itembox_itemprice {
+    position: absolute;
+    width: 100%;
+    height: 16%;
+    top: 72%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: red;
+}
+
+.shopinfo_itembox_iteminfo:hover {
+    background-color: rgba(128, 128, 128, 0.6);
+    z-index: 3;
+    cursor: pointer;
+}
+
+.qiangjiao1 {
+    position: absolute;
+    left: 40px;
+    height: 100%;
+    width: 2px;
+    top: 0;
+    background-color: #75695c;
+    z-index: 1;
+}
+
+.qiangjiao2 {
+    position: absolute;
+    right: 40px;
+    height: 100%;
+    width: 2px;
+    top: 0;
+    background-color: #75695c;
+    z-index: 1;
 }

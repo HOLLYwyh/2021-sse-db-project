@@ -133,6 +133,7 @@ class CartItem extends HTMLElement {
         this._shadowRoot = this.attachShadow({mode: 'closed'});
         this._shadowRoot.appendChild(cart_item_template.content.cloneNode(true));
 
+        this.$commodityid = "";
         this.$name = this._shadowRoot.querySelector(".cart_como_name");
         this.$image = this._shadowRoot.querySelector(".cart_como_img img");
         this.$perprice = this._shadowRoot.querySelector(".cart_como_perprice");
@@ -140,6 +141,7 @@ class CartItem extends HTMLElement {
         this.$totprice = this._shadowRoot.querySelector(".cart_como_totprice");
         this.$delete = this._shadowRoot.querySelector(".cart_como_opt");
         this.$checkbox = this._shadowRoot.querySelector("input");
+
         this.$checkbox.addEventListener("click", () => {
             let cart = document.getElementsByTagName("cart-sum")[0];
             let delta = parseFloat(this.$totprice.innerHTML.toString());
@@ -158,7 +160,19 @@ class CartItem extends HTMLElement {
             cart.setAttribute("cartnum", num.toString());
             cart.setAttribute("cartprice", price.toFixed(2).toString());
         });
+
         this.$delete.addEventListener("click", () => {
+
+            $.ajax({
+                url: "/Home/RecmdZoneCommodities",//json文件位置
+                type: "post",
+                contentType: "application/json",
+                dataType: "json", //返回数据格式为json
+                data: JSON.stringify({ "commodity_id": this.$commodityid }),
+                success: function (data) {//请求成功完成后要执行的方法
+                }
+            });
+
             if (this.$checkbox.checked == true) {
             let cart = document.getElementsByTagName("cart-sum")[0];
             let delta = parseFloat(this.$totprice.innerHTML.toString());
@@ -194,6 +208,7 @@ class CartItem extends HTMLElement {
         this.$totprice.innerHTML = (price * num).toFixed(2).toString();
         this.$commodityId = item_data.commodityId;
     }
+
 }
 
 customElements.define("cart-item", CartItem);
@@ -334,7 +349,7 @@ window.onload = function () {
             }
             cart_item_list.parentNode.appendChild(new CartSum());
         }
-    })
+    });
 
 }
 
