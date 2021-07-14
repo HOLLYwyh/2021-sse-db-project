@@ -1,5 +1,5 @@
 let ord = new Vue({
-    el: '#list',
+    el: '#home-list',
     data:{
         objectList: [],
         draw:false,

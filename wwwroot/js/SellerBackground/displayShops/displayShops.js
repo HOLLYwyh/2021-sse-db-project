@@ -1,4 +1,10 @@
-//还没有定义实例
+////let sh = new Vue({
+////    el: '#list',    //某个组件或标签
+////    data: {
+////        objectList: [],
+////        draw: false,
+////    }
+////})
 
 function displayshops(sellerID) {
     $.ajax({
@@ -17,7 +23,7 @@ function displayshops(sellerID) {
                 //console.log("null");
             }
             else {
-                //赋值给指定实例的数组
+                sh.objectList = result;//赋值给指定实例的数组
             }
         }
     });
