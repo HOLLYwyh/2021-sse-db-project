@@ -61,56 +61,56 @@ new Vue({
                     name: "英豪巨无霸",
                     date: "2020-05-01",
                     price: "9.9",
-                    details: "",
+                    details: "2",
                 },
                 {
                     img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
                     name: "英豪巨无霸",
                     date: "2020-05-01",
                     price: "9.9",
-                    details: "",
+                    details: "3",
                 },
                 {
                     img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
                     name: "英豪巨无霸",
                     date: "2020-05-01",
                     price: "9.9",
-                    details: "",
+                    details: "4",
                 },
                 {
                     img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
                     name: "英豪巨无霸",
                     date: "2020-05-01",
                     price: "9.9",
-                    details: "",
+                    details: "5",
                 },
                 {
                     img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
                     name: "英豪巨无霸",
                     date: "2020-05-01",
                     price: "9.9",
-                    details: "",
+                    details: "6",
                 },
                 {
                     img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
                     name: "英豪巨无霸",
                     date: "2020-05-01",
                     price: "9.9",
-                    details: "",
+                    details: "7",
                 },
                 {
                     img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
                     name: "英豪巨无霸",
                     date: "2020-05-01",
                     price: "9.9",
-                    details: "",
+                    details: "8",
                 },
                 {
                     img: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
                     name: "英豪巨无霸",
                     date: "2020-05-01",
                     price: "9.9",
-                    details: "",
+                    details: "9",
                 },
 
             ],
@@ -120,6 +120,10 @@ new Vue({
             rate: 4.9,
         };
     },
-    methods: {}
+    methods: {
+        jumpto(x) {
+            console.log(x);
+        }
+    }
 
 })
