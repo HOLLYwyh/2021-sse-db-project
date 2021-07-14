@@ -260,13 +260,25 @@ namespace InternetMall.Services
 
         public string DisplayShops(string sellerID)// 找到商家的所有店铺
         {
-            var shops = _context.Shops.Where(s => s.SellerId == sellerID).ToList();
-            if (shops == null || shops.Count == 0)//没有店铺
+            var shoplist = _context.Shops.Where(s => s.SellerId == sellerID).ToList();
+
+            if (shoplist == null || shoplist.Count == 0)//没有店铺
             {
                 return null;
             }
             else
             {
+                List<ShopView> shops = new List<ShopView>();//前端需要的视图列表
+                ShopView temp = new ShopView();
+                foreach (Shop shop in shoplist)
+                {
+                    temp.shopID = shop.ShopId;
+                    temp.shopName = shop.Name;
+                    temp.shopDescription = shop.Description;
+                    temp.creditScore = shop.CreditScore;
+                    temp.img = "../.." + shop.Url;       //url的返回方式不确定，貌似豪哥说要写成绝对路径（我仿照的是SearchController）
+                    shops.Add(temp);
+                }
                 return JsonConvert.SerializeObject(shops);
             }
         }

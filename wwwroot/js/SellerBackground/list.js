@@ -1,5 +1,5 @@
 /*只需要将objlist的内容进行修改，就能对页面进行重新渲染 */
-Vue.component('list',{
+ Vue.component('list',{
     props: ["objlist","draw"],
     data()
     {
