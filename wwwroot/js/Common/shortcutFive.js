@@ -19,7 +19,7 @@ Vue.component('shortcut',{
                 <li>
                     <div class="col_9FCC48">
                         <div>
-                            <a href="http://">购物车</a>
+                            <a href="/Purchase/ShoppingCart">购物车</a>
                         </div>
                     </div>
                 </li>
