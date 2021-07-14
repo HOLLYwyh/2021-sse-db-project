@@ -26,7 +26,7 @@ namespace InternetMall.Services
         {
             _context = context;
         }
-        public Good RenderOrderPageFromDetail(string commodityId, int amount)
+        public Good RenderOrderPageFromDetail(string commodityId, int amount)   //从详情页购买
         {
             if (commodityId == "")
                 return null;

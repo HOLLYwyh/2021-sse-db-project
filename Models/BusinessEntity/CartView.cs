@@ -16,13 +16,13 @@ namespace InternetMall.Models.BusinessEntity
 
         public int Quantity { get; set; }             // 商品数量
 
-        public DateTime DateCreated { get; set; }     // 创建时间
+        public DateTime? DateCreated { get; set; }     // 创建时间
         
         public string CommodityName { get; set; }     //商品名称
 
         public string ShopName { get; set; }          // 店铺名称
 
-        public decimal Price{ get; set; }             // 商品价格
+        public decimal? Price{ get; set; }             // 商品价格
 
     
     }
