@@ -15,12 +15,20 @@
 
 
     <script src="~/js/Common/vue.js"></script>
-
+    <!--右边栏-->
+    <link href="/css/Common/naviRight.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css">
     <title>订单信息确认</title>
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
     @await Html.PartialAsync("~/Views/Shared/backToTop.cshtml")
 </head>
 <body>
+    <!--右边栏-->
+    <div id="naviRight">
+        <naviright>
+
+        </naviright>
+    </div>
     <div id="shortcut">
         <shortcut></shortcut>
     </div>
@@ -120,7 +128,7 @@
                         </li>
                         <li>
                             <span class="addAddressCons">送货清单</span>
-                            <span class="addAddress"><a href="ShoppingCart.html">返回修改购物车</a></span>
+                            <span class="addAddress"><a href="/Purchase/ShoppingCart">返回修改购物车</a></span>
                             <div class="row deliverymode">
                                 <div class="col-lg-3 deliverymodeLeft">
                                     <p>配送方式：</p>
@@ -138,7 +146,7 @@
                                 <div class="col-lg-9 deliverymodeRight">
                                     <div class="layui-form">
                                         <table class="layui-table" v-for='(item,index) in shopTableDatas' :key='index'>
-                                            <tr >
+                                            <tr>
                                                 <td>
                                                     <span class="goodName">
                                                         <img class="goodImg" :src="item.src" />
@@ -163,7 +171,7 @@
                                 </div>
                             </div>
                         </li>
-                        
+
                         <li class="couponconts">
                             <span class="addAddressCons ">使用优惠券</span>
                             <div class="consignee couponcontShow">
@@ -188,7 +196,7 @@
                 </div>
                 <div class="contenterFooter">
                     <p>总金额：<span class="footerPrice">￥{{totalPrice}}</span></p>
-                   @* <p>运费：<span class="footerPrice">￥100.00</span></p>*@
+                    @* <p>运费：<span class="footerPrice">￥100.00</span></p>*@
                     <p>优惠：<span class="footerPrice footercouponPrice">{{couponPrice | moneyFiler}}</span></p>
                 </div>
                 <div class="clearfix"></div>
@@ -204,6 +212,7 @@
     </div>
 
     <script src="~/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="/js/Common/naviRight.js"></script>
     <script src="~/js/Purchase/confirmOrder/order_confirm.js"></script>
 </body>
 </html>
