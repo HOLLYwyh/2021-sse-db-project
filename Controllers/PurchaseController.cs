@@ -3,15 +3,33 @@ using Alipay.AopSdk.Core.Domain;
 using Alipay.AopSdk.Core.Request;
 using Alipay.AopSdk.Core.Util;
 using Internetmall.Models.AlipayModels;
+using Internetmall.Models.BusinessEntity;
+using InternetMall.DBContext;
+using InternetMall.Models;
+using InternetMall.Models.BusinessEntity;
+using InternetMall.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using ThirdParty.Json.LitJson;
 
 namespace InternetMall.Controllers
 {
     public class PurchaseController : Controller
     {
+        private readonly ModelContext _context;   //数据库上下文
+        private OrderService orderService;             //后端service
+        private CartService cartService; 
+
+        public PurchaseController(ModelContext context)
+        {
+            _context = context;
+            orderService = new OrderService(_context);
+            cartService = new CartService(_context);
+        }
+
         #region 发起支付
         /// 发起支付请求
         /// </summary>
@@ -36,7 +54,7 @@ namespace InternetMall.Controllers
 
             AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
             // 设置同步回调地址
-            request.SetReturnUrl("https://localhost:44393/Purchase/Callback");
+            request.SetReturnUrl("https://localhost:44393/Purchase/SuccessPay");
             // 设置异步通知接收地址
             request.SetNotifyUrl("");
             // 将业务model载入到request
@@ -149,25 +167,97 @@ namespace InternetMall.Controllers
         }
 
         #endregion
-        public IActionResult ConfirmOrder()
+        public IActionResult ConfirmOrder()    //购买信息确认
         {
-            return View();
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
         }
-        public IActionResult ShoppingCart()
+        public IActionResult ShoppingCart()    //购物车
         {
-            return View();
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
         }
-        public IActionResult Settle()
+
+        public IActionResult SuccessPay()   //最终购买成功
         {
-            return View();
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
         }
-        public IActionResult Payment()
+
+        public IActionResult SubmitOrder()   //支付宝付款页面
         {
-            return View();
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
         }
-        public IActionResult SubmitOrder()
+
+
+        //前后端交互
+        //订单生成页面
+        [HttpPost]
+        public IActionResult SetCommodDetail([FromBody] CommodDetail commodity)   //商品详情页提交商品
         {
-            return View();
+            Global.GCommodityID = commodity.ID;
+            Global.GCommodityNum = commodity.Amount;
+            Global.GConfirmOrderType = 1;
+            JsonData jsondata = new JsonData();
+            jsondata["commodityID"] = commodity.ID;
+            return Json(jsondata.ToJson());
+        }
+
+        public IActionResult GetCommodDetail()   //订单确认-渲染商品信息
+        {
+            Good commodity = new Good();
+            commodity = orderService.RenderOrderPageFromDetail(Global.GCommodityID,Global.GCommodityNum);
+            string str = JsonConvert.SerializeObject(commodity);
+            return new ContentResult { Content = str, ContentType = "application/json" };
+        }
+
+        //购物车页面相关
+        public IActionResult GetCartDetail()    //购物车详情
+        {
+            List<CartView> shopCarts = new List<CartView>();    //  购物车信息显示类 列表    
+            shopCarts = cartService.GetCartProduct(Request.Cookies["buyerID"]);
+            string str = JsonConvert.SerializeObject(shopCarts);
+            return new ContentResult { Content = str, ContentType = "application/json" };
+        }
+
+        [HttpPost]
+        public IActionResult DeleteCommodity([FromBody] CommodityID commodity)  //购物车删除商品
+        {
+            JsonData jsondata = new JsonData();
+            if(cartService.RemoveFromCart(Request.Cookies["buyerID"], commodity.ID))
+            {
+                jsondata["result"] = true;
+            }
+            else
+            {
+                jsondata["result"] = false;
+            }
+            return Json(jsondata.ToJson());
         }
     }
 }

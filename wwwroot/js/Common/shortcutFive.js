@@ -19,14 +19,14 @@ Vue.component('shortcut',{
                 <li>
                     <div class="col_9FCC48">
                         <div>
-                            <a href="http://">购物车</a>
+                            <a href="/Purchase/ShoppingCart">购物车</a>
                         </div>
                     </div>
                 </li>
                 <li>
                     <div class="col_00A3E7">
                         <div>
-                            <a href="/Favorites/favorite">收藏夹</a>
+                            <a href="/SellerBackground/Home">英豪店铺</a>
                         </div>
                     </div>
                 </li>

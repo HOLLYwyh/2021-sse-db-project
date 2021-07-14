@@ -15,12 +15,20 @@
 
 
     <script src="~/js/Common/vue.js"></script>
-
+    <!--右边栏-->
+    <link href="/css/Common/naviRight.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css">
     <title>订单信息确认</title>
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
     @await Html.PartialAsync("~/Views/Shared/backToTop.cshtml")
 </head>
 <body>
+    <!--右边栏-->
+    <div id="naviRight">
+        <naviright>
+
+        </naviright>
+    </div>
     <div id="shortcut">
         <shortcut></shortcut>
     </div>
@@ -120,7 +128,7 @@
                         </li>
                         <li>
                             <span class="addAddressCons">送货清单</span>
-                            <span class="addAddress"><a href="ShoppingCart.html">返回修改购物车</a></span>
+                            <span class="addAddress"><a href="/Purchase/ShoppingCart">返回修改购物车</a></span>
                             <div class="row deliverymode">
                                 <div class="col-lg-3 deliverymodeLeft">
                                     <p>配送方式：</p>
@@ -137,14 +145,14 @@
                                 </div>
                                 <div class="col-lg-9 deliverymodeRight">
                                     <div class="layui-form">
-                                        <table class="layui-table">
+                                        <table class="layui-table" v-for='(item,index) in shopTableDatas' :key='index'>
                                             <tr>
-                                                <td v-for='(item,index) in shopTableDatas' :key='index'>
+                                                <td>
                                                     <span class="goodName">
                                                         <img class="goodImg" :src="item.src" />
                                                     </span>
                                                     <span class="goodName goodsName">
-                                                        <h2 class="goodname"></h2>
+                                                        <h2 class="goodname">名称：{{item.name}}</h2>
                                                         <p class="goodGary">
                                                             <span>供应商：</span>
                                                             <span>美国</span>
@@ -155,54 +163,15 @@
                                                         </p>
                                                     </span>
                                                 </td>
-                                                <td class="goodPrice">￥344534.00</td>
-                                                <td class="goodNum">1</td>
+                                                <td class="goodPrice">单价：￥{{item.price}}</td>
+                                                <td class="goodNum">数量:{{item.num}}</td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="goodName">
-                                                        <img class="goodImg" src="../../images/a2.png" />
-                                                    </span>
-                                                    <span class="goodName goodsName">
-                                                        <h2 class="goodname"></h2>
-                                                        <p class="goodGary">
-                                                            <span>供应商：</span>
-                                                            <span>美国</span>
-                                                        </p>
-                                                        <p class="goodGary">
-                                                            <span>发货地：</span>
-                                                            <span>中国</span>
-                                                        </p>
-                                                    </span>
-                                                </td>
-                                                <td class="goodPrice">￥344534.00</td>
-                                                <td class="goodNum">1</td>
-                                            </tr>
-
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <span class="addAddressCons">发票信息</span>
-                            <div class="consignee">
-                                <span class="consigneeList" v-for="(invoiceDatas,index) in invoicedatas" :class="{'consigneeListClick':invoiceIndex == index}" @@click="invoiceIndex=index">
-                                    <span v-text="invoiceDatas.name"></span>
-                                    <div v-show="invoiceIndex == index">
-                                        <div class="arrow-right"></div>
-                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                    </div>
-                                </span>
-                            </div>
-                            <div class="consignee" v-if="invoiceIndex > 0">
-                                <span class="CompanyInformation">增值税普通发票</span>
-                                <span class="CompanyInformation">北京科技公司</span>
-                                <span class="CompanyInformation">货物详细</span>
-                                <span class="CompanyInformation modify">修改</span>
-                            </div>
 
-                        </li>
                         <li class="couponconts">
                             <span class="addAddressCons ">使用优惠券</span>
                             <div class="consignee couponcontShow">
@@ -226,16 +195,16 @@
                     <div class="row totalRow">金额抵用：{{couponPrice | moneyFiler}}</div>
                 </div>
                 <div class="contenterFooter">
-                    <p>1件商品，1项服务，总金额：<span class="footerPrice">￥9600.00</span></p>
-                    <p>运费：<span class="footerPrice">￥100.00</span></p>
+                    <p>总金额：<span class="footerPrice">￥{{totalPrice}}</span></p>
+                    @* <p>运费：<span class="footerPrice">￥100.00</span></p>*@
                     <p>优惠：<span class="footerPrice footercouponPrice">{{couponPrice | moneyFiler}}</span></p>
                 </div>
                 <div class="clearfix"></div>
                 <div class="row footerRow">
-                    <span class="footerRowprice">应付金额：<span>￥9999.00</span></span>
-                    <span class="footerRowaddress"><span>商品收获地址：{{moreaddressCity + moreaddressArea + moreaddressMinarea}}</span><span>{{moreaddressName}}</span><span>13800138000</span></span>
+                    <span class="footerRowprice">应付金额：<span>￥{{totalPrice}}</span></span>
+                    <span class="footerRowaddress"><span>商品收货地址：{{filterAddress[currentIndex].city}} {{filterAddress[currentIndex].area}} {{filterAddress[currentIndex].minarea}}</span><span>{{filterAddress[currentIndex].name}}</span><span>{{filterAddress[currentIndex].phone}}</span></span>
                 </div>
-                <button class="btn submitForm">提交订单</button>
+                <button class="btn submitForm" onclick="submit()">提交订单</button>
             </div>
 
 
@@ -243,6 +212,7 @@
     </div>
 
     <script src="~/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="/js/Common/naviRight.js"></script>
     <script src="~/js/Purchase/confirmOrder/order_confirm.js"></script>
 </body>
 </html>

@@ -20,7 +20,7 @@ Vue.component('naviright', {
                     
                     <div>
                     
-                    <el-avatar icon="el-icon-user-solid"></el-avatar>
+                    <el-avatar icon="el-icon-user-solid" :src=img></el-avatar>
                     
                     </div>
                     <div>
@@ -52,7 +52,7 @@ Vue.component('naviright', {
             
             <!--购物车-->
             <div class="sidebaPersonage ">
-                <a href="www.baidu.com" class="topa">
+                <a href="/Purchase/ShoppingCart" class="topa">
                     <i class="fa fa-shopping-cart fa-lg user"></i>
                     <em class="tab-text">购物车</em>
                 </a>
@@ -97,6 +97,9 @@ Vue.component('naviright', {
         setName(namex) {
             this.name = namex
         },
+        setImg(imgx) {
+            this.img=imgx
+        },
         getCookie(cname) {
             var name = cname + "=";
             var ca = document.cookie.split(';');
@@ -108,16 +111,32 @@ Vue.component('naviright', {
         }
     },
     created(){
-            let name = this.getCookie("buyerNickName")
-            let id = this.getCookie("buyerID")
-            console.log(name)
-            console.log("11")
-            console.log(decodeURI(name))
-            if (name) {
-                this.setid(decodeURI(id))
-                this.setName(decodeURI(name))
-            
+        let name = this.getCookie("buyerNickName")
+        let id = this.getCookie("buyerID")
+        console.log(name)
+        console.log("11")
+        console.log(decodeURI(name))
+        if (name) {
+            this.setid(decodeURI(id))
+            this.setName(decodeURI(name))
         }
+        let that
+        $.ajax({
+            url: "/Home/GetBuyerPic",
+            type: "get",
+            contentType: "application/json",
+            async: false,
+            dataType: "json", //返回数据格式为json
+            success: function (data) {
+                console.log(data)
+                if (data.url != "FAILED") {
+                    that = data.url
+                }
+
+            }
+        })
+        console.log(that)
+        this.setImg(that)
     }
 })
 

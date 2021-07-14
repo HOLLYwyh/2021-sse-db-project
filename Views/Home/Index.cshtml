@@ -34,7 +34,7 @@
             <li class="item"><a href="#part9"><div>洗护</div></a></li>
         </ul>
     </div>
-    
+
     <div id="naviRight">
         <naviright>
 
@@ -48,9 +48,9 @@
             <img src="~/Images/Home/index/yinghaohuicui.png">
         </div>
         <div>
-            <input type="text" placeholder="关键词搜索" class="fl">
+            <input id="Context" type="text" placeholder="关键词搜索" class="fl">
         </div>
-        <button class="fl" onclick="window.location.href = '/Search/SearchCommodity'"></button>
+        <button class="fl" onclick="submitSearch()"></button>
         <div class="nav fr">
 
 
@@ -66,23 +66,23 @@
 
             <div class="nav_son">
                 <img src="~/Images/Home/index/shoppingcart.svg" alt="">
-                <a href="#">购物车</a>
+                <a href="/Purchase/ShoppingCart">购物车</a>
             </div>
             <div class="nav_son">
                 <img src="~/Images/Home/index/notice.svg" alt="">
-                <a href="#">通知</a>
+                <a href="/Favorites/follow">关注</a>
             </div>
             <div class="nav_son">
                 <img src="~/Images/Home/index/bro_history.svg" alt="">
-                <a href="#">浏览记录</a>
+                <a href="/Ranking/UniversalList">排行榜</a>
             </div>
             <div class="nav_son">
                 <img src="~/Images/Home/index/bookmark.svg" alt="">
-                <a href="#">收藏夹</a>
+                <a href="/Favorites/favorite">收藏夹</a>
             </div>
             <div class="nav_son">
                 <img src="~/Images/Home/index/orders.svg" alt="">
-                <a href="#">历史订单</a>
+                <a href="/Account/orders">历史订单</a>
             </div>
             <div class="nav_son">
                 <img src="~/Images/Home/index/coupon.svg" alt="">
@@ -100,21 +100,20 @@
         </div>
         <div class="rcmd_box">
             <ul>
-                <li v-for='(thing,index) in goods' :key='index'>
-                    <a :href="thing.link">
+                <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='index'>
+                    <a>
                         <img :src="thing.img">
                         <div class="introduce">
-
                             {{thing.intro}}
-
                         </div>
                         <div class="shop">
                             店铺：{{thing.shop}}
                         </div>
                     </a>
+
                 </li>
             </ul>
-            <div class="change_btn">
+            <div class="change_btn" onclick="getRcmd()">
 
                 换一换
             </div>
@@ -122,35 +121,386 @@
     </div>
 
     <div id="part1">
-        <part type="服装"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+
+                    <div class="change_bt" onclick=" setGoods('服装') ">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
+                        <a href="javascript:;">
+                            <img :src="thing.img">
+                            <div class="introduce">
+                                {{thing.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{thing.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{thing.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part2">
-        <part type="电子产品"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+
+                    <div class="change_bt" onclick="setGoods('电子产品')">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
+                        <a href="javascript:;">
+                            <img :src="thing.img">
+                            <div class="introduce">
+                                {{thing.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{thing.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{thing.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part3">
-        <part type="书籍"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+
+                    <div class="change_bt" onclick="setGoods('书籍')">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
+                        <a href="javascript:;">
+                            <img :src="thing.img">
+                            <div class="introduce">
+                                {{thing.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{thing.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{thing.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part4">
-        <part type="宠物"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+
+                    <div class="change_bt" onclick="setGoods('宠物')">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
+                        <a href="javascript:;">
+                            <img :src="thing.img">
+                            <div class="introduce">
+                                {{thing.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{thing.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{thing.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part5">
-        <part type="运动"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+
+                    <div class="change_bt" onclick="setGoods('运动')">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
+                        <a href="javascript:;">
+                            <img :src="thing.img">
+                            <div class="introduce">
+                                {{thing.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{thing.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{thing.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part6">
-        <part type="食品"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+
+                    <div class="change_bt" onclick="setGoods('食品')">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
+                        <a href="javascript:;">
+                            <img :src="thing.img">
+                            <div class="introduce">
+                                {{thing.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{thing.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{thing.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part7">
-        <part type="家居"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+
+                    <div class="change_bt" onclick="setGoods('家居')">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
+                        <a href="javascript:;">
+                            <img :src="thing.img">
+                            <div class="introduce">
+                                {{thing.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{thing.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{thing.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part8">
-        <part type="美妆"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+
+                    <div class="change_bt" onclick="setGoods('美妆')">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
+                        <a href="javascript:;">
+                            <img :src="thing.img">
+                            <div class="introduce">
+                                {{thing.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{thing.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{thing.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="part9">
-        <part type="洗护"></part>
+        <div class="kind">
+            <div class="card_list">
+                <div class="part_title">
+                    <p class="ti">{{this.type}}</p>
+
+                    <div class="change_bt" onclick="setGoods('洗护')">
+                        换一换
+                    </div>
+
+                </div>
+                <ul>
+                    <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='thing.key'>
+                        <a href="javascript:;">
+                            <img :src="thing.img">
+                            <div class="introduce">
+                                {{thing.intro}}
+                            </div>
+                            <div class="shop">
+                                店铺：{{thing.shop}}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rank">
+                <div class="rank_title">
+                    排行榜
+                </div>
+                <div class="ranklist">
+                    <ul>
+                        <li @@click="chooseAddressRank(thing,index)" v-for='(thing,index) in rank' :key='index'>
+                            <div class="rk">{{number[index]}}</div>
+                            <a href="javascript:;">
+                                <div class="name">{{thing.commodityName}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
 
-    <script type="text/javascript" src="~/js/Home/index/part.js"></script>
+
     <script type="text/javascript" src="~/js/Common/carousel.js"></script>
     <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
     <script type="text/javascript" src="~/js/Common/naviRight.js"></script>

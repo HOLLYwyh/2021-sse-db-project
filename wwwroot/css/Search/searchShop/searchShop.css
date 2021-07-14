@@ -6,15 +6,10 @@ body {
 
 /*店铺栏*/
 .shops {
-    height: 1000px;
+    height: 100%;
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 2%;
-}
-
-/*换页部分*/
-.turn-to-page {
-    margin: 0 35%;
 }
 
 /*搜索结果部分*/
@@ -65,4 +60,9 @@ body {
 
 .row-con .card {
     height: 100%;
+}
+
+.commodityImage {
+    width: 267px;
+    height: 230px;
 }

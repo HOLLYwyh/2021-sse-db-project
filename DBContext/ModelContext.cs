@@ -690,6 +690,10 @@ namespace InternetMall.DBContext
                     .HasForeignKey(d => d.OrdersId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("SYS_C0010039");
+
+                entity.Property(e => e.Amount)
+                    .HasColumnType("NUMBER(6,0)")
+                    .HasColumnName("AMOUNT");
             });
 
             modelBuilder.Entity<ReceiveInformation>(entity =>

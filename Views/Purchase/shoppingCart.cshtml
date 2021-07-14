@@ -1,150 +1,51 @@
-<!--购物车页面-->
 <!DOCTYPE html>
-<html>
+<html lang="zh-ch">
 <head>
     <meta charset="utf-8">
-    <link href="css/car.css" rel="stylesheet" type="text/css">
     <title>购物车</title>
     <link href="~/css/Entry/buyerLogin/buyerLogin.css" type="text/css" rel="stylesheet" />
     <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
     <!--引入与导航栏有关的配置-->
     <link href="/css/Common/shortcut_five.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/Purchase/shoppingCart/shoppingCart.css">
+    <link href="~/css/Common/shortcut_five.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/naviRight.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css">
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/backToTop.cshtml")
 </head>
 <body>
-    <style>
-        body {
-            overflow: hidden;
-            text-align: center;
-        }
+    <!--右边栏-->
+    <div id="naviRight">
+        <naviright>
 
-        .car {
-            width: 60%;
-            border: 1px solid #F88020;
-            border-radius: 18px;
-            margin-left: 300px;
-        }
-
-            .car .good {
-                background-color: #F88020;
-                height: 55px;
-                font-size: 22px;
-                color: white;
-                line-height: 55px;
-                font-weight: 200;
-                border-radius: 18px 18px 0 0;
-                margin-bottom: 20px;
-            }
-
-                .car .good table {
-                    width: 100%;
-                }
-
-            .car .goods {
-                height: 45px;
-                line-height: 45px;
-                font-size: 20px;
-                font-weight: 200;
-            }
-
-                .car .goods table {
-                    width: 100%;
-                }
-
-                    .car .goods table .btn1 {
-                        width: 70px;
-                        height: 28px;
-                        border: 2px solid #46B3E6;
-                        background-color: white;
-                        color: #46B3E6;
-                        border-radius: 4px;
-                        font-weight: 600;
-                    }
-
-                    .car .goods table button:hover {
-                        background-color: #46B3E6;
-                        color: white;
-                    }
-
-            .car .goods1 {
-                margin-top: 10px;
-                /*background-color:;*/
-                height: 50px;
-                font-size: 19px;
-                color: white;
-                line-height: 50px;
-                font-weight: 200;
-                border-radius: 0 0 10px 10px;
-            }
-
-            .car .goods2 {
-                border-top: 1px solid #F88020;
-                margin-top: 10px;
-                height: 50px;
-                font-size: 19px;
-                line-height: 50px;
-                font-weight: 200;
-                border-radius: 0 0 10px 10px;
-            }
-
-            .car .goods1 table {
-                width: 100%;
-            }
-
-            .car .goods1 .btn2 {
-                width: 70px;
-                height: 28px;
-                border: 2px solid #21BF73;
-                background-color: white;
-                color: #21BF73;
-                border-radius: 4px;
-                font-weight: 600;
-            }
-
-                .car .goods1 .btn2:hover {
-                    color: white;
-                    background-color: #21BF73;
-                }
-
-            .car .goods1 .btn3 {
-                width: 80px;
-                height: 30px;
-                border: 2px solid #FF0000;
-                background-color: white;
-                color: #FF0000;
-                border-radius: 4px;
-                font-weight: 600;
-            }
-
-                .car .goods1 .btn3:hover {
-                    color: white;
-                    background-color: #FF0000;
-                }
-    </style>
+        </naviright>
+    </div>
+    <!--渲染导航栏-->
     <div id="shortcutlg">
         <shortcut></shortcut>
     </div>
-    <h1>
-        我的购物车
-    </h1>
-    <div class="car">
+    <div class="cart_outerbox">
+        <p>
+            <span style="font-weight: bold; font-size: 32px; color: brown;">英豪荟萃 </span>
+            <span style="font-size: 32px;">购物车</span>
+        </p>
 
-        <div class="good">
-            <table><tr><td width=30%>商品名称</td><td width=20%>单价</td><td width=20%>数量</td><td width=30%>操作</td></tr></table>
-        </div>
-        <div class="goods">
-            <table><tr><td width=30%>优质运动鞋</td><td width=20%>99</td><td width=20%>1</td><td width=30%><button class="btn1">删除</button></td></tr></table>
-        </div>
-        <div class="goods">
-            <table><tr><td width=30%>优质运动鞋</td><td width=20%>99</td><td width=20%>1</td><td width=30%><button class="btn1">删除</button></td></tr></table>
-        </div>
-
-        <div class="goods1">
-            <table><tr><td width=50%><button class="btn2">确认购买</button></td><td><button class="btn3">全部清空</button></td></tr></table>
+        <div class="cart_attributebox">
+            <p style="left: 8%;">商品信息</p>
+            <p style="left: 52%;">单价¥</p>
+            <p style="left: 64%;">数量</p>
+            <p style="left: 76%;">总价¥</p>
+            <p style="right: 4%;">操作</p>
         </div>
 
+        <div id="cart_itembox" class="cart_comolistbox">
+        </div>
+        <!--cart-sum></!--cart-sum-->
     </div>
-    <script type="text/javascript" src="/js/Common/shortcutFive.js"></script>
-    <script type="text/javascript" src="/js/Entry/buyerLogin/buyerLogin.js"></script>
+
+    <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="~/js/Common/naviRight.js"></script>
+    <script type="text/javascript" src="~/js/Purchase/shoppingCart/shoppingCart.js"></script>
 </body>
 </html>

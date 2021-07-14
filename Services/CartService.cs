@@ -24,84 +24,86 @@ namespace InternetMall.Services
         }
 
         //添加购物车
-        public void addToCart(string buyerid, string commodityid)
+        public bool addToCart(string buyerid, string commodityid,int number)
         {
             AddShoppingCart cart = _context.AddShoppingCarts.Where(x => x.BuyerId == buyerid && x.CommodityId == commodityid).FirstOrDefault();
             if (cart == null)
             {
-                cart = new AddShoppingCart { BuyerId = buyerid, CommodityId = commodityid, Quantity = 1, DateCreated = DateTime.Now };
+                cart = new AddShoppingCart { BuyerId = buyerid, CommodityId = commodityid, Quantity = number, DateCreated = DateTime.Now };
                 _context.AddShoppingCarts.Add(cart);
             }
 
             else
-                cart.Quantity++;
+            {
+                cart.Quantity+= number;
+                _context.AddShoppingCarts.Update(cart);
+            }
 
-            _context.SaveChanges();
+            if (_context.SaveChanges() > 0)
+                return true;
+            else
+                return false;
         }
 
         // 从购物车中删除
-        public async Task RemoveFromCart(string buyerid, string commodityid)
+        public bool RemoveFromCart(string buyerid, string commodityid)
         {
-            AddShoppingCart cart = _context.AddShoppingCarts.Where(x=>x.BuyerId == buyerid && x.CommodityId == commodityid).FirstOrDefault();
-            if(cart != null)
+            AddShoppingCart cart = _context.AddShoppingCarts.Where(x => x.BuyerId == buyerid && x.CommodityId == commodityid).FirstOrDefault();
+            if (cart != null)
             {
                 _context.AddShoppingCarts.Remove(cart);
-                await _context.SaveChangesAsync();
+
+                if (_context.SaveChanges() > 0)
+                    return true;
+                else
+                    return false;
             }
+            else
+                return true;
         }
 
         // 清除购物车
-        public async Task RemoveAllCart(string buyerid)
+        public bool RemoveAllCart(string buyerid)
         {
-            var carts = _context.AddShoppingCarts.Where(x => x.BuyerId == buyerid);
+            List<AddShoppingCart> carts = _context.AddShoppingCarts.Where(x => x.BuyerId == buyerid).ToList();
             _context.AddShoppingCarts.RemoveRange(carts);
-            await _context.SaveChangesAsync();
+            if (_context.SaveChanges() > 0)
+                return true;
+            else
+                return false;
         }
 
-        // 查看购物车
-        public IEnumerable<CartView> GetCartProduct(string buyerid)
+        // 渲染购物车里的商品
+        public List<CartView> GetCartProduct(string buyerid)
         {
-            List<CartView> shopCart = new List<CartView>();    //  购物车信息显示类 列表
+            List<CartView> shopCarts = new List<CartView>();    //  购物车信息显示类 列表        
 
+            List<AddShoppingCart> carts = _context.AddShoppingCarts.Where(x => x.BuyerId == buyerid).ToList();
 
-            // var shopCart = _context.AddShoppingCarts.Where(a => a.BuyerId == buyerid).Include(a => a.Buyer).Include(a=>a.Commodity).ThenInclude(c=>c.Shop).ToList();
-            
-            // 查询商品信息
-            var query = from cart in _context.AddShoppingCarts
-                        join buyer in _context.Buyers on cart.BuyerId equals buyer.BuyerId
-                        join comm in _context.Commodities on cart.CommodityId equals comm.CommodityId
-                        join shop in _context.Shops on buyer.BuyerId equals shop.SellerId
-                        where cart.BuyerId == buyerid
-                        select new
-                        {
-                            BuyerId = buyer.BuyerId,
-                            CommodityId = cart.CommodityId,
-                            CommodityName = comm.Name,
-                            ShopName = shop.Name,
-                            Quantity = cart.Quantity,
-                            DateCreated = cart.DateCreated,
-                            Price = comm.Price
-                        };           
-
-            foreach (var item in query)
+            foreach (AddShoppingCart cart in carts)
             {
-                CartView cartview = new CartView();
+                Commodity commodity = _context.Commodities.Where(x => x.CommodityId == cart.CommodityId).FirstOrDefault();
 
-                cartview.BuyerId = item.BuyerId;
-                cartview.CommodityId = item.CommodityId;
-                cartview.CommodityName = item.CommodityName;
-                cartview.DateCreated = (DateTime)item.DateCreated;
-                cartview.ShopName = item.ShopName;
-                cartview.Quantity = item.Quantity;
-                cartview.Price = (decimal)item.Price;
+                Shop shop = _context.Shops.Where(x => x.ShopId == commodity.ShopId).FirstOrDefault();
 
-                shopCart.Add(cartview);
+                CartView cartview = new CartView
+                {
+                    errorCode = 0,
+                    BuyerId = cart.BuyerId,
+                    commodityId = cart.CommodityId,
+                    CommodityName = commodity.Name,
+                    DateCreated = cart.DateCreated,
+                    ShopName = shop.Name,
+                    shopId = shop.ShopId,
+                    imgUrl = commodity.Url,
+                    amount = cart.Quantity,
+                    Price = commodity.Price * cart.Quantity
+                };
+
+                shopCarts.Add(cartview);
             }
-
-            return shopCart;       
+            return shopCarts;
         }
-
-        
     }
 }
 

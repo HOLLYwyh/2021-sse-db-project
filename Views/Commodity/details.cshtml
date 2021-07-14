@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-ch">
+<head>
+    <script type="text/javascript" src="~/js/Common/vue.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/shortcut_five.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Commodity/details.css" type="text/css" rel="stylesheet" />
+
+    <title>详情页</title>
+
+    <!--右边栏-->
+    <link href="/css/Common/naviRight.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css">
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+
+</head>
+<body>
+    <div id="shortcut">
+        <shortcut></shortcut>
+    </div>
+    <!--右边栏-->
+    <div id="naviRight">
+        <naviright>
+
+        </naviright>
+    </div>
+
+
+    <div class="qbspfl">
+        <div class="djfl">
+            商品详情
+        </div>
+
+    </div>
+
+
+    <div class="nowweizhi">
+        <span></span>
+    </div>
+
+    <div class="theshopshow" id="infox">
+
+        <div id="preview">
+            <div class=jqzoom id="spec-n1">
+                <img height="350" :src="input.imgUrl" v-bind:jqimg="input.imgUrl" width="350">
+            </div>
+            <div id="spec-n5">
+
+            </div>
+        </div>
+
+        <div class="shoppnum">
+            <!--n1-->
+            <div class="shanpmai">
+                <h1 class="spdname">{{input.name}} </h1>
+                <br />
+                <h2 class="spdname">{{input.intro}}</h2>
+                <br />
+                <div class="hotspeak">
+
+                </div>
+                <div class="shoujiap">
+                    <span>商城价格</span>
+                    <i>{{input.price}}</i>￥
+                </div>
+                <div class="chuxinxi">
+
+                </div>
+                <div class="shoujigm">
+
+                </div>
+                <div class="peisongzhi">
+
+                </div>
+                <div class="xuanzcolor">
+
+
+
+                    <div class="goumaijiajian">
+                        <span>购买数量</span>
+                        <input id="min" name="" type="button" value="减" / style=" width:30px; height:30px; font-size:12px; line-height:30px; color:#333; float:left; cursor:pointer" onclick="vm.minus()">
+                        <input id="text_box" name="" type="text" :value=number style="width:60px;height:30px; font-size:12px; text-align:center; float:left" />
+                        <input id="add" name="" type="button" value="加" / style=" width:30px; height:30px; font-size:12px; line-height:30px; color:#333; float:left; cursor:pointer" onclick="vm.plus()">
+                    </div>
+                    <br />
+                    <!--加入购物车与收藏商品-->
+                    <div class="joinspadsp">
+                        <a style=" margin-left:67px" @@click="sendBuy()">立即购买</a>
+                        <a style=" margin-left:6px" @@click="addToCart()">加入购物车</a>
+                        <a style=" margin-left:6px" @@click="addToFav()">收藏该商品</a>
+                    </div>
+                    <br />
+                    <!--商品编号-->
+                    <div class="shopbh">
+                        <span>商品编号</span>
+                        <em>{{input.commodityId}}</em>
+                    </div>
+                </div>
+            </div>
+
+            <div class="daitianc">
+                <span class="lkadlk">瞧了又瞧</span>
+                <div class="lklksp">
+                    <ul>
+                        <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='index'>
+                            <a href="javascript:;">
+                                <b>
+                                    <img :src="thing.img">
+                                </b>
+                                <h5>
+                                    {{thing.intro}}
+                                </h5>
+                                <p>{{thing.description}}</p>
+                                @*<div class="shop">
+                                    店铺：{{thing.shop}}
+                                </div>*@
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/Commodity/163css.js"></script>
+    <script>
+        $(function () {
+            $("#banner_menu_wrap").mouseleave(function () {
+                $(this).hide()
+                $("#big_banner_wrap").hide()
+            });
+            $(".djfl").mouseenter(function () {
+                $("#big_banner_wrap").show()
+                $("#banner_menu_wrap").show()
+            });
+        })
+
+    </script>
+    <script type=text/javascript>
+        $(function () {
+            $(".jqzoom").jqueryzoom({
+                xzoom: 400,
+                yzoom: 400,
+                offset: 10,
+                position: "right",
+                preload: 1,
+                lens: 1
+            });
+            /*$("#spec-list").jdMarquee({
+                deriction: "left",
+                width: 350,
+                height: 56,
+                step: 2,
+                speed: 4,
+                delay: 10,
+                control: true,
+                _front: "#spec-right",
+                _back: "#spec-left"
+            });*/
+            $("#spec-list img").bind("mouseover", function () {
+                var src = $(this).attr("src");
+                $("#spec-n1 img").eq(0).attr({
+                    src: src.replace("\/n5\/", "\/n1\/"),
+                    jqimg: src.replace("\/n5\/", "\/n0\/")
+                });
+                $(this).css({
+                    "border": "2px solid #ff6600",
+                    "padding": "1px"
+                });
+            }).bind("mouseout", function () {
+                $(this).css({
+                    "border": "1px solid #ccc",
+                    "padding": "2px"
+                });
+            });
+        })
+    </script>
+    <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="/js/Common/naviRight.js"></script>
+    <script type="text/javascript" src="~/js/Commodity/details.js"></script>
+</body>
+</html>

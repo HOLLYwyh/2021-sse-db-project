@@ -35,49 +35,35 @@
     </div>
     <!--筛选栏部分-->
     <div id="search-category" class="search-category">
-       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @@select="handleSelect">
-          <el-menu-item index="1">综合结果</el-menu-item>
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @@select="handleSelect">
+            <el-menu-item index="1" onclick="setCommodDefault()">默认</el-menu-item>
             <el-submenu index="2">
-               <template slot="title">
+                <template slot="title">
                     价格
-               </template>
-               <el-menu-item index="2-1">价格从高到低</el-menu-item>
-               <el-menu-item index="2-2">价格从低到高</el-menu-item>
+                </template>
+                <el-menu-item index="2-1" onclick="setCommodDesc()">价格从高到低</el-menu-item>
+                <el-menu-item index="2-2" onclick="setCommodAsc()">价格从低到高</el-menu-item>
             </el-submenu>
-            <el-menu-item index="3">销量</el-menu-item>
-       </el-menu>
+            <el-menu-item index="3" onclick="setCommodByAmount()">销量</el-menu-item>
+        </el-menu>
     </div>
     <!--商品部分-->
     <div class="commodities bg-gray-100 rounded-lg  border-opacity-0">
         <div id="commodity-list" class="commodity-list">
-        <el-row :span="0" v-for="(o, index) in 4" :key="o">
-            <el-col :span="6" v-for="(o, index) in 3" :key="o" :offset="index > 0 ? 2 : 0">
-               <el-card class="transition duration-150 ease-in-out transform hover:-translate-y-1 hover:border-2 hover:border-blue-700" 
-                             :body-style="{ padding: '0px' }">
-                  <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-                     <div style="padding: 0px;">
-                        <span>好吃的汉堡</span>
-                          <div class="bottom clearfix">
-                             <time class="time">{{ currentDate }}</time>
-                             <el-button type="text" class="button">详情</el-button>
-                          </div>
-                      </div>
-               </el-card>
-            </el-col>
-        </el-row>
-        </div>
-    </div>
-
-    <!--翻页-->
-    <div id="turn-to-page" class="turn-to-page">
-        <div class="block">
-            <el-pagination @@size-change="handleSizeChange"
-                       @@current-change="handleCurrentChange"
-                       :current-page.sync="currentPage1"
-                       :page-size="100"
-                       layout="prev, pager, next, jumper"
-                       :total="1000">
-            </el-pagination>
+           <el-row>
+               <el-col :span="7" v-for="(item, index) in goods" :key="index" :offset="index%3!==0? 1 : 0">
+                  <div style="margin-top:20px; margin-bottom:20px ">
+                     <el-card class="transition duration-150 ease-in-out transform hover:-translate-y-1 hover:border-2 hover:border-blue-700"
+                                     :body-style="{ padding: '0px' }">
+                        <img class="commodityImage" :src="goods[number].img" @@click="commodityDetial(item.ID)">
+                        <div style="padding: 0px;">
+                          <span class="intro">{{goods[number].intro}}</span>
+                            <p class="price">￥{{goods[number++].price}}</p>
+                        </div>
+                     </el-card>
+                  </div>
+               </el-col>
+           </el-row>
         </div>
     </div>
 

@@ -18,11 +18,13 @@ namespace InternetMall.Controllers
         private readonly ModelContext _context;   //数据库上下文
         private BuyerService service;             //后端service
         private SellerService sellerService;
+        private AdministratorService adminService;
         public EntryController(ModelContext context)
         {
             _context = context;
             service = new BuyerService(_context);
             sellerService = new SellerService(_context);
+            adminService = new AdministratorService(_context);
         }
         // 传输页面
         public IActionResult BuyerLogIn()
@@ -71,7 +73,14 @@ namespace InternetMall.Controllers
         }
         public IActionResult AdministratorLogIn()
         {
-            return View();
+            if (Request.Cookies["adminNickName"] != null)
+            {
+                return Redirect("/Admin/AdminWork");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult BuyerLogOut()    //买家退出登录
@@ -140,14 +149,13 @@ namespace InternetMall.Controllers
                 HttpContext.Response.Cookies.Append("sellerID", seller.SellerId, new CookieOptions { Expires = DateTime.Now.AddSeconds(3600) });
                 //HttpContext.Response.Cookies.Append("sellerURL", seller.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(3600) });
                 JsonData jsondata = new JsonData();
-                jsondata["sellerNickName"] = seller.Nickname;
+                jsondata["LogIn"] = "SUCCESS";
                 return Json(jsondata.ToJson());
             }
             else
             {
                 JsonData jsondata = new JsonData();
-                jsondata["sellerNickName"] = "找不到名称";
-                jsondata["sellerPassword"] = "找不到密码";
+                jsondata["LogIn"] = "ERROR";
                 return Json(jsondata.ToJson());
             }
         }
@@ -169,9 +177,25 @@ namespace InternetMall.Controllers
             }
         }
 
-        //[HttpPost]
-        //public IActionResult AdministratorLogInForm([FromBody]EntryLogInAdmin loginSeller)  //管理员登录
-        //{
-        //}
+        [HttpPost]
+        public IActionResult AdministratorLogInForm([FromBody] EntryLogInAdmin logInAdmin)  //管理员登录
+        {
+            var adminstrator = adminService.Login(logInAdmin.ID, logInAdmin.password);
+            if(adminstrator!=null)
+            {
+                //设置cookie
+                HttpContext.Response.Cookies.Append("adminNickName", adminstrator.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(3600) });
+                HttpContext.Response.Cookies.Append("adminID", adminstrator.AdministratorId, new CookieOptions { Expires = DateTime.Now.AddSeconds(3600) });
+                JsonData jsondata = new JsonData();
+                jsondata["LogIn"] = "SUCCESS";
+                return Json(jsondata.ToJson());
+            }
+            else
+            {
+                JsonData jsondata = new JsonData();
+                jsondata["LogIn"] = "ERROR";
+                return Json(jsondata.ToJson());
+            }
+        }
     }
 }

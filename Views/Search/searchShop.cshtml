@@ -38,23 +38,22 @@
     <!--筛选栏部分-->
     <div id="search-category" class="search-category">
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @@select="handleSelect">
-            <el-menu-item index="1">综合结果</el-menu-item>
-            <el-menu-item index="2">销量</el-menu-item>
-            <el-menu-item index="3">信用</el-menu-item>
+            <el-menu-item index="1" onclick="setShopsDefault()">默认</el-menu-item>
+            <el-menu-item index="2" onclick="setShopsByCredit()">信用</el-menu-item>
         </el-menu>
     </div>
     <!--店铺搜索结果-->
     <div class="shops bg-gray-100 rounded-lg  border-opacity-0">
         <div id="shop-list" class="shop-list">
-            <el-row :span="0" v-for="(o, index) in 4" :key="o" :gutter="20" class="row-con">
-                <el-col :span="6" v-for="(o, index) in 1" :key="o">
+            <el-row :span="0" v-for="(item, index) in shops" :key="index" :gutter="20" class="row-con">
+                <el-col :span="6">
                     <el-card class="card transition duration-150 ease-in-out transform hover:-translate-y-1 hover:border-2 hover:border-blue-700"
                              :body-style="{ padding: '0px' }">
-                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+                        <img :src="item.img" class="commodityImage">
                         <div style="padding: 10px;">
-                            <span>全家</span>
+                            <span>{{item.shopName}}</span>
                             <div class="bottom clearfix">
-                                <el-button type="text" class="button">详情</el-button>
+                                <el-button type="text" class="button" @@click="setShop(item.shopID)">进入店铺</el-button>
                             </div>
                         </div>
                     </el-card>
@@ -63,24 +62,11 @@
                 <el-col :span="16">
                     <el-card class="card description" shadow="never">
                         <div class="text-blue-700">店铺详情</div>
-                        <p>阿巴阿巴</p>
+                        <p>{{item.shopDescription}}</p>
                     </el-card>
                 </el-col>
 
             </el-row>
-        </div>
-    </div>
-
-    <!--翻页-->
-    <div id="turn-to-page" class="turn-to-page">
-        <div class="block">
-            <el-pagination @@size-change="handleSizeChange"
-                           @@current-change="handleCurrentChange"
-                           :current-page.sync="currentPage1"
-                           :page-size="100"
-                           layout="prev, pager, next, jumper"
-                           :total="1000">
-            </el-pagination>
         </div>
     </div>
 

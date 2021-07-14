@@ -36,12 +36,13 @@ namespace InternetMall.Controllers
         //显示页面
         public IActionResult Home()
         {
+            //这里还需要再修改
             return View();
         }
 
         public IActionResult Goods()
         {
-
+            //这里还需要再修改
             return View();
         }
         public IActionResult ShopSignUp()
@@ -54,6 +55,16 @@ namespace InternetMall.Controllers
             {
                 return Redirect("/Entry/SellerLogIn");
             }
+        }
+
+        public IActionResult SwitchShop()
+        {
+            return View();
+        }
+
+        public IActionResult Orders()
+        {
+            return View();
         }
 
         //前后端交互
