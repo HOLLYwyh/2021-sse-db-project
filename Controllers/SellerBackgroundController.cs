@@ -170,5 +170,19 @@ namespace InternetMall.Controllers
             }
             return new ContentResult { Content = str, ContentType = "application/json" }; ;      //进入“选择店铺”页面
         }
+
+        public IActionResult SetShopIDForm([FromBody] DisplayOrders sh)  //卖家选择店铺后更改全局的shopID信息
+        {
+            Global.GShopID = sh.ShopID;
+            Console.WriteLine("修改后的shopID：" + Global.GShopID);
+            JsonData jsondata = new JsonData();
+            jsondata["result"] = Global.GShopID;
+            return Json(jsondata.ToJson());
+        }
+        public IActionResult GetShopIDForm()
+        {
+            var str=JsonConvert.SerializeObject(Global.GShopID);
+            return new ContentResult { Content = str, ContentType = "application/json" }; ;
+        }
     }
 }

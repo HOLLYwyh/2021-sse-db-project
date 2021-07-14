@@ -9,4 +9,5 @@ namespace InternetMall.Constants.Shop
         public const int Individual = 3;       // 个人店铺
         public const int BannedShop = 4;       // 被封禁的店铺
     }
+
 }
