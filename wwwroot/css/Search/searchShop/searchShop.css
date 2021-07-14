@@ -6,7 +6,7 @@ body {
 
 /*店铺栏*/
 .shops {
-    height: 730px;
+    height: 100%;
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 2%;
@@ -60,4 +60,9 @@ body {
 
 .row-con .card {
     height: 100%;
+}
+
+.commodityImage {
+    width: 267px;
+    height: 230px;
 }

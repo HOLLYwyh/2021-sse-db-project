@@ -23,61 +23,113 @@ namespace InternetMall.Services
         }
 
         //添加关注
-        public void addToFollowShop(string buyerid, string shopid)
+        public bool addToFollowShop(string buyerid, string shopid)
         {
             FollowShop followShop = _context.FollowShops.Where(x => x.BuyerId == buyerid && x.ShopId == shopid).FirstOrDefault();
             if (followShop == null)
             {
-                followShop = new FollowShop { BuyerId = buyerid, ShopId = shopid,  DateCreated = DateTime.Now };
+                followShop = new FollowShop { BuyerId = buyerid, ShopId = shopid, DateCreated = DateTime.Now };
                 _context.FollowShops.Add(followShop);
-            }
 
-            _context.SaveChanges();
+                if (_context.SaveChanges() > 0)
+                    return true;
+                else
+                    return false;
+            }
+            else            // 已存在，不许添加
+                return true;
         }
 
         // 取消关注
-        public async Task removeFollowShop(string buyerid, string shopid)
+        public bool removeFollowShop(string buyerid, string shopid)
         {
             FollowShop followShop = _context.FollowShops.Where(x => x.BuyerId == buyerid && x.ShopId == shopid).FirstOrDefault();
             if (followShop != null)
             {
                 _context.FollowShops.Remove(followShop);
-                await _context.SaveChangesAsync();
+
+                if (_context.SaveChanges() > 0)
+                    return true;
+                else
+                    return false;
             }
+            else
+                return true;
+        }
+
+        // 清除所有关注
+        public bool removeAllFollowShop(string buyerid)
+        {
+            List<FollowShop> followShops = _context.FollowShops.Where(x => x.BuyerId == buyerid).ToList();
+
+            _context.FollowShops.RemoveRange(followShops);
+
+            if (_context.SaveChanges() > 0)
+                return true;
+            else
+                return false;
+
         }
 
         // 查看关注信息
-        public IEnumerable<FollowShopView> GetCartProduct(string buyerid)
+        public List<FollowShopView> getFollowShops(string buyerid)
         {
-            List<FollowShopView> followShops = new List<FollowShopView>();    //  关注信息显示类 列表
+            List<FollowShopView> followShopViews = new List<FollowShopView>();    //  返回买家关注显示列表        
 
-            // 查询商品信息
-            var query = from followShop in _context.FollowShops
-                        join buyer in _context.Buyers on followShop.BuyerId equals buyer.BuyerId
-                        join shop in _context.Shops on followShop.ShopId equals shop.ShopId
-                        where followShop.BuyerId == buyerid
-                        select new
-                        {
-                            BuyerId = buyer.BuyerId,
-                            ShopId = shop.ShopId,
-                            ShopName = shop.Name,       
-                            DateCreated = followShop.DateCreated
-                        };
+            List<FollowShop> followShops = _context.FollowShops.Where(x => x.BuyerId == buyerid).ToList();  // 买家关注列表
 
-            foreach (var item in query)
+            foreach (FollowShop followShop in followShops)
             {
-                FollowShopView followShopView = new FollowShopView();
+                Shop shop = _context.Shops.Where(x => x.ShopId == followShop.ShopId).FirstOrDefault();    // 关注的店铺
 
-                followShopView.BuyerId = item.BuyerId;
-                followShopView.ShopId = item.ShopId;
-                followShopView.DateCreated = (DateTime)item.DateCreated;
-                followShopView.ShopName = item.ShopName;
-                
+                List<Commodity> shopAllCommodities = _context.Commodities.Where(x => x.ShopId == shop.ShopId).ToList(); // 店铺的所有商品
 
-                followShops.Add(followShopView);
+                List<Commodity> shopOrderCommodities = shopAllCommodities.OrderBy(x => x.Soldnum).ToList();   // 商品列表排序
+
+                List<Commodity> shopCommodities = new List<Commodity>();
+
+                int count = 0;
+                foreach (Commodity commodity in shopOrderCommodities)
+                {
+                    shopCommodities.Add(commodity);
+                    count++;
+                    if (count == 4)
+                        break;
+                }
+
+                List<CommodityView> commodityViews = new List<CommodityView>();
+                foreach (var shopcommodity in shopCommodities)
+                {
+                    CommodityView commodityView = new CommodityView
+                    {
+                        CommodityId = shopcommodity.CommodityId,
+                        ShopId = shopcommodity.ShopId,
+                        Url = shopcommodity.Url,
+                        Category = shopcommodity.Category,
+                        Name = shopcommodity.Name,
+                        Price = shopcommodity.Price,
+                        Storage = shopcommodity.Storage,
+                        Soldnum = shopcommodity.Soldnum,
+                        Description = shopcommodity.Description
+                    };
+                    commodityViews.Add(commodityView);
+                }
+
+                FollowShopView followShopView = new FollowShopView
+                {
+                    BuyerId = followShop.BuyerId,
+                    ShopId = followShop.ShopId,
+                    DateCreated = followShop.DateCreated,
+                    ShopName = shop.Name,
+                    Url = shop.Url,
+                    commodityView = commodityViews
+                };
+
+                followShopViews.Add(followShopView);
             }
 
-            return followShops;
+            return followShopViews;
         }
+
     }
 }

@@ -10,8 +10,10 @@
     <link href="~/css/Commodity/details.css" type="text/css" rel="stylesheet" />
 
     <title>详情页</title>
-    
 
+    <!--右边栏-->
+    <link href="/css/Common/naviRight.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css">
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
 
 </head>
@@ -19,7 +21,12 @@
     <div id="shortcut">
         <shortcut></shortcut>
     </div>
+    <!--右边栏-->
+    <div id="naviRight">
+        <naviright>
 
+        </naviright>
+    </div>
 
 
     <div class="qbspfl">
@@ -81,9 +88,9 @@
                     <br />
                     <!--加入购物车与收藏商品-->
                     <div class="joinspadsp">
-                        <a href="#" style=" margin-left:67px" @@click="sendBuy()">立即购买</a>
-                        <a href="#" style=" margin-left:6px">加入购物车</a>
-                        <a href="#" style=" margin-left:6px">收藏该商品</a>
+                        <a style=" margin-left:67px" @@click="sendBuy()">立即购买</a>
+                        <a style=" margin-left:6px" @@click="addToCart()">加入购物车</a>
+                        <a style=" margin-left:6px" @@click="addToFav()">收藏该商品</a>
                     </div>
                     <br />
                     <!--商品编号-->
@@ -97,7 +104,7 @@
             <div class="daitianc">
                 <span class="lkadlk">瞧了又瞧</span>
                 <div class="lklksp">
-                    <ul >
+                    <ul>
                         <li @@click="chooseAddress(thing,index)" v-for='(thing,index) in goods' :key='index'>
                             <a href="javascript:;">
                                 <b>
@@ -172,6 +179,7 @@
         })
     </script>
     <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="/js/Common/naviRight.js"></script>
     <script type="text/javascript" src="~/js/Commodity/details.js"></script>
 </body>
 </html>

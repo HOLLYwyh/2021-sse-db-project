@@ -251,7 +251,9 @@ var part9 = new Vue({
     }
 });
 
-let naviright = new Vue({ el: '#naviRight' })
+let naviright = new Vue({
+    el: '#naviRight',
+})
 
 function getCookie(cname) {
     var name = cname + "=";
