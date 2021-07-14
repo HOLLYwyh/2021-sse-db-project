@@ -296,6 +296,7 @@ namespace Internetmall.Services
                     newShopView.shopDescription = newShop.Description;
                     newShopView.img = newShop.Url;
                     newShopView.creditScore = newShop.CreditScore;
+                    newShopView.shopID = newShop.ShopId;
                     returnList.Add(newShopView);
                 }
             }
@@ -336,6 +337,7 @@ namespace Internetmall.Services
                         newShopView.shopDescription = newShop.Description;
                         newShopView.img = newShop.Url;
                         newShopView.creditScore = newShop.CreditScore;
+                        newShopView.shopID = newShop.ShopId;
                         returnList.Add(newShopView);
                     }
                 }

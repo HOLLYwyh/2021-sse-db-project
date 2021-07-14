@@ -1,13 +1,13 @@
-﻿using Internetmall.Interfaces;
-using Internetmall.Models.BusinessEntity;
+﻿using Internetmall.Models.BusinessEntity;
 using InternetMall.DBContext;
+using InternetMall.Interfaces;
 using InternetMall.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Internetmall.Services
+namespace InternetMall.Services
 {
     public class CommodityDetailsService : ICommodityDetailsService
     {

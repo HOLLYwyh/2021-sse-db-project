@@ -24,18 +24,18 @@ namespace InternetMall.Services
         }
 
         //添加购物车
-        public bool addToCart(string buyerid, string commodityid)
+        public bool addToCart(string buyerid, string commodityid,int number)
         {
             AddShoppingCart cart = _context.AddShoppingCarts.Where(x => x.BuyerId == buyerid && x.CommodityId == commodityid).FirstOrDefault();
             if (cart == null)
             {
-                cart = new AddShoppingCart { BuyerId = buyerid, CommodityId = commodityid, Quantity = 1, DateCreated = DateTime.Now };
+                cart = new AddShoppingCart { BuyerId = buyerid, CommodityId = commodityid, Quantity = number, DateCreated = DateTime.Now };
                 _context.AddShoppingCarts.Add(cart);
             }
 
             else
             {
-                cart.Quantity++;
+                cart.Quantity+= number;
                 _context.AddShoppingCarts.Update(cart);
             }
 
@@ -73,7 +73,7 @@ namespace InternetMall.Services
                 return false;
         }
 
-        // 查看购物车
+        // 渲染购物车里的商品
         public List<CartView> GetCartProduct(string buyerid)
         {
             List<CartView> shopCarts = new List<CartView>();    //  购物车信息显示类 列表        
@@ -88,13 +88,16 @@ namespace InternetMall.Services
 
                 CartView cartview = new CartView
                 {
+                    errorCode = 0,
                     BuyerId = cart.BuyerId,
-                    CommodityId = cart.CommodityId,
+                    commodityId = cart.CommodityId,
                     CommodityName = commodity.Name,
                     DateCreated = cart.DateCreated,
                     ShopName = shop.Name,
-                    Quantity = cart.Quantity,
-                    Price = commodity.Price
+                    shopId = shop.ShopId,
+                    imgUrl = commodity.Url,
+                    amount = cart.Quantity,
+                    Price = commodity.Price * cart.Quantity
                 };
 
                 shopCarts.Add(cartview);

@@ -45,20 +45,20 @@
                                     :key="index"
                                     :offset="index%5!==0 ? 1 : 0">
                                 <el-card :body-style="{ padding: '0px' }" style="margin-bottom:20px;" shadow="hover">
-                                    <img :src="item.img"
+                                    <img :src="item.CommodityImg"
                                          class="image" />
                                     <div style="padding: 8px">
-                                        <span>{{item.name}}</span><br />
+                                        <span>{{item.CommodityName}}</span><br />
                                         <el-rate v-model="rate"
                                                  disabled
                                                  show-score
                                                  text-color="#ff9900"
                                                  score-template="{value}">
                                         </el-rate>
-                                        <span><strong>¥{{item.price}}</strong></span><br />
+                                        <span><strong>¥{{item.Price}}</strong></span><br />
                                         <div class="bottom clearfix">
-                                            <time class="time">关注时间：{{ item.date }}</time><br />
-                                            <el-button type="text"  style="padding: 4px;float:right;" @@click="jumpto(item.details)">查看详情</el-button>
+                                            <time class="time">关注时间：{{ item.DateCreated }}</time><br />
+                                            <el-button type="text"  style="padding: 4px;float:right;" @@click="commodityDetial(item.CommodityId)">查看详情</el-button>
                                         </div>
                                     </div>
                                 </el-card>

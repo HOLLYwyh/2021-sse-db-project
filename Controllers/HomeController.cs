@@ -7,12 +7,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using InternetMall.DBContext;
-using Internetmall.Services;
 using Internetmall.Models.BusinessEntity;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Hosting;
 using ThirdParty.Json.LitJson;
 using InternetMall.Models;
+using InternetMall.Services;
 
 namespace InternetMall.Controllers
 {
@@ -20,6 +20,7 @@ namespace InternetMall.Controllers
     {
         private readonly ModelContext _context;   //数据库上下文
         private HomeService homeService;             //后端service
+        private BuyerService buyerService;
         [Obsolete]
         private readonly IHostingEnvironment _hostingEnvironment;
 
@@ -28,6 +29,7 @@ namespace InternetMall.Controllers
         {
             _context = context;
             homeService = new HomeService(_context);
+            buyerService = new BuyerService(_context);
             _hostingEnvironment = hostingEnvironment;
         }
 
@@ -84,6 +86,22 @@ namespace InternetMall.Controllers
             rankList = homeService.Rank(category);
             string str = JsonConvert.SerializeObject(rankList);
             return new ContentResult { Content = str, ContentType = "application/json" };
+        }
+
+        public IActionResult GetBuyerPic()    //返回买家头像
+        {
+            JsonData jsondata = new JsonData();
+            Buyer buyer = buyerService.SearchByID(Request.Cookies["buyerID"]);
+            if(buyer!=null)
+            {
+                buyer.Url+= "../.." + buyer.Url; ;
+                jsondata["url"] = buyer.Url;
+            }
+            else
+            {
+                jsondata["url"] = "FAILED";
+            }
+            return Json(jsondata.ToJson());
         }
     }
 }

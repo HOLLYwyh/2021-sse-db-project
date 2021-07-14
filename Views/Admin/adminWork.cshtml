@@ -47,52 +47,32 @@
                                                 <el-input v-model="form.name"></el-input>
                                             </el-form-item>
                                             <el-form-item label="活动种类">
-                                                <el-select v-model="form.region" placeholder="请选择活动种类">
-                                                    <el-option label="打折" value="shanghai"></el-option>
-                                                    <el-option label="满减" value="beijing"></el-option>
+                                                <el-select v-model="form.type" placeholder="请选择活动种类">
+                                                    <el-option label="全场活动" value="全场活动"></el-option>
+                                                    <el-option label="特类商品" value="特类商品"></el-option>
+                                                    <el-option label="店铺活动" value="店铺活动"></el-option>
+                                                    <el-option label="单个商品" value="单个商品"></el-option>
                                                 </el-select>
                                             </el-form-item>
                                             <el-form-item label="开始时间">
-                                                <el-col :span="11">
+                                                <el-col :span="24">
                                                     <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
                                                 </el-col>
-                                                <el-col class="line" :span="2">-</el-col>
-                                                <el-col :span="11">
-                                                    <el-time-picker placeholder="选择时间" v-model="form.time1" style="width: 100%;"></el-time-picker>
-                                                </el-col>
+                                                
                                             </el-form-item>
                                             <el-form-item label="结束时间">
-                                                <el-col :span="11">
+                                                <el-col :span="24">
                                                     <el-date-picker type="date" placeholder="选择日期" v-model="form.date2" style="width: 100%;"></el-date-picker>
                                                 </el-col>
-                                                <el-col class="line" :span="2">-</el-col>
-                                                <el-col :span="11">
-                                                    <el-time-picker placeholder="选择时间" v-model="form.time2" style="width: 100%;"></el-time-picker>
-                                                </el-col>
+                                                
                                             </el-form-item>
-                                            <el-form-item label="即时配送">
-                                                <el-switch v-model="form.delivery"></el-switch>
-                                            </el-form-item>
-                                            <el-form-item label="活动性质">
-                                                <el-checkbox-group v-model="form.type">
-                                                    <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-                                                    <el-checkbox label="地推活动" name="type"></el-checkbox>
-                                                    <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-                                                    <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-                                                </el-checkbox-group>
-                                            </el-form-item>
-                                            <el-form-item label="特殊资源">
-                                                <el-radio-group v-model="form.resource">
-                                                    <el-radio label="线上品牌商赞助"></el-radio>
-                                                    <el-radio label="线下场地免费"></el-radio>
-                                                </el-radio-group>
-                                            </el-form-item>
+                                           
                                             <el-form-item label="活动描述">
                                                 <el-input type="textarea" v-model="form.desc"></el-input>
                                             </el-form-item>
                                             <el-form-item>
                                                 <el-button type="primary" @@click="onSubmit">立即发布</el-button>
-                                                <el-button>取消</el-button>
+                                                <el-button onclick="content.output()">取消</el-button>
                                             </el-form-item>
                                         </el-form>
                                     </el-card>
@@ -104,38 +84,44 @@
                                             <el-card class="cancel">
                                                 <el-row>
                                                     <el-col :span="12">
-                                                        <el-button type="primary">查看所有活动</el-button>
+                                                        <el-button type="primary" @@click="getAll()">查看所有活动</el-button>
                                                     </el-col>
                                                     <el-col :span="6">
                                                         <el-input v-model="input" placeholder="请输入活动ID"></el-input>
                                                     </el-col>
                                                     <el-col :span="6">
-                                                        <el-button type="primary">查看指定活动</el-button>
+                                                        <el-button type="primary" @@click="getOne()">查看指定活动</el-button>
                                                     </el-col>
                                                 </el-row>
                                                 <el-table :data="tableData"
                                                           style="width: 100%">
-                                                    <el-table-column prop="id"
+                                                    <el-table-column prop="ActivityId"
                                                                      label="活动ID"
-                                                                     width="180">
+                                                                     width="100">
                                                     </el-table-column>
-                                                    <el-table-column prop="type"
+                                                    <el-table-column prop="Name"
+                                                                     label="活动名称"
+                                                                     width="100">
+                                                    </el-table-column>
+                                                    <el-table-column prop="Category"
                                                                      label="活动种类"
-                                                                     width="180">
+                                                                     width="100">
                                                     </el-table-column>
-                                                    <el-table-column prop="condition"
-                                                                     label="满"
-                                                                     width="180">
+                                                    <el-table-column prop="StartTime"
+                                                                     label="开始时间"
+                                                                     width="100">
                                                     </el-table-column>
-                                                    <el-table-column prop="minus"
-                                                                     label="减"
+                                                    <el-table-column prop="EndTime"
+                                                                     label="结束时间"
+                                                                     width="100">
+                                                    </el-table-column>
+                                                    <el-table-column prop="Description"
+                                                                     label="活动详情"
                                                                      width="180">
                                                     </el-table-column>
                                                     <el-table-column label="操作" align="center" min-width="100">
                                                         <template slot-scope="scope">
-                                                            <el-button type="text" @@click="checkDetail(scope.row.phone)">查看详情</el-button>
-                                                            <el-button type="info" @@click="modifyUser(scope.row.phone)">修改</el-button>
-                                                            <el-button type="info" @@click="deleteUser(scope.row.phone)">删除</el-button>
+                                                            <el-button type="primary" @@click="deleteRow(scope.$index,tableData)">删除</el-button>
                                                         </template>
                                                     </el-table-column>
                                                 </el-table>
@@ -148,30 +134,30 @@
                                 <el-tab-pane label="用户封禁" name="third">
                                     <el-card class="carddd">
                                         <el-col :span="6">
-                                            <el-input v-model="input" placeholder="请输入用户ID"></el-input>
+                                            <el-input v-model="input2" placeholder="请输入用户ID"></el-input>
                                         </el-col>
                                         <el-col :span="6">
-                                            <el-button type="primary">封禁指定用户</el-button>
+                                            <el-button type="primary" @@click="closeUser()">封禁指定用户</el-button>
                                         </el-col>
                                     </el-card>
                                 </el-tab-pane>
                                 <el-tab-pane label="关闭店铺" name="fourth">
                                     <el-card class="carddd">
                                         <el-col :span="6">
-                                            <el-input v-model="input" placeholder="请输入店铺ID"></el-input>
+                                            <el-input v-model="input3" placeholder="请输入店铺ID"></el-input>
                                         </el-col>
                                         <el-col :span="6">
-                                            <el-button type="primary">关闭指定店铺</el-button>
+                                            <el-button type="primary" @@click="closeShop()">关闭指定店铺</el-button>
                                         </el-col>
                                     </el-card>
                                 </el-tab-pane>
                                 <el-tab-pane label="商品下架" name="fifth">
                                     <el-card class="carddd">
                                         <el-col :span="6">
-                                            <el-input v-model="input" placeholder="请输入商品ID"></el-input>
+                                            <el-input v-model="input4" placeholder="请输入商品ID"></el-input>
                                         </el-col>
                                         <el-col :span="6">
-                                            <el-button type="primary">下架指定商品</el-button>
+                                            <el-button type="primary" @@click="closeGoods()">下架指定商品</el-button>
                                         </el-col>
                                     </el-card>
                                 </el-tab-pane>

@@ -183,17 +183,30 @@ class CartItem extends HTMLElement {
             cart.setAttribute("cartnum", num.toString());
             cart.setAttribute("cartprice", price.toFixed(2).toString());
             }
-            this.parentNode.removeChild(this);
-        });
 
-        this.$name.innerHTML = item_data.name;
+            $.ajax({
+                type: "post",
+                url: "/Purchase/DeleteCommodity",
+                async: false,
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify({ID:this.$commodityId}),
+                success: function (result) {
+                    console.log(result)
+                }
+            });
+
+            this.parentNode.removeChild(this);
+            //this.$commodityId;
+        });
+        this.$name.innerHTML = item_data.CommodityName;
         this.$amount.innerHTML = item_data.amount;
-        this.$image.setAttribute("src", item_data.img);
-        this.$perprice.innerHTML = item_data.price;
+        this.$image.setAttribute("src", item_data.imgUrl);
+        this.$perprice.innerHTML = item_data.Price;
         let price = parseFloat(this.$perprice.innerHTML.toString());
         let num = parseFloat(this.$amount.innerHTML.toString());
         this.$totprice.innerHTML = (price * num).toFixed(2).toString();
-        this.$commodityid = item_data.commodity_id;
+        this.$commodityId = item_data.commodityId;
     }
 
 }

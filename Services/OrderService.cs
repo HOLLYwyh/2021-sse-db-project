@@ -26,7 +26,30 @@ namespace InternetMall.Services
         {
             _context = context;
         }
-        public Good RenderOrderPageFromDetail(string commodityId, int amount)   //从详情页购买
+        //public Good RenderOrderPageFromDetail(string commodityId, int amount)   //从详情页购买
+        //{
+        //    if (commodityId == "")
+        //        return null;
+        //    else
+        //    {
+        //        if (_context.Commodities.Any(c => c.CommodityId == commodityId))
+        //        {
+        //            Commodity newCommodity = _context.Commodities.Include(c => c.Shop).FirstOrDefault(c => c.CommodityId == commodityId);
+        //            Good newGood = new Good();
+        //            newGood.img = newCommodity.Url;
+        //            newGood.intro = newCommodity.Name;
+        //            newGood.shop = newCommodity.Shop.Name;
+        //            newGood.ID = newCommodity.CommodityId;
+        //            newGood.price = newCommodity.Price * amount;
+        //            newGood.description = newCommodity.Description;
+        //            newGood.Soldnum = newCommodity.Soldnum;
+        //            return newGood;
+        //        }
+        //        else return null;
+        //    }
+        //}
+
+        public Good RenderOrderPageFromDetail(string commodityId, int amount)
         {
             if (commodityId == "")
                 return null;
@@ -34,15 +57,16 @@ namespace InternetMall.Services
             {
                 if (_context.Commodities.Any(c => c.CommodityId == commodityId))
                 {
-                    Commodity newCommodity = _context.Commodities.Include(c => c.Shop).FirstOrDefault(c => c.CommodityId == commodityId);
+                    var query = from commodity in _context.Set<Commodity>().Where(c => c.CommodityId == commodityId) join shop in _context.Set<Shop>() on commodity.ShopId equals shop.ShopId select new { commodity, shop };
+                    var newCommodity = query.ToList();
                     Good newGood = new Good();
-                    newGood.img = newCommodity.Url;
-                    newGood.intro = newCommodity.Name;
-                    newGood.shop = newCommodity.Shop.Name;
-                    newGood.ID = newCommodity.CommodityId;
-                    newGood.price = newCommodity.Price * amount;
-                    newGood.description = newCommodity.Description;
-                    newGood.Soldnum = newCommodity.Soldnum;
+                    newGood.img = newCommodity[0].commodity.Url;
+                    newGood.intro = newCommodity[0].commodity.Name;
+                    newGood.shop = newCommodity[0].shop.Name;
+                    newGood.ID = newCommodity[0].commodity.CommodityId;
+                    newGood.price = newCommodity[0].commodity.Price * amount;
+                    newGood.description = newCommodity[0].commodity.Description;
+                    newGood.Soldnum = newCommodity[0].commodity.Soldnum;
                     return newGood;
                 }
                 else return null;

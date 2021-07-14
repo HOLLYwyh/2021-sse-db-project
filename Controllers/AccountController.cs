@@ -13,6 +13,7 @@ using ThirdParty.Json.LitJson;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using InternetMall.Models.BusinessEntity;
 
 namespace InternetMall.Controllers
 {
@@ -241,5 +242,147 @@ namespace InternetMall.Controllers
                 return Json(jsondata.ToJson());
             }
         }
+
+        /**************************** 买家收藏夹服务 ***********************************/
+        [HttpPost]
+        public IActionResult DisplayFavorites([FromBody] BuyerModel buyerModel)   // 查看关注商品
+        {
+            List<FavoriteProductView> favorites = new List<FavoriteProductView>();
+            favorites = favoriteProductService.getFavoriteProduct(buyerModel.BuyerId);
+
+            foreach (var favorite in favorites)
+            {
+                favorite.CommodityImg = "../.." + favorite.CommodityImg;
+            }
+
+            string str = JsonConvert.SerializeObject(favorites);
+            return new ContentResult { Content = str, ContentType = "application/json" };
+        }
+
+        [HttpPost]
+        public IActionResult AddFavoriteProduct([FromBody] AddOrDeleteFavorites addFavorite)  // 关注商品
+        {
+            if (favoriteProductService.addToFavorite(addFavorite.buyerid, addFavorite.commodityid))
+            {
+                JsonData jsondata = new JsonData();
+                jsondata["addFavorite"] = "SUCCESS";
+                return Json(jsondata.ToJson());
+            }
+            else
+            {
+                JsonData jsondata = new JsonData();
+                jsondata["addFavorite"] = "ERROR";
+                return Json(jsondata.ToJson());
+            }
+        }
+
+        [HttpPost]
+        public IActionResult CancelFavoriteProduct([FromBody] AddOrDeleteFavorites addFavorite)  // 取消关注商品
+        {
+            if (favoriteProductService.removeFromFavorite(addFavorite.buyerid, addFavorite.commodityid))
+            {
+                JsonData jsondata = new JsonData();
+                jsondata["deleteFavorite"] = "SUCCESS";
+                return Json(jsondata.ToJson());
+            }
+            else
+            {
+                JsonData jsondata = new JsonData();
+                jsondata["deleteFavorite"] = "ERROR";
+                return Json(jsondata.ToJson());
+            }
+        }
+
+        [HttpPost]
+        public IActionResult CancelAllFavoriteProduct([FromBody] DeleteAllFavorites deleteAllFavorite)  // 清楚所有关注商品
+        {
+            if (favoriteProductService.removeAllFavorite(deleteAllFavorite.buyerid))
+            {
+                JsonData jsondata = new JsonData();
+                jsondata["deleteAllFavorite"] = "SUCCESS";
+                return Json(jsondata.ToJson());
+            }
+            else
+            {
+                JsonData jsondata = new JsonData();
+                jsondata["deleteAllFavorite"] = "ERROR";
+                return Json(jsondata.ToJson());
+            }
+        }
+
+
+        /******************************* 买家关注店铺服务 ***************************/
+        [HttpPost]
+        public IActionResult DisplayFollowShops([FromBody] BuyerModel buyerModel)   // 查看关注店铺信息
+        {
+            List<FollowShopView> followShopViews = new List<FollowShopView>();
+            followShopViews = followShopService.getFollowShops(buyerModel.BuyerId);
+
+            foreach (var followShop in followShopViews)
+            {
+                followShop.Url = "../.." + followShop.Url;
+
+                foreach (var commodity in followShop.commodityView)
+                {
+                    commodity.Url = "../.." + commodity.Url;
+                }
+            }
+
+            string str = JsonConvert.SerializeObject(followShopViews);
+            return new ContentResult { Content = str, ContentType = "application/json" };
+        }
+
+        [HttpPost]
+        public IActionResult AddFollowShop([FromBody] AddOrDeleteFollowShop add)  // 关注店铺
+        {
+            if (followShopService.addToFollowShop(add.buyerid, add.shopid))
+            {
+                JsonData jsondata = new JsonData();
+                jsondata["addFollowShop"] = "SUCCESS";
+                return Json(jsondata.ToJson());
+            }
+            else
+            {
+                JsonData jsondata = new JsonData();
+                jsondata["addFollowShop"] = "ERROR";
+                return Json(jsondata.ToJson());
+            }
+        }
+
+        [HttpPost]
+        public IActionResult CancelFollowShop([FromBody] AddOrDeleteFollowShop deleteFollowShop)  // 取消关注店铺
+        {
+            if (followShopService.removeFollowShop(deleteFollowShop.buyerid, deleteFollowShop.shopid))
+            {
+                JsonData jsondata = new JsonData();
+                jsondata["deleteFollowShop"] = "SUCCESS";
+                return Json(jsondata.ToJson());
+            }
+            else
+            {
+                JsonData jsondata = new JsonData();
+                jsondata["deleteFollowShop"] = "ERROR";
+                return Json(jsondata.ToJson());
+            }
+        }
+
+        [HttpPost]
+        public IActionResult CancelAllFollowShop([FromBody] DeleteAllFollowShops deleteAllFollowShops)  // 清除所有关注店铺
+        {
+            if (followShopService.removeAllFollowShop(deleteAllFollowShops.buyerid))
+            {
+                JsonData jsondata = new JsonData();
+                jsondata["deleteAllFollowShops"] = "SUCCESS";
+                return Json(jsondata.ToJson());
+            }
+            else
+            {
+                JsonData jsondata = new JsonData();
+                jsondata["deleteAllFollowShops"] = "ERROR";
+                return Json(jsondata.ToJson());
+            }
+        }
+
+
     }
 }
