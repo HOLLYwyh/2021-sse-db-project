@@ -79,7 +79,18 @@ let content = new Vue({
     },
     methods: {
         aClick(index) {
-            return this.object[index].ID;
+            $.ajax({
+                type: "post",
+                url: "",
+                async: false,
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify({ "ID": this.object[index].ID }), //请求类型
+                success: function (result) {
+                    console.log(result);
+                    window.location.href = "/Commodity/details";
+                }
+            });
         },
         refresh() {
             console.log("which是");
