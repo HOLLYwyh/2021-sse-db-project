@@ -1,27 +1,11 @@
-Vue.component('radio', {
-    template: `
-
-    <el-radio-group v-model="gender">
-        <el-radio :label="1">男</el-radio>
-        <el-radio :label="2">女</el-radio>
-        <el-radio :label="0">保密</el-radio>
-    </el-radio-group>
-`,
-
-    data() {
-        return {
-            gender: 0
-        };
-    },
-})
 Vue.component('index', {
     template: `
   <el-container direction="vertical">
     <h3>订单中心</h3>
-    <el-link :underline="false" href="/Account/orders">历史订单</el-link>  
+    <el-link :underline="false" href="https://">历史订单</el-link>  
 
     <h3>我的钱包</h3>
-    <el-link :underline="false" href="https://">购物车</el-link>  
+    <el-link :underline="false" href="/Purchase/shoppingCart">购物车</el-link>  
     <el-link :underline="false" href="https://">优惠券</el-link>  
 
     <h3>我的关注</h3>
@@ -52,7 +36,7 @@ Vue.component('promptbox', {
         <span>确定要提交并保存个人信息嘛~</span>
         <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="updateInformation()">确 定</el-button>
     </span >
     </el-dialog >
     </div>
@@ -70,40 +54,41 @@ Vue.component('promptbox', {
                 })
                 .catch((_) => { });
         },
+        updateInformation() {
+            this.dialogVisible = false;
+            updateInfo(app.id);
+        }
     },
-})
-Vue.component('birthday', {
-    template: `
-    <el-date-picker v-model="birthday" type="date" placeholder="选择日期">
-    </el-date-picker>
-`,
-    data() {
-        return {
-            pickerOptions: {
-                disabledDate(time) {
-                    return time.getTime() > Date.now();
-                },
-            },
-            birthday: "",
-        };
-    },
-    methods: {}
 })
 
 
-new Vue({
+let app = new Vue({
     el: '#app',
     data() {
         return {
             avatar: "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
             ID: "123456789",
+            id: "",
             nickname: "HollyWYH",
             imageUrl: "",
+            upFile: "", //上传的图片
+            gender: 0,
+            pickerOptions: {
+                disabledDate(time) {
+                    return time.getTime() > Date.now();
+                },
+            },
+            birthday: null,
+            setbirth: null,
         };
     },
     methods: {
         handleAvatarSuccess(res, file) {
             this.imageUrl = URL.createObjectURL(file.raw);
+            this.upFile = file.raw;
+            console.log(file.raw);
+            //console.log(typeof (this.imageUrl));
+            //console.log(this.imageUrl);
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === "image/jpeg";
@@ -117,8 +102,86 @@ new Vue({
             }
             return isJPG && isLt2M;
         },
+        getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+
+    },
+    created() {
+        this.id = this.getCookie("buyerID")
     }
 
-})
 
+})
+function display(id) {
+    //console.log(id);
+    $.ajax({
+        type: "post",
+        url: "/Account/DisplayBuyerInfo",
+        async: false,
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ BuyerId: id }),
+        success: function (result) {
+            var object = eval('(' + result + ')');//string类型转换成Json对象方法
+            app.ID = object["buyerPhone"];
+            app.nickname = object["buyerNickname"];
+            app.gender = object["buyerGender"];
+            app.birthday = object["buyerBirth"];
+            app.imageUrl = object["buyerUrl"];
+            app.setbirth = object["buyerBirth"];
+        }
+    });
+}
+function updateInfo(id) {
+    console.log(id);
+    var d = app.birthday;
+    var standardDate;
+    standardDate = (d !== app.setbirth ? d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() : d);
+    //if (d !== app.setbirth) {
+    //    console.log('从网页直接获取原数据：' + app.birthday);
+    //    standardDate = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+    //    console.log('试图转化：' + standardDate);
+    //}
+    //else {
+    //    standardDate = d;
+    //}
+    console.log("standardDate:" + standardDate);
+
+    var formData = new FormData();
+    formData.append("UpdatedNickname", $("#updatedNickname").val());
+    formData.append("UpdatedGender", app.gender);
+    formData.append("UpdatedBirth", standardDate);
+    formData.append("UpdatedUrl", app.upFile);
+    formData.append("BuyerId", id);
+
+    console.log($("#updatedNickname").val());
+    console.log(app.gender);
+    console.log(standardDate);
+    console.log(app.upFile);
+    console.log(id);
+
+
+    $.ajax({
+        type: "post",
+        url: "/Account/UpdateInfoById",
+        async: false,
+        cache: false, //不必须不从缓存中读取
+        processData: false,//必须处理数据，上传文件的时候，则不需要把其转换为字符串，因此要改成false
+        contentType: false,//必须发送数据的格式    
+        data: formData,
+        success: function (result) {
+
+            console.log(result);
+        }
+    });
+}
+
+window.onload = display(app.id);
 

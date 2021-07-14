@@ -312,13 +312,13 @@ customElements.define("cart-sum", CartSum);
 window.onload = function () {
     var dataArr;
     $.ajax({
-        url: "/Home/RecmdZoneCommodities",//json文件位置
+        url: "/Purchase/GetCartDetail",//json文件位置
 
-        type: "post",
+        type: "get",
 
         contentType: "application/json",
         dataType: "json", //返回数据格式为json
-        data: JSON.stringify({ "type": "1" }),
+        //data: JSON.stringify({ "type": "1" }),
         success: function (data) {//请求成功完成后要执行的方法
             console.log("cart json get");
             dataArr = data;
