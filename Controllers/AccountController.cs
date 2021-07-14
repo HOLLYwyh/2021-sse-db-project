@@ -129,7 +129,7 @@ namespace InternetMall.Controllers
 
         [HttpPost]
         [Obsolete]
-        public IActionResult UpdateInfoById()
+        public Buyer UpdateInfoById()
         {
             var date = Request;
             var files = Request.Form.Files;   //上传的图片
@@ -145,7 +145,7 @@ namespace InternetMall.Controllers
             nowBuyer.Nickname = data["UpdatedNickname"];
             nowBuyer.Gender = int.Parse(data["UpdatedGender"]);
             nowBuyer.DateBirth = DateTime.Parse(data["UpdatedBirth"]);
-
+            //如果上传图片将执行此步骤，否则跳过
             foreach (var formFile in files)
             {
                 if (formFile.Length > 0)   //上传图片成功
@@ -162,18 +162,18 @@ namespace InternetMall.Controllers
                     string newFileName = System.Guid.NewGuid().ToString(); //随机生成新的文件名
                     var filePath = folderPath + "/" + newFileName + exetent; //newFileName;
                     var url = "/uploads/account/1/" + newFileName + exetent;    //存入数据库中实际的内容
-
+               
                     nowBuyer.Url = url;
-                    service2.EditBuyer(beforeBuyer, nowBuyer);
-
+                    
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         formFile.CopyTo(stream);
                     }
-
                 }
             }
-            return Ok(new { count = files.Count, size });
+            service2.EditBuyer(beforeBuyer, nowBuyer);
+
+            return nowBuyer;
         }
         
         /**************************** 买家收货地址 **********************/

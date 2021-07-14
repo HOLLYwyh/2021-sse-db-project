@@ -78,8 +78,8 @@ let app = new Vue({
                     return time.getTime() > Date.now();
                 },
             },
-            birthday: "",
-
+            birthday: null,
+            setbirth:null,
         };
     },
     methods: {
@@ -135,19 +135,38 @@ function display(id) {
             app.gender = object["buyerGender"];
             app.birthday = object["buyerBirth"];
             app.imageUrl = object["buyerUrl"];
-
+            app.setbirth = object["buyerBirth"];
         }
     });
 }
 function updateInfo(id) {
     console.log(id);
+    var d = app.birthday;
+    var standardDate;
+    standardDate = (d !== app.setbirth ? d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() : d);
+    //if (d !== app.setbirth) {
+    //    console.log('从网页直接获取原数据：' + app.birthday);
+    //    standardDate = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+    //    console.log('试图转化：' + standardDate);
+    //}
+    //else {
+    //    standardDate = d;
+    //}
+    console.log("standardDate:" + standardDate);
 
     var formData = new FormData();
     formData.append("UpdatedNickname", $("#updatedNickname").val());
     formData.append("UpdatedGender", app.gender);
-    formData.append("UpdatedBirth", app.birthday);
+    formData.append("UpdatedBirth", standardDate);
     formData.append("UpdatedUrl", app.upFile);
     formData.append("BuyerId", id);
+
+    console.log($("#updatedNickname").val());
+    console.log(app.gender);
+    console.log(standardDate);
+    console.log(app.upFile);
+    console.log(id);
+    
 
     $.ajax({
         type: "post",
@@ -158,6 +177,7 @@ function updateInfo(id) {
         contentType: false,//必须发送数据的格式    
         data: formData,
         success: function (result) {
+
             console.log(result);
         }
     });
