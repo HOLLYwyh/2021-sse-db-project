@@ -23,7 +23,7 @@ Vue.component('searchbar', {
             </div>
         </div>
         <div id="shopping-cart"class="shopping-cart">
-            <el-button type="danger">我的购物车</el-button>
+            <el-button type="danger" @click="turnToCart">我的购物车</el-button>
         </div>
     </div>
     `,
@@ -52,6 +52,9 @@ Vue.component('searchbar', {
                     }
                 }
             });
+        },
+        turnToCart() {
+            window.location = "/Purchase/ShoppingCart"
         }
     },
     created() {

@@ -72,6 +72,7 @@ namespace InternetMall.Controllers
             jsondata["shopType"] = name.Type;
             return Json(jsondata.ToJson());
         }
+        
         public IActionResult GetSearchName()
         {
             JsonData jsondata = new JsonData();

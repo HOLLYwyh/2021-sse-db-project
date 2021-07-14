@@ -197,13 +197,16 @@ namespace InternetMall.Controllers
             }
         }
 
-        public IActionResult Payment()
+        public IActionResult SubmitOrder()   //支付宝付款页面
         {
-            return View();
-        }
-        public IActionResult SubmitOrder()
-        {
-            return View();
+            if (Request.Cookies["buyerNickName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Entry/BuyerLogIn");
+            }
         }
 
 
