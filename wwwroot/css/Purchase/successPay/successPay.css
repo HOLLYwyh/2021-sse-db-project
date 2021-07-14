@@ -1,0 +1,111 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{height: 100%;width: 100%;}
+.box_h{
+    width:100%;
+    border-bottom: 1px solid #000;
+}
+.box_h img{
+    float:left;
+    margin-left: 168px;
+	margin-top: 5px;
+	width:50px;
+	height:50px;
+}
+.l1 a{
+    margin-top: 15px;
+    float:left;
+    font-size: 30px;
+	font-family: FZYiKJW;
+	color:red;
+	text-decoration: none;
+}
+.l2{
+    margin-right: 200px;
+    margin-top: 15px;
+    font-size: 20px;
+    float:right;
+    text-decoration: none;
+}
+.box_h::after{
+    content: "";
+    clear:both;
+    display: block;
+}
+/* 主界面 */
+.main{
+    background-color: #EFEFEF;
+    width:100%;
+    height: 100%;
+    overflow: hidden;
+}
+.main1{
+    width:1080px;
+    margin:30px auto;
+}
+.main1-1{
+    background-color:#F5FEF3;
+    width: 100%;
+    height:110px;
+    overflow: hidden;
+}
+.main1-2{
+    background-color: #fff;
+    width: 100%;
+    height: 550px;
+    overflow: hidden;
+}
+#first{
+    font-size: 20px;
+    display: block;
+    line-height: 110px;
+    margin-left: 50px;
+}
+.main1-2 li{
+    list-style: none;
+    font-size: 15px;
+    margin-left: 50px;
+    margin-bottom: 15px;
+}
+.main1-2 ul:first-child{
+    margin-top: 60px;
+}
+.sec{
+    margin-top: 50px;
+    margin-left: 50px;
+    font-size: 15px;
+    color: #888888;
+}
+.thd{
+    margin-left: 50px;
+    margin-top: 20px;
+    font-size: 15px;
+    color: #888888;
+}
+.but{
+    margin-top: 50px;
+    margin-left: 50px;
+    width: 130px;
+    height: 50px;
+    background-color: #4580CB;
+    border: hidden;
+    color: #fff;
+}
+.but:hover{
+    background-color: #2B9FFA;
+}
+.main2{
+    margin:0 auto;
+}
+.f{
+    font-size: 15px;
+    color: #888888;
+    text-align: center;
+}
+.s{
+    font-size: 15px;
+    color: #888888;
+    text-align: center;
+}

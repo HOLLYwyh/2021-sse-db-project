@@ -261,6 +261,7 @@ namespace InternetMall.Services
             var shoplist = _context.Shops.Where(s => s.SellerId == sellerID).ToList();
 
             if (shoplist == null || shoplist.Count == 0)//没有店铺
+            
             {
                 return null;
             }
