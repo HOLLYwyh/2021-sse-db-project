@@ -204,6 +204,7 @@ namespace InternetMall.Controllers
         {
             Global.GCommodityID = commodity.ID;
             Global.GCommodityNum = commodity.Amount;
+            Global.GConfirmOrderType = 1;
             JsonData jsondata = new JsonData();
             jsondata["commodityID"] = commodity.ID;
             return Json(jsondata.ToJson());

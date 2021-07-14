@@ -12,5 +12,6 @@ namespace InternetMall
         public static string GShopType = "0";       //店铺种类
         public static string GCommodityID = "1";    //商品ID
         public static int   GCommodityNum = 1;      //商品详情页面购买数量       
+        public static int GConfirmOrderType = 1;    //购买类别  1-从商品详情页购买，2-从购物车购买
     }
 }
