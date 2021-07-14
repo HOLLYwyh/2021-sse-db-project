@@ -186,7 +186,9 @@ namespace InternetMall.Controllers
                 //设置cookie
                 HttpContext.Response.Cookies.Append("adminNickName", adminstrator.Nickname, new CookieOptions { Expires = DateTime.Now.AddSeconds(3600) });
                 HttpContext.Response.Cookies.Append("adminID", adminstrator.AdministratorId, new CookieOptions { Expires = DateTime.Now.AddSeconds(3600) });
-                return Redirect("/Home/Index");
+                JsonData jsondata = new JsonData();
+                jsondata["LogIn"] = "SUCCESS";
+                return Json(jsondata.ToJson());
             }
             else
             {

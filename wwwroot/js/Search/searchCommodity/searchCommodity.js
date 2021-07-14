@@ -32,7 +32,7 @@ var commodity = new Vue({
                 async: false,
                 data: JSON.stringify({ ID:  id}),
                 success: function (data) {//请求成功完成后要执行的方法
-                    console.log(data);
+                    window.location = "/Commodity/Details"
                 }
             })
         }
@@ -41,7 +41,7 @@ var commodity = new Vue({
 
 
 //搜索分类菜单
-new Vue({
+var searchCategory = new Vue({
     el: "#search-category",
     data: {
         activeIndex: '1'
@@ -67,6 +67,21 @@ function getCommodities() {    //渲染商品
             commodity.goods = data
             console.log(data);
             console.log(commodity.goods);
+        }
+    })
+}
+
+function getCommodityType() {  //获取种类
+    $.ajax({
+        url: "/Search/GetCommodityType",
+        type: "get",
+        dataType: "json", //返回数据格式为json
+        async: false,
+        success: function (result) {//请求成功完成后要执行的方法
+            console.log(result)
+            var jsonData = eval("(" + result + ")");   //将json转换成对象
+            searchCategory.activeIndex = jsonData.type;
+            console.log(jsonData.type);
         }
     })
 }
@@ -135,23 +150,7 @@ function setCommodByAmount() {   //销量排序
 
 function start() {
     getCommodities()
+    getCommodityType()
 }
 
 window.onload = start()
-
-//function commodityDetial(index) {                 //进入上象棋
-//    //还没有写完'
-//    console.log(index);
-//    /*$.ajax({
-//        url: "/Commodity/SetCommodityID",
-//        type: "post",
-//        dataType: "json", //返回数据格式为json
-//        contentType: "application/json; charset=utf-8",
-//        async: false,
-//        data: JSON.stringify({ ID:  commodity.goods[index].ID}),
-//        success: function (data) {//请求成功完成后要执行的方法
-//            console.log(data);
-//            console.log()
-//        }
-//    })*/
-//}
