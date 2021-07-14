@@ -41,7 +41,7 @@ namespace InternetMall.Services
         }
 
         // 修改用户绑定的手机号码
-        public async Task<bool> updatePhone(string buyerid, string oldPhone, string newPhone)
+        public bool updatePhone(string buyerid, string oldPhone, string newPhone)
         {
             Buyer buyer = _ctx.Buyers.FirstOrDefault(x => x.BuyerId == buyerid);   
 
@@ -56,7 +56,7 @@ namespace InternetMall.Services
                 {
                     buyer.Phone = newPhone;
                     _ctx.Buyers.Update(buyer);
-                    await _ctx.SaveChangesAsync();
+                    _ctx.SaveChanges();
                     return true;
                 }
                 else
@@ -65,7 +65,7 @@ namespace InternetMall.Services
         }
 
         // 修改用户密码
-        public async Task<bool> updatePasswd(string buyerid, string oldPasswd, string newPasswd)
+        public bool updatePasswd(string buyerid, string oldPasswd, string newPasswd)
         {
             Buyer buyer = _ctx.Buyers.FirstOrDefault(x => x.BuyerId == buyerid);
 
@@ -79,7 +79,7 @@ namespace InternetMall.Services
                 if (buyer.Passwd == oldPasswd)  // 比对密码
                 {
                     buyer.Passwd = newPasswd;
-                    await _ctx.SaveChangesAsync();
+                    _ctx.SaveChanges();
                     return true;
                 }
                 else

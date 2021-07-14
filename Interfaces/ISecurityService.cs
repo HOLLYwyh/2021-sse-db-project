@@ -14,9 +14,9 @@ namespace InternetMall.Interfaces
         public string displayPasswd(string buyerid);
 
         // 修改用户绑定的手机号码
-        public Task<bool> updatePhone(string buyerid, string oldPhone, string newPhone);
+        public bool updatePhone(string buyerid, string oldPhone, string newPhone);
 
         // 修改用户密码
-        public Task<bool> updatePasswd(string buyerid, string oldPasswd, string newPasswd);
+        public bool updatePasswd(string buyerid, string oldPasswd, string newPasswd);
     }
 }
