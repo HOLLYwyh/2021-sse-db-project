@@ -363,6 +363,7 @@ function setGoods(type) {
             dataType: "json", //返回数据格式为json
             data: JSON.stringify({ "type": "4" }),
             success: function (data) {//请求成功完成后要执行的方法
+
                 console.log(data)
                 console.log("12")
                 part4.goods = data

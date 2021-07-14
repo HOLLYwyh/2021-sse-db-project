@@ -9,5 +9,6 @@ namespace Internetmall.Interfaces
     interface ICommodityDetailsService
     {
         public CommodityDetailsView DisplayCommodityDetails(string CommodityId);
+        public List<Good> recommendCommodity(string CommodityId);
     }
 }
