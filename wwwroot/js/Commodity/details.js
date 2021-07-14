@@ -1,4 +1,8 @@
 let shortcut1 = new Vue({ el: '#shortcut' });
+//右边栏
+new Vue({
+    el: "#naviRight"
+})
 
 function selectGoods(id) {
     console.log(id)
