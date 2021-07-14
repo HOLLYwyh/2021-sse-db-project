@@ -12,7 +12,7 @@ namespace InternetMall.Interfaces
     public interface IFavoriteProductService
     {
         //添加收藏夹
-        public void addToFavorite(string buyerid, string commodityid);
+        public bool addToFavorite(string buyerid, string commodityid);
        
         // 从收藏夹中删除
         public Task removeFromFavorite(string buyerid, string commodityid);

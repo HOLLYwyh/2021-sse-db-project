@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Internetmall.Services
+namespace InternetMall.Services
 {
     public class HomeService : IHomeService
     {
@@ -51,7 +51,7 @@ namespace Internetmall.Services
                         judge1[commodityCotegory]++;//对于订单中遍历到的的商品种类，其权重加1
                     }
                 }
-                List<AddShoppingCart> shoppingCartList =  _context.AddShoppingCarts.Where(a => a.BuyerId == buyerId).ToList();
+                List<AddShoppingCart> shoppingCartList =  _context.AddShoppingCarts.Where(a => a.BuyerId == buyerId).Include(a => a.Commodity).Include(a => a.Buyer).ToList();
                 foreach (AddShoppingCart newShoppingCart in shoppingCartList)//遍历该用户购物车中的所有商品
                 {
                     int commodityCotegory = (int)newShoppingCart.Commodity.Category;//对于订单中遍历到的的商品种类，其权重加2
