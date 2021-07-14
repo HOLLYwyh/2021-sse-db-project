@@ -1,7 +1,7 @@
 .cart_outerbox {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 60px;
     right: 0;
     bottom: 0;
     width: 88vw;
