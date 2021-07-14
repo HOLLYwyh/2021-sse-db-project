@@ -26,29 +26,22 @@ namespace InternetMall.Services
         {
             _context = context;
         }
-        //public Good RenderOrderPageFromDetail(string commodityId, int amount)   //从详情页购买
-        //{
-        //    if (commodityId == "")
-        //        return null;
-        //    else
-        //    {
-        //        if (_context.Commodities.Any(c => c.CommodityId == commodityId))
-        //        {
-        //            Commodity newCommodity = _context.Commodities.Include(c => c.Shop).FirstOrDefault(c => c.CommodityId == commodityId);
-        //            Good newGood = new Good();
-        //            newGood.img = newCommodity.Url;
-        //            newGood.intro = newCommodity.Name;
-        //            newGood.shop = newCommodity.Shop.Name;
-        //            newGood.ID = newCommodity.CommodityId;
-        //            newGood.price = newCommodity.Price * amount;
-        //            newGood.description = newCommodity.Description;
-        //            newGood.Soldnum = newCommodity.Soldnum;
-        //            return newGood;
-        //        }
-        //        else return null;
-        //    }
-        //}
 
+        public List<ReceiveInformation>GetReceiveInformation(string buyerId)
+        {
+            if (buyerId == "")
+                return null;
+            else
+            {
+                if (_context.ReceiveInformations.Any(r => r.BuyerId == buyerId))
+                {
+                    List<ReceiveInformation> returnList = _context.ReceiveInformations.Where(r => r.BuyerId == buyerId).ToList();
+                    return returnList;
+                }
+                else return null;
+            }
+        }
+        //从商品详情页跳转到订单页面的渲染
         public Good RenderOrderPageFromDetail(string commodityId, int amount)
         {
             if (commodityId == "")
@@ -80,7 +73,7 @@ namespace InternetMall.Services
         }
 
         // 创建订单
-        public bool createOrder(string buyerid, string commodityid, string receivedId, int amount)
+        public bool CreateOrderFromDetail(string buyerid, string commodityid, string receivedId, int amount)
         {
             // OrderId生成
             CreateIdCount orderCount = new CreateIdCount(_context);
@@ -104,7 +97,6 @@ namespace InternetMall.Services
                 ReceivedId = receivedId,
                 Orderamount = amount
             };
-
             _context.Orders.Add(order);
 
             if (_context.SaveChanges() > 0)

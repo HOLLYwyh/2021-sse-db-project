@@ -13,9 +13,12 @@ namespace InternetMall.Interfaces
     /// </summary>
     public interface IOrderService
     {
+        public List<ReceiveInformation> GetReceiveInformation(string buyerId);
         public Good RenderOrderPageFromDetail(string commodityId, int amount);
-        // 创建订单
-        public bool createOrder(string buyerid, string commodityid, string receivedId,int amount);
+        // 从商品详情页创建订单
+        public bool CreateOrderFromDetail(string buyerid, string commodityid, string receivedId,int amount);
+        // 从购物车创建订单
+        //public bool CreateOrderFromChart()
         // 更新订单状态
         public bool updateOrderStatus(string orderid, int newStatus);
         // 更新订单中商品的状态

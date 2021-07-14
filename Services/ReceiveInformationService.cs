@@ -1,7 +1,7 @@
 ﻿using InternetMall.DBContext;
 using InternetMall.Interfaces;
 using InternetMall.Models;
-using InternetMall.Models.ControllerModels;
+using InternetMall.Models.BusinessEntity;
 using System.Collections.Generic;
 using System.Linq;
 
