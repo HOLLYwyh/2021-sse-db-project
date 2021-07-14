@@ -1,7 +1,7 @@
 Vue.component('side-bar', {
     data: function () {
         return {
-          active: 1, 
+            active: 1,
         }
     },
     methods:{

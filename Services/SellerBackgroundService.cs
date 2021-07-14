@@ -172,7 +172,7 @@ namespace InternetMall.Services
                 }
             }
             //newOrderList.Add(new SellerBriefOrderView() { date = System.DateTime.Now, buyerName ="hjk", address="tj",
-            //    buyerPhone="12345678910",orderID="2",condition="待发货",tag="TO_BE_SHIP",show=true}); ;
+            //    buyerPhone="12345678910",orderID="2",condition="待发货",tag="TO_BE_SHIP",show=true});
             return JsonConvert.SerializeObject(newOrderList);
 
         }

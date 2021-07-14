@@ -1,4 +1,6 @@
-let sh =new Vue({
+
+
+let sh = new Vue({
     el: "#shop",
     data:
     {
@@ -29,8 +31,14 @@ function displayshops(sellerID) {
         data: JSON.stringify({ "SellerID": sellerID }),
         success: function (result) {
             console.log(result);
-            sh.objectList = result;
-            sh.draw = true;
+            if (result === null) {
+                window.location.href = "/SellerBackground/shopSignUp";
+            }
+            else {
+                sh.objectList = result;
+                sh.draw = true;
+                window.location.href = "/SellerBackground/shopSignUp";
+            }
         }
     });
 }
