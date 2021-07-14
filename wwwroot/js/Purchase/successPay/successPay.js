@@ -1,6 +1,7 @@
 let shortcutlg=new Vue({
     el:"#shortcutlg"
 })
+let naviright = new Vue({ el: '#naviRight' })
 let order=new Vue({
     el:'#order',
     data:{
