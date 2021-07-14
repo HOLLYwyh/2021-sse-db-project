@@ -1,3 +1,5 @@
+
+
 Vue.component('shop', {
     props:["objlist","draw"],
     data: function () {

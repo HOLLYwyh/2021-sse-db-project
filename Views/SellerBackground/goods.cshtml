@@ -33,7 +33,10 @@
                 </li>
             </ul>
             <div class="main" id="upload">
-                <upload></upload>
+                <upload
+                        v-bind:objlist="objectLise"
+                        v-bind:draw="draw"
+                ></upload>
             </div>
         </div>
     </div>

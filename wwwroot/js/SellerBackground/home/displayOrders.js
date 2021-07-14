@@ -5,9 +5,6 @@ let ord = new Vue({
         draw:false,
     }
 })
-
-
-
 function displayorders(shopID) {
     $.ajax({
         type: "post",
@@ -21,23 +18,12 @@ function displayorders(shopID) {
             //console.log(result);
             if (result==null) {
                 alert("No orders!");
-                console.log("null")
             }
             else {
                 ord.objectList = result;
                 ord.draw = true;
-                console.log("draw1");
-                console.log(ord.draw);
-                /*console.log("!!!result");
-                console.log(result);
-                console.log("ord.objectList!!!!");
-                console.log(ord.objectList)*/
-                console.log("not null");
-            }
-            //console.log(result);
         }
     });
 }
-
 
 window.onload = displayorders("1");
