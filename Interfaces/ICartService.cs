@@ -12,16 +12,16 @@ namespace InternetMall.Interfaces
     public interface ICartService
     {
         //添加购物车
-        public void addToCart(string buyerid, string commodityid);
+        public bool addToCart(string buyerid, string commodityid,int number);
 
         // 从购物车中删除
-        public Task RemoveFromCart(string buyerid, string commodityid);
+        public bool RemoveFromCart(string buyerid, string commodityid);
        
         // 清除购物车
-        public Task RemoveAllCart(string buyerid);
+        public bool RemoveAllCart(string buyerid);
         
         // 查看购物车
-        public IEnumerable<CartView> GetCartProduct(string buyerid);
+        public List<CartView> GetCartProduct(string buyerid);
        
     }
 }

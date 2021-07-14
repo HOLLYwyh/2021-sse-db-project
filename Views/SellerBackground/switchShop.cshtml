@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>英豪荟萃 - 切换店铺</title>
+    <script src="//unpkg.com/element-ui@@2.15.2/lib/index.js"></script>
+
+    <link rel="stylesheet" href="~/css/SellerBackground/switchShop/switchShop.css">
+    <link rel="stylesheet" href="~/css/SellerBackground/sidebar.css">
+    <link rel="stylesheet" href="~/css/SellerBackground/dropdownmenu.css">
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+</head>
+<body>
+    <div>
+        <div class="nav-area">
+            <el-aside id="nav" style="width:100%;">
+                <side-bar></side-bar>
+            </el-aside>
+        </div>
+        <div class="main-body">
+            <ul class="header">
+                <li class="avatar" id="avatar">
+                    <dropdown-menu v-bind:list="[{icon:'el-icon-user',text:'个人信息'},
+                                                 {icon:'el-icon-setting',text:'设置'},
+                                                 {icon:'el-icon-switch-button',text:'退出登录'}]" v-bind:tag="'avatar'">
+                    </dropdown-menu>
+                </li>
+                <li class="message-box" id="message-box">
+                    <dropdown-menu v-bind:list="[{icon:'el-icon-chat-dot-square',text:'我的消息'},
+                                                 {icon:'el-icon-message',text:'系统通知'}]" v-bind:tag="'message'">
+                    </dropdown-menu>
+                </li>
+            </ul>
+            <div class="main" id="shop-list">
+                <div id="shop">
+                    <shop></shop>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/SellerBackground/sidebar.js"></script>
+    <script src="~/js/SellerBackground/dropdownMenu.js"></script>
+    <script src="~/js/SellerBackground/switchShop/switchShop.js"></script>
+</body>
+</html>

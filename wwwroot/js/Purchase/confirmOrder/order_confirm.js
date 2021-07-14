@@ -1,65 +1,9 @@
-new Vue({el:'#shortcut'});
+//右边栏
+new Vue({
+	el: "#naviRight"
+})
+new Vue({ el: '#shortcut' });
 
-/*模拟数据*/
-var shopCartdatas = {
-	shopcartdatas:[
-		{
-			"checked":false,
-			src:"../../images/a1.png",
-			"name":"大榴莲6666",
-			"supplier":"美国",
-			"ConPlace":"中国大陆",
-			"price":100,
-			"num":1,
-			"saveandremove":true,
-			"type":"商品",
-		},
-		{
-			"checked":false,
-			src:"../../images/a1.png",
-			"name":"GZL-中控离心机净化机",
-			"supplier":"美国",
-			"ConPlace":"中国大陆",
-			"price":100,
-			"num":2,
-			"saveandremove":true,
-			"type":"商品",
-		},
-		{
-			"checked":false,
-			src:"../../images/a1.png",
-			"name":"GZL-中控离心机净化机",
-			"supplier":"美国",
-			"ConPlace":"中国大陆",
-			"price":100,
-			"num":3,
-			"saveandremove":true,
-			"type":"服务",
-		},
-		{
-			"checked":false,
-			src:"../../images/a1.png",
-			"name":"大榴莲6666",
-			"supplier":"美国",
-			"ConPlace":"中国大陆",
-			"price":100,
-			"num":4,
-			"saveandremove":true,
-			"type":"商品",
-		},
-		{
-			"checked":false,
-			src:"../../images/a1.png",
-			"name":"GZL-中控离心机净化机",
-			"supplier":"美国",
-			"ConPlace":"中国大陆",
-			"price":600,
-			"num":5,
-			"saveandremove":true,
-			"type":"服务",
-		},
-	]
-}
 var addressdatas = {
 	addressdata:[
 		{
@@ -215,14 +159,62 @@ var dialogs = [
 				{id:4,name:'手机号码'},
 				{id:5,name:'收货人'},
 
-
 ]
 var vm = new Vue({
 	el: "#myVue",
 	data: {
 		 /*数据源*/
-		dialogs:dialogs,
-		 shopTableDatas:shopCartdatas.shopcartdatas,
+		dialogs: dialogs,
+
+		
+
+		shopTableDatas: [
+			{
+				"checked": false,
+				"src": "../../images/a1.png",
+				"name": "大榴莲6666",
+				"supplier": "美国",
+				"ConPlace": "中国大陆",
+				"price": 100,
+				"num": 1,
+				"saveandremove": true,
+				"type": "商品",
+			},
+			{
+				"checked": false,
+				"src": "../../images/a1.png",
+				"name": "GZL-中控离心机净化机",
+				"supplier": "美国",
+				"ConPlace": "中国大陆",
+				"price": 100,
+				"num": 2,
+				"saveandremove": true,
+				"type": "商品",
+			},
+			{
+				"checked": false,
+				"src": "../../images/a1.png",
+				"name": "GZL-中控离心机净化机",
+				"supplier": "美国",
+				"ConPlace": "中国大陆",
+				"price": 100,
+				"num": 3,
+				"saveandremove": true,
+				"type": "服务",
+			},
+			{
+				"checked": false,
+				"src": "../../images/a1.png",
+				"name": "大榴莲6666",
+				"supplier": "美国",
+				"ConPlace": "中国大陆",
+				price: 100,
+				num: 4,
+				"saveandremove": true,
+				"type": "商品",
+			},
+			
+		],
 		 moreAddressData:addressdatas.addressdata,//地址数据
 		 paymentdatas:payment.paymentdata,//支付类型数据
 		 deliverymodedatas:deliverymode.deliverymodeData,//配送类型数据
@@ -275,7 +267,41 @@ var vm = new Vue({
 			this.initAddress();
 		})
 	},
+
+	
 	methods: {
+		submit() {
+			let that = {}
+			$.ajax({
+				url: "",
+				type: "post",
+				contentType: "application/json",
+				async: false,
+				dataType: "json", //返回数据格式为json
+				success: function (data) {
+					console.log(data)
+					
+				}
+			})
+        },
+		getGoods() {
+			let that
+			$.ajax({
+				url: "/Purchase/GetCommodDetail",
+				type: "get",
+				contentType: "application/json",
+				async: false,
+				dataType: "json", //返回数据格式为json
+				success: function (data) {
+					console.log(data)
+					that=data
+				}
+			})
+			console.log(this.totalPrice)
+			/*this.shopTableDatas=[]*/
+			
+			/*this.shopTableDatas.push(that)*/
+        },
 		/*商品数量增加减少函数*/
 		goodNum:function(item,way){
 			if(way == 1){
@@ -629,7 +655,16 @@ var vm = new Vue({
 	computed:{
 		filterAddress:function(){
 			return this.moreAddressData.slice(0,this.limitNum)
-		}
+		},
+		totalPrice:function() {
+
+			let p = 0
+			for (let i in this.shopTableDatas) {
+				p += vm.shopTableDatas[i].price * vm.shopTableDatas[i].num
+			}
+			return p
+        }
 	},
 });
 
+window.onload = vm.getGoods()

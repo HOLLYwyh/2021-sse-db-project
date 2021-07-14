@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Purchase/successPay/successPay.css">
+    <link href="~/css/Common/shortcut_five.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="~/js/Common/vue.js"></script>
+
+    <link href="~/css/Common/naviRight.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css">
+    <title>支付成功</title>
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/backToTop.cshtml")
+</head>
+<body>
+    <div id="shortcutlg">
+        <shortcut></shortcut>
+    </div>
+    <div id="naviRight">
+        <naviright>
+
+        </naviright>
+    </div>
+    <div class="main">
+        <div class="main1">
+            <div class="main1-1">
+                <div id="first">支付成功!</div>
+            </div>
+            <div class="main1-2">
+                <ul id="order">
+                    <li>商品订单：<span id="one">{{ orderNum }}</span></li>
+                    <li>支付金额：<span id="two">{{ money }}</span></li>
+                    <li>商品名称：<span id="three">{{ name }}</span></li>
+                    <li>支付订单：<span id="four">{{ pay }}</span></li>
+                    <li>支付方式：<span id="five">{{ method }}</span></li>
+                    <li>购买时间：<span id="six">{{ time }}</span></li>
+                </ul>
+                <div class="sec">若有疑问请与客服联系，我们将尽快为您提供服务。</div>
+                <div class="thd">客服电话：19821229038</div>
+                <input class="but" type="button" value="返回首页" onclick="myfunc()">
+                <script>
+                    function myfunc() {
+                        window.location.href = "/Home/Index";
+                    }
+                </script>
+            </div>
+        </div>
+        <div class="main2">
+            <div class="f">All Rights Reserved 英豪 版权所有</div>
+        </div>
+    </div>
+    <script src="~/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="~/js/Common/naviRight.js"></script>
+    <script src="~/js/Purchase/successPay/successPay.js"></script>
+</body>
+</html>

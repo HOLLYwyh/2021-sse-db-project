@@ -1,0 +1,31 @@
+.cart_outerbox {
+    position: absolute;
+    left: 0;
+    top: 60px;
+    right: 0;
+    bottom: 0;
+    width: 88vw;
+    background-color: #96969600;
+    margin: auto;
+    max-width: 1280px;
+    min-width: 1080px;
+}
+.cart_attributebox {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 52px;
+    border-bottom: 2px solid rgb(161, 161, 161);
+}
+.cart_attributebox p {
+    position: absolute;
+    font-size: 16px;
+}
+.cart_comolistbox {
+    position: relative;
+    left: 0;
+    top: 4px;
+    width: 100%;
+    background-color: rgba(255, 179, 152, 0);
+}

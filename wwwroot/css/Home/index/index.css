@@ -224,21 +224,22 @@ body {
     height: 96px;
 }
 
-.rcmd_box .introduce {
-    width: 100%;
-    font-size: 14px;
-    line-height: 20px;
-    margin: 10px 0 8px;
-    height: 40px;
-    overflow: hidden;
-    font-weight: 500;
-    text-align: left;
-    color:white;
+    .rcmd_box .introduce {
+        width: 100%;
+        font-size: 14px;
+        line-height: 20px;
+        margin: 10px 0 8px;
+        height: 96px;
+        overflow: hidden;
+        font-weight: 500;
+        text-align: left;
+        color: white;
+        position: relative;
+        top: -110px;
+        display: none;
+        background: rgba(0, 0, 0, 50%)
+    }
 
-    position:relative;
-    top:-75px;
-    display:none;
-}
 
 .rcmd_box ul li:hover .introduce {
     display: block;
@@ -253,9 +254,10 @@ body {
     height: 16px;
     color:white;
     position:relative;
-    top:-80px;
+    top:-140px;
     text-align:left;
     display:none;
+    z-index:999;
 }
 
 .rcmd_box ul li:hover .shop {
@@ -281,4 +283,9 @@ body {
     padding-top: 7px;
     line-height: 14px;
     cursor: pointer;
+    float:right;
+}
+
+.ti{
+    float:left;
 }

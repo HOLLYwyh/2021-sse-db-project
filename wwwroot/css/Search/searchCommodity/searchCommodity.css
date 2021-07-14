@@ -6,7 +6,7 @@ body {
 
 /*商品栏*/
 .commodities {
-    height:1000px;
+    height:100%;
     margin-left: 10%;
     margin-right: 10%;
     margin-top : 2%;
@@ -18,11 +18,6 @@ body {
     margin-left: 10%;
     margin-right: 10%;
     margin-top:50px;
-}
-
-/*换页部分*/
-.turn-to-page {
-    margin: 0 35%;
 }
 
 
@@ -64,4 +59,21 @@ body {
 
 .el-row {
     margin-bottom: 17px;
+}
+
+/*el-card以及其中的内容*/
+.el-card{
+    width :300px;
+    height:300px;
+}
+
+.commodityImage {
+    width: 300px;
+    height: 230px;
+}
+.intro{
+    color:cornflowerblue;
+}
+.price{
+
 }

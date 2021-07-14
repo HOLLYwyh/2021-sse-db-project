@@ -1,1 +1,72 @@
 <!--总排行榜-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>排行榜</title>
+    <link href="~/css/Ranking/chart.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/shortcut_five.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="~/js/Common/vue.js"></script>
+    <!--右边栏-->
+    <link href="/css/Common/naviRight.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css">
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/backToTop.cshtml")
+</head>
+<body>
+    <div id="shortcutlg">
+        <shortcut></shortcut>
+    </div>
+    <!--右边栏-->
+    <div id="naviRight">
+        <naviright>
+
+        </naviright>
+    </div>
+    <!-- 排行榜分类 -->
+    <div class="f2">
+        <div id="hot" v-on:click="divClick" :class="{f21:isActive,f24:checkf24}">
+            <span><img src="~/Images/Ranking/data.png" /></span>
+            <span><a v-on:click="divClick()">热卖排行</a></span>
+        </div>
+
+        <div id="search" v-on:click="divClick" :class="{f22:isActive,f25:checkf25}">
+            <span><img src="~/Images/Ranking/crown.png" /></span>
+            <span><a v-on:click="divClick()">搜索指数排行</a></span>
+        </div>
+
+        <div id="praise" v-on:click="divClick" :class="{f23:isActive,f26:checkf26}">
+            <span><img src="~/Images/Ranking/thumb.png" /></span>
+            <span><a v-on:click="divClick()">口碑排行</a></span>
+        </div>
+    </div>
+    <!-- 内容 -->
+    <div id="content" class="n1">
+        <div v-for="(item,index) in object" class="n2">
+            <div class="num">{{index+1}}</div>
+            <div class="img"><img :src="item.img" alt="?"></div>
+            <div class="n4">
+                <a class="title" v-on:click="aClick(index)" >{{item.intro}}</a>
+                <div class="box">
+                    <span class="date-box">
+                        <i class="icon ion-play"></i>
+                         {{item.shop}}
+                    </span>
+                    <a>
+                        <span class="date-box">
+                            <i class="icon ion-person"></i>
+                            {{item.description}}...
+                        </span>
+                    </a>
+                </div>
+                <div class="box2">
+                    <div class="fs">￥{{item.price}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="/js/Common/naviRight.js"></script>
+    <script src="~/js/Ranking/chart.js"></script>
+</body>
+</html>

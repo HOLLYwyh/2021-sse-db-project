@@ -12,8 +12,7 @@
     min-width: 200px;
     /*min-width: 180px;*/
     height: 100%;
-    position:absolute; /* 使它产生粘性，即使在滚动时 */
-    overflow: auto; /* 如果侧栏的内容太多，则启用滚动条 */
+    position:fixed; /* 使它产生粘性，即使在滚动时 */
     display:block;
 }
 

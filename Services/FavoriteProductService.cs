@@ -31,13 +31,16 @@ namespace InternetMall.Services
                 favorite = new FavoriteProduct { BuyerId = buyerid, CommodityId = commodityid, DateCreated = DateTime.Now };
                 _context.FavoriteProducts.Add(favorite);
 
-                if (_context.SaveChanges() > 0)
+                if(_context.SaveChanges()>0)
+                {
                     return true;
-                else
-                    return false;
+                }
+                return false; 
             }
             else
+            {
                 return true;
+            }
         }
 
         // 从收藏夹中删除
