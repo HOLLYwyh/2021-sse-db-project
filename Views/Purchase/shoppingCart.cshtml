@@ -7,11 +7,24 @@
     <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
     <!--引入与导航栏有关的配置-->
     <link href="/css/Common/shortcut_five.css" rel="stylesheet">
-    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
-    <script type="text/javascript" src="~/js/Purchase/shoppingCart/shoppingCart.js"></script>
     <link rel="stylesheet" type="text/css" href="~/css/Purchase/shoppingCart/shoppingCart.css">
+    <link href="~/css/Common/shortcut_five.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Common/naviRight.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.7.0.css">
+    @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/backToTop.cshtml")
 </head>
 <body>
+    <!--右边栏-->
+    <div id="naviRight">
+        <naviright>
+
+        </naviright>
+    </div>
+    <!--渲染导航栏-->
+    <div id="shortcutlg">
+        <shortcut></shortcut>
+    </div>
     <div class="cart_outerbox">
         <p>
             <span style="font-weight: bold; font-size: 32px; color: brown;">英豪荟萃 </span>
@@ -30,5 +43,9 @@
         </div>
         <!--cart-sum></!--cart-sum-->
     </div>
+
+    <script type="text/javascript" src="~/js/Common/shortcutFive.js"></script>
+    <script type="text/javascript" src="~/js/Common/naviRight.js"></script>
+    <script type="text/javascript" src="~/js/Purchase/shoppingCart/shoppingCart.js"></script>
 </body>
 </html>
