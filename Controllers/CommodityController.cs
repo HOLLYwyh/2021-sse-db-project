@@ -61,5 +61,19 @@ namespace InternetMall.Controllers
             string str = JsonConvert.SerializeObject(commodityList);
             return new ContentResult { Content = str, ContentType = "application/json" };
         }
+
+        public IActionResult AddToCart()    //添加商品到购物车
+        {
+            JsonData jsondata = new JsonData();
+            
+            return Json(jsondata.ToJson());
+        }
+
+        public IActionResult AddToFavourite()     //收藏商品
+        {
+            JsonData jsondata = new JsonData();
+            
+            return Json(jsondata.ToJson());
+        }
     }
 }

@@ -216,9 +216,9 @@ namespace InternetMall.Controllers
 
 
         //前后端交互
-        //商品详情页相关
+        //订单生成页面
         [HttpPost]
-        public IActionResult SetCommodDetail([FromBody] CommodDetail commodity)   //商品详情页确定具体情况
+        public IActionResult SetCommodDetail([FromBody] CommodDetail commodity)   //商品详情页提交商品
         {
             Global.GCommodityID = commodity.ID;
             Global.GCommodityNum = commodity.Amount;
@@ -228,7 +228,7 @@ namespace InternetMall.Controllers
             return Json(jsondata.ToJson());
         }
 
-        public IActionResult GetCommodDetail()   //获取从商品详情页的内容
+        public IActionResult GetCommodDetail()   //订单确认-渲染商品信息
         {
             Good commodity = new Good();
             commodity = orderService.RenderOrderPageFromDetail(Global.GCommodityID,Global.GCommodityNum);
@@ -237,7 +237,7 @@ namespace InternetMall.Controllers
         }
 
         //购物车页面相关
-        public IActionResult GetCartDetail()    //购物车详情s
+        public IActionResult GetCartDetail()    //购物车详情
         {
             List<CartView> shopCarts = new List<CartView>();    //  购物车信息显示类 列表    
             shopCarts = cartService.GetCartProduct(Request.Cookies["buyerID"]);

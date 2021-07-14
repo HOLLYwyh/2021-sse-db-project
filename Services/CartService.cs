@@ -73,7 +73,7 @@ namespace InternetMall.Services
                 return false;
         }
 
-        // 查看购物车
+        // 渲染购物车里的商品
         public List<CartView> GetCartProduct(string buyerid)
         {
             List<CartView> shopCarts = new List<CartView>();    //  购物车信息显示类 列表        
@@ -88,13 +88,16 @@ namespace InternetMall.Services
 
                 CartView cartview = new CartView
                 {
+                    errorCode = 0,
                     BuyerId = cart.BuyerId,
-                    CommodityId = cart.CommodityId,
+                    commodityId = cart.CommodityId,
                     CommodityName = commodity.Name,
                     DateCreated = cart.DateCreated,
                     ShopName = shop.Name,
-                    Quantity = cart.Quantity,
-                    Price = commodity.Price
+                    shopId = shop.ShopId,
+                    imgUrl = commodity.Url,
+                    amount = cart.Quantity,
+                    Price = commodity.Price * cart.Quantity
                 };
 
                 shopCarts.Add(cartview);
