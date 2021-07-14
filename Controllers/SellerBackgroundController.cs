@@ -114,7 +114,7 @@ namespace InternetMall.Controllers
         }
 
         [HttpPost]
-        public bool ShopSignUpForm([FromBody] ShopSignUp shopSignUp)     //申请店铺
+        public IActionResult ShopSignUpForm([FromBody] ShopSignUp shopSignUp)     //申请店铺
         {
             short shopCategory;
             if (shopSignUp.Category == "官方旗舰店")
@@ -137,18 +137,16 @@ namespace InternetMall.Controllers
             if (shopService.createShop(shopSignUp.SellerID, shopSignUp.Name, shopCategory, shopSignUp.Description))
             {
 
-                //JsonData jsondata = new JsonData();
-                //jsondata["signUp"] = "SUCCESS";
-                //HttpContext.Response.Cookies.Append("shopName", shopSignUp.Name, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
-                //return Json(jsondata.ToJson());
-                return true;
+                JsonData jsondata = new JsonData();
+                jsondata["signUp"] = "SUCCESS";
+                HttpContext.Response.Cookies.Append("shopName", shopSignUp.Name, new CookieOptions { Expires = DateTime.Now.AddSeconds(300) });
+                return Json(jsondata.ToJson());
             }
             else
             {
-                //JsonData jsondata = new JsonData();
-                //jsondata["signUp"] = "ERROR";
-                //return Json(jsondata.ToJson());
-                return false;
+                JsonData jsondata = new JsonData();
+                jsondata["signUp"] = "ERROR";
+                return Json(jsondata.ToJson());
             }
         }
 
