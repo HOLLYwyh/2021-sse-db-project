@@ -151,19 +151,17 @@ namespace InternetMall.Services
                     briefOrder.buyerName = newOrder.Buyer.Nickname;
                     briefOrder.buyerPhone = newOrder.Buyer.Phone;
                     briefOrder.date = newOrder.OrdersDate;
-                    briefOrder.tag = "DONE";  //默认已完成
                     briefOrder.show = true;
                     switch (newOrder.Status)
                     {
-                        case 0: briefOrder.condition = "未定义";  break;
-                        case 1: briefOrder.condition = "待付款"; break;
-                        case 2: briefOrder.condition = "待发货"; break;
-                        case 3: briefOrder.condition = "运送中"; break;
-                        case 4: briefOrder.condition = "待收货"; break;
-                        case 5: briefOrder.condition = "待评价"; break;
-                        case 6: briefOrder.condition = "已完成"; break;
-                        case 7: briefOrder.condition = "已取消"; break;
-                        case 8: briefOrder.condition = "待处理"; break; 
+                        case 0: briefOrder.condition = "未定义"; briefOrder.tag = "UNKNOWN"; break;
+                        case 1: briefOrder.condition = "待付款"; briefOrder.tag = "TO_BE_PAY"; break;
+                        case 2: briefOrder.condition = "待发货"; briefOrder.tag = "TO_BE_SHIP"; break;
+                        case 3: briefOrder.condition = "运送中"; briefOrder.tag = "SHIPPING"; break;
+                        case 4: briefOrder.condition = "待收货"; briefOrder.tag = "TO_BE_RECEIVE"; break;
+                        case 5: briefOrder.condition = "待评价"; briefOrder.tag = "TO_BE_COMMENT"; break;
+                        case 6: briefOrder.condition = "已完成"; briefOrder.tag = "DONE"; break;
+                        case 7: briefOrder.condition = "已取消"; briefOrder.tag = "CANCELED"; break;
                     }
 
                     var address = _context.ReceiveInformations.FirstOrDefault(r => r.ReceivedId == newOrder.ReceivedId);
