@@ -165,9 +165,16 @@ namespace InternetMall.Controllers
             Buyer beforeBuyer = service2.SearchByID(data["BuyerId"]);
             Buyer nowBuyer = beforeBuyer;
             //对其部分信息进行更新
+            if(data["UpdatedBirth"]=="")
+            {
+                nowBuyer.DateBirth = null;
+            }
+            else
+            {
+                nowBuyer.DateBirth = DateTime.Parse(data["UpdatedBirth"]);
+            }
             nowBuyer.Nickname = data["UpdatedNickname"];
             nowBuyer.Gender = int.Parse(data["UpdatedGender"]);
-            nowBuyer.DateBirth = DateTime.Parse(data["UpdatedBirth"]);
             //如果上传图片将执行此步骤，否则跳过
             foreach (var formFile in files)
             {
