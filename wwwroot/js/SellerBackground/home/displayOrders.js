@@ -26,5 +26,3 @@ function displayorders(shopID) {
         }
     });
 }
-
-window.onload = displayorders("1");
