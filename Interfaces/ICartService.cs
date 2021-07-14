@@ -12,7 +12,7 @@ namespace InternetMall.Interfaces
     public interface ICartService
     {
         //添加购物车
-        public bool addToCart(string buyerid, string commodityid);
+        public bool addToCart(string buyerid, string commodityid,int number);
 
         // 从购物车中删除
         public bool RemoveFromCart(string buyerid, string commodityid);

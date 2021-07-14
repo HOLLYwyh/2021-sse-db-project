@@ -23,16 +23,25 @@ namespace InternetMall.Services
         }
 
         //添加收藏夹
-        public void addToFavorite(string buyerid, string commodityid)
+        public bool addToFavorite(string buyerid, string commodityid)
         {
             FavoriteProduct favorite = _context.FavoriteProducts.Where(x => x.BuyerId == buyerid && x.CommodityId == commodityid).FirstOrDefault();
             if (favorite == null)
             {
                 favorite = new FavoriteProduct { BuyerId = buyerid, CommodityId = commodityid, DateCreated = DateTime.Now };
                 _context.FavoriteProducts.Add(favorite);
+                if(_context.SaveChanges()>0)
+                {
+                    return true;
+                }
+                return false; 
+            }
+            else
+            {
+                return true;
             }
 
-            _context.SaveChanges();
+            
         }
 
         // 从收藏夹中删除

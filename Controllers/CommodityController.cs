@@ -1,7 +1,7 @@
 ﻿using Internetmall.Models.BusinessEntity;
-using Internetmall.Services;
 using InternetMall.DBContext;
 using InternetMall.Models;
+using InternetMall.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -16,11 +16,15 @@ namespace InternetMall.Controllers
     {
         private readonly ModelContext _context;   //数据库上下文
         private CommodityDetailsService commdDetailService;             //后端service
+        private CartService cartService;
+        private FavoriteProductService favoriteService;
 
         public CommodityController(ModelContext context)
         {
             _context = context;
             commdDetailService = new CommodityDetailsService(_context);
+            cartService = new CartService(_context);
+            favoriteService = new FavoriteProductService(_context);
         }
         public IActionResult Details()
         {
@@ -65,14 +69,28 @@ namespace InternetMall.Controllers
         public IActionResult AddToCart()    //添加商品到购物车
         {
             JsonData jsondata = new JsonData();
-            
+            if(cartService.addToCart(Request.Cookies["buyerID"], Global.GCommodityID,Global.GCommodityNum))
+            {
+                jsondata["addToCart"] = "SUCCESS";
+            }
+            else
+            {
+                jsondata["addToCart"] = "FAILED";
+            }
             return Json(jsondata.ToJson());
         }
 
         public IActionResult AddToFavourite()     //收藏商品
         {
             JsonData jsondata = new JsonData();
-            
+            if(favoriteService.addToFavorite(Request.Cookies["buyerID"], Global.GCommodityID))
+            {
+                jsondata["addToFav"] = "SUCCESS";
+            }
+            else
+            {
+                jsondata["addToFav"] = "FAILED";
+            }
             return Json(jsondata.ToJson());
         }
     }

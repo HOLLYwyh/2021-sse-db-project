@@ -44,7 +44,7 @@ let vm = new Vue({
                 this.number--;
             }
         },
-        sendBuy() {
+        sendBuy() {   //购买
             var output = { ID: this.input.commodityId, Amount: this.number }
             $.ajax({
                 type: "post",
@@ -55,6 +55,51 @@ let vm = new Vue({
                 data: JSON.stringify( output ),
                 success: function (result) {
                     window.location = "/Purchase/ConfirmOrder"
+                }
+            });
+        },
+        addToCart() {  //添加购物车
+            var output = { ID: this.input.commodityId, Amount: this.number }
+            $.ajax({
+                type: "post",
+                url: "/Purchase/SetCommodDetail",
+                async: false,
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify(output),
+                success: function (result) {
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: "/Commodity/AddToCart",
+                async: false,
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    if (result.addToCart == "SUCCESS") {
+                        alert("添加成功");
+                    }
+                    else {
+                        alert("添加失败");
+                    }
+                }
+            });
+        },
+        addToFav() {    //收藏商品
+            $.ajax({
+                type: "get",
+                url: "/Commodity/AddToFavourite",
+                async: false,
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    if (result.addToFav == "SUCCESS") {
+                        alert("添加成功");
+                    }
+                    else {
+                        alert("添加失败");
+                    }
                 }
             });
         },

@@ -244,5 +244,20 @@ namespace InternetMall.Controllers
             string str = JsonConvert.SerializeObject(shopCarts);
             return new ContentResult { Content = str, ContentType = "application/json" };
         }
+
+        [HttpPost]
+        public IActionResult DeleteCommodity([FromBody] CommodityID commodity)  //购物车删除商品
+        {
+            JsonData jsondata = new JsonData();
+            if(cartService.RemoveFromCart(Request.Cookies["buyerID"], commodity.ID))
+            {
+                jsondata["result"] = true;
+            }
+            else
+            {
+                jsondata["result"] = false;
+            }
+            return Json(jsondata.ToJson());
+        }
     }
 }

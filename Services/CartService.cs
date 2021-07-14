@@ -24,18 +24,18 @@ namespace InternetMall.Services
         }
 
         //添加购物车
-        public bool addToCart(string buyerid, string commodityid)
+        public bool addToCart(string buyerid, string commodityid,int number)
         {
             AddShoppingCart cart = _context.AddShoppingCarts.Where(x => x.BuyerId == buyerid && x.CommodityId == commodityid).FirstOrDefault();
             if (cart == null)
             {
-                cart = new AddShoppingCart { BuyerId = buyerid, CommodityId = commodityid, Quantity = 1, DateCreated = DateTime.Now };
+                cart = new AddShoppingCart { BuyerId = buyerid, CommodityId = commodityid, Quantity = number, DateCreated = DateTime.Now };
                 _context.AddShoppingCarts.Add(cart);
             }
 
             else
             {
-                cart.Quantity++;
+                cart.Quantity+= number;
                 _context.AddShoppingCarts.Update(cart);
             }
 

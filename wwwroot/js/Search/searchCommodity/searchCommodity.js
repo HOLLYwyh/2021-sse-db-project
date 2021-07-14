@@ -22,7 +22,7 @@ var commodity = new Vue({
         number: 0
     },
     methods: {
-        commodityDetial(id) {                 //进入上象棋
+        commodityDetial(id) {                 //进入商品详情
             console.log(id);
             $.ajax({
                 url: "/Commodity/SetCommodityID",
