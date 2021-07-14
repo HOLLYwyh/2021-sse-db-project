@@ -1,4 +1,8 @@
 let shortcut1 = new Vue({ el: '#shortcut' });
+//右边栏
+new Vue({
+    el: "#naviRight"
+})
 
 function selectGoods(id) {
     console.log(id)
@@ -77,7 +81,8 @@ let vm = new Vue({
                 contentType: "application/json",
                 dataType: "json",
                 success: function (result) {
-                    if (result.addToCart == "SUCCESS") {
+                    var jsonData = eval("(" + result + ")");   //将json转换成对象
+                    if (jsonData.addToCart == "SUCCESS") {
                         alert("添加成功");
                     }
                     else {
@@ -94,7 +99,8 @@ let vm = new Vue({
                 contentType: "application/json",
                 dataType: "json",
                 success: function (result) {
-                    if (result.addToFav == "SUCCESS") {
+                    var jsonData = eval("(" + result + ")");   //将json转换成对象
+                    if (jsonData.addToFav == "SUCCESS") {
                         alert("添加成功");
                     }
                     else {

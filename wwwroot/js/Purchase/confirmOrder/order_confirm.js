@@ -1,4 +1,8 @@
-new Vue({el:'#shortcut'});
+//右边栏
+new Vue({
+	el: "#naviRight"
+})
+new Vue({ el: '#shortcut' });
 
 var addressdatas = {
 	addressdata:[
