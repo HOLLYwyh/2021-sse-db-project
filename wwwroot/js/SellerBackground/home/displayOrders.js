@@ -16,7 +16,7 @@ function displayorders(shopID) {
         success: function (result) {
             //let temp = JSON.stringify(result);
             //console.log(result);
-            if (result == null) {
+            if (result === null) {
                 alert("No orders!");
             }
             else {

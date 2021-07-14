@@ -1,4 +1,5 @@
-﻿function createshop() {
+﻿
+function createshop() {
     $.ajax({
         type: "post",
         url: "/SellerBackground/ShopSignUpForm",
@@ -7,7 +8,12 @@
         dataType: "json",
         data: JSON.stringify({ SellerID: $("#sellerID").val(), Name: $("#name").val(), Category: $("#category").val(), Description: $("#description").val()}),
         success: function (result) {
-            //省略的操作
+            if (result === true) {
+                window.location.href = "/SellerBackground/SwitchShop";
+            }
+            else {
+                window.location.href = "/SellerBackground/ShopSignUp";
+            }
         }
     });
 }
