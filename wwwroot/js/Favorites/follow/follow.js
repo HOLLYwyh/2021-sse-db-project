@@ -69,7 +69,7 @@ let app = new Vue({
                 },
                 */
             ],
-            id:"",
+            id: "",
             input: '',
             currentDate: new Date(),
             rate: 5.0,
@@ -84,6 +84,29 @@ let app = new Vue({
                 if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
             }
             return "";
+        },
+        removefollow(x) {
+            this.$confirm("确定取消关注该店铺嘛?", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning",
+            }).then(() => {
+                $.ajax({
+                    type: "post",
+                    url: "/Account/CancelFollowShop",
+                    async: false,
+                    contentType: "application/json",
+                    dataType: "json",
+                    data: JSON.stringify({
+                        buyerid: this.id,               // 买家ID
+                        shopid: x                 // 店铺ID
+                    }),
+                    success: function (result) {        // bool
+                        DisplayFollowShops(this.id);
+                    }
+                })
+            });
+
         }
     },
     created() {
