@@ -107,7 +107,21 @@ let app = new Vue({
                 })
             });
 
+        },
+        gotoshop(x) {
+            $.ajax({
+                url: "/Shop/SetShopID",
+                type: "post",
+                dataType: "json", //返回数据格式为json
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                data: JSON.stringify({ ID: x }),
+                success: function (data) {//请求成功完成后要执行的方法
+                    window.location = "/Shop/Shop"
+                }
+            })
         }
+
     },
     created() {
         this.id = this.getCookie("buyerID");
