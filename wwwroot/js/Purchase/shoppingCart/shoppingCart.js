@@ -162,17 +162,6 @@ class CartItem extends HTMLElement {
         });
 
         this.$delete.addEventListener("click", () => {
-
-            $.ajax({
-                url: "/Home/RecmdZoneCommodities",//json文件位置
-                type: "post",
-                contentType: "application/json",
-                dataType: "json", //返回数据格式为json
-                data: JSON.stringify({ "commodity_id": this.$commodityid }),
-                success: function (data) {//请求成功完成后要执行的方法
-                }
-            });
-
             if (this.$checkbox.checked == true) {
             let cart = document.getElementsByTagName("cart-sum")[0];
             let delta = parseFloat(this.$totprice.innerHTML.toString());
@@ -183,7 +172,6 @@ class CartItem extends HTMLElement {
             cart.setAttribute("cartnum", num.toString());
             cart.setAttribute("cartprice", price.toFixed(2).toString());
             }
-
             $.ajax({
                 type: "post",
                 url: "/Purchase/DeleteCommodity",
@@ -288,7 +276,25 @@ class CartSum extends HTMLElement {
         this.$buy = this._shadowRoot.querySelector(".cart_buy");
 
         this.$buy.addEventListener("click", () => {
-            //todo
+            let items = document.querySelectorAll("cart-item");
+            let len = items.length;
+            let result = [];
+            for (i = 0; i < len; i++) {
+                if (items[i].$checkbox.checked == true) {
+                    let tmp = { commodityId: items[i].$commodityId, amount: items[i].$amount.innerHTML.toString() };
+                    result.push(tmp);
+                }
+            }
+            $.ajax({
+                url: "/Purchase/GetCartDetail",//json文件位置
+                type: "post",
+                contentType: "application/json",
+                dataType: "json", //返回数据格式为json
+                data: JSON.stringify({ result }),
+                success: function (data) {//请求成功完成后要执行的方法
+                    console.log(result);
+                }
+            });
         });
     }
 
