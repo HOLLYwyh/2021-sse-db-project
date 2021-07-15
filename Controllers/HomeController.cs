@@ -94,7 +94,7 @@ namespace InternetMall.Controllers
             Buyer buyer = buyerService.SearchByID(Request.Cookies["buyerID"]);
             if(buyer!=null)
             {
-                buyer.Url+= "../.." + buyer.Url; ;
+                buyer.Url = "../.." + buyer.Url; ;
                 jsondata["url"] = buyer.Url;
             }
             else
