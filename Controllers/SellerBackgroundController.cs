@@ -164,13 +164,13 @@ namespace InternetMall.Controllers
         {
             var str = sellerBackgroundService.DisplayShops(displayshops.SellerID);
 
-            //if (str==null)
-            //{
-            //    return null;  //无店铺，切换到“创建店铺”界面
-            //}
+            if (str == null)
+            {
+                return new ContentResult { Content = "", ContentType = "application/json" }; ;
+            }
             return new ContentResult { Content = str, ContentType = "application/json" }; ;  
         }
-
+        [HttpPost]
         public IActionResult SetShopIDForm([FromBody] DisplayOrders sh)  //卖家选择店铺后更改全局的shopID信息
         {
             Global.GShopID = sh.ShopID;
@@ -179,9 +179,24 @@ namespace InternetMall.Controllers
             jsondata["result"] = Global.GShopID;
             return Json(jsondata.ToJson());
         }
+        [HttpPost]
         public IActionResult GetShopIDForm()
         {
             var str=JsonConvert.SerializeObject(Global.GShopID);
+            return new ContentResult { Content = str, ContentType = "application/json" }; ;
+        }
+        [HttpPost]
+        public IActionResult SetIfShopForm([FromBody] CheckShop checkShop)
+        {
+            Global.GIfShop = checkShop.IfShop;  
+            JsonData jsondata = new JsonData();//返回值没用，只是为了符合返回要求
+            jsondata["over"] = "YES";
+            return Json(jsondata.ToJson());
+        }
+        [HttpPost]
+        public IActionResult GetIfShopForm()
+        {
+            var str = JsonConvert.SerializeObject(Global.GIfShop);
             return new ContentResult { Content = str, ContentType = "application/json" }; ;
         }
     }

@@ -13,5 +13,6 @@ namespace InternetMall
         public static string GCommodityID = "1";    //商品ID
         public static int   GCommodityNum = 1;      //商品详情页面购买数量
         public static string GShopID = "";          //店铺ID
+        public static string GIfShop = "0";         //标记卖家是否有店铺
     }
 }

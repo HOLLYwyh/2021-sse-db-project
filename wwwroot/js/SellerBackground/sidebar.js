@@ -1,4 +1,5 @@
 Vue.component('side-bar', {
+    props:["show"],
     data: function () {
         return {
             active: 1,
@@ -40,6 +41,7 @@ Vue.component('side-bar', {
         }
     },
     template: `
+        <div v-show="show">
         <el-menu default-active="activeIndex" class="el-menu-vertical-demo"
             background-color="transparent" text-color="#8a8c93" active-text-color="#29b7cb">
             <el-menu-item index="1">
@@ -99,7 +101,40 @@ Vue.component('side-bar', {
                 </el-menu-item-group>
             </el-submenu>
         </el-menu>
+        </div>
     `
 })
 
-var sidebar = new Vue({ el: '#nav' });
+var sidebar = new Vue({
+    el: '#nav',
+    data: {
+        show:true,
+    }
+});
+
+function getIfShop() {
+    $.ajax({
+        type: "post",
+        url: "/SellerBackground/GetIfShopForm",
+        async: false,
+        contenttype: "application/json",
+        datatype: "json",
+        data: null,
+        success: function (result) {
+            
+            if (result === "0") {
+                sidebar.show = false;      //获取后端存储的shopid信息
+            }
+            else {
+                sidebar.show = true;      //获取后端存储的shopid信息
+            }
+            console.log(result);
+            console.log("nowIfShop:");
+            console.log(sidebar.show);
+        }
+    });
+}
+
+window.onload = getIfShop();
+console.log(sidebar.show);
+
