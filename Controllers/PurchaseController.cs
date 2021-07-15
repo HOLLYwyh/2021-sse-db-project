@@ -190,6 +190,7 @@ namespace InternetMall.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult SuccessPay()   //最终购买成功
         {
             if (Request.Cookies["buyerNickName"] != null)
@@ -198,6 +199,21 @@ namespace InternetMall.Controllers
             }
             else
             {
+                Dictionary<string, string> sArray = GetRequestGet();
+                if (sArray.Count != 0)
+                {
+                    bool flag = AlipaySignature.RSACheckV1(sArray, AlipayConfig.AlipayPublicKey, AlipayConfig.CharSet, AlipayConfig.SignType, false);
+                    if (flag)
+                    {
+                        Console.WriteLine($"同步验证通过，订单号：{sArray["out_trade_no"]}");
+                        ViewData["PayResult"] = "同步验证通过";
+                    }
+                    else
+                    {
+                        Console.WriteLine($"同步验证失败，订单号：{sArray["out_trade_no"]}");
+                        ViewData["PayResult"] = "同步验证失败";
+                    }
+                }
                 return Redirect("/Entry/BuyerLogIn");
             }
         }
@@ -271,7 +287,7 @@ namespace InternetMall.Controllers
             if (Global.GConfirmOrderType == 1)  //是从商品详情页面进行渲染
             {
                 if (orderService.CreateOrderFromDetail(Request.Cookies["buyerID"], Global.GCommodityID,
-                   order.AddressID, Global.GCommodityNum,int.Parse(order.TotalPrice)))
+                   order.AddressID, Global.GCommodityNum,order.TotalMoney))
                 {
                     jsonData["result"] = "SUCCESS";
                 }
@@ -282,11 +298,15 @@ namespace InternetMall.Controllers
             }
             else   //从购物车进行渲染
             {
-                //下方均需要前端传入的数据
-                string receiveID = "1";
-                int price = 1;
-                //上方均需要前端传入的数据
-                //orderService.CreateOrderFromChart(Request.Cookies["buyerID"],, receiveID, price);
+                if(orderService.CreateOrderFromChart(Request.Cookies["buyerID"], Global.GGoods
+                    ,order.AddressID,order.TotalMoney))
+                {
+                    jsonData["result"] = "SUCCESS";
+                }
+                else
+                {
+                    jsonData["result"] = "FAILED";
+                }
             }
             return Json(jsonData.ToJson());
         }

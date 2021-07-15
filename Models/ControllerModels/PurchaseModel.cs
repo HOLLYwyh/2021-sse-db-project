@@ -22,9 +22,9 @@ namespace InternetMall.Models
         public List<CartCommodity> cart { get; set; }
     }
 
-    public class CommdCartOrder    //这里可能还需要重新修改
+    public class CommdCartOrder    
     {
-        public string TotalPrice { get; set; }   //总价
+        public decimal TotalMoney { get; set; }   //总价
 
         public string AddressID { get; set; }  //店铺ID
     }

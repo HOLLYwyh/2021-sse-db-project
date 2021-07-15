@@ -24,5 +24,6 @@ namespace InternetMall
         public static Cart GCart;          //购物车中选中的物品
         //创建订单部分
         public static List<Good> GGoods;    //购物车中购买的商品
+        public static List<string> GOrderID = new List<string>();   //订单ID
     }
 }

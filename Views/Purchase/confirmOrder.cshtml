@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
     <link href="~/css/Common/shortcut_five.css" type="text/css" rel="stylesheet" />
@@ -69,7 +70,7 @@
 
                                                 @*<span class='edmitSpan' @@click="defultAddress(items)">设为默认地址</span>*@
 
-                                               @* <span class='edmitSpan' @@click="emitAddress(items,index)">
+                                                @* <span class='edmitSpan' @@click="emitAddress(items,index)">
                                                     编辑</spa>
                                                 </span>
                                                 <span v-if='!items.isShowDefult' @@click="deleAddressAlert(index)" class='edmitSpan edmitSpan-delete'>删除</span>*@
@@ -80,8 +81,8 @@
                                 </el-row>
                             </div>
                             @*<el-dialog title="新增收货地址"
-                                       :visible.sync="newAddressShow"
-                                       width="30%">
+                                         :visible.sync="newAddressShow"
+                                         width="30%">
                                 <el-form ref="form" :model="form" label-width="80px">
                                     <el-form-item label="收货人">
                                         <el-input v-model="form.name" placeholder="请输入内容"></el-input>
@@ -209,9 +210,52 @@
                     <span class="footerRowprice">应付金额：<span>￥{{totalPrice}}</span></span>
                     <span class="footerRowaddress"><span>商品收货地址：{{filterAddress[currentIndex].DetailAddr}}</span><span>{{filterAddress[currentIndex].ReceiverName}}</span><span>{{filterAddress[currentIndex].Phone}}</span></span>
                 </div>
-                <button class="btn submitForm" onclick="submit()">提交订单</button>
+                <button class="btn submitForm" @@click="submit()">提交订单</button>
             </div>
 
+
+
+
+
+            <div class="col-sm-12">
+                <form asp-action="PayRequest" method="post" class="form-horizontal" role="form">
+                    <div class="form-group" style="display:none" >
+                        <label for="tradeno" class="control-label col-sm-2">商户订单号：</label>
+                        <div class="col-sm-10" >
+                            <input type="text" name="tradeno" v-model="ddh" class="form-control" id="tradeno" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="display:none">
+                        <label for="subject" class="control-label col-sm-2">订单名称：</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="subject" v-model="ddmc" class="form-control" id="subject" value="一只橘猫" />
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="display:none">
+                        <label for="totalAmout" class="control-label col-sm-2">付款金额：</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="0.01" v-model="totalPPrice" name="totalAmout" class="form-control" id="totalAmout" value="0.01" />
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="display:none">
+                        <label for="itemBody" class="control-label col-sm-2">商品描述：</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="itemBody" v-model="spms" class="form-control" id="itemBody" value="胖胖的橘猫" />
+                        </div>
+                    </div>
+
+                    <div class="form-group" v-show="kyfk">
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <button class="btn btn-success btn-block">付款</button>
+                            <p class="help-block text-center">如果您点击“付款”按钮，即表示您同意该次的执行操作。</p>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
 
         </div>
     </div>
