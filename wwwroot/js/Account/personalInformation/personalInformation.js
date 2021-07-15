@@ -55,6 +55,10 @@ Vue.component('promptbox', {
                 .catch((_) => { });
         },
         updateInformation() {
+            if (app.nickname == "") {
+                alert("给自己取个好听的昵称叭(*^_^*)");
+                return false;
+            }
             this.dialogVisible = false;
             updateInfo(app.id);
         }

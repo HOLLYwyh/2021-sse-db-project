@@ -145,6 +145,50 @@ let app = new Vue({
                     window.location = "/Commodity/Details"
                 }
             })
+        },
+        removefavo(x) {
+            this.$confirm("确定取消收藏该商品嘛?", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning",
+            }).then(() => {
+                $.ajax({
+                    type: "post",
+                    url: "/Account/CancelFavoriteProduct",
+                    async: false,
+                    contentType: "application/json",
+                    dataType: "json",
+                    data: JSON.stringify({
+                        buyerid: this.id,           // 买家ID
+                        commodityid: x              // 商品ID
+                    }),
+                    success: function (result) {        // bool
+                        displayFavorites(this.id);
+                    }
+                })
+            });
+        },
+        clearup() {
+            this.$confirm("确定要清空收藏夹吗? 此操作不可撤销", "警告", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning",
+            }).then(() => {
+                $.ajax({
+                    type: "post",
+                    url: "/Account/CancelAllFavoriteProduct",
+                    async: false,
+                    contentType: "application/json",
+                    dataType: "json",
+                    data: JSON.stringify({
+                        buyerid: this.id            // 买家ID
+                    }),
+                    success: function (result) {      // bool
+                        var jsonData = eval("(" + result + ")");   //将json转换成对象
+                        displayFavorites(this.id);
+                    }
+                })
+            });
         }
     },
     created() {

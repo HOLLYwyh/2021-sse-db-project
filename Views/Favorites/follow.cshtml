@@ -54,9 +54,12 @@
                                                  score-template="{value}">
                                         </el-rate>
                                         <div class="bottom clearfix">
-                                            <time class="time">关注时间：{{ item.DateCreated }}</time><br />
-                                            <el-button type="text" style="margin-right:10px;" @@click="gotoshop(item.ShopId)">进入店铺</el-button>
-                                            <el-link type="primary" :underline="false" :href="item.shop">联系客服</el-link>
+                                            <time class="time">关注时间：{{ item.DateCreated }}</time><br /><br />
+                                            <!--el-button type="text" style="margin-right:10px;" @@click="gotoshop(item.ShopId)">进入店铺</!--el-button>
+                                            <el-link type="primary" :underline="false" :href="item.shop">联系客服</el-link><br /-->
+                                            <el-button type="danger" icon="el-icon-delete" circle @@click="removefollow(item.ShopId)"></el-button>
+                                            <el-button type="info" icon="el-icon-message" circle @@click=""></el-button>
+                                            <el-button icon="el-icon-search" circle @@click=""></el-button>
                                         </div>
                                     </div>
                                 </el-card>
