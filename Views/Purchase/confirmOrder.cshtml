@@ -41,15 +41,15 @@
                         <li>
                             <el-row>
                                 <span class="addAddressCons">收货人信息</span>
-                                <span class="addAddress" @@click="AddressShowClick">新增收货地址</span>
+                                <span class="addAddress" @@click="AddressShowClick">编辑收货地址</span>
                             </el-row>
                             <div class="scolleShow">
                                 <el-row class="consignee" v-for="(items,index) in filterAddress">
                                     <div v-on:mouseout="MouseOutList(items)" v-on:mouseleave="MouseOverList(items)">
                                         <el-col :span='4'>
                                             <div class="consigneeList consigneeListWidth" :class="{'consigneeListClick':items.addressDefult}" @@click="currentIndexClick(items,index)">
-                                                <span v-text="items.name"></span>
-                                                <span v-text="items.city"></span>
+                                                <span v-text="items.ReceiverName"></span>
+                                                <span v-text="items.DetailAddr"></span>
                                                 <div v-show="items.addressDefult">
                                                     <div class="arrow-right"></div>
                                                     <i class="fa fa-check" aria-hidden="true"></i>
@@ -57,24 +57,29 @@
                                             </div>
                                         </el-col>
                                         <el-col class='rightAddress' :span='20' :class='{BackColor:items.addressIsShow}'>
-                                            <span v-text="items.name"></span>
-                                            <span v-text="items.city"></span>
-                                            <span v-text="items.area"></span>
-                                            <span v-text="items.minarea"></span>
-                                            <span v-text="items.phone"></span>
+                                            <span v-text="items.receiverName"></span>
+                                            <span v-text="items.DetailAddr"></span>
+
+                                            @*<span v-text="items.area"></span>
+                                            <span v-text="items.minarea"></span>*@
+
+                                            <span v-text="items.Phone"></span>
                                             <span v-if='items.isShowDefult' class="addressDefultClass">默认地址</span>
                                             <span v-if='items.addressIsShow' class='edmitAddre'>
-                                                <span class='edmitSpan' @@click="defultAddress(items)">设为默认地址</span>
-                                                <span class='edmitSpan' @@click="emitAddress(items,index)">
+
+                                                @*<span class='edmitSpan' @@click="defultAddress(items)">设为默认地址</span>*@
+
+                                               @* <span class='edmitSpan' @@click="emitAddress(items,index)">
                                                     编辑</spa>
                                                 </span>
-                                                <span v-if='!items.isShowDefult' @@click="deleAddressAlert(index)" class='edmitSpan edmitSpan-delete'>删除</span>
+                                                <span v-if='!items.isShowDefult' @@click="deleAddressAlert(index)" class='edmitSpan edmitSpan-delete'>删除</span>*@
+
                                         </el-col>
                                         <div class="clearfix"></div>
                                     </div>
                                 </el-row>
                             </div>
-                            <el-dialog title="新增收货地址"
+                            @*<el-dialog title="新增收货地址"
                                        :visible.sync="newAddressShow"
                                        width="30%">
                                 <el-form ref="form" :model="form" label-width="80px">
@@ -100,7 +105,7 @@
                                     <el-button @@click="dialogVisible = false" type='danger'>取 消</el-button>
                                     <el-button type="primary" @@click="saveNewAdress(edmitType)">保存</el-button>
                                 </span>
-                            </el-dialog>
+                            </el-dialog>*@
                             <div v-if='!moreAddressData.length == 0' class="muchAddress">
                                 <span @@click="moreAddress">
                                     更多地址
@@ -128,7 +133,7 @@
                         </li>
                         <li>
                             <span class="addAddressCons">送货清单</span>
-                            <span class="addAddress"><a href="/Purchase/ShoppingCart">返回修改购物车</a></span>
+                            <span class="addAddress"><a href="/Purchase/ShoppingCart">进入购物车</a></span>
                             <div class="row deliverymode">
                                 <div class="col-lg-3 deliverymodeLeft">
                                     <p>配送方式：</p>
@@ -149,13 +154,13 @@
                                             <tr>
                                                 <td>
                                                     <span class="goodName">
-                                                        <img class="goodImg" :src="item.src" />
+                                                        <img class="goodImg" :src="item.img" />
                                                     </span>
                                                     <span class="goodName goodsName">
-                                                        <h2 class="goodname">名称：{{item.name}}</h2>
+                                                        <h2 class="goodname">名称：{{item.intro}}</h2>
                                                         <p class="goodGary">
-                                                            <span>供应商：</span>
-                                                            <span>美国</span>
+                                                            <span>商铺：</span>
+                                                            <span>{{item.shop}}</span>
                                                         </p>
                                                         <p class="goodGary">
                                                             <span>发货地：</span>
@@ -164,7 +169,7 @@
                                                     </span>
                                                 </td>
                                                 <td class="goodPrice">单价：￥{{item.price}}</td>
-                                                <td class="goodNum">数量:{{item.num}}</td>
+                                                <td class="goodNum">数量:{{item.Soldnum}}</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -202,7 +207,7 @@
                 <div class="clearfix"></div>
                 <div class="row footerRow">
                     <span class="footerRowprice">应付金额：<span>￥{{totalPrice}}</span></span>
-                    <span class="footerRowaddress"><span>商品收货地址：{{filterAddress[currentIndex].city}} {{filterAddress[currentIndex].area}} {{filterAddress[currentIndex].minarea}}</span><span>{{filterAddress[currentIndex].name}}</span><span>{{filterAddress[currentIndex].phone}}</span></span>
+                    <span class="footerRowaddress"><span>商品收货地址：{{filterAddress[currentIndex].DetailAddr}}</span><span>{{filterAddress[currentIndex].ReceiverName}}</span><span>{{filterAddress[currentIndex].Phone}}</span></span>
                 </div>
                 <button class="btn submitForm" onclick="submit()">提交订单</button>
             </div>

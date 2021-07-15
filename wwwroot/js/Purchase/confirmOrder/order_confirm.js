@@ -5,57 +5,23 @@ new Vue({
 new Vue({ el: '#shortcut' });
 
 var addressdatas = {
-	addressdata:[
+	addressdata: [
 		{
-			name:"111111111111",
-			city:"北京市",
-			area:"丰台区",
-			minarea:"嘉园一里9号楼1",
-			phone:13800138000,
-			addressDefult:false,
-			addressIsShow:false,
-			isShowDefult:false,
+			Buyer: null,
+			BuyerId: "",
+			City: "",
+			Country: "",
+			DetailAddr: "无收货地址，请先添加",
+			Phone: "",
+			Province: "",
+			ReceivedId: "",
+			ReceiverName: "",
+			Tag: "",
+			addressDefult: false,
+			addressIsShow: false,
+			isShowDefult: false,
 		},
-		{
-			name:"222222222222",
-			city:"北京市",
-			area:"丰台区",
-			minarea:"嘉园一里9号楼2",
-			phone:13800138000,
-			addressDefult:false,
-			addressIsShow:false,
-			isShowDefult:false,
-		},
-		{
-			name:"3333333333",
-			city:"北京市",
-			area:"丰台区",
-			minarea:"嘉园一里9号楼1",
-			phone:13800138000,
-			addressDefult:false,
-			addressIsShow:false,
-			isShowDefult:false,
-		},
-		{
-			name:"444444444",
-			city:"北京市",
-			area:"丰台区",
-			minarea:"嘉园一里9号楼2",
-			phone:13800138000,
-			addressDefult:false,
-			addressIsShow:false,
-			isShowDefult:false,
-		},
-		{
-			name:"555555555",
-			city:"北京市",
-			area:"丰台区",
-			minarea:"嘉园一里9号楼3",
-			phone:13800138000,
-			addressDefult:true,
-			addressIsShow:false,
-			isShowDefult:true,
-		},
+		
 	
 	]
 }
@@ -170,49 +136,17 @@ var vm = new Vue({
 
 		shopTableDatas: [
 			{
-				"checked": false,
-				"src": "../../images/a1.png",
-				"name": "大榴莲6666",
-				"supplier": "美国",
-				"ConPlace": "中国大陆",
-				"price": 100,
-				"num": 1,
-				"saveandremove": true,
-				"type": "商品",
-			},
-			{
-				"checked": false,
-				"src": "../../images/a1.png",
-				"name": "GZL-中控离心机净化机",
-				"supplier": "美国",
-				"ConPlace": "中国大陆",
-				"price": 100,
-				"num": 2,
-				"saveandremove": true,
-				"type": "商品",
-			},
-			{
-				"checked": false,
-				"src": "../../images/a1.png",
-				"name": "GZL-中控离心机净化机",
-				"supplier": "美国",
-				"ConPlace": "中国大陆",
-				"price": 100,
-				"num": 3,
-				"saveandremove": true,
-				"type": "服务",
-			},
-			{
-				"checked": false,
-				"src": "../../images/a1.png",
-				"name": "大榴莲6666",
-				"supplier": "美国",
-				"ConPlace": "中国大陆",
+				
+				img: "../../images/a1.png",
+				intro: "大榴莲6666",
+				shop: "美国",
+				ID: "中国大陆",
 				price: 100,
-				num: 4,
-				"saveandremove": true,
-				"type": "商品",
+				Soldnum: 1,
+				description: true,
+				
 			},
+			
 			
 		],
 		 moreAddressData:addressdatas.addressdata,//地址数据
@@ -251,9 +185,9 @@ var vm = new Vue({
 	          	city:'',
 				area:'',
 				minarea:'',
-				phone:'',
 				addressDefult:'',
 				addressIsShow:'',
+				phone:'',
 				num:'',
 				isShowDefult:''
         },
@@ -270,6 +204,26 @@ var vm = new Vue({
 
 	
 	methods: {
+		getAddress() {
+			let that
+			$.ajax({
+				url: "/Purchase/GetReceiveInformation",
+				type: "get",
+				contentType: "application/json",
+				async: false,
+				dataType: "json", //返回数据格式为json
+				success: function (data) {
+					console.log(data)
+					that = data
+					console.log(that)
+				}
+
+			})
+			if (that) {
+			this.moreAddressData=that
+            }
+			
+        },
 		submit() {
 			let that = {}
 			$.ajax({
@@ -298,9 +252,9 @@ var vm = new Vue({
 				}
 			})
 			console.log(this.totalPrice)
-			/*this.shopTableDatas=[]*/
+			this.shopTableDatas=[]
 			
-			/*this.shopTableDatas.push(that)*/
+			this.shopTableDatas.push(that)
         },
 		/*商品数量增加减少函数*/
 		goodNum:function(item,way){
@@ -458,8 +412,9 @@ var vm = new Vue({
 		},
 		//新增收货地址函数
 		AddressShowClick:function(){
-			this.edmitType = '新增',
-			this.newAddressShow = true;
+			//this.edmitType = '新增',
+			//this.newAddressShow = true;
+			window.location = "/Account/Address";
 		},
 		//新增收货地址和编辑收货地址  保存函数
 		saveNewAdress:function(){
@@ -660,11 +615,16 @@ var vm = new Vue({
 
 			let p = 0
 			for (let i in this.shopTableDatas) {
-				p += vm.shopTableDatas[i].price * vm.shopTableDatas[i].num
+				p += vm.shopTableDatas[i].price * vm.shopTableDatas[i].Soldnum
 			}
 			return p
         }
 	},
 });
 
-window.onload = vm.getGoods()
+function start() {
+	vm.getGoods()
+	vm.getAddress()
+}
+
+window.onload = start()
