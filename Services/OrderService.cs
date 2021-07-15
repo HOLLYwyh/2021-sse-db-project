@@ -64,7 +64,7 @@ namespace InternetMall.Services
             }
         }
         //从商品详情页跳转到订单页面的渲染
-        public Good RenderOrderPageFromDetail(string commodityId, int amount)
+        public List<Good> RenderOrderPageFromDetail(string commodityId, int amount)
         {
             if (commodityId == "")
                 return null;
@@ -72,6 +72,7 @@ namespace InternetMall.Services
             {
                 if (_context.Commodities.Any(c => c.CommodityId == commodityId))
                 {
+                    List<Good> returnList = new List<Good>();
                     var query = from commodity in _context.Set<Commodity>().Where(c => c.CommodityId == commodityId) join shop in _context.Set<Shop>() on commodity.ShopId equals shop.ShopId select new { commodity, shop };
                     var newCommodity = query.ToList();
                     Good newGood = new Good();
@@ -79,10 +80,11 @@ namespace InternetMall.Services
                     newGood.intro = newCommodity[0].commodity.Name;
                     newGood.shop = newCommodity[0].shop.Name;
                     newGood.ID = newCommodity[0].commodity.CommodityId;
-                    newGood.price = newCommodity[0].commodity.Price * amount;
+                    newGood.price = newCommodity[0].commodity.Price;
                     newGood.description = newCommodity[0].commodity.Description;
-                    newGood.Soldnum = newCommodity[0].commodity.Soldnum;
-                    return newGood;
+                    newGood.Soldnum = amount;
+                    returnList.Add(newGood);
+                    return returnList;
                 }
                 else return null;
             }

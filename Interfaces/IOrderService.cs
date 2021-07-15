@@ -17,7 +17,7 @@ namespace InternetMall.Interfaces
         public List<CouponView> GetCoupons(string buyerId);
         // 根据用户Id返回其所有收货人信息
         public List<ReceiveInformation> GetReceiveInformation(string buyerId);
-        public Good RenderOrderPageFromDetail(string commodityId, int amount);
+        public List<Good> RenderOrderPageFromDetail(string commodityId, int amount);
         // 从商品详情页创建订单
         public bool CreateOrderFromDetail(string buyerid, string commodityid, string receivedId,int amount,int price);
         // 从购物车创建订单

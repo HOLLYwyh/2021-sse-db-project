@@ -23,17 +23,17 @@ var shop = new Vue({
     },
     methods: {
         setShop(id) {    //跳转到店铺详情页面
-            //$.ajax({
-            //    url: "",
-            //    type: "post",
-            //    dataType: "json", //返回数据格式为json
-            //    contentType: "application/json; charset=utf-8",
-            //    async: false,
-            //    data: JSON.stringify({ ID: id }),
-            //    success: function (data) {//请求成功完成后要执行的方法
-            //        window.location = ""
-            //    }
-            //})
+            $.ajax({
+                url: "/Shop/SetShopID",
+                type: "post",
+                dataType: "json", //返回数据格式为json
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                data: JSON.stringify({ ID: id }),
+                success: function (data) {//请求成功完成后要执行的方法
+                    window.location = "/Shop/Shop"
+                }
+            })
         }
     }
 })

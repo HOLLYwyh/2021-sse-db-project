@@ -286,15 +286,22 @@ class CartSum extends HTMLElement {
                 }
             }
             $.ajax({
-                url: "/Purchase/GetCartDetail",//json文件位置
+                url: "/Purchase/SetCartOrdedr",//json文件位置
                 type: "post",
                 contentType: "application/json",
                 dataType: "json", //返回数据格式为json
-                data: JSON.stringify({ result }),
+                data: JSON.stringify({"cart":result}),
                 success: function (data) {//请求成功完成后要执行的方法
-                    console.log(result);
+                    var jsonData = eval("(" + data + ")");   //将json转换成对象
+                    if (jsonData.result == "FALSE") {
+                        alert("请先选择商品!!!!");
+                    }
+                    else {
+                        window.location = "/Purchase/ConfirmOrder";
+                    }
                 }
             });
+            
         });
     }
 

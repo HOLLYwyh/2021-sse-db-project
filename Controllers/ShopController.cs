@@ -1,15 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
+using System;using System.Linq;
+
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using InternetMall.Models;
 using ThirdParty.Json.LitJson;
+using InternetMall.DBContext;
+using InternetMall.Services;
+using InternetMall.Models.BusinessEntity;
+using Newtonsoft.Json;
 
 namespace InternetMall.Controllers
 {
     public class ShopController : Controller
     {
+        private readonly ModelContext _context;   //数据库上下文
+        private ShopService shopService;             //后端service
+
+        public ShopController(ModelContext context)
+        {
+            _context = context;
+            shopService = new ShopService(_context);
+        }
+
         public IActionResult Shop()
         {
             if (Request.Cookies["buyerNickName"] != null)
@@ -33,8 +46,12 @@ namespace InternetMall.Controllers
 
         public IActionResult GetShop()    //商品详情页面
         {
-            //还需要再修改
-            return Ok();
+            //正在修改
+            ShopCommodityView shop = new ShopCommodityView();
+            shop = shopService.getShopCommodities(Global.GShopId);
+
+            string str = JsonConvert.SerializeObject(shop);
+            return new ContentResult { Content = str, ContentType = "application/json" };
         }
     }
 }

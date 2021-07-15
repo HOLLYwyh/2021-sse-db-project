@@ -230,10 +230,18 @@ namespace InternetMall.Controllers
 
         public IActionResult GetCommodDetail()   //订单确认-渲染商品信息
         {
-            Good commodity = new Good();
-            commodity = orderService.RenderOrderPageFromDetail(Global.GCommodityID,Global.GCommodityNum);
-            string str = JsonConvert.SerializeObject(commodity);
-            return new ContentResult { Content = str, ContentType = "application/json" };
+            if(Global.GConfirmOrderType  == 1)  //从商品详情页渲染商品信息
+            {
+                List<Good> commodity = new List<Good>();
+                commodity = orderService.RenderOrderPageFromDetail(Global.GCommodityID, Global.GCommodityNum);
+                string str = JsonConvert.SerializeObject(commodity);
+                return new ContentResult { Content = str, ContentType = "application/json" };
+            }
+            else   //从购物车渲染商品信息
+            {
+                return Ok();
+            }
+
         }
 
         public IActionResult GetReceiveInformation()    //订单确认-收货信息
@@ -305,9 +313,20 @@ namespace InternetMall.Controllers
         }
         
         [HttpPost]
-        public IActionResult ConfirmOrderCart()    //在购物车页面跳转到购物详情
+        public IActionResult SetCartOrdedr([FromBody] Cart cart)    //在购物车页面跳转到支付详情
         {
-            return Ok();
+            JsonData jsonData = new JsonData();
+            if(cart.cart.Count == 0)  //没有商品
+            {
+                jsonData["result"] = "FALSE"; 
+            }
+            else
+            {
+                Global.GCart = cart;
+                Global.GConfirmOrderType = 2;
+                jsonData["result"] = "SUCCESS";
+            }
+            return Json(jsonData.ToJson());
         }
     }
 }

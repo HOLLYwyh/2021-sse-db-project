@@ -225,13 +225,14 @@ var vm = new Vue({
 			
         },
 		submit() {
-			let that = {}
+			let that = { totalMoney: this.totalPrice, addressID: this.filterAddress[currentIndex].ReceivedId }
 			$.ajax({
 				url: "",
 				type: "post",
 				contentType: "application/json",
 				async: false,
 				dataType: "json", //返回数据格式为json
+				data: JSON.stringify(that),
 				success: function (data) {
 					console.log(data)
 					
@@ -252,9 +253,10 @@ var vm = new Vue({
 				}
 			})
 			console.log(this.totalPrice)
-			this.shopTableDatas=[]
+			this.shopTableDatas=that
+			/*this.shopTableDatas=[]
 			
-			this.shopTableDatas.push(that)
+			this.shopTableDatas.push(that)*/
         },
 		/*商品数量增加减少函数*/
 		goodNum:function(item,way){
