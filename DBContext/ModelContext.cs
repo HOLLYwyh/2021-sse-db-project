@@ -423,10 +423,10 @@ namespace InternetMall.DBContext
                     .HasPrecision(2)
                     .HasColumnName("CATEGORY");
 
-                entity.Property(e => e.CommodityId)
+                entity.Property(e => e.ActivityId)
                     .HasMaxLength(6)
                     .IsUnicode(false)
-                    .HasColumnName("COMMODITY_ID");
+                    .HasColumnName("_ID");
 
                 entity.Property(e => e.Discount1)
                     .HasColumnType("NUMBER(11,2)")
@@ -453,9 +453,9 @@ namespace InternetMall.DBContext
                     .HasColumnType("NUMBER(11,2)")
                     .HasColumnName("THRESHOLD");
 
-                entity.HasOne(d => d.Commodity)
+                entity.HasOne(d => d.Activity)
                     .WithMany(p => p.Coupons)
-                    .HasForeignKey(d => d.CommodityId)
+                    .HasForeignKey(d => d.ActivityId)
                     .HasConstraintName("SYS_C0010043");
 
                 entity.HasOne(d => d.Shop)

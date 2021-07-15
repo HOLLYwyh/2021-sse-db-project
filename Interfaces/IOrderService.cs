@@ -21,7 +21,7 @@ namespace InternetMall.Interfaces
         // 从商品详情页创建订单
         public bool CreateOrderFromDetail(string buyerid, string commodityid, string receivedId,int amount,int price);
         // 从购物车创建订单
-        //public bool CreateOrderFromChart()
+        public List<Good> RenderOrderPageFromCart(Cart newCart, string buyerId);
         // 更新订单状态
         public bool updateOrderStatus(string orderid, int newStatus);
         // 更新订单中商品的状态

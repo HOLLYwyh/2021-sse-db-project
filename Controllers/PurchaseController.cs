@@ -239,7 +239,11 @@ namespace InternetMall.Controllers
             }
             else   //从购物车渲染商品信息
             {
-                return Ok();
+                List<Good> commodityList = new List<Good>();
+                commodityList = orderService.RenderOrderPageFromCart(Global.GCart, Request.Cookies["buyerID"]);
+                Global.GGoods = commodityList;  //提前保存
+                string str = JsonConvert.SerializeObject(commodityList);
+                return new ContentResult { Content = str, ContentType = "application/json" };
             }
 
         }
@@ -261,18 +265,13 @@ namespace InternetMall.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateOrder()    //订单确认-生成订单
+        public IActionResult CreateOrder([FromBody] CommdCartOrder order)    //订单确认-生成订单
         {
             JsonData jsonData = new JsonData();
             if (Global.GConfirmOrderType == 1)  //是从商品详情页面进行渲染
             {
-                //下方均需要前端传入的数据
-                string receiveID = "1";
-                int price = 1;
-                int amount = 1;
-                //上方均需要前端传入的数据
                 if (orderService.CreateOrderFromDetail(Request.Cookies["buyerID"], Global.GCommodityID,
-                    receiveID,amount,price))
+                   order.AddressID, Global.GCommodityNum,int.Parse(order.TotalPrice)))
                 {
                     jsonData["result"] = "SUCCESS";
                 }
@@ -283,7 +282,11 @@ namespace InternetMall.Controllers
             }
             else   //从购物车进行渲染
             {
-                //这里还没有写~
+                //下方均需要前端传入的数据
+                string receiveID = "1";
+                int price = 1;
+                //上方均需要前端传入的数据
+                //orderService.CreateOrderFromChart(Request.Cookies["buyerID"],, receiveID, price);
             }
             return Json(jsonData.ToJson());
         }

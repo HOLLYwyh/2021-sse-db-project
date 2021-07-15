@@ -279,6 +279,7 @@ class ShopTitle extends HTMLElement {
         this.$name.innerHTML = shop_data.name;
         this.$followme.addEventListener("click", () => {
             //todo click to follow this shop
+
             console.log(this.$shopId);
         });
     }

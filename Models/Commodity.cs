@@ -10,7 +10,6 @@ namespace InternetMall.Models
         public Commodity()
         {
             AddShoppingCarts = new HashSet<AddShoppingCart>();
-            Coupons = new HashSet<Coupon>();
             FavoriteProducts = new HashSet<FavoriteProduct>();
             OrdersCommodities = new HashSet<OrdersCommodity>();
         }
@@ -27,7 +26,6 @@ namespace InternetMall.Models
 
         public virtual Shop Shop { get; set; }
         public virtual ICollection<AddShoppingCart> AddShoppingCarts { get; set; }
-        public virtual ICollection<Coupon> Coupons { get; set; }
         public virtual ICollection<FavoriteProduct> FavoriteProducts { get; set; }
         public virtual ICollection<OrdersCommodity> OrdersCommodities { get; set; }
     }

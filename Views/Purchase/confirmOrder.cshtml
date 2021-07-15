@@ -180,14 +180,14 @@
                         <li class="couponconts">
                             <span class="addAddressCons ">使用优惠券</span>
                             <div class="consignee couponcontShow">
-                                <span class="coupon" v-for="(CouponDatas,index) in Coupondatas" :class="{'consigneeListClick':CouponIndex == index}" @@click="CouponIndexClcik(index,CouponDatas.price)">
+                                <span class="coupon" v-for="(CouponDatas,index) in Coupondatas" :class="{'consigneeListClick':CouponIndex == index}" @@click="useQuan(index,CouponDatas.Discount)">
                                     <div class="couponDiv" :class="{'couponDivClick':CouponIndex == index}">
-                                        <p class="couponprice">{{CouponDatas.price | moneyFiler}}</p>
-                                        <p class="coupontime" v-text="'有效期至'+CouponDatas.time"></p>
+                                        <p class="couponprice">满：{{CouponDatas.Threshold}}</p>
+                                        <p class="coupontime" v-text="'有效期至'+CouponDatas.EndTime"></p>
                                     </div>
                                     <span class="coupontype" :class="{'coupontypeClick':CouponIndex == index}">
-                                        <span v-text="CouponDatas.type"></span>
-                                        <span v-text="CouponDatas.types"></span>
+                                        <span>减：</span><span v-text="CouponDatas.Discount"></span>
+                                        @*<span v-text="CouponDatas.types"></span>*@
                                     </span>
                                     <div v-show="CouponIndex == index">
                                         <div class="arrow-right"></div>
@@ -197,12 +197,12 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="row totalRow">金额抵用：{{couponPrice | moneyFiler}}</div>
+                    <div class="row totalRow">金额抵用：{{couponPrice}}</div>
                 </div>
                 <div class="contenterFooter">
                     <p>总金额：<span class="footerPrice">￥{{totalPrice}}</span></p>
                     @* <p>运费：<span class="footerPrice">￥100.00</span></p>*@
-                    <p>优惠：<span class="footerPrice footercouponPrice">{{couponPrice | moneyFiler}}</span></p>
+                    <p>优惠：<span class="footerPrice footercouponPrice">{{couponPrice}}</span></p>
                 </div>
                 <div class="clearfix"></div>
                 <div class="row footerRow">
