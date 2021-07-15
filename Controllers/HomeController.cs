@@ -38,7 +38,7 @@ namespace InternetMall.Controllers
             Global.GCommodityType = "0";
             Global.GShopType = "0";
             //return View();
-            return Redirect("/Entry/SellerLogIn");
+            return Redirect("/Commodity/Details");
         }
 
         //前后端交互
