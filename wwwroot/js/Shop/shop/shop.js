@@ -472,18 +472,21 @@ customElements.define("shop-display", ShopDisplay);
 
 window.onload = function () {
     $.ajax({
-        url: "",//json文件位置
+        url: "/Shop/GetShop",//json文件位置
         type: "get",
         contentType: "application/json",
         dataType: "json", //返回数据格式为json
         //data: JSON.stringify({ "type": "1" }),
         success: function (data) {//请求成功完成后要执行的方法
-            let items = [];//shop's commodities
+            console.log(data);
+            var jsonData = eval("(" + data + ")");   //将json转换成对象
+            let items = jsonData.CommodityViews;//shop's commodities
             let len = items.length;
             let cupboard = document.querySelector("shop-display");
             for (i = 0; i < 4; i++) {
                 for (j = 0; j < 6 && i * 6 + j < len; j++) {
                     cupboard.$borders[i].appendChild(new ShopItem(items[i * 6 + j]));
+                    console.log(cupboard.$borders[i])
                 }
             }
         }
