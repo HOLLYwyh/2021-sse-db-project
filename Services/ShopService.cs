@@ -35,7 +35,7 @@ namespace InternetMall.Services
 
             if (shop == null)
             {
-                shop = new Shop { SellerId = sellerid, ShopId = GetShopCount().ToString(), Name = shopName, Category = category, Description = description };
+                shop = new Shop { SellerId = sellerid, ShopId = GetShopCount().ToString(), Name = shopName, Category = category, Description = description,Url= "/Images/SellerBackground/avatar.png" };
 
                 _context.Shops.Add(shop);
             }

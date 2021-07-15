@@ -9,7 +9,7 @@ let ord = new Vue({
 
 function getShopID() {
     $.ajax({
-        type: "get",
+        type: "post",
         url: "/SellerBackground/GetShopIDForm",
         async: false,
         contentType: "application/json",
