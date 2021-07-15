@@ -108,6 +108,7 @@ namespace Internetmall.Services
             List<Good> goods = new List<Good>();
             if (commodityCategory != -1)
             {
+                
                 List<Commodity> commoditiesList =  _context.Commodities.Where(c => c.Category == commodityCategory).Include(c => c.Shop).Include(c => c.OrdersCommodities).ToList();
                 for (int i = 0; i < 8; i++)
                 {
@@ -127,6 +128,7 @@ namespace Internetmall.Services
                 return goods;
             }
             else return null;
+
         }
         public List<rankView> Rank(int commodityCategory = -1)   //产生排行榜文件
         {

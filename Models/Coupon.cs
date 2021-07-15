@@ -21,9 +21,9 @@ namespace InternetMall.Models
         public decimal? Discount2 { get; set; }
         public short? Category { get; set; }
         public string ShopId { get; set; }
-        public string CommodityId { get; set; }
+        public string ActivityId { get; set; }
 
-        public virtual Commodity Commodity { get; set; }
+        public virtual Activity Activity { get; set; }
         public virtual Shop Shop { get; set; }
         public virtual ICollection<BuyerCoupon> BuyerCoupons { get; set; }
         public virtual ICollection<CouponShop> CouponShops { get; set; }

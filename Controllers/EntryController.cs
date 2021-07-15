@@ -64,7 +64,7 @@ namespace InternetMall.Controllers
         {
             if (Request.Cookies["sellerNickName"] != null)
             {
-                return Redirect("/SellerBackground/Home");
+                return Redirect("/SellerBackground/SwitchShop");
             }
             else
             {
@@ -175,6 +175,24 @@ namespace InternetMall.Controllers
                 jsondata["signUp"] = "ERROR";
                 return Json(jsondata.ToJson());
             }
+        }
+
+        [HttpPost]
+        public IActionResult SellerLogOutForm()                            //卖家退出
+        {
+            if (Request.Cookies["sellerNickName"] != null)
+            {
+                //设置cookie
+                HttpContext.Response.Cookies.Delete("sellerNickName");
+                HttpContext.Response.Cookies.Delete("sellerID");
+            }
+            //重置全局变量
+            Global.GIfShop = "0";  
+            Global.GShopID = "";
+
+            JsonData jsondata = new JsonData();
+            jsondata["logout"] = "YES";
+            return Json(jsondata.ToJson());
         }
 
         [HttpPost]

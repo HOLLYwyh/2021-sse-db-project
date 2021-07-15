@@ -12,7 +12,6 @@ namespace InternetMall.Models
         public string Category { get; set; }
         public string Description { get; set; }
     }
-
     public class DisplayOrders //显示店铺订单
     {
         public string ShopID { get; set; }
@@ -23,10 +22,7 @@ namespace InternetMall.Models
         public string SellerID { get; set; }
     }
     public class CheckShop     //记录有无店铺的信息
-    { 
+    {
         public string IfShop { get; set; }
     }
-
 }
-
-

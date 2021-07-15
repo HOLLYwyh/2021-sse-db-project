@@ -357,7 +357,7 @@ namespace InternetMall.DBContext
             });
 
             modelBuilder.Entity<Counter>(entity =>
-            {               
+            {
                 entity.ToTable("COUNTER");
 
                 entity.Property(e => e.ID)
@@ -384,7 +384,7 @@ namespace InternetMall.DBContext
                 entity.Property(e => e.Shopcount)
                     .HasPrecision(10)
                     .HasColumnName("SHOPCOUNT");
-       
+
                 entity.Property(e => e.Ordercount)
                    .HasPrecision(10)
                    .HasColumnName("ORDERCOUNT");
@@ -423,10 +423,10 @@ namespace InternetMall.DBContext
                     .HasPrecision(2)
                     .HasColumnName("CATEGORY");
 
-                entity.Property(e => e.CommodityId)
+                entity.Property(e => e.ActivityId)
                     .HasMaxLength(6)
                     .IsUnicode(false)
-                    .HasColumnName("COMMODITY_ID");
+                    .HasColumnName("_ID");
 
                 entity.Property(e => e.Discount1)
                     .HasColumnType("NUMBER(11,2)")
@@ -453,9 +453,9 @@ namespace InternetMall.DBContext
                     .HasColumnType("NUMBER(11,2)")
                     .HasColumnName("THRESHOLD");
 
-                entity.HasOne(d => d.Commodity)
+                entity.HasOne(d => d.Activity)
                     .WithMany(p => p.Coupons)
-                    .HasForeignKey(d => d.CommodityId)
+                    .HasForeignKey(d => d.ActivityId)
                     .HasConstraintName("SYS_C0010043");
 
                 entity.HasOne(d => d.Shop)
@@ -714,7 +714,7 @@ namespace InternetMall.DBContext
                     .HasColumnName("BUYER_ID");
 
                 entity.Property(e => e.City)
-                    .HasMaxLength(2)
+                    .HasMaxLength(3)
                     .IsUnicode(false)
                     .HasColumnName("CITY")
                     .IsFixedLength(true);
@@ -725,15 +725,21 @@ namespace InternetMall.DBContext
                     .HasColumnName("COUNTRY");
 
                 entity.Property(e => e.DetailAddr)
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false)
                     .HasColumnName("DETAIL_ADDR");
 
                 entity.Property(e => e.District)
-                    .HasMaxLength(2)
+                    .HasMaxLength(3)
                     .IsUnicode(false)
                     .HasColumnName("DISTRICT")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.Tag)
+                   .HasMaxLength(10)
+                   .IsUnicode(false)
+                   .HasColumnName("TAG")
+                   .IsFixedLength(true);
 
                 entity.Property(e => e.Phone)
                     .HasMaxLength(11)
@@ -742,7 +748,7 @@ namespace InternetMall.DBContext
                     .IsFixedLength(true);
 
                 entity.Property(e => e.Province)
-                    .HasMaxLength(2)
+                    .HasMaxLength(3)
                     .IsUnicode(false)
                     .HasColumnName("PROVINCE")
                     .IsFixedLength(true);

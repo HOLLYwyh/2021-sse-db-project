@@ -26,8 +26,10 @@ new Vue({
                     data: JSON.stringify({ ID: $("#ID").val(), password: $("#password").val() }),
                     success: function (result) {
                         var jsonData = eval("(" + result + ")");   //将json转换成对象
+                        console.log(jsonData);
                         if (jsonData.LogIn != "ERROR") {
-                            window.location.href = "/SellerBackground/Home";
+                            window.location= "/SellerBackground/SwitchShop";
+                            console.log("网页跳转到："+window.location);
                         }
                         else {
                             alert("账号或密码错误!");

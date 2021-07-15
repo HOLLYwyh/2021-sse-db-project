@@ -105,12 +105,13 @@ namespace InternetMall.Services
             var modelContext = await _context.Activities.Where(a => a.ActivityId == activityID).ToListAsync();
             return modelContext;
         }
-        public void createCoupon(DateTime sTime, DateTime eTime, int thres, int dis1, int dis2, short type, string shopId, string commdityId)//发布优惠券
-        {
-            Coupon coupon = new Coupon { CouponId = GetCouponCount().ToString(), StartTime = sTime, EndTime = eTime, Threshold = thres, Discount1 = dis1, Discount2 = dis2, Category = type, ShopId = shopId, CommodityId = commdityId };
-            _context.Coupons.Add(coupon);
-            _context.SaveChanges();
-        }
+        //public void createCoupon(DateTime sTime, DateTime eTime, int thres, int dis1, int dis2, short type, string shopId, string commdityId)//发布优惠券
+        //{
+        //    Coupon coupon = new Coupon { CouponId = GetCouponCount().ToString(), StartTime = sTime, EndTime = eTime, Threshold = thres, Discount1 = dis1, Discount2 = dis2, Category = type, ShopId = shopId, CommodityId = commdityId };
+            
+        //    _context.Coupons.Add(coupon);
+        //    _context.SaveChanges();
+        //}
         //显示优惠券
         public async Task<List<Coupon>> DisplayCoupon(string couponID)
         {

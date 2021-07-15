@@ -10,20 +10,15 @@ namespace InternetMall.Models.BusinessEntity
     /// </summary>
     public class CartView
     {
-        public string BuyerId { get; set; }
-
-        public string CommodityId { get; set; }    
-
-        public int Quantity { get; set; }             // 商品数量
-
-        public DateTime DateCreated { get; set; }     // 创建时间
-        
-        public string CommodityName { get; set; }     //商品名称
-
-        public string ShopName { get; set; }          // 店铺名称
-
-        public decimal Price{ get; set; }             // 商品价格
-
-    
+        public int errorCode { get; set; }//错误状态
+        public string BuyerId { get; set; }//买家Id
+        public string commodityId { get; set; }//商品Id 
+        public int amount{ get; set; }// 商品数量
+        public DateTime? DateCreated { get; set; }// 创建时间
+        public string CommodityName { get; set; }//商品名称
+        public string shopId { get; set; }//店铺Id
+        public string ShopName { get; set; }// 店铺名称
+        public decimal? Price{ get; set; }// 商品总价格
+        public string imgUrl { get; set; }//商品图像
     }
 }

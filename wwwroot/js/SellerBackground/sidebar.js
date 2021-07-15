@@ -128,6 +128,7 @@ function getIfShop() {
             else {
                 sidebar.show = true;      //获取后端存储的shopid信息
             }
+            console.log("是否有店铺0/1：");
             console.log(result);
             console.log("nowIfShop:");
             console.log(sidebar.show);

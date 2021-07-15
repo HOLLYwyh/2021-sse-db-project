@@ -9,6 +9,21 @@ namespace InternetMall.Models.BusinessEntity
     /// <summary>
     /// 卖家后台逻辑实体定义
     /// </summary>
+    
+    public class ShopDataView
+    { 
+        // 点赞数
+        public int FavoriteNum { get; set; }
+
+        // 盈利值
+        public decimal monthProfit { get; set; }
+
+        // 店铺待发货数量
+        public int ToBeShipNum { get; set; }
+
+        // 退款售后订单数
+        public int CanceledOrderNum { get; set; }
+    }
 
     // 店铺关注数
     public class ShopFavoriteNum
@@ -26,7 +41,7 @@ namespace InternetMall.Models.BusinessEntity
         // 店铺名称
         public string ShopName { get; set; }
 
-        // 店铺代发货数量
+        // 店铺待发货数量
         public int ToBeShipNum { get; set; }
     }
 

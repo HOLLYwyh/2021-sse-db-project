@@ -46,7 +46,7 @@ function displayshops(sellerID) {
             console.log("result:");
             console.log(result);
             if (result === null || result === "" || typeof (result) === "undefined") {
-                setifshop("1"); //设置“无店铺”信息
+                setifshop("0"); //设置“无店铺”信息
                 if (window.location.href != "https://localhost:44393/SellerBackground/ShopSignUp") {
                     window.location.href = "/SellerBackground/ShopSignUp";
                 }
@@ -62,8 +62,8 @@ function displayshops(sellerID) {
         },
         error: function (result) {
             setifshop("0");      //设置“无店铺”信息
-            if (window.location.href != "https://localhost:44393/sellerbackground/shopsignup") {
-                window.location.href = "/sellerbackground/shopsignup";
+            if (window.location.href != "https://localhost:44393/SellerBackground/ShopSignUp") {
+                window.location.href = "/SellerBackground/ShopSignUp";
             }
         }
     });
