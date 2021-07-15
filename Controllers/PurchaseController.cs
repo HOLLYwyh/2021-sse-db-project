@@ -230,10 +230,22 @@ namespace InternetMall.Controllers
 
         public IActionResult GetCommodDetail()   //订单确认-渲染商品信息
         {
-            Good commodity = new Good();
-            commodity = orderService.RenderOrderPageFromDetail(Global.GCommodityID,Global.GCommodityNum);
-            string str = JsonConvert.SerializeObject(commodity);
-            return new ContentResult { Content = str, ContentType = "application/json" };
+            if(Global.GConfirmOrderType  == 1)  //从商品详情页渲染商品信息
+            {
+                List<Good> commodity = new List<Good>();
+                commodity = orderService.RenderOrderPageFromDetail(Global.GCommodityID, Global.GCommodityNum);
+                string str = JsonConvert.SerializeObject(commodity);
+                return new ContentResult { Content = str, ContentType = "application/json" };
+            }
+            else   //从购物车渲染商品信息
+            {
+                List<Good> commodityList = new List<Good>();
+                commodityList = orderService.RenderOrderPageFromCart(Global.GCart, Request.Cookies["buyerID"]);
+                Global.GGoods = commodityList;  //提前保存
+                string str = JsonConvert.SerializeObject(commodityList);
+                return new ContentResult { Content = str, ContentType = "application/json" };
+            }
+
         }
 
         public IActionResult GetReceiveInformation()    //订单确认-收货信息
@@ -253,18 +265,13 @@ namespace InternetMall.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateOrder()    //订单确认-生成订单
+        public IActionResult CreateOrder([FromBody] CommdCartOrder order)    //订单确认-生成订单
         {
             JsonData jsonData = new JsonData();
             if (Global.GConfirmOrderType == 1)  //是从商品详情页面进行渲染
             {
-                //下方均需要前端传入的数据
-                string receiveID = "1";
-                int price = 1;
-                int amount = 1;
-                //上方均需要前端传入的数据
                 if (orderService.CreateOrderFromDetail(Request.Cookies["buyerID"], Global.GCommodityID,
-                    receiveID,amount,price))
+                   order.AddressID, Global.GCommodityNum,int.Parse(order.TotalPrice)))
                 {
                     jsonData["result"] = "SUCCESS";
                 }
@@ -275,7 +282,11 @@ namespace InternetMall.Controllers
             }
             else   //从购物车进行渲染
             {
-                //这里还没有写~
+                //下方均需要前端传入的数据
+                string receiveID = "1";
+                int price = 1;
+                //上方均需要前端传入的数据
+                //orderService.CreateOrderFromChart(Request.Cookies["buyerID"],, receiveID, price);
             }
             return Json(jsonData.ToJson());
         }
@@ -305,9 +316,20 @@ namespace InternetMall.Controllers
         }
         
         [HttpPost]
-        public IActionResult ConfirmOrderCart()    //在购物车页面跳转到购物详情
+        public IActionResult SetCartOrdedr([FromBody] Cart cart)    //在购物车页面跳转到支付详情
         {
-            return Ok();
+            JsonData jsonData = new JsonData();
+            if(cart.cart.Count == 0)  //没有商品
+            {
+                jsonData["result"] = "FALSE"; 
+            }
+            else
+            {
+                Global.GCart = cart;
+                Global.GConfirmOrderType = 2;
+                jsonData["result"] = "SUCCESS";
+            }
+            return Json(jsonData.ToJson());
         }
     }
 }

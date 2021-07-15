@@ -28,8 +28,9 @@ namespace InternetMall.Services
             if (result == null)                   //不存在，则插入该商品
             {
                 Counter counts = _context.Counters.FirstOrDefault(c=>c.ID=="0");
-                commodity.CommodityId = (counts.Commoditycount + 1).ToString();//生成商品ID
+                //commodity.CommodityId = (counts.Commoditycount + 1).ToString();//生成商品ID
                 //修改表的计数
+                commodity.CommodityId = "100";
                 counts.Commoditycount = counts.Commoditycount + 1;
                 _context.Counters.Update(counts);
 

@@ -133,7 +133,7 @@ namespace InternetMall.Services
 
             return seller;
         }
-        public void Create([Bind("SellerId,Phone,Passwd,Nickname,Gender,DateBirth,IdNumber")] Seller seller)
+        public void Create([Bind("SellerId,Phone,Passwd,Nickname,IdNumber")] Seller seller)
         {
             //if (ModelState.IsValid)
             //{

@@ -104,7 +104,7 @@ namespace InternetMall.Services
         }
         public void createCoupon(DateTime sTime, DateTime eTime, int thres, int dis1, int dis2, short type, string shopId, string commdityId)//发布优惠券
         {
-            Coupon coupon = new Coupon { CouponId = GetCouponCount().ToString(), StartTime = sTime, EndTime = eTime, Threshold = thres, Discount1 = dis1, Discount2 = dis2, Category = type, ShopId = shopId, CommodityId = commdityId };
+            Coupon coupon = new Coupon { CouponId = GetCouponCount().ToString(), StartTime = sTime, EndTime = eTime, Threshold = thres, Discount1 = dis1, Discount2 = dis2, Category = type, ShopId = shopId};
             _context.Coupons.Add(coupon);
             _context.SaveChanges();
         }

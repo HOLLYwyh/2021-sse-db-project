@@ -1,6 +1,8 @@
-﻿using InternetMall.DBContext;
+﻿using Internetmall.Models.BusinessEntity;
+using InternetMall.DBContext;
 using InternetMall.Interfaces;
 using InternetMall.Models;
+using InternetMall.Models.BusinessEntity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -44,6 +46,51 @@ namespace InternetMall.Services
                 return true;
 
             return false;
+        }
+        // 店铺信息及其拥有的所有商品
+        //public List<ShopCommodityView> getShopCommodities(string shopid)
+        public ShopCommodityView getShopCommodities(string shopid)
+        {
+            Shop shop = _context.Shops.Where(x => x.ShopId == shopid).FirstOrDefault();  // 店铺信息
+
+            //List<ShopCommodityView> shopCommodityViews = new List<ShopCommodityView>();    //  返回信息列表     
+
+            List<Commodity> shopCommodities = _context.Commodities.Where(x => x.ShopId == shopid).ToList();    // 所有商品
+
+            List<CommodityView> commodityViews = new List<CommodityView>();
+
+            foreach (var shopcommodity in shopCommodities)
+            {
+                CommodityView commodityView = new CommodityView
+                {
+                    CommodityId = shopcommodity.CommodityId,
+                    ShopId = shopcommodity.ShopId,
+                    Url = shopcommodity.Url,
+                    Category = shopcommodity.Category,
+                    Name = shopcommodity.Name,
+                    Price = shopcommodity.Price,
+                    Storage = shopcommodity.Storage,
+                    Soldnum = shopcommodity.Soldnum,
+                    Description = shopcommodity.Description
+                };
+                commodityViews.Add(commodityView);
+            }
+            ShopView shopView = new ShopView
+            {
+                shopID = shop.ShopId,
+                shopName = shop.Name,
+                shopDescription = shop.Description,
+                img = shop.Url,
+                creditScore = shop.CreditScore
+            };
+
+            ShopCommodityView shopCommodityView = new ShopCommodityView
+            {
+                Shop = shopView,
+                CommodityViews = commodityViews
+            };
+
+            return shopCommodityView;
         }
 
         // 查看卖家所有店铺

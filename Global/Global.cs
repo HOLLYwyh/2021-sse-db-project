@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Internetmall.Models.BusinessEntity;
+using InternetMall.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,5 +20,9 @@ namespace InternetMall
         public static string GShopId = "1";          //店铺ID
         //购买部分                                           
         public static int GConfirmOrderType = 1;    //购买类别  1-从商品详情页购买，2-从购物车购买
+        //购物车部分
+        public static Cart GCart;          //购物车中选中的物品
+        //创建订单部分
+        public static List<Good> GGoods;    //购物车中购买的商品
     }
 }

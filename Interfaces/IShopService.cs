@@ -1,4 +1,5 @@
 ﻿using InternetMall.Models;
+using InternetMall.Models.BusinessEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,11 @@ namespace InternetMall.Interfaces
 
         // 查看卖家一个店铺
         public Shop viewOneShop(string sellerid, string shopName);
+
+        // 查看卖家一个店铺及所有商品
+        //public List<ShopCommodityView> getShopCommodities(string shopid);
+        public ShopCommodityView getShopCommodities(string shopid);
+
 
         // 判断卖家是否拥有店铺
         public bool sellerShopExist(string sellerid);

@@ -152,8 +152,12 @@ var vm = new Vue({
 		 moreAddressData:addressdatas.addressdata,//地址数据
 		 paymentdatas:payment.paymentdata,//支付类型数据
 		 deliverymodedatas:deliverymode.deliverymodeData,//配送类型数据
-		 invoicedatas:invoice.invoicedata,//发票类型数据
-		 Coupondatas:Coupon.Coupondata,//优惠券数据
+		invoicedatas: invoice.invoicedata,//发票类型数据
+
+
+		/*Coupondatas: Coupon.Coupondata,*///优惠券数据
+
+
 		 userBuyData:[],//用户购买数据
 		
 		/*默认选择标签*/
@@ -178,8 +182,23 @@ var vm = new Vue({
 		 saveandremove:true,//收藏和取消收藏的状态
 		 goodsNum:0,//商品的数量
 		 serviceNum:0,//服务的数量
-		 
-		
+
+		Coupondatas:[ {
+			CouponId : '2233',
+			StartTime: '',
+			EndTime: '',
+			Threshold : '250',
+			Discount : '20',
+        },],
+
+		/*{
+			 Coupondatas
+			"price":200,
+			"time":"2017-08-30",
+			"type":"[ 店铺类 ]",
+			"types":"[ 店铺类 ]",
+		},*/
+
 		 form: {
 			 	name:'',
 	          	city:'',
@@ -223,15 +242,41 @@ var vm = new Vue({
 			this.moreAddressData=that
             }
 			
+		},
+		useQuan(index, price) {
+			if (this.totalPrice >= this.Coupondatas[index].Threshold) {
+				this.CouponIndex = index;
+				this.couponPrice = price;
+            }	
+        },
+		getQuan() {
+			let that
+			$.ajax({
+				url: "/Purchase/GetCoupons",
+				type: "get",
+				contentType: "application/json",
+				async: false,
+				dataType: "json", //返回数据格式为json
+				success: function (data) {
+					console.log(data)
+					that = data
+					console.log(that)
+				}
+
+			})
+			if (that) {
+				this.Coupondatas = that
+			}
         },
 		submit() {
-			let that = {}
+			let that = { TotalMoney: this.totalPrice, AddressID: this.filterAddress[currentIndex].ReceivedId }
 			$.ajax({
 				url: "",
 				type: "post",
 				contentType: "application/json",
 				async: false,
 				dataType: "json", //返回数据格式为json
+				data: JSON.stringify(that),
 				success: function (data) {
 					console.log(data)
 					
@@ -252,9 +297,9 @@ var vm = new Vue({
 				}
 			})
 			console.log(this.totalPrice)
-			this.shopTableDatas=[]
+			this.shopTableDatas=that
 			
-			this.shopTableDatas.push(that)
+			
         },
 		/*商品数量增加减少函数*/
 		goodNum:function(item,way){
@@ -617,6 +662,7 @@ var vm = new Vue({
 			for (let i in this.shopTableDatas) {
 				p += vm.shopTableDatas[i].price * vm.shopTableDatas[i].Soldnum
 			}
+			p -= this.couponPrice
 			return p
         }
 	},
@@ -625,6 +671,7 @@ var vm = new Vue({
 function start() {
 	vm.getGoods()
 	vm.getAddress()
+	vm.getQuan() 
 }
 
 window.onload = start()

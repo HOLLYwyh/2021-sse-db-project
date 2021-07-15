@@ -33,6 +33,7 @@ namespace InternetMall.Services
                 newBuyer.Phone = phone;
                 newBuyer.Nickname = nickName;
                 newBuyer.Passwd = passwd;
+                newBuyer.Gender = 0;
                 //为新用户随机生成一个用户ID
                 newBuyer.BuyerId = GetBuyerCount().ToString();
                 //其他信息可以为空（初始即为空），用户后续添加即可

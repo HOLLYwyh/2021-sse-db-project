@@ -190,10 +190,10 @@ class CartItem extends HTMLElement {
         this.$name.innerHTML = item_data.CommodityName;
         this.$amount.innerHTML = item_data.amount;
         this.$image.setAttribute("src", item_data.imgUrl);
-        this.$perprice.innerHTML = item_data.Price;
-        let price = parseFloat(this.$perprice.innerHTML.toString());
+        this.$totprice.innerHTML = item_data.Price;
+        let price = parseFloat(this.$totprice.innerHTML.toString());
         let num = parseFloat(this.$amount.innerHTML.toString());
-        this.$totprice.innerHTML = (price * num).toFixed(2).toString();
+        this.$perprice.innerHTML = (price / num).toFixed(2).toString();
         this.$commodityId = item_data.commodityId;
     }
 
@@ -286,15 +286,22 @@ class CartSum extends HTMLElement {
                 }
             }
             $.ajax({
-                url: "/Purchase/GetCartDetail",//json文件位置
+                url: "/Purchase/SetCartOrdedr",//json文件位置
                 type: "post",
                 contentType: "application/json",
                 dataType: "json", //返回数据格式为json
-                data: JSON.stringify({ result }),
+                data: JSON.stringify({"cart":result}),
                 success: function (data) {//请求成功完成后要执行的方法
-                    console.log(result);
+                    var jsonData = eval("(" + data + ")");   //将json转换成对象
+                    if (jsonData.result == "FALSE") {
+                        alert("请先选择商品!!!!");
+                    }
+                    else {
+                        window.location = "/Purchase/ConfirmOrder";
+                    }
                 }
             });
+            
         });
     }
 
@@ -351,7 +358,7 @@ window.onload = function () {
             for (i = 0; i < len; i++) {
                 //window.alert("1");
                 cart_item_list.appendChild(new CartItem(data[i]));
-                console.log(data[i]);
+                //console.log(data[i]);
             }
             cart_item_list.parentNode.appendChild(new CartSum());
         }

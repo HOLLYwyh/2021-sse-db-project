@@ -106,11 +106,11 @@ shop_item_template.innerHTML = `
     </div>
 </div>
 `;
-let tmp = { name: "数据库算法导论操作系统计算机系统结构", price: "998.00", img_url: "" };
+//let tmp = { name: "数据库算法导论操作系统计算机系统结构", price: "998.00", img_url: "" };
 class ShopItem extends HTMLElement {
     constructor(item_data) {
         super();
-        item_data = tmp;
+        //item_data = tmp;
         this._shadowRoot = this.attachShadow({ mode: 'closed' });
         this._shadowRoot.appendChild(shop_item_template.content.cloneNode(true));
 
@@ -118,11 +118,23 @@ class ShopItem extends HTMLElement {
         this.$name = this._shadowRoot.querySelector(".shopinfo_itembox_itemname");
         this.$price = this._shadowRoot.querySelector(".shopinfo_itembox_itemprice");
         this.$link = this._shadowRoot.querySelector(".shopinfo_itembox_iteminfo");
-        this.$img.setAttribute("src", item_data.img_url);
-        this.$name.innerHTML = item_data.name;
-        this.$price.innerHTML = item_data.price;
+        this.$img.setAttribute("src", item_data.Url);
+        this.$name.innerHTML = item_data.Name;
+        this.$price.innerHTML = item_data.Price;
+        this.$comid = item_data.CommodityId;
         this.$link.addEventListener("click", () => {
             //todo, click to jump to commodity detail page
+            $.ajax({
+                url: "/Commodity/SetCommodityID",
+                type: "post",
+                dataType: "json", //返回数据格式为json
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                data: JSON.stringify({ ID: this.$comid }),
+                success: function (data) {//请求成功完成后要执行的方法
+                    window.location = "/Commodity/Details"
+                }
+            })
         });
 
     }
@@ -269,17 +281,37 @@ shop_title_template.innerHTML = `
 class ShopTitle extends HTMLElement {
     constructor(shop_data) {
         super();
-        let tmp = { name: "英豪荟萃官方旗舰店", shopId: "1" };
-        shop_data = tmp;
+        //let tmp = { name: "英豪荟萃官方旗舰店", shopId: "1" };
+        //shop_data = tmp;
         this._shadowRoot = this.attachShadow({ mode: 'closed' });
         this._shadowRoot.appendChild(shop_title_template.content.cloneNode(true));
-        this.$shopId = shop_data.shopId;
+        this.$shopId = shop_data.shopID;
         this.$followme = this._shadowRoot.querySelector(".followme_button");
         this.$name = this._shadowRoot.querySelector(".shopinfo_name");
-        this.$name.innerHTML = shop_data.name;
+        this.$name.innerHTML = shop_data.shopName;
         this.$followme.addEventListener("click", () => {
             //todo click to follow this shop
-            console.log(this.$shopId);
+            $.ajax({
+                type: "post",
+                url: "/Account/AddFollowShop",
+                async: false,
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify({
+                    buyerid: this.$shopId,               // 买家ID
+                    shopid: this.$shopId                 // 店铺ID
+                }),
+                success: function (result) {        // bool
+                    let ret = result.search("SUCCESS");
+                    console.log(ret);
+                    if (ret != -1) {
+                        alert("关注成功");
+                    }
+                    else {
+                        alert("关注失败");
+                    }
+                }
+            })
         });
     }
 }
@@ -472,18 +504,25 @@ customElements.define("shop-display", ShopDisplay);
 
 window.onload = function () {
     $.ajax({
-        url: "",//json文件位置
+        url: "/Shop/GetShop",//json文件位置
         type: "get",
         contentType: "application/json",
         dataType: "json", //返回数据格式为json
         //data: JSON.stringify({ "type": "1" }),
         success: function (data) {//请求成功完成后要执行的方法
-            let items = [];//shop's commodities
+            console.log(data);
+            //var jsonData = eval("(" + data + ")");   //将json转换成对象
+            let jsonData = data;
+            let shopInfo = jsonData.Shop;
+            let shop_main = document.getElementById("shop_main");
+            shop_main.appendChild(new ShopTitle(shopInfo));
+            let items = jsonData.CommodityViews;//shop's commodities
             let len = items.length;
             let cupboard = document.querySelector("shop-display");
             for (i = 0; i < 4; i++) {
                 for (j = 0; j < 6 && i * 6 + j < len; j++) {
                     cupboard.$borders[i].appendChild(new ShopItem(items[i * 6 + j]));
+                    //console.log(cupboard.$borders[i])
                 }
             }
         }

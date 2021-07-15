@@ -1,4 +1,5 @@
 ﻿using Internetmall.Models.BusinessEntity;
+using Internetmall.Models.ControllerModels;
 using InternetMall.Constants.Orders;
 using InternetMall.DBContext;
 using InternetMall.Interfaces;
@@ -63,8 +64,33 @@ namespace InternetMall.Services
                 else return null;
             }
         }
+        //从购物车渲染订单
+        public List<Good> RenderOrderPageFromCart(Cart newCart, string buyerId)
+        {
+            if (newCart.cart.Count == 0 || buyerId == "")
+                return null;
+            else
+            {
+                List<Good> returnList = new List<Good>();
+                foreach (CartCommodity newCommodity in newCart.cart)
+                {
+                    Good newGood = new Good();
+                    var query = from commodity in _context.Set<Commodity>().Where(c => c.CommodityId == newCommodity.commodityId) join shop in _context.Set<Shop>() on commodity.ShopId equals shop.ShopId select new { commodity, shop };
+                    var tempCommodity = query.ToList();
+                    newGood.img = tempCommodity[0].commodity.Url;
+                    newGood.intro = tempCommodity[0].commodity.Name;
+                    newGood.shop = tempCommodity[0].shop.Name;
+                    newGood.ID = tempCommodity[0].commodity.CommodityId;
+                    newGood.price = tempCommodity[0].commodity.Price;
+                    newGood.description = tempCommodity[0].commodity.Description;
+                    newGood.Soldnum = int.Parse(newCommodity.amount);
+                    returnList.Add(newGood);
+                }
+                return returnList;
+            }
+        }
         //从商品详情页跳转到订单页面的渲染
-        public Good RenderOrderPageFromDetail(string commodityId, int amount)
+        public List<Good> RenderOrderPageFromDetail(string commodityId, int amount)
         {
             if (commodityId == "")
                 return null;
@@ -72,6 +98,7 @@ namespace InternetMall.Services
             {
                 if (_context.Commodities.Any(c => c.CommodityId == commodityId))
                 {
+                    List<Good> returnList = new List<Good>(); 
                     var query = from commodity in _context.Set<Commodity>().Where(c => c.CommodityId == commodityId) join shop in _context.Set<Shop>() on commodity.ShopId equals shop.ShopId select new { commodity, shop };
                     var newCommodity = query.ToList();
                     Good newGood = new Good();
@@ -79,10 +106,11 @@ namespace InternetMall.Services
                     newGood.intro = newCommodity[0].commodity.Name;
                     newGood.shop = newCommodity[0].shop.Name;
                     newGood.ID = newCommodity[0].commodity.CommodityId;
-                    newGood.price = newCommodity[0].commodity.Price * amount;
+                    newGood.price = newCommodity[0].commodity.Price;
                     newGood.description = newCommodity[0].commodity.Description;
-                    newGood.Soldnum = newCommodity[0].commodity.Soldnum;
-                    return newGood;
+                    newGood.Soldnum = amount;
+                    returnList.Add(newGood);
+                    return returnList;
                 }
                 else return null;
             }
@@ -93,7 +121,60 @@ namespace InternetMall.Services
         {
             return _context.Orders.Any(e => e.OrdersId == id);
         }
-
+        // 从购物车页面创建订单
+        public bool CreateOrderFromChart(string buyerId, List<CartCommodityModels> cartCommodityList, string receivedId, int price)
+        {
+            if (buyerId == "" || cartCommodityList.Count == 0 || receivedId == "" || price == 0)
+                return false;
+            else
+            {
+                List<Commodity> commodityList = new List<Commodity>();
+                List<Shop> shopList = new List<Shop>();
+                CreateIdCount create = new CreateIdCount(_context);
+                decimal oldPrice = 0;
+                foreach(CartCommodityModels cartCommodity in cartCommodityList)
+                {
+                    Commodity newCommodity = _context.Commodities.Include(c => c.Shop).FirstOrDefault(c => c.CommodityId == cartCommodity.CommodityId);
+                    oldPrice = oldPrice + ((int)newCommodity.Price) * cartCommodity.amount;
+                    commodityList.Add(newCommodity);
+                    if (shopList.Any(s => s.ShopId == newCommodity.Shop.ShopId) == false)
+                        shopList.Add(_context.Shops.FirstOrDefault(s => s.ShopId == newCommodity.Shop.ShopId));
+                    AddShoppingCart scCommodity = _context.AddShoppingCarts.FirstOrDefault(a => a.CommodityId == cartCommodity.CommodityId && a.BuyerId == buyerId);
+                    _context.AddShoppingCarts.Remove(scCommodity);
+                }
+                decimal discountNumber = price / shopList.Count;
+                foreach(Shop newShop in shopList)
+                {
+                    Order newOrder = new Order();
+                    newOrder.OrdersId = create.GetOrderCount();
+                    newOrder.BuyerId = buyerId;
+                    newOrder.ShopId = newShop.ShopId;
+                    newOrder.OrdersDate = DateTime.Now;
+                    newOrder.Status = COrders.ToBePay;
+                    newOrder.ReceivedId = receivedId;
+                    decimal amount = 0;
+                    foreach(Commodity newCommodity in commodityList)
+                    {
+                        CartCommodityModels newcart = cartCommodityList.FirstOrDefault(c => c.CommodityId == newCommodity.CommodityId);
+                        OrdersCommodity newOrdersCommodity = new OrdersCommodity();
+                        newOrdersCommodity.OrdersId = newOrder.OrdersId;
+                        newOrdersCommodity.CommodityId = newCommodity.CommodityId;
+                        newOrdersCommodity.Status = COrders.ToBePay;
+                        newOrdersCommodity.Amount = newcart.amount;
+                        _context.OrdersCommodities.Add(newOrdersCommodity);
+                        if (newCommodity.ShopId == newShop.ShopId )
+                        {          
+                            amount = amount + ((int)newCommodity.Price) * newcart.amount;
+                        }
+                    }
+                    amount = amount - (oldPrice - price) / discountNumber;
+                    newOrder.Orderamount = amount;
+                    _context.Orders.Add(newOrder);
+                }
+                _context.SaveChanges();
+                return true;
+            }
+        }
         // 从商品详情页面创建订单
         public bool CreateOrderFromDetail(string buyerid, string commodityid, string receivedId, int amount, int price)
         {
@@ -119,7 +200,6 @@ namespace InternetMall.Services
                 Orderamount = price
             };
             _context.Orders.Add(order);
-
             if (_context.SaveChanges() > 0)
                 return true;
             else
