@@ -29,7 +29,9 @@ let app = new Vue({
     el: '#app',
     data() {
         return {
+            id:"",
             list: [
+                /*
                 {
                     price: "10",
                     date: "2021-7-1",
@@ -50,10 +52,56 @@ let app = new Vue({
                     date: "2021-7-1",
                     class: "店铺类",
                 }
+                */
             ],
         }
     },
     methods: {
+        getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        },
+        gotoshop(x) {
+            $.ajax({
+                url: "/Shop/SetShopID",
+                type: "post",
+                dataType: "json", //返回数据格式为json
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                data: JSON.stringify({ ID: x }),
+                success: function (data) {//请求成功完成后要执行的方法
+                    window.location = "/Shop/Shop"
+                }
+            })
+        }
 
+    },
+    created() {
+        this.id = this.getCookie("buyerID");
+        console.log(this.id);
     }
+
 })
+window.onload = DisplayCoupons(app.id);
+
+function DisplayCoupons() {
+    $.ajax({
+        type: "post",
+        url: "/Account/DisplayCoupons",
+        async: false,
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ BuyerId: app.id, }),
+        success: function (result) {
+            // var object = eval("(" + result + ")");   //将json转换成对象
+            console.log(result);
+            app.list = result;
+            console.log(app.list);
+        }
+    })
+}

@@ -24,7 +24,57 @@
                 <index></index>
             </el-aside>
             <el-main style="min-height: 600px;margin:20px;" direction="vertical">
-                <list></list>
+                    <!--el-row>
+                        <el-col :span="24">
+                            <el-tabs v-model="activeName" @@tab-click="handleClick(activeName)">
+                                <el-tab-pane label="全部" name="ALL"></el-tab-pane>
+                                <el-tab-pane label="待付款" name="TO_BE_PAY"></el-tab-pane>
+                                <el-tab-pane label="待发货" name="TO_BE_SHIP"></el-tab-pane>
+                                <el-tab-pane label="待收货" name="TO_BE_RECEIVE"></el-tab-pane>
+                                <el-tab-pane label="已完成" name="DONE"></el-tab-pane>
+                                <el-tab-pane label="待处理" name="OTHER"></el-tab-pane>
+                            </el-tabs>
+                        </el-col>
+                    </el-row-->
+
+                    <el-row v-for="(item, index) in list"
+                            :key="index"
+                            :offset="index > 0 ? 1 : 0">
+                        <el-col :span="17">
+                            <div class="showcase">
+                                <el-row>
+                                    <el-col :span="7" v-for="(o, index) in item.commodityList"
+                                            :key="index"
+                                            :offset="index%3!==0 ? 1 : 0">
+                                        <img style="position: relative;  left: 30%; top: 10px; width: 150px; height: 150px; display: block;" :src="o.Url" @@click="commodityDetial(o.CommodityId)" />
+                                        <h4 style="color:#808080">{{o.name}} X {{o.amount}}</h4>
+                                        <!--商品名称偏左，待调整-->
+                                    </el-col>
+                                </el-row>
+                            </div>
+                        </el-col>
+
+                        <el-col :span="7">
+                            <el-card :body-style="{ padding: '0px' }" shadow="never">
+                                <div style="padding: 8px;height:251px">
+                                    <el-tag :type="drawTag(item.status)" disable-transitions>
+                                        {{item.status}}
+                                    </el-tag>
+                                    <p style="color:#808080">收货人姓名：{{ item.receiverName }}</p>
+                                    <p style="color:#808080">收货人手机：{{item.receiverPhone}}</p>
+                                    <p style="color:#808080">收货人地址：{{item.detailAddr}}</p>
+                                    <div class="bottom clearfix">
+                                        <p style="color:#808080">订单ID：{{item.orderId}}</p>
+                                        <time class="time">订单创建时间：{{ item.date }}</time><br /><br />
+                                        <el-button type="text" style="margin-right:10px;" @@click="gotoshop(item.ShopId)">进入店铺</el-button>
+                                        <!--el-link type="primary" :underline="false" :href="item.shop">联系客服</el-link><br /-->
+                                        <!--el-button type="info" icon="el-icon-message" circle @@click=""></el-button>
+        <el-button icon="el-icon-search" circle @@click=""></el-button-->
+                                    </div>
+                                </div>
+                            </el-card>
+                        </el-col>
+                    </el-row>
             </el-main>
         </el-container>
     </div>

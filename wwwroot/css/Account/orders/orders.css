@@ -1,6 +1,7 @@
-body{
-    margin:0;
+body {
+    margin: 0;
 }
+
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -11,9 +12,73 @@ body{
 
 .el-row {
     margin-bottom: 20px;
-    margin-left: 30px;
 }
 
 .el-col {
     border-radius: 4px;
+}
+
+.bg-purple-dark {
+    background: #99a9bf;
+}
+
+.bg-purple {
+    background: #d3dce6;
+}
+
+.bg-purple-light {
+    background: #e5e9f2;
+}
+
+.grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+}
+
+.row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+}
+
+.time {
+    font-size: 13px;
+    color: #999;
+}
+
+.bottom {
+    margin-top: 13px;
+    line-height: 12px;
+}
+
+.image {
+    position: relative;
+    /*text-align:center;
+    align-self:center;*/
+    left: 30%;
+    top: 10px;
+    width: 100px;
+    height: 100px;
+    display: block;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.showcase {
+    padding: 12px;
+    border: linen;
+    border-width: 1.5px;
+    border-style: solid;
+    height: 242px;
+}
+
+h3 {
+    color: rgba(80, 80, 90, 1);
 }

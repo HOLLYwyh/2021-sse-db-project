@@ -8,21 +8,24 @@ using System.Threading.Tasks;
 
 namespace InternetMall.Models.ControllerModels
 {
-    
-   public class ReleaseActivity           // 发布活动
-   {
+
+    public class ReleaseActivity           // 发布活动
+    {
         public string name { get; set; }
         public DateTime date1 { get; set; }
         public DateTime date2 { get; set; }
         public string type { get; set; }
         public string desc { get; set; }
-   }
+        public decimal? constrict { get; set; }
+        public decimal? minus { get; set; }
+    }
 
     public class LookActivity            // 查看活动
     {
-        public string ID { get; set; }   
- 
+        public string ID { get; set; }
+
     }
+
 
     public class DeleteBuyer            // 删除买家
     {
@@ -45,11 +48,4 @@ namespace InternetMall.Models.ControllerModels
         public string ID { get; set; }
 
      }
-
-
-
-
-
-
-
 }

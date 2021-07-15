@@ -25,65 +25,18 @@ Vue.component('index', {
     methods: {},
 })
 
-Vue.component('list', {
-    template: `
-<el-card>
-                                <el-row>
-                                    <el-col :span="14">
-<el-tabs v-model="activeName" @tab-click="handleClick(activeName)">
-    <el-tab-pane label="全部" name="ALL"></el-tab-pane>
-    <el-tab-pane label="待付款" name="TO_BE_PAY"></el-tab-pane>
-    <el-tab-pane label="待发货" name="TO_BE_SHIP"></el-tab-pane>
-    <el-tab-pane label="待收货" name="TO_BE_RECEIVE"></el-tab-pane>
-    <el-tab-pane label="已完成" name="DONE"></el-tab-pane>
-    <el-tab-pane label="待处理" name="OTHER"></el-tab-pane>
-</el-tabs>
-                                    </el-col>
-                                    <el-col :span="4">
-                                        <el-input :span="4"
-                                                  v-model="input"
-                                                  placeholder="请输入关键字"></el-input>
-                                    </el-col>
-                                    <el-col :span="1">
-                                        <el-button icon="el-icon-search" plain></el-button>
-                                    </el-col>
-                                    <el-button type="danger">我的购物车</el-button>
-                                </el-row>
 
-<el-table :data="curpageData"  style="width: 100%">
-    <el-table-column prop="name" label="收货人" width="180">
-    </el-table-column>
-    <el-table-column prop="phone" label="电话" width="180">
-    </el-table-column>
-    <el-table-column prop="address" label="地址" :formatter="formatter">
-    </el-table-column>
-    <el-table-column prop="tag" label="标签" width="120">
-        <template slot-scope="scope">
-            <el-tag :type="drawTag(scope.row.tag)" disable-transitions>
-                {{scope.row.condition}}</el-tag>
-        </template>
-    </el-table-column>
-    <el-table-column prop="date" label="日期" sortable width="180">
-    </el-table-column>
-</el-table>
-<div class="paginationClass">
-    <el-pagination
-    v-on:size-change="handleSizeChange"
-    v-on:current-change="handleCurrentChange" 
-    :current-page="currentPage"
-    :page-sizes="[5, 10, 20, 50]"
-    :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
-    :total="filteredData.length">
-    </el-pagination>
-</div>
-</el-card>
-`,
+
+let app = new Vue({
+    el: '#app',
     data() {
         return {
-            pageSize: 5,
-            currentPage: 1,
+            id:"",
+            //pageSize: 5,
+            //currentPage: 1,
             activeName: 'ALL',
-            origionData: [{
+            list: [
+                /*{
                 date: '2016-05-02',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1518 弄',
@@ -139,32 +92,44 @@ Vue.component('list', {
                 condition: '待处理',
                 tag: 'OTHER',
                 show: true
-            }],
+            }*/
+            ],
             filteredData: [],
             curpageData: []
         }
     },
-    mounted() {
-        this.handleClick('ALL');
-    },
     methods: {
-        formatter(row) {
+        /*formatter(row) {
             return row.address;
-        },
+        },*/
         drawTag(tag) {
-            if (tag === 'DONE') { //已完成
+            if (tag === '已完成') { //已完成
                 return 'success';
-            } else if (tag === 'TO_BE_RECEIVE') { //待收货
+            } else if (tag === '待收货') { //待收货
                 return '';
-            } else if (tag === 'TO_BE_SHIP') { //代发货
+            } else if (tag === '待发货') { //待发货
                 return 'danger';
-            } else if (tag === 'TO_BE_PAY') {  //待付款
+            } else if (tag === '待付款') {  //待付款
                 return 'warning';
             } else {//OTHER
                 return 'info';
             }
         },
-        handleFilter(value, row) {
+        commodityDetial(id) {                 //进入商品详情
+            console.log(id);
+            $.ajax({
+                url: "/Commodity/SetCommodityID",
+                type: "post",
+                dataType: "json", //返回数据格式为json
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                data: JSON.stringify({ ID: id }),
+                success: function (data) {//请求成功完成后要执行的方法
+                    window.location = "/Commodity/Details"
+                }
+            })
+        },
+        /*handleFilter(value, row) {
             if (value === 'ALL') {
                 row.show = true;
             } else {
@@ -179,16 +144,26 @@ Vue.component('list', {
             this.activeName = activeName;
             this.filteredData.splice(0, this.filteredData.length);
             let index = 0;
-            this.origionData.map((row) => {
+            this.list.map((row) => {
                 this.handleFilter(this.activeName, row);
                 if (row.show === true) {
                     this.filteredData[index] = Object.assign({}, row);
                     index++;
                 }
             });
-            this.handleCurrentChange(1);
+            //this.handleCurrentChange(1);
+        },*/
+        getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
         },
-        handleSizeChange(pageSize) { // 每页条数切换
+
+        /*handleSizeChange(pageSize) { // 每页条数切换
             this.pageSize = pageSize;
             this.handleCurrentChange(this.currentPage);
         },
@@ -208,15 +183,32 @@ Vue.component('list', {
                     index++;
                 }
             }
-        },
-    },
-})
+        },*/
 
-
-new Vue({
-    el: '#app',
-    data() {
-        return {}
     },
-    methods: {}
+    /*mounted() {
+        this.handleClick('ALL');
+    },*/
+    created() {
+        this.id = this.getCookie("buyerID");
+        console.log(this.id);
+    }
+
 })
+window.onload = DisplayOrders(app.id);
+
+function DisplayOrders() {
+    $.ajax({
+        type: "post",
+        url: "/Account/DisplayOrders",
+        async: false,
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ BuyerId: app.id, }),
+        success: function (result) {
+            // var object = eval("(" + result + ")");   //将json转换成对象
+            console.log(result);
+            app.list = result;
+        }
+    })
+}
