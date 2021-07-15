@@ -282,39 +282,42 @@ namespace InternetMall.Services
         }
 
         // 查看买家所有订单
-        public string getOrderByBuyerId(string buyerid)
+        public List<OrderInformationView> getOrderByBuyerId(string buyerid)
         {
-            List<OrderView> ordersView = new List<OrderView>();
-
-            List<Order> orders = _context.Orders.Where(x => x.BuyerId == buyerid).ToList();
-
-            foreach (Order order in orders)
+            List<OrderInformationView> returnList = new List<OrderInformationView>();
+            List<Order> orderList = _context.Orders.Where(o => o.BuyerId == buyerid).Include(o => o.OrdersCommodities).Include(o => o.Received).ToList();
+            foreach (Order newOrder in orderList)
             {
-                OrdersCommodity ordersCommodity = _context.OrdersCommodities.Where(x => x.OrdersId == order.OrdersId).FirstOrDefault();
-
-                Commodity commodity = _context.Commodities.Where(x => x.CommodityId == ordersCommodity.CommodityId).FirstOrDefault();
-
-                Shop shop = _context.Shops.Where(x => x.ShopId == order.ShopId).FirstOrDefault();
-
-                OrderView orderView = new OrderView
+                List<CommodityOrderView> commodities = new List<CommodityOrderView>();
+                OrderInformationView returnItem = new OrderInformationView();
+                returnItem.orderId = newOrder.OrdersId;
+                returnItem.date = newOrder.OrdersDate;
+                returnItem.receiverName = newOrder.Received.ReceiverName;
+                returnItem.receiverPhone = newOrder.Received.Phone;
+                returnItem.detailAddr = newOrder.Received.DetailAddr;
+                switch (newOrder.Status)
                 {
-                    OrdersId = order.OrdersId,
-                    BuyerId = order.BuyerId,
-                    ReceivedId = order.ReceivedId,
-                    CommodityId = commodity.CommodityId,
-                    ShopId = order.ShopId,
-                    CommodityName = commodity.Name,
-                    Name = shop.Name,
-                    OrdersDate = order.OrdersDate,
-                    Status = order.Status,
-                    Price = commodity.Price,
-                    Url = commodity.Url,
-                };
+                    case 1: returnItem.status = "待付款"; break;
+                    case 2: returnItem.status = "待发货"; break;
+                    case 4: returnItem.status = "待收货"; break;
+                    case 6: returnItem.status = "已完成"; break;
 
-                ordersView.Add(orderView);
+                }
+                foreach (OrdersCommodity commodity in newOrder.OrdersCommodities)
+                {
+                    Commodity newCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == commodity.CommodityId);
+                    CommodityOrderView tempItem = new CommodityOrderView();
+                    tempItem.CommodityId = newCommodity.CommodityId;
+                    tempItem.name = newCommodity.Name;
+                    tempItem.Url = newCommodity.Url;
+                    tempItem.amount = commodity.Amount;
+                    commodities.Add(tempItem);
+                }
+                returnItem.commodityList = commodities;
+                returnList.Add(returnItem);
             }
+            return returnList;
 
-            return JsonConvert.SerializeObject(ordersView);
         }
 
         // 根据状态查看买家订单

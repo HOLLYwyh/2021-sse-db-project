@@ -29,14 +29,15 @@
                             v-for="(item, index) in list"
                             :key="index"
                             :offset="index%5!==0 ? 1 : 0">
-                        <el-card :body-style="{ padding: '0px' }" style="margin-bottom:20px;" shadow="hover">
+                        <el-card :body-style="{ padding: '0px' }" style="margin-bottom:20px;height:250px" shadow="hover">
                             <i class="el-icon-s-ticket"></i>
                             <div style="padding: 8px">
-                                <h2 style="margin:-5px"><strong>¥{{item.price}}</strong></h2><br />
-                                <h5 style="color:#aaaaaa;margin-top:-10px;margin-bottom:5px;">满{{}}可用</h5>
-                                <h2 style="color:#808080;margin-top:-5px;">【{{item.class}}】</h2>
+                                <h2 style="margin:-5px"><strong>¥{{item.Discount1}}</strong></h2><br />
+                                <h5 style="color:#aaaaaa;margin-top:-10px;margin-bottom:5px;">满{{item.Threshold}}可用</h5>
+                                <h2 style="color:#808080;margin-top:-5px;">【{{item.Category}}】</h2>
                                 <div class="bottom clearfix">
-                                    <time class="time">使用截止日期：{{ item.date }}</time><br />
+                                    <time class="time">使用截止日期：{{ item.EndTime }}</time><br />
+                                    <el-button type="text" @@click="gotoshop(item.ShopId)">使用</el-button>
                                 </div>
                             </div>
                         </el-card>

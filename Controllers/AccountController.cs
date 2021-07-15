@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using InternetMall.Models.BusinessEntity;
+using Internetmall.Models.BusinessEntity;
 
 namespace InternetMall.Controllers
 {
@@ -25,6 +26,8 @@ namespace InternetMall.Controllers
         private FavoriteProductService favoriteProductService;
         private FollowShopService followShopService;
         private ReceiveInformationService receiveInformationService;
+        private BuyerCouponService buyerCouponService;
+        private OrderService orderService;
         [Obsolete]
         private readonly IHostingEnvironment _hostingEnvironment;
 
@@ -37,6 +40,8 @@ namespace InternetMall.Controllers
             favoriteProductService = new FavoriteProductService(_context);
             followShopService = new FollowShopService(_context);
             receiveInformationService = new ReceiveInformationService(_context);
+            buyerCouponService = new BuyerCouponService(_context);
+            orderService = new OrderService(_context);
 
             _hostingEnvironment = hostingEnvironment;
         }
@@ -412,6 +417,50 @@ namespace InternetMall.Controllers
             }
         }
 
+        /************************ 买家优惠券 **********************/
+        [HttpPost]
+        public IActionResult DisplayCoupons([FromBody] LookCoupons lookCoupons)   // 查看买家优惠券
+        {
+            List<BuyerCouponView> coupons = new List<BuyerCouponView>();
+            coupons = buyerCouponService.getBuyerCoupns(lookCoupons.BuyerId);
+            string str = JsonConvert.SerializeObject(coupons);
+            return new ContentResult { Content = str, ContentType = "application/json" };
+        }
 
+
+        [HttpPost]
+        public IActionResult UseCoupon([FromBody] UseCoupon useCoupon)  // 买家使用优惠券
+        {
+            if (buyerCouponService.deleteBuyerCoupon(useCoupon.CouponId))
+            {
+                JsonData jsondata = new JsonData();
+                jsondata["deleteCoupon"] = "SUCCESS";
+                return Json(jsondata.ToJson());
+            }
+            else
+            {
+                JsonData jsondata = new JsonData();
+                jsondata["deleteCoupon"] = "ERROR";
+                return Json(jsondata.ToJson());
+            }
+        }
+
+
+        /***************** 买家订单 ***************************/
+        [HttpPost]
+        public IActionResult DisplayOrders([FromBody] BuyerOrder buyerOrder)   // 查看买家订单
+        {
+            List<OrderInformationView> orders = new List<OrderInformationView>();
+            orders = orderService.getOrderByBuyerId(buyerOrder.BuyerId);
+            foreach (var order in orders)
+            {
+                foreach (var commodity in order.commodityList)
+                {
+                    commodity.Url = "../.." + commodity.Url;
+                }
+            }
+            string str = JsonConvert.SerializeObject(orders);
+            return new ContentResult { Content = str, ContentType = "application/json" };
+        }
     }
 }

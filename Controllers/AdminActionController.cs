@@ -26,16 +26,16 @@ namespace InternetMall.Controllers
         [HttpPost]
         public IActionResult ReleaseOneActivity([FromBody] ReleaseActivity releaseActivity)  // 发布活动
         {
-            if (adminActionService.releaseActivity(releaseActivity.name, releaseActivity.type, releaseActivity.date1, releaseActivity.date2, releaseActivity.desc))
+            if (adminActionService.releaseActivity(releaseActivity.name, releaseActivity.type, releaseActivity.date1, releaseActivity.date2, releaseActivity.desc, releaseActivity.constrict, releaseActivity.minus))
             {
                 JsonData jsondata = new JsonData();
-                jsondata["add"] = "SUCESS";
+                jsondata["addActivity"] = "SUCESS";
                 return Json(jsondata.ToJson());
             }
             else
             {
                 JsonData jsondata = new JsonData();
-                jsondata["add"] = "ERROR";
+                jsondata["addActivity"] = "ERROR";
                 return Json(jsondata.ToJson());
             }
         }
@@ -72,7 +72,6 @@ namespace InternetMall.Controllers
                 return Json(jsondata.ToJson());
             }
         }
-
         /*************** 封禁功能 ********************/
         [HttpPost]
         public IActionResult DeleteBuyer([FromBody] DeleteBuyer deleteBuyer)  // 删除买家

@@ -30,7 +30,8 @@ namespace InternetMall.Interfaces
         // 更新订单中商品的状态
         public bool updateCommodityStatus(string commodityid, int newStatus);
         // 查看买家所有订单
-        public string getOrderByBuyerId(string buyerid);
+        public List<OrderInformationView> getOrderByBuyerId(string buyerid);
+
         // 根据状态查看买家订单
         public List<OrderView> getOrderByStatus(string buyerid, int status);
         // 查看订单详情
