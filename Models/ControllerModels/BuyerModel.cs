@@ -109,4 +109,27 @@ namespace InternetMall.Models
         public string shopName { get; set; }
         List<Commodity> commodities { get; set; }
     }
+
+    /****************** 优惠券 *********************/
+    public class LookCoupons                       // 查看优惠券
+    {
+        public string BuyerId { get; set; }
+    }
+
+    public class UseCoupon                       // 使用优惠券
+    {
+        public string CouponId { get; set; }
+    }
+
+    /********************* 卖家店铺数据分析 ******************/
+    public class ShopData
+    {
+        public string ShopID { get; set; }
+    }
+
+    /********************* 买家订单 *************************/
+    public class BuyerOrder
+    {
+        public string BuyerId { get; set; }
+    }
 }

@@ -5,12 +5,44 @@ var content = new Vue({
         tabPosition: 'left',
         activeName: 'first',
 
+        
+
         form: {
             name: '',
             type: '',
             date1: '',
             date2: '',
-            desc: ''
+            desc: '',
+            constrict: '',
+            minus: '',
+            
+        },
+        rules: {
+            name: [
+                { required: true, message: '请输入活动名称', trigger: 'blur' },
+                { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+            ],
+            type: [
+                { required: true, message: '请选择活动区域', trigger: 'change' }
+            ],
+            date1: [
+                { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+            ],
+            date2: [
+                { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+            ],
+            desc: [
+                { required: true, message: '请输入活动名称', trigger: 'blur'}
+            ],
+            constrict: [
+                { required: true, message: '请输入数字', trigger: 'blur' },
+                { type: 'number', message: '必须为数字值' }
+            ],
+            minus: [
+                { required: true, message: '请输入数字', trigger: 'blur' },
+                { type: 'number', message: '必须为数字值' }
+            ]
+
         },
 
         input: '',
@@ -27,6 +59,23 @@ var content = new Vue({
         }],
     },
     methods: {
+        submitForm(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    
+                    this.onSubmit()
+                    alert('发布成功!');
+                    this.$refs['form'].resetFields();
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
+        },
+        resetForm(formName) {
+            this.$refs[formName].resetFields();
+        },
+        
         onSubmit() {
             console.log('submit!');
 
@@ -82,7 +131,9 @@ var content = new Vue({
             this.tableData = that
         },
         getOne() {
+            if (this.input) {
 
+            
             let id=this.input
             let that
             $.ajax({
@@ -98,55 +149,63 @@ var content = new Vue({
                     console.log(that)
                 }
             })
-            this.tableData=that
+                this.tableData = that
+
+            }
         },
         closeUser() {
-            let id = this.input2
+            if (this.input2) {
+                let id = this.input2
 
-            $.ajax({
-                url: "/AdminAction/DeleteBuyer",
-                type: "post",
-                contentType: "application/json",
-                async: false,
-                dataType: "json",
-                data: JSON.stringify({ "ID": id }),//发送要封的人的id
-                success: function (data) {
-                    console.log(data)
-                    alert("操作成功")
-                }
-            })
+                $.ajax({
+                    url: "/AdminAction/DeleteBuyer",
+                    type: "post",
+                    contentType: "application/json",
+                    async: false,
+                    dataType: "json",
+                    data: JSON.stringify({ "ID": id }),//发送要封的人的id
+                    success: function (data) {
+                        console.log(data)
+                        alert("操作成功")
+                    }
+                })
+            }
         },
         closeShop() {
-            let id = this.input3
+            if (this.input3) {
+                let id = this.input3
 
-            $.ajax({
-                url: "/AdminAction/DeleteShop",
-                type: "post",
-                contentType: "application/json",
-                async: false,
-                dataType: "json",
-                data: JSON.stringify({ "ID": id }),//发送要封的店的id
-                success: function (data) {
-                    console.log(data)
-                    alert("操作成功")
-                }
-            })
+                $.ajax({
+                    url: "/AdminAction/DeleteShop",
+                    type: "post",
+                    contentType: "application/json",
+                    async: false,
+                    dataType: "json",
+                    data: JSON.stringify({ "ID": id }),//发送要封的店的id
+                    success: function (data) {
+                        console.log(data)
+                        alert("操作成功")
+                    }
+                })
+            }
         },
         closeGoods() {
-            let id = this.input4
+            if (this.input4) {
+                let id = this.input4
 
-            $.ajax({
-                url: "/AdminAction/DeleteCommodity",
-                type: "post",
-                contentType: "application/json",
-                async: false,
-                dataType: "json",
-                data: JSON.stringify({ "ID": id }),//发送要封的商品的id
-                success: function (data) {
-                    console.log(data)
-                    alert("操作成功")
-                }
-            })
+                $.ajax({
+                    url: "/AdminAction/DeleteCommodity",
+                    type: "post",
+                    contentType: "application/json",
+                    async: false,
+                    dataType: "json",
+                    data: JSON.stringify({ "ID": id }),//发送要封的商品的id
+                    success: function (data) {
+                        console.log(data)
+                        alert("操作成功")
+                    }
+                })
+            }
         },
     }
     
