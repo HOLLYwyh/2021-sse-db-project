@@ -236,6 +236,50 @@ namespace InternetMall.Controllers
             return new ContentResult { Content = str, ContentType = "application/json" };
         }
 
+        public IActionResult GetReceiveInformation()    //订单确认-收货信息
+        {
+            List<ReceiveInformation> information = new List<ReceiveInformation>();
+            information = orderService.GetReceiveInformation(Request.Cookies["buyerID"]);
+            string str = JsonConvert.SerializeObject(information);
+            return new ContentResult { Content = str, ContentType = "application/json" };
+        }
+
+        public IActionResult GetCoupons()  //订单确认-渲染优惠券
+        {
+            List<CouponView> coupon = new List<CouponView>();
+            coupon = orderService.GetCoupons(Request.Cookies["buyerID"]);
+            string str = JsonConvert.SerializeObject(coupon);
+            return new ContentResult { Content = str, ContentType = "application/json" };
+        }
+
+        [HttpPost]
+        public IActionResult CreateOrder()    //订单确认-生成订单
+        {
+            JsonData jsonData = new JsonData();
+            if (Global.GConfirmOrderType == 1)  //是从商品详情页面进行渲染
+            {
+                //下方均需要前端传入的数据
+                string receiveID = "1";
+                int price = 1;
+                int amount = 1;
+                //上方均需要前端传入的数据
+                if (orderService.CreateOrderFromDetail(Request.Cookies["buyerID"], Global.GCommodityID,
+                    receiveID,amount,price))
+                {
+                    jsonData["result"] = "SUCCESS";
+                }
+                else
+                {
+                    jsonData["result"] = "FAILED";
+                }
+            }
+            else   //从购物车进行渲染
+            {
+                //这里还没有写~
+            }
+            return Json(jsonData.ToJson());
+        }
+
         //购物车页面相关
         public IActionResult GetCartDetail()    //购物车详情
         {
@@ -258,6 +302,12 @@ namespace InternetMall.Controllers
                 jsondata["result"] = false;
             }
             return Json(jsondata.ToJson());
+        }
+        
+        [HttpPost]
+        public IActionResult ConfirmOrderCart()    //在购物车页面跳转到购物详情
+        {
+            return Ok();
         }
     }
 }
