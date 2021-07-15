@@ -55,6 +55,10 @@ Vue.component('promptbox', {
                 .catch((_) => { });
         },
         updateInformation() {
+            if (app.nickname == "") {
+                alert("给自己取个好听的昵称叭(*^_^*)");
+                return false;
+            }
             this.dialogVisible = false;
             updateInfo(app.id);
         }
@@ -132,7 +136,7 @@ function display(id) {
             var object = eval('(' + result + ')');//string类型转换成Json对象方法
             app.ID = object["buyerPhone"];
             app.nickname = object["buyerNickname"];
-            app.gender = object["buyerGender"];
+            app.gender = (object["buyerGender"] === null ? 0 : object["buyerGender"]);
             app.birthday = object["buyerBirth"];
             app.imageUrl = object["buyerUrl"];
             app.setbirth = object["buyerBirth"];
@@ -140,19 +144,18 @@ function display(id) {
     });
 }
 function updateInfo(id) {
-    console.log(id);
     var d = app.birthday;
     var standardDate;
-    standardDate = (d !== app.setbirth ? d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() : d);
-    //if (d !== app.setbirth) {
-    //    console.log('从网页直接获取原数据：' + app.birthday);
-    //    standardDate = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-    //    console.log('试图转化：' + standardDate);
-    //}
-    //else {
-    //    standardDate = d;
-    //}
-    console.log("standardDate:" + standardDate);
+    //standardDate = (d !== app.setbirth ? d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() : d);
+    //这里要加判断因为：在页面上修改生日后，日期格式会变为中国标准时间，与数据库格式不符；空字符串亦无法直接传入数据库
+    if (d !== app.setbirth) {
+        standardDate = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+    }
+    else {
+        standardDate = d;
+    }
+    console.log('原数据：' + app.birthday);
+    console.log('转化后：' + standardDate);
 
     var formData = new FormData();
     formData.append("UpdatedNickname", $("#updatedNickname").val());
@@ -161,11 +164,11 @@ function updateInfo(id) {
     formData.append("UpdatedUrl", app.upFile);
     formData.append("BuyerId", id);
 
-    console.log($("#updatedNickname").val());
-    console.log(app.gender);
-    console.log(standardDate);
-    console.log(app.upFile);
-    console.log(id);
+    //console.log($("#updatedNickname").val());
+    //console.log(app.gender);
+    //console.log(standardDate);
+    //console.log(app.upFile);
+    //console.log(id);
 
 
     $.ajax({

@@ -12,7 +12,7 @@ Vue.component('shortcut',{
                 <li>
                     <div class="col_FFCC00">
                         <div>
-                            <a href="/Account/personalInformation">个人中心</a>
+                            <a href="/Account/orders">个人中心</a>
                         </div>
                     </div>
                 </li>
