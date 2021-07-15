@@ -190,10 +190,10 @@ class CartItem extends HTMLElement {
         this.$name.innerHTML = item_data.CommodityName;
         this.$amount.innerHTML = item_data.amount;
         this.$image.setAttribute("src", item_data.imgUrl);
-        this.$perprice.innerHTML = item_data.Price;
-        let price = parseFloat(this.$perprice.innerHTML.toString());
+        this.$totprice.innerHTML = item_data.Price;
+        let price = parseFloat(this.$totprice.innerHTML.toString());
         let num = parseFloat(this.$amount.innerHTML.toString());
-        this.$totprice.innerHTML = (price * num).toFixed(2).toString();
+        this.$perprice.innerHTML = (price / num).toFixed(2).toString();
         this.$commodityId = item_data.commodityId;
     }
 
@@ -358,7 +358,7 @@ window.onload = function () {
             for (i = 0; i < len; i++) {
                 //window.alert("1");
                 cart_item_list.appendChild(new CartItem(data[i]));
-                console.log(data[i]);
+                //console.log(data[i]);
             }
             cart_item_list.parentNode.appendChild(new CartSum());
         }

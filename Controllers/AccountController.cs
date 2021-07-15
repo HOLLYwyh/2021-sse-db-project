@@ -364,7 +364,7 @@ namespace InternetMall.Controllers
         [HttpPost]
         public IActionResult AddFollowShop([FromBody] AddOrDeleteFollowShop add)  // 关注店铺
         {
-            if (followShopService.addToFollowShop(add.buyerid, add.shopid))
+            if (followShopService.addToFollowShop(Request.Cookies["buyerID"], add.shopid))
             {
                 JsonData jsondata = new JsonData();
                 jsondata["addFollowShop"] = "SUCCESS";
