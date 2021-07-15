@@ -26,29 +26,44 @@ namespace InternetMall.Services
         {
             _context = context;
         }
-        //public Good RenderOrderPageFromDetail(string commodityId, int amount)   //从详情页购买
-        //{
-        //    if (commodityId == "")
-        //        return null;
-        //    else
-        //    {
-        //        if (_context.Commodities.Any(c => c.CommodityId == commodityId))
-        //        {
-        //            Commodity newCommodity = _context.Commodities.Include(c => c.Shop).FirstOrDefault(c => c.CommodityId == commodityId);
-        //            Good newGood = new Good();
-        //            newGood.img = newCommodity.Url;
-        //            newGood.intro = newCommodity.Name;
-        //            newGood.shop = newCommodity.Shop.Name;
-        //            newGood.ID = newCommodity.CommodityId;
-        //            newGood.price = newCommodity.Price * amount;
-        //            newGood.description = newCommodity.Description;
-        //            newGood.Soldnum = newCommodity.Soldnum;
-        //            return newGood;
-        //        }
-        //        else return null;
-        //    }
-        //}
 
+        public List<CouponView> GetCoupons(string buyerId)
+        {
+            if (buyerId == "")
+                return null;
+            else
+            {
+                List<BuyerCoupon> newList = _context.BuyerCoupons.Where(b => b.BuyerId == buyerId).ToList();
+                List<CouponView> returnList = new List<CouponView>();
+                foreach(BuyerCoupon newItem in newList)
+                {
+                    Coupon tempCoupon = _context.Coupons.FirstOrDefault(c => c.CouponId == newItem.CouponId);
+                    CouponView couponView = new CouponView();
+                    couponView.CouponId = tempCoupon.CouponId;
+                    couponView.StartTime = tempCoupon.StartTime;
+                    couponView.EndTime = tempCoupon.EndTime;
+                    couponView.Threshold = tempCoupon.Threshold;
+                    couponView.Discount = tempCoupon.Discount1;
+                    returnList.Add(couponView);
+                }
+                return returnList;
+            }
+        }
+        public List<ReceiveInformation>GetReceiveInformation(string buyerId)
+        {
+            if (buyerId == "")
+                return null;
+            else
+            {
+                if (_context.ReceiveInformations.Any(r => r.BuyerId == buyerId))
+                {
+                    List<ReceiveInformation> returnList = _context.ReceiveInformations.Where(r => r.BuyerId == buyerId).ToList();
+                    return returnList;
+                }
+                else return null;
+            }
+        }
+        //从商品详情页跳转到订单页面的渲染
         public Good RenderOrderPageFromDetail(string commodityId, int amount)
         {
             if (commodityId == "")
@@ -79,8 +94,8 @@ namespace InternetMall.Services
             return _context.Orders.Any(e => e.OrdersId == id);
         }
 
-        // 创建订单
-        public bool createOrder(string buyerid, string commodityid, string receivedId, int amount)
+        // 从商品详情页面创建订单
+        public bool CreateOrderFromDetail(string buyerid, string commodityid, string receivedId, int amount, int price)
         {
             // OrderId生成
             CreateIdCount orderCount = new CreateIdCount(_context);
@@ -89,8 +104,7 @@ namespace InternetMall.Services
             Commodity commodity = _context.Commodities.Where(x => x.CommodityId == commodityid).FirstOrDefault();
 
             // 创建联系集 - 初始时商品状态为待付款
-            int price = (int)commodity.Price;
-            OrdersCommodity ordersCommodity = new OrdersCommodity { OrdersId = orderId, CommodityId = commodityid, Status = COrders.ToBePay ,Amount=amount/price };
+            OrdersCommodity ordersCommodity = new OrdersCommodity { OrdersId = orderId, CommodityId = commodityid, Status = COrders.ToBePay ,Amount=amount };
             _context.OrdersCommodities.Add(ordersCommodity);
 
             // 创建Order —— 初始状态为待付款
@@ -102,9 +116,8 @@ namespace InternetMall.Services
                 Status = COrders.ToBePay,
                 ShopId = commodity.ShopId,
                 ReceivedId = receivedId,
-                Orderamount = amount
+                Orderamount = price
             };
-
             _context.Orders.Add(order);
 
             if (_context.SaveChanges() > 0)

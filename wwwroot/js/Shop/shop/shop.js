@@ -1,3 +1,13 @@
+//右边栏
+new Vue({
+    el: "#naviRight"
+})
+
+//渲染导航栏
+new Vue({
+    el: "#shortcutlg"
+})
+
 const shop_item_template = document.createElement("template");
 shop_item_template.innerHTML = `
 <style>
