@@ -106,11 +106,11 @@ shop_item_template.innerHTML = `
     </div>
 </div>
 `;
-
+let tmp = { name: "数据库算法导论操作系统计算机系统结构", price: "998.00", img_url: "" };
 class ShopItem extends HTMLElement {
     constructor(item_data) {
         super();
-
+        item_data = tmp;
         this._shadowRoot = this.attachShadow({ mode: 'closed' });
         this._shadowRoot.appendChild(shop_item_template.content.cloneNode(true));
 
@@ -118,11 +118,9 @@ class ShopItem extends HTMLElement {
         this.$name = this._shadowRoot.querySelector(".shopinfo_itembox_itemname");
         this.$price = this._shadowRoot.querySelector(".shopinfo_itembox_itemprice");
         this.$link = this._shadowRoot.querySelector(".shopinfo_itembox_iteminfo");
-        /*
         this.$img.setAttribute("src", item_data.img_url);
         this.$name.innerHTML = item_data.name;
         this.$price.innerHTML = item_data.price;
-        */
         this.$link.addEventListener("click", () => {
             //todo, click to jump to commodity detail page
         });
