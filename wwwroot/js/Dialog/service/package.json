@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "jQuery": "^1.7.4",
+    "jsdom": "^16.6.0",
+    "nodejs-websocket": "^1.7.2"
+  }
+}

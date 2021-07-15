@@ -383,6 +383,13 @@ namespace InternetMall.Controllers
             }
         }
 
-
+        [HttpPost]
+        public IActionResult TurnToService([FromBody] BuyerModel buyerId)   //设置商品ID
+        {
+            Global.GBuyerID = buyerId.BuyerId;
+            JsonData jsondata = new JsonData();
+            jsondata["BuyerId"] = buyerId.BuyerId;
+            return Json(jsondata.ToJson());
+        }
     }
 }

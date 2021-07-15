@@ -18,5 +18,7 @@ namespace InternetMall
         public static string GShopId = "1";          //店铺ID
         //购买部分                                           
         public static int GConfirmOrderType = 1;    //购买类别  1-从商品详情页购买，2-从购物车购买
+        //买家部分
+        public static string GBuyerID = "0";        //买家ID
     }
 }

@@ -1,17 +1,160 @@
-body{
-    background-color :rgb(138,188,209); /*秋波蓝*/
+input {
+    border: 1px solid #ccc;
+    padding: 7px 0px;
+    border-radius: 3px;
+    padding-left: 5px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
 }
 
-.dialog-bar {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 1300px;
-    height: 600px;
+    input:focus {
+        border-color: #66afe9;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+    }
+
+.button {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
 
-.contacts {
-    position: absolute;
-    left: 50%;
+.button1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
 }
+
+    .button1:hover {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+.button2 {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+}
+
+    .button2:hover {
+        background-color: #008CBA;
+        color: white;
+    }
+
+.triangle-border {
+    position: relative;
+    padding: 15px;
+    margin: 1em 0 3em;
+    border: 5px solid #5a8f00;
+    color: #333;
+    background: #fff;
+    /* css3 */
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+    .triangle-border.left {
+        margin-left: 30px;
+    }
+
+    .triangle-border.right {
+        margin-right: 30px;
+    }
+
+    .triangle-border:before {
+        content: "";
+        position: absolute;
+        bottom: -20px;
+        /* value = - border-top-width - border-bottom-width */
+        left: 40px;
+        /* controls horizontal position */
+        border-width: 20px 20px 0;
+        border-style: solid;
+        border-color: #5a8f00 transparent;
+        display: block;
+        width: 0;
+    }
+
+    /* creates the smaller  triangle */
+    .triangle-border:after {
+        content: "";
+        position: absolute;
+        bottom: -13px;
+        /* value = - border-top-width - border-bottom-width */
+        left: 47px;
+        border-width: 13px 13px 0;
+        border-style: solid;
+        border-color: #fff transparent;
+        display: block;
+        width: 0;
+    }
+
+    .triangle-border.top:before {
+        top: -20px;
+        /* value = - border-top-width - border-bottom-width */
+        bottom: auto;
+        left: auto;
+        right: 40px;
+        /* controls horizontal position */
+        border-width: 0 20px 20px;
+    }
+
+    /* creates the smaller  triangle */
+    .triangle-border.top:after {
+        top: -13px;
+        /* value = - border-top-width - border-bottom-width */
+        bottom: auto;
+        left: auto;
+        right: 47px;
+        /* value = (:before right) + (:before border-right) - (:after border-right) */
+        border-width: 0 13px 13px;
+    }
+
+    .triangle-border.left:before {
+        top: 10px;
+        /* controls vertical position */
+        bottom: auto;
+        left: -30px;
+        /* value = - border-left-width - border-right-width */
+        border-width: 15px 30px 15px 0;
+        border-color: transparent #5a8f00;
+    }
+
+    /* creates the smaller  triangle */
+    .triangle-border.left:after {
+        top: 16px;
+        /* value = (:before top) + (:before border-top) - (:after border-top) */
+        bottom: auto;
+        left: -21px;
+        /* value = - border-left-width - border-right-width */
+        border-width: 9px 21px 9px 0;
+        border-color: transparent #fff;
+    }
+
+    /* creates the larger triangle */
+    .triangle-border.right:before {
+        top: 10px;
+        /* controls vertical position */
+        bottom: auto;
+        left: auto;
+        right: -30px;
+        /* value = - border-left-width - border-right-width */
+        border-width: 15px 0 15px 30px;
+        border-color: transparent #5a8f00;
+    }

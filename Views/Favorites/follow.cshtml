@@ -56,7 +56,7 @@
                                         <div class="bottom clearfix">
                                             <time class="time">关注时间：{{ item.DateCreated }}</time><br />
                                             <el-button type="text" style="margin-right:10px;" @@click="gotoshop(item.ShopId)">进入店铺</el-button>
-                                            <el-link type="primary" :underline="false" :href="item.shop">联系客服</el-link>
+                                            <el-button type="primary" :underline="false" @@click="TurnToService()">联系客服</el-button>
                                         </div>
                                     </div>
                                 </el-card>

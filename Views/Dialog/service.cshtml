@@ -1,33 +1,120 @@
-<!--与客服对话的页面-->
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="en">
+
 <head>
-    <!--引入tailwind-->
-    <link href="https://unpkg.com/tailwindcss@@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link href="/css/Dialog/service/service.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>联系客服</title>
+    <link rel="stylesheet" href="/css/Dialog/service/service.css" type="text/css" />
+    <link href="~/css/Common/common.css" type="text/css" rel="stylesheet" />
+    <!--引入与导航栏有关的配置-->
+    <link href="/css/Common/shortcut_five.css" rel="stylesheet">
     @await Html.PartialAsync("~/Views/Shared/base.cshtml")
+
 </head>
 
 <body>
-    <!--返回按钮-->
-    <!--聊天页面-->
-    <div class="dialog-bar shadow-xl opacity-75 rounded-lg bg-red-100">
-        <!--左边栏-->
-        <el-aside id="left-sidebar" class="shadow-xl opacity-75 rounded-lg"  width="200px">
-            <el-table :data="contactsData" height="600" style="width: 100%">
-                <el-table-column class="contacts" prop="contacts"
-                                 label="联系人"
-                                 width="199">
-                </el-table-column>
-            </el-table>
-        </el-aside>
-        <!--消息区-->
-        <!--发消息区-->
-        <!--评价区-->
+    <!--渲染导航栏-->
+    <div id="shortcutlg">
+        <shortcut></shortcut>
     </div>
 
-    <script type="text/javascript" src="~/js/Dialog/service/service.js"></script>
+    <div id="container" style="width:1250px">
+
+        <div id="header" style="background-color: #D1D5DB; ">
+            <h1 style="margin-bottom: 0; text-align: center;">联系客服</h1>
+        </div>
+
+        <!--<div id="menu" style="background-color:#afa8a8;height:450px;width:200px;float:left;">-->
+        <div id="menu" style="background-color: #9CA3AF; height: 450px; width: 200px; float: left; ">
+            <h2>您可能想问:</h2>
+            <p>--宝贝何时发货</p>
+            <p>--宝贝评价怎么样?问问大家</p>
+            <p>--物流快吗</p>
+            <p>--是正品吗</p>
+            <p>--怎么发宝贝评价</p>
+
+        </div>
+
+        <div id="content" style="background-color: #EFF6FF; height: 450px; width: 1050px; float: left;">
+            服务器走神了 >_<
+        </div>
+
+        <div id="footer" style="background-color:#676060;clear:both;height:70px;width:1250px;text-align:center;">
+
+            <input type="text" placeholder="输入你的内容" style="width:800px;" />
+
+            <button type="submit" class="button button1" style="width:100px;">发送</button>
+        </div>
+
+    </div>
+
+    <script>
+        var buyerNickname;
+        $.ajax({
+            type: "post",
+            url: "/Dialog/GetBuyerNicknameById",
+            async: false,         
+            success: function (result) {
+                //console.log(1);
+                //console.log(result);//string
+                buyerNickname = result;
+            }
+        });
+
+        console.log(buyerNickname);
+
+        const TYPE_ENTER = 0;
+        const TYPE_LEAVE = 1;
+        const TYPE_MSG = 2;
+
+        var socket = new WebSocket('ws://localhost:3000');
+        var button = document.querySelector('button');
+        var input = document.querySelector('input');
+        var div = document.querySelector('#content');
+        
+
+        socket.addEventListener('open', function () {
+            console.log("服务连接成功");
+            div.innerHTML = '~~~~~~~~~~~~~' + '服务器连接成功' + '~~~~~~~~~~~~~';
+        });
+        button.addEventListener('click', function () {
+            var value = input.value;
+            //发送消息非空就发送至服务器
+            if (value != '') {
+                socket.send(value);
+                input.value = '';
+            }
+        });
+        socket.addEventListener('message', function (e) {
+            var data = JSON.parse(e.data);
+           /* console.log(e.data);*/
+            var dv = document.createElement('div');
+            if (data.type === TYPE_ENTER) {
+                dv.style.color = 'green';
+                dv.innerText = buyerNickname + ' ' + data.msg + '-----' + data.time;
+            }
+            else if (data.type === TYPE_LEAVE) {
+                dv.style.color = 'red';
+                dv.innerText = buyerNickname + ' ' + data.msg + '-----' + data.time;
+            }
+            else {
+                dv.style.color = 'blue';
+                dv.innerText = buyerNickname + ' : ' + data.msg;
+            }
+            div.appendChild(dv);
+
+        })
+        socket.addEventListener('close', function () {
+            console.log('服务断开连接');
+        })
+
+    </script>
+    <script type="text/javascript" src="/js/Common/shortcutFive.js"></script>
+
+
+
 </body>
 
 </html>

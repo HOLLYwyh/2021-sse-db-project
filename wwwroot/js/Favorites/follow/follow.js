@@ -84,7 +84,26 @@ let app = new Vue({
                 if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
             }
             return "";
+        },
+        TurnToService() {
+            /*console.log("id=" + app.id);*/
+            $.ajax({
+                type: "post",
+                url: "/Account/TurnToService",
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({ BuyerId: app.id, }),
+                success: function (result) {
+                    console.log(result);//string
+                    if (result != null) {
+                        window.location = "/Dialog/Service";
+                    }
+
+                }
+            })
         }
+
     },
     created() {
         this.id = this.getCookie("buyerID");
@@ -115,7 +134,26 @@ function DisplayFollowShops() {               // 显示关注的所有店铺
 }
 window.onload = DisplayFollowShops(app.id);
 
+//联系客服，把用户ID传到下一个页面
 
+//function TurnToService() {
+//    console.log("id=" + app.id);
+//    $.ajax({
+//        type: "post",
+//        url: "/Account/TurnToService",
+//        async: false,
+//        contentType: "application/json; charset=utf-8",
+//        dataType: "json",
+//        data: JSON.stringify({ BuyerId: app.id, }),
+//        success: function (result) {
+//            console.log(result);
+//            if (result != null) {
+//                window.location = "/Dialog/Service";
+//            }
+            
+//        }
+//    })
+//}
 //function AddFollowShop(id) {                    // 关注店铺
 //    $.ajax({
 //        type: "post",
