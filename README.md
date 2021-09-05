@@ -361,43 +361,43 @@ create table chatuser(
 
 - 首页
 
-  ![image-20210905165051817](C:\Users\吴英豪\AppData\Roaming\Typora\typora-user-images\image-20210905165051817.png)
+  ![image-20210905165051817](https://github.com/HOLLYwyh/2021-sse-db-project/blob/main/pictures/首页.png)
 
 - 买家登录
 
-  ![image-20210905165108213](C:\Users\吴英豪\AppData\Roaming\Typora\typora-user-images\image-20210905165108213.png)
+  ![image-20210905165108213](https://github.com/HOLLYwyh/2021-sse-db-project/blob/main/pictures/买家登录.png)
 
 - 个人中心
 
-  ![image-20210905185012668](C:\Users\吴英豪\AppData\Roaming\Typora\typora-user-images\image-20210905185012668.png)
+  ![image-20210905185012668](https://github.com/HOLLYwyh/2021-sse-db-project/blob/main/pictures/个人中心.png)
 
 - 购物车
 
-  ![image-20210905185313613](C:\Users\吴英豪\AppData\Roaming\Typora\typora-user-images\image-20210905185313613.png)
+  ![image-20210905185313613](https://github.com/HOLLYwyh/2021-sse-db-project/blob/main/pictures/购物车.png)
 
 - 商品详情
 
-  ![image-20210905185201458](C:\Users\吴英豪\AppData\Roaming\Typora\typora-user-images\image-20210905185201458.png)
+  ![image-20210905185201458](https://github.com/HOLLYwyh/2021-sse-db-project/blob/main/pictures/商品详情.png)
 
 - 店铺详情
 
-  ![image-20210905185123579](C:\Users\吴英豪\AppData\Roaming\Typora\typora-user-images\image-20210905185123579.png)
+  ![image-20210905185123579](https://github.com/HOLLYwyh/2021-sse-db-project/blob/main/pictures/店铺详情.png)
 
 - 订单确认
 
-  ![image-20210905185228068](C:\Users\吴英豪\AppData\Roaming\Typora\typora-user-images\image-20210905185228068.png)
+  ![image-20210905185228068](https://github.com/HOLLYwyh/2021-sse-db-project/blob/main/pictures/订单确认.png)
 
 - 搜索页面
 
-  ![image-20210905185054887](C:\Users\吴英豪\AppData\Roaming\Typora\typora-user-images\image-20210905185054887.png)
+  ![image-20210905185054887](https://github.com/HOLLYwyh/2021-sse-db-project/blob/main/pictures/搜索页面.png)
 
 - 卖家后台
 
-  ![image-20210905185855091](C:\Users\吴英豪\AppData\Roaming\Typora\typora-user-images\image-20210905185855091.png)
+  ![image-20210905185855091](https://github.com/HOLLYwyh/2021-sse-db-project/blob/main/pictures/卖家后台.png)
 
 - 管理员中心
 
-  ![image-20210905190245449](C:\Users\吴英豪\AppData\Roaming\Typora\typora-user-images\image-20210905190245449.png)
+  ![image-20210905190245449](https://github.com/HOLLYwyh/2021-sse-db-project/blob/main/pictures/管理员中心.png)
 
 
 
