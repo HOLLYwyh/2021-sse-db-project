@@ -24,5 +24,10 @@ namespace InternetMall.Models
         public virtual ReceiveInformation Received { get; set; }
         public virtual Shop Shop { get; set; }
         public virtual ICollection<OrdersCommodity> OrdersCommodities { get; set; }
+
+        public int CompareTo(Order od)
+        {
+            return this.Orderamount.CompareTo(od.Orderamount);
+        }
     }
 }

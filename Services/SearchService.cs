@@ -84,7 +84,12 @@ namespace Internetmall.Services
                     for (int i = count; i < 12; i++)
                     {
                         string randCommodityID = random.Next(2, 120).ToString();
-                        Commodity newCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == randCommodityID);//Include(c => c.Shop).FirstOrDefault(c =>c.CommodityId == randCommodityID);
+                        Commodity newCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == randCommodityID);
+                        while(newCommodity == null)
+                        {
+                            randCommodityID = random.Next(2, 120).ToString();
+                            newCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == randCommodityID);
+                        }
                         Good newGood = new Good();
                         newGood.img = newCommodity.Url;
                         newGood.intro = newCommodity.Name;
