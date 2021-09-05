@@ -27,6 +27,38 @@ namespace InternetMall.Services
         {
             _context = context;
         }
+        //确认订单
+        public bool ConfirmOrder()
+        {
+            foreach (string orderId in Global.GOrderID)
+            {
+                if (orderId == "")
+                    return false;
+                else
+                {
+                    if (_context.Orders.Any(o => o.OrdersId == orderId))
+                    {
+                        Order newOrder = _context.Orders.FirstOrDefault(o => o.OrdersId == orderId);
+                        if (newOrder.Status == COrders.ToBePay)
+                        {
+                            newOrder.Status = COrders.ToBeShip;
+                            List<OrdersCommodity> cartList = _context.OrdersCommodities.Where(a => a.OrdersId == orderId).ToList();
+                            foreach (OrdersCommodity newItem in cartList)
+                            {
+                                if (newItem.Status == COrders.ToBePay)
+                                {
+                                    newItem.Status = COrders.ToBeShip;
+                                    _context.OrdersCommodities.Update(newItem);
+                                }
+                            }
+                        }
+                        else return false;
+                    }
+                    else return false;
+                }
+            }
+            return true;
+        }
 
         public List<CouponView> GetCoupons(string buyerId)
         {
@@ -122,7 +154,7 @@ namespace InternetMall.Services
             return _context.Orders.Any(e => e.OrdersId == id);
         }
         // 从购物车页面创建订单
-        public bool CreateOrderFromChart(string buyerId, List<CartCommodityModels> cartCommodityList, string receivedId, int price)
+        public bool CreateOrderFromChart(string buyerId, List<Good> cartCommodityList, string receivedId, decimal price)
         {
             if (buyerId == "" || cartCommodityList.Count == 0 || receivedId == "" || price == 0)
                 return false;
@@ -130,58 +162,77 @@ namespace InternetMall.Services
             {
                 List<Commodity> commodityList = new List<Commodity>();
                 List<Shop> shopList = new List<Shop>();
+                Global.GOrderID.Clear();
                 CreateIdCount create = new CreateIdCount(_context);
                 decimal oldPrice = 0;
-                foreach(CartCommodityModels cartCommodity in cartCommodityList)
+                foreach (Good cartCommodity in cartCommodityList)
                 {
-                    Commodity newCommodity = _context.Commodities.Include(c => c.Shop).FirstOrDefault(c => c.CommodityId == cartCommodity.CommodityId);
-                    oldPrice = oldPrice + ((int)newCommodity.Price) * cartCommodity.amount;
+                    Commodity newCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == cartCommodity.ID);
+                    Shop newShop = _context.Shops.FirstOrDefault(s => s.Name == cartCommodity.shop);
+                    oldPrice = oldPrice + ((int)newCommodity.Price) * cartCommodity.Soldnum;
                     commodityList.Add(newCommodity);
-                    if (shopList.Any(s => s.ShopId == newCommodity.Shop.ShopId) == false)
-                        shopList.Add(_context.Shops.FirstOrDefault(s => s.ShopId == newCommodity.Shop.ShopId));
-                    AddShoppingCart scCommodity = _context.AddShoppingCarts.FirstOrDefault(a => a.CommodityId == cartCommodity.CommodityId && a.BuyerId == buyerId);
+                    if (shopList.Any(s => s.ShopId == newShop.ShopId) == false)
+                        shopList.Add(_context.Shops.FirstOrDefault(s => s.ShopId == newShop.ShopId));
+                    AddShoppingCart scCommodity = _context.AddShoppingCarts.FirstOrDefault(a => a.CommodityId == cartCommodity.ID && a.BuyerId == buyerId);
                     _context.AddShoppingCarts.Remove(scCommodity);
                 }
+                List<BuyerCoupon> couponList = _context.BuyerCoupons.Where(c => c.BuyerId == buyerId).ToList();
+                foreach (BuyerCoupon newBuyerCoupon in couponList)
+                {
+                    Coupon newCoupon = _context.Coupons.FirstOrDefault(c => c.CouponId == newBuyerCoupon.CouponId);
+                    if (newCoupon.Threshold <= oldPrice && newCoupon.Discount1 == (oldPrice - price))
+                    {
+                        newBuyerCoupon.Amount--;
+                        if (newBuyerCoupon.Amount == 0)
+                            _context.BuyerCoupons.Remove(newBuyerCoupon);
+                        else _context.BuyerCoupons.Update(newBuyerCoupon);
+                    }
+                }
                 decimal discountNumber = price / shopList.Count;
-                foreach(Shop newShop in shopList)
+                foreach (Shop newShop in shopList)
                 {
                     Order newOrder = new Order();
-                    newOrder.OrdersId = create.GetOrderCount();
+                    string newOrderId=create.GetOrderCount();
+                    newOrder.OrdersId = newOrderId;
+                    Global.GOrderID.Add(newOrderId);
                     newOrder.BuyerId = buyerId;
                     newOrder.ShopId = newShop.ShopId;
                     newOrder.OrdersDate = DateTime.Now;
                     newOrder.Status = COrders.ToBePay;
                     newOrder.ReceivedId = receivedId;
                     decimal amount = 0;
-                    foreach(Commodity newCommodity in commodityList)
+                    foreach (Commodity newCommodity in commodityList)
                     {
-                        CartCommodityModels newcart = cartCommodityList.FirstOrDefault(c => c.CommodityId == newCommodity.CommodityId);
+                        Good newcart = cartCommodityList.FirstOrDefault(c => c.ID == newCommodity.CommodityId);
                         OrdersCommodity newOrdersCommodity = new OrdersCommodity();
                         newOrdersCommodity.OrdersId = newOrder.OrdersId;
                         newOrdersCommodity.CommodityId = newCommodity.CommodityId;
                         newOrdersCommodity.Status = COrders.ToBePay;
-                        newOrdersCommodity.Amount = newcart.amount;
+                        newOrdersCommodity.Amount = newcart.Soldnum;
                         _context.OrdersCommodities.Add(newOrdersCommodity);
-                        if (newCommodity.ShopId == newShop.ShopId )
-                        {          
-                            amount = amount + ((int)newCommodity.Price) * newcart.amount;
+                        if (newCommodity.ShopId == newShop.ShopId)
+                        {
+                            amount = amount + ((int)newCommodity.Price) * newcart.Soldnum;
                         }
                     }
                     amount = amount - (oldPrice - price) / discountNumber;
                     newOrder.Orderamount = amount;
                     _context.Orders.Add(newOrder);
                 }
-                _context.SaveChanges();
-                return true;
+                if (_context.SaveChanges() > 0)
+                    return true;
+                else
+                    return false;
             }
         }
         // 从商品详情页面创建订单
-        public bool CreateOrderFromDetail(string buyerid, string commodityid, string receivedId, int amount, int price)
+        public bool CreateOrderFromDetail(string buyerid, string commodityid, string receivedId, int amount, decimal price)
         {
             // OrderId生成
             CreateIdCount orderCount = new CreateIdCount(_context);
             string orderId = orderCount.GetOrderCount();
-
+            Global.GOrderID.Clear();
+            Global.GOrderID.Add(orderId);
             Commodity commodity = _context.Commodities.Where(x => x.CommodityId == commodityid).FirstOrDefault();
 
             // 创建联系集 - 初始时商品状态为待付款

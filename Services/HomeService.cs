@@ -37,6 +37,7 @@ namespace InternetMall.Services
             if (inFo == true)
             {
                 int[] judge1 = new int[10];//对于十个商品大类进行权重标记的数组
+                /*
                 List<Order> orderList =  _context.Orders.Where(o => o.BuyerId == buyerId).OrderByDescending(c => c.OrdersDate).Include(o => o.OrdersCommodities).ToList();//按时间对订单队列进行降序排序
                 int count = 0;
                 orderList.Sort();
@@ -51,6 +52,7 @@ namespace InternetMall.Services
                         judge1[commodityCotegory]++;//对于订单中遍历到的的商品种类，其权重加1
                     }
                 }
+                */
                 List<AddShoppingCart> shoppingCartList =  _context.AddShoppingCarts.Where(a => a.BuyerId == buyerId).Include(a => a.Commodity).Include(a => a.Buyer).ToList();
                 foreach (AddShoppingCart newShoppingCart in shoppingCartList)//遍历该用户购物车中的所有商品
                 {
@@ -135,11 +137,11 @@ namespace InternetMall.Services
             if (commodityCategory != -1)
             {
                 List<Commodity> commoditiesList = _context.Commodities.Where(c => c.Category == commodityCategory).OrderBy(c => c.Soldnum).ToList();
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 9; i++)
                 {
                     resultcommodities[i] = int.Parse(commoditiesList[i].CommodityId);
                 }
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 9; i++)
                 {
                     Commodity tempCommodity = _context.Commodities.FirstOrDefault(c => c.CommodityId == resultcommodities[i].ToString());
                     rankView tempRank = new rankView();

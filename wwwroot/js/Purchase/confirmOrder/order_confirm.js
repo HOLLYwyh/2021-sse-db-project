@@ -129,6 +129,10 @@ var dialogs = [
 var vm = new Vue({
 	el: "#myVue",
 	data: {
+		
+		ddmc: "wcnm",
+		spms: "6666",
+		kyfk:false,
 		 /*数据源*/
 		dialogs: dialogs,
 
@@ -223,6 +227,19 @@ var vm = new Vue({
 
 	
 	methods: {
+		GetDateNow() {
+			var vNow = new Date();
+			var sNow = "";
+			sNow += String(vNow.getFullYear());
+			sNow += String(vNow.getMonth() + 1);
+			sNow += String(vNow.getDate());
+			sNow += String(vNow.getHours());
+			sNow += String(vNow.getMinutes());
+			sNow += String(vNow.getSeconds());
+			sNow += String(vNow.getMilliseconds());
+		/*document.getElementById("tradeno").value = sNow;*/
+			return sNow
+		},
 		getAddress() {
 			let that
 			$.ajax({
@@ -267,11 +284,45 @@ var vm = new Vue({
 			if (that) {
 				this.Coupondatas = that
 			}
+		},
+		subbmit() {
+			this.submit()
+			this.pay()
         },
 		submit() {
-			let that = { TotalMoney: this.totalPrice, AddressID: this.filterAddress[currentIndex].ReceivedId }
+			let that = { TotalMoney: this.totalPrice, AddressID: this.filterAddress[this.currentIndex].ReceivedId }
+			let temp=false
+			console.log(that);
 			$.ajax({
-				url: "",
+				url: "/Purchase/CreateOrder",
+				type: "post",
+				contentType: "application/json",
+				async: false,
+				dataType: "json", //返回数据格式为json
+				data: JSON.stringify(that),
+				success: function (result) {
+					var jsonData = eval("(" + result + ")");   //将json转换成对象
+					if (jsonData.result == "FAILED") {
+						alert("创建订单失败");
+						window.location = "/Purchase/ShoppingCart";
+					}
+					else {
+						temp = true
+						alert("点击下方付款")
+					}
+				}
+			})
+			this.kyfk=temp
+		},
+		formatFloat(src, pos)
+		{
+		return Math.round(src * Math.pow(10, pos)) / Math.pow(10, pos);
+		},
+		pay() {
+			let that = {tradeno:"000",subject:"000",totalAmout: this.totalPrice,itemBody:"000"}
+			console.log(that);
+			$.ajax({
+				url: "/Purchase/PayRequest",
 				type: "post",
 				contentType: "application/json",
 				async: false,
@@ -279,9 +330,10 @@ var vm = new Vue({
 				data: JSON.stringify(that),
 				success: function (data) {
 					console.log(data)
-					
+					that = data
 				}
 			})
+			console.log(that)
         },
 		getGoods() {
 			let that
@@ -664,6 +716,12 @@ var vm = new Vue({
 			}
 			p -= this.couponPrice
 			return p
+		},
+		totalPPrice: function () {
+			return this.totalPrice+0.01
+		},
+		ddh: function () {
+			return this.GetDateNow()
         }
 	},
 });
